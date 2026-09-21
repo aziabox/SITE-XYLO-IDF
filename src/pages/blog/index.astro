@@ -49,7 +49,7 @@ const href = (p: (typeof posts)[number]) => `/blog/${p.data.category}/${p.id}`;
             <p class="eyebrow">{CATEGORIES[une.data.category].name} · {frDate(une.data.published)}</p>
             <h2>{une.data.title}</h2>
             <p class="lead">{une.data.description}</p>
-            <p class="une__answer">{une.data.answer}</p>
+            <p class="une__answer" set:html={une.data.answer} />
             <span class="link-arrow">Lire l’article</span>
           </div>
         </a>

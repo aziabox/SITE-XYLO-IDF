@@ -17,7 +17,7 @@ const verified = d.verified === true;
         </p>
       </div>
 
-      <div class="gar__body">
+      <div class:list={["gar__body", compact && "gar__body--compact"]}>
         {verified ? (
           <div class="gar__card gar__card--ok">
             <p class="gar__badge">Assurance décennale en cours de validité</p>
@@ -98,6 +98,8 @@ const verified = d.verified === true;
   .gar__head { max-width: 62ch; margin-bottom: clamp(1.75rem, 1rem + 2.5vw, 3rem); }
   .gar__head > * + * { margin-top: .8rem; }
   .gar__body { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: clamp(1.5rem, 1rem + 2vw, 3rem); align-items: start; }
+  /* Sans colonne latérale, on borne la longueur de ligne pour rester lisible. */
+  .gar__body--compact { grid-template-columns: minmax(0, 78ch); }
   .gar__card {
     background: var(--c-surface); border: 1px solid var(--c-border);
     border-radius: var(--r-lg); padding: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);

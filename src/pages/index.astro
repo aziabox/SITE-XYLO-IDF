@@ -182,15 +182,30 @@ const jsonLd = [
         <h2>Protection du patrimoine</h2>
         <p>Préserver les charpentes, poutres et structures bois plutôt que les remplacer par défaut.</p>
       </div>
+      {/* Ce bloc bascule sur la garantie décennale uniquement si l'attestation
+          a été fournie et vérifiée (src/data/site.ts). Sinon, il présente les
+          engagements que l'entreprise tient réellement. */}
       <div class="trust__item">
         <span class="trust__i trust__i--copper" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
         </span>
-        <h2>Engagements écrits</h2>
-        <p>
-          Devis détaillé, rapport d’intervention et traçabilité des produits.
-          <a href="/garanties-et-assurances">Garanties et assurances</a>.
-        </p>
+        {SITE.decennale.verified ? (
+          <>
+            <h2>Garantie décennale<span class="trust__ast" aria-hidden="true">*</span></h2>
+            <p>
+              <span class="trust__ast" aria-hidden="true">*</span>Selon travaux et conditions du
+              contrat d’assurance. <a href="/garanties-et-assurances">Assureur, police et validité</a>.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2>Engagements écrits</h2>
+            <p>
+              Devis détaillé, rapport d’intervention et traçabilité des produits.
+              <a href="/garanties-et-assurances">Garanties et assurances</a>.
+            </p>
+          </>
+        )}
       </div>
     </div>
   </section>
@@ -489,6 +504,7 @@ const jsonLd = [
     background: rgba(164,191,173,.16); color: var(--sauge-200); margin-bottom: .9rem;
   }
   .trust__i--copper { background: rgba(219,166,132,.18); color: var(--cuivre-300); }
+  .trust__ast { color: var(--cuivre-300); }
 
   /* ---------------- DOUTE / SIGNES ---------------- */
   .doute { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: center; }
