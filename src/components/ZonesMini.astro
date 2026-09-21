@@ -1,0 +1,45 @@
+---
+import { DEPARTEMENTS } from '~/data/departements';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Où nous intervenons',
+  text = "Dans les huit départements d’Île-de-France. Chaque page départementale décrit le bâti local et les ouvrages bois qui y demandent le plus d’attention.",
+} = Astro.props;
+---
+<section class="section section--tight zmini">
+  <div class="wrap">
+    <div class="zmini__in">
+      <div class="zmini__txt">
+        <p class="eyebrow">Île-de-France</p>
+        <h2>{title}</h2>
+        <p>{text}</p>
+        <a href="/zones-intervention" class="link-arrow">Toutes les zones d’intervention</a>
+      </div>
+      <ul class="zmini__list">
+        {DEPARTEMENTS.map((d) => (
+          <li>
+            <a href={`/zones-intervention/${d.slug}`}>
+              <span class="zmini__code">{d.code}</span>
+              <span>{d.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+<style>
+  .zmini { background: var(--c-bg-alt); border-block: 1px solid var(--c-border); }
+  .zmini__in { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(1.5rem, 1rem + 3vw, 3.5rem); align-items: center; }
+  .zmini__txt h2 { font-size: var(--t-h3); margin-block: .5rem .6rem; }
+  .zmini__txt p { font-size: var(--t-sm); color: var(--c-text-soft); margin-bottom: .9rem; }
+  .zmini__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .5rem; }
+  .zmini__list a {
+    display: flex; align-items: center; gap: .55rem; text-decoration: none;
+    padding: .55rem .75rem; border: 1px solid var(--c-border); border-radius: var(--r-md);
+    background: var(--c-surface); font-size: .82rem; font-weight: 600; color: var(--sauge-800);
+  }
+  .zmini__list a:hover { border-color: var(--sauge-400); background: var(--sauge-50); }
+  .zmini__code { font-family: var(--f-title); font-size: .72rem; font-weight: 700; color: var(--cuivre-600); }
+  @media (max-width: 820px) { .zmini__in { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,222 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import FicheIdentite from '~/components/FicheIdentite.astro';
+import Confusions from '~/components/Confusions.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import { INSECTE_BY_SLUG } from '~/data/insectes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const l = INSECTE_BY_SLUG['lyctus'];
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Insectes xylophages', href: '/insectes-xylophages' },
+  { label: 'Lyctus' },
+];
+const jsonLd = [
+  serviceSchema({
+    name: 'Diagnostic et traitement du lyctus',
+    description: "Identification du lyctus dans les parquets, lambris, contreplaqués et mobilier récents en feuillus, évaluation de l’étendue et traitement en Île-de-France.",
+    path: '/lyctus',
+    serviceType: 'Traitement du lyctus',
+  }),
+  faqSchema(l.faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Lyctus : l’insecte des bois feuillus récents"
+  description="Le lyctus attaque l’aubier des feuillus riches en amidon : parquets, lambris, contreplaqués et mobilier récents. Vermoulure en farine, trous de 1 à 2 mm, cycle court : identification et traitement."
+  path="/lyctus"
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Fiche espèce"
+    title="Lyctus : l’insecte qui s’attaque aux bois neufs"
+    lead="À rebours de l’idée reçue selon laquelle les insectes du bois s’en prennent aux vieilles charpentes, le lyctus ne s’intéresse qu’aux bois récents. Il y cherche une chose précise : l’amidon, que le bois perd en vieillissant."
+    answer="Le lyctus se développe dans <strong>l’aubier des feuillus à gros vaisseaux riches en amidon</strong> : chêne, frêne, châtaignier, orme et de nombreux bois tropicaux. Comme l’amidon disparaît avec le temps, il délaisse les bois de plus de dix à quinze ans. On le trouve donc dans les <strong>parquets, lambris, contreplaqués et meubles récents</strong>. Sa vermoulure a la finesse d’une farine : c’est son signe distinctif."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Une histoire d’amidon, pas de bois ancien</h2>
+            <p class="lead">
+              Comprendre ce que cherche le lyctus permet de comprendre exactement où il apparaît, et
+              pourquoi il disparaît de lui-même au bout de quelques années.
+            </p>
+            <p>
+              L’arbre stocke des réserves sous forme d’amidon dans les cellules de son aubier, la
+              partie vivante et périphérique du tronc. Après l’abattage et le sciage, cet amidon
+              subsiste un temps dans le bois mis en œuvre, puis se dégrade progressivement. La larve
+              du lyctus s’en nourrit : c’est sa ressource principale.
+            </p>
+            <p>
+              Deux conséquences en découlent. D’une part, le lyctus n’attaque que les essences dont
+              l’aubier contient à la fois de l’amidon et des vaisseaux assez larges pour que la
+              femelle y dépose ses œufs : chêne, frêne, châtaignier, orme, et beaucoup de bois
+              tropicaux. Les résineux n’ont ni l’un ni l’autre, ils ne sont jamais concernés.
+              D’autre part, une fois l’amidon épuisé — en une quinzaine d’années environ — le bois
+              cesse de l’intéresser.
+            </p>
+            <p>
+              C’est pourquoi une charpente de chêne bicentenaire ne risque pratiquement rien du
+              lyctus, alors qu’un parquet de chêne posé l’année dernière peut être largement
+              attaqué.
+            </p>
+          </div>
+
+          <div class="note note--copper">
+            <span class="note__title">Le critère qui ne trompe pas : la vermoulure</span>
+            Celle du lyctus est une poudre extrêmement fine, impalpable, qui coule comme de la
+            farine et ne crisse pas entre les doigts. Aucune autre espèce courante ne produit une
+            vermoulure aussi fine. Si vous trouvez sous un parquet récent une poudre claire qui
+            s’écoule sans le moindre grain perceptible, l’hypothèse du lyctus est très sérieuse.
+          </div>
+
+          <div>
+            <h2>Un cycle court, donc une progression rapide</h2>
+            <p>
+              C’est la seconde particularité du lyctus, et elle change la manière de réagir. Là où
+              le capricorne met trois à dix ans à boucler un cycle, le lyctus peut le faire en
+              moins d’un an dans un local chauffé, avec plusieurs générations successives.
+            </p>
+            <p>
+              Conséquence pratique : une attaque découverte en début d’année peut s’être nettement
+              étendue avant l’automne. À l’inverse, c’est aussi ce qui permet de vérifier
+              rapidement l’efficacité d’un traitement — quelques mois suffisent pour constater
+              l’arrêt, là où d’autres espèces demandent des années de recul.
+            </p>
+          </div>
+
+          <div>
+            <h2>L’attaque arrive presque toujours avec le bois</h2>
+            <p>
+              C’est le point que nos clients découvrent avec surprise. Dans la grande majorité des
+              cas, le lyctus n’est pas venu de l’extérieur : il était déjà présent dans le lot de
+              bois à la livraison, sous forme d’œufs ou de jeunes larves, et le développement s’est
+              simplement poursuivi après la pose.
+            </p>
+            <p>
+              Cela a deux implications. D’abord, il faut examiner l’ensemble du lot, et pas
+              seulement les lames où des trous sont apparus. Ensuite, il faut vérifier la
+              provenance avant de reposer quoi que ce soit, faute de quoi le problème réapparaîtra
+              à l’identique.
+            </p>
+            <ul class="list-dot">{l.zones.map((z) => <li>{z}</li>)}</ul>
+          </div>
+
+          <div>
+            <h2>Traiter ou remplacer ?</h2>
+            <p>{l.risque}</p>
+            <p>
+              Sur un parquet neuf largement touché, le remplacement du lot est souvent la solution
+              la plus saine, et elle relève fréquemment de la garantie du fournisseur ou du poseur.
+              Sur un ouvrage ponctuel, un agencement sur mesure ou un élément difficile à remplacer,
+              le traitement se justifie pleinement. Nous indiquons clairement laquelle des deux
+              voies nous paraît la plus raisonnable, y compris lorsque cela ne nous donne pas de
+              travaux.
+            </p>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <FicheIdentite insecte={l} />
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Reconnaître l’adulte</h3>
+            <p>{l.adulte}</p>
+          </div>
+          <div class="card" style="margin-top:1rem">
+            <h3 style="font-size:1.08rem">Signes d’une attaque</h3>
+            <ul class="list-check small" style="margin-top:.6rem">{l.signes.map((s) => <li>{s}</li>)}</ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Méthode</p>
+        <h2>Comment nous diagnostiquons une attaque de lyctus</h2>
+        <p class="lead">
+          L’identification est ici plus simple que pour les autres espèces : l’âge de l’ouvrage et
+          la finesse de la vermoulure suffisent presque toujours à conclure.
+        </p>
+      </div>
+      <ol class="list-num">{l.diagnostic.map((d) => <li>{d}</li>)}</ol>
+      <h3 style="margin-top:2.5rem">Le traitement</h3>
+      <ol class="list-num" style="margin-top:.75rem">{l.traitement.map((d) => <li>{d}</li>)}</ol>
+      <h3 style="margin-top:2.5rem">La prévention</h3>
+      <ul class="list-check" style="margin-top:.75rem">{l.prevention.map((d) => <li>{d}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions que l’on nous pose sur le lyctus</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Quel insecte fait de très petits trous avec une poudre très fine ?">
+          <p>
+            Si la poudre est impalpable et coule comme de la farine, et si les trous font 1 à 2 mm
+            dans un bois feuillu récent, le lyctus est l’hypothèse la plus probable. Si la poudre
+            crisse légèrement sous le doigt et contient de petits granulés, il s’agit plutôt d’une
+            petite vrillette.
+          </p>
+        </Answer>
+        <Answer question="Un bois exotique est-il plus exposé ?">
+          <p>
+            Certains bois tropicaux à gros vaisseaux et riches en amidon le sont effectivement, et
+            des attaques sont régulièrement constatées sur des mobiliers ou des agencements
+            importés. Il ne s’agit pas d’une question d’origine géographique en soi, mais de la
+            composition de l’aubier de ces essences.
+          </p>
+          <p>
+            Comme pour les bois européens, le duramen — le cœur de la pièce — ne contient pas
+            d’amidon et n’est pas attaqué.
+          </p>
+        </Answer>
+        <Answer question="Faut-il traiter toute la maison ?">
+          <p>
+            Non, et c’est une différence importante avec le capricorne. Le lyctus se limite à
+            l’ouvrage en feuillu récent qu’il a colonisé : il ne migre pas vers une charpente en
+            sapin ni vers un bois ancien qui ne contient plus d’amidon. Le périmètre de
+            l’intervention se limite donc généralement à l’ouvrage concerné et aux bois de même
+            provenance.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Confusions items={l.confusions} intro="La confusion la plus fréquente est avec la petite vrillette, dont les diamètres de trous se recoupent. Le grain de la vermoulure tranche systématiquement." />
+
+  <Faq items={l.faq} title="Questions fréquentes sur le lyctus" />
+
+  <ZonesMini />
+
+  <Maillage
+    title="Poursuivre"
+    items={[
+      { label: 'Traitement du bois', href: '/traitement-bois', text: 'Les méthodes selon l’ouvrage : parquets, lambris, mobilier, structures.' },
+      { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Vue d’ensemble des espèces et de ce qui les distingue.' },
+      { label: 'Vermoulure dans le bois', href: '/vermoulure-bois', text: 'Ce que la texture de la poudre révèle de l’espèce en cause.' },
+    ]}
+  />
+
+  <CtaBand
+    title="De la poudre fine sous un parquet ou un meuble récent ?"
+    text="Recueillez-en un peu sur une feuille blanche et photographiez-la : la texture de la vermoulure est l’élément le plus utile pour préparer l’échange."
+  />
+</Base>

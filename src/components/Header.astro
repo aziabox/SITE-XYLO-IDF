@@ -1,0 +1,308 @@
+---
+import Logo from './Logo.astro';
+import { MAIN_NAV, SIMPLE_NAV } from '~/data/nav';
+import { SITE, CTA } from '~/data/site';
+const here = '/' + (Astro.url.pathname.replace(/^\/|\/$/g, '') || '');
+const isActive = (href: string) => here === href || (href !== '/' && here.startsWith(href + '/'));
+---
+<div class="utility">
+  <div class="wrap-wide utility__in">
+    <p class="utility__claim">Diagnostic, traitement curatif et prévention des insectes xylophages</p>
+    <div class="utility__links">
+      <a href="/zones-intervention" class="utility__link">Zones d’intervention</a>
+      <span class="utility__sep" aria-hidden="true"></span>
+      <a href={SITE.phoneHref} class="utility__phone">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 2.2 6.6 5 5.3 6.5c.8 1.6 2.1 2.9 3.7 3.7L10.5 9l2.8 1.4v2.4c0 .6-.5 1-1.1 1C6.6 13.4 2.1 8.9 2 2.9c0-.6.4-1.1 1-1.1h2.2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        {SITE.phoneDisplay}
+      </a>
+    </div>
+  </div>
+</div>
+
+<header class="hdr" id="hdr">
+  <div class="wrap-wide hdr__in">
+    <a href="/" class="hdr__logo" aria-label={`${SITE.name} — accueil`}><Logo /></a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav__list">
+        {MAIN_NAV.map((g) => (
+          <li class="nav__item">
+            <a href={g.href} class:list={['nav__top', isActive(g.href!) && 'is-active']} aria-expanded="false">
+              {g.label}
+              <svg class="nav__chev" width="9" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </a>
+            <div class="mega" role="group">
+              <div class="mega__in">
+                {g.intro && (
+                  <div class="mega__lead">
+                    <p class="mega__leadtxt">{g.intro}</p>
+                    {g.href && <a href={g.href} class="link-arrow">Tout voir</a>}
+                  </div>
+                )}
+                <div class="mega__cols">
+                  {g.columns.map((c) => (
+                    <div class="mega__col">
+                      {c.title.trim() && <p class="mega__title">{c.title}</p>}
+                      <ul>
+                        {c.links.map((l) => (
+                          <li>
+                            <a href={l.href} class="mega__link">
+                              <span class="mega__lbl">{l.label}</span>
+                              {l.desc && <span class="mega__desc">{l.desc}</span>}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+        {SIMPLE_NAV.map((l) => (
+          <li class="nav__item">
+            <a href={l.href} class:list={['nav__top', isActive(l.href) && 'is-active']}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="hdr__actions">
+      <a href={CTA.primary.href} class="btn btn--primary btn--sm hdr__cta">{CTA.primary.label}</a>
+      <button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mobile-nav" hidden>
+  <div class="mnav__scroll">
+    <nav aria-label="Navigation mobile">
+      {MAIN_NAV.map((g) => (
+        <details class="mnav__grp">
+          <summary>{g.label}</summary>
+          <div class="mnav__body">
+            {g.href && <a href={g.href} class="mnav__all">Vue d’ensemble</a>}
+            {g.columns.map((c) => (
+              <>
+                {c.title.trim() && <p class="mnav__title">{c.title}</p>}
+                {c.links.map((l) => <a href={l.href} class="mnav__link">{l.label}</a>)}
+              </>
+            ))}
+          </div>
+        </details>
+      ))}
+      <div class="mnav__simple">
+        {SIMPLE_NAV.map((l) => <a href={l.href} class="mnav__link">{l.label}</a>)}
+        <a href="/demander-un-diagnostic" class="mnav__link">Demander un diagnostic</a>
+      </div>
+    </nav>
+    <div class="mnav__foot">
+      <a href={SITE.phoneHref} class="btn btn--primary btn--block">Appeler le {SITE.phoneDisplay}</a>
+      <p class="small muted" style="margin-top:.7rem;text-align:center">Du lundi au samedi</p>
+    </div>
+  </div>
+</div>
+
+<div class="dock" aria-label="Actions rapides">
+  <a href={SITE.phoneHref} class="dock__btn dock__btn--call">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 2.2 6.6 5 5.3 6.5c.8 1.6 2.1 2.9 3.7 3.7L10.5 9l2.8 1.4v2.4c0 .6-.5 1-1.1 1C6.6 13.4 2.1 8.9 2 2.9c0-.6.4-1.1 1-1.1h2.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    Appeler
+  </a>
+  <a href="/demander-un-diagnostic" class="dock__btn dock__btn--diag">Demander un diagnostic</a>
+</div>
+
+<style>
+  /* ---------- Bandeau utilitaire ---------- */
+  .utility { background: var(--sauge-900); color: rgba(243,239,228,.78); font-size: .78rem; }
+  .utility__in { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 38px; }
+  .utility__claim { margin: 0; }
+  .utility__links { display: flex; align-items: center; gap: .85rem; }
+  .utility__link { color: rgba(243,239,228,.78); text-decoration: none; }
+  .utility__link:hover { color: #fff; }
+  .utility__sep { width: 1px; height: 13px; background: rgba(243,239,228,.24); }
+  .utility__phone {
+    display: inline-flex; align-items: center; gap: .4rem; color: #F3EFE4;
+    font-weight: 600; text-decoration: none; letter-spacing: .01em;
+  }
+  .utility__phone:hover { color: var(--cuivre-300); }
+  @media (max-width: 860px) { .utility__claim { display: none; } .utility__in { justify-content: center; } }
+  @media (max-width: 480px) { .utility__link { display: none; } .utility__sep { display: none; } }
+
+  /* ---------- En-tête ---------- */
+  .hdr {
+    position: sticky; top: 0; z-index: 90;
+    background: rgba(252,250,245,.92);
+    backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--c-border);
+    transition: box-shadow .2s ease;
+  }
+  .hdr.is-stuck { box-shadow: 0 6px 24px -14px rgba(30,43,36,.4); }
+  .hdr__in { display: flex; align-items: center; gap: 1.5rem; min-height: 74px; }
+  .hdr__logo { text-decoration: none; flex: none; }
+  .hdr__actions { margin-left: auto; display: flex; align-items: center; gap: .7rem; }
+
+  /* ---------- Navigation ---------- */
+  .nav { margin-left: auto; }
+  .nav__list { display: flex; align-items: center; gap: .15rem; }
+  .nav__item { position: relative; }
+  .nav__top {
+    display: inline-flex; align-items: center; gap: .32rem;
+    padding: .6rem .72rem; border-radius: var(--r-sm);
+    font-size: .875rem; font-weight: 550; color: var(--gris-700); text-decoration: none;
+    white-space: nowrap; transition: color .15s ease, background-color .15s ease;
+  }
+  .nav__top:hover, .nav__item:hover > .nav__top, .nav__item:focus-within > .nav__top { color: var(--sauge-800); background: var(--sauge-50); }
+  .nav__top.is-active { color: var(--sauge-800); font-weight: 650; }
+  .nav__chev { transition: transform .2s ease; opacity: .55; }
+  .nav__item:hover .nav__chev, .nav__item:focus-within .nav__chev { transform: rotate(180deg); }
+
+  .mega {
+    position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(6px);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease, visibility .18s;
+    z-index: 95;
+  }
+  .nav__item:hover .mega, .nav__item:focus-within .mega {
+    opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+  }
+  .mega__in {
+    display: flex; gap: 2rem;
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--r-lg); box-shadow: var(--sh-lg);
+    padding: 1.6rem 1.75rem; min-width: 480px; max-width: 860px;
+  }
+  .mega__lead {
+    width: 190px; flex: none; padding-right: 1.6rem; border-right: 1px solid var(--c-border);
+    display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;
+  }
+  .mega__leadtxt { font-family: var(--f-title); font-size: 1rem; line-height: 1.35; color: var(--sauge-800); }
+  .mega__cols { display: flex; gap: 2.2rem; }
+  .mega__col { min-width: 170px; }
+  .mega__title {
+    font-size: .66rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--cuivre-500); margin-bottom: .7rem;
+  }
+  .mega__link {
+    display: block; padding: .42rem .55rem; margin-left: -.55rem; border-radius: var(--r-sm);
+    text-decoration: none; transition: background-color .14s ease;
+  }
+  .mega__link:hover { background: var(--sauge-50); }
+  .mega__lbl { display: block; font-size: .86rem; font-weight: 600; color: var(--sauge-800); }
+  .mega__desc { display: block; font-size: .74rem; color: var(--c-text-muted); margin-top: .1rem; line-height: 1.4; }
+
+  /* ---------- Burger ---------- */
+  .burger { display: none; width: 42px; height: 42px; border-radius: var(--r-md); position: relative; }
+  .burger span {
+    position: absolute; left: 11px; width: 20px; height: 1.8px; background: var(--sauge-800);
+    border-radius: 2px; transition: transform .22s ease, opacity .18s ease;
+  }
+  .burger span:nth-child(1) { top: 15px; }
+  .burger span:nth-child(2) { top: 20.5px; }
+  .burger span:nth-child(3) { top: 26px; }
+  .burger[aria-expanded='true'] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .burger[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+  @media (max-width: 1120px) {
+    .nav { display: none; }
+    .burger { display: block; }
+    .hdr__cta { display: none; }
+  }
+
+  /* ---------- Menu mobile ---------- */
+  .mnav {
+    position: fixed; inset: 0; top: 0; z-index: 89;
+    background: var(--c-bg); padding-top: 112px; display: flex; flex-direction: column;
+  }
+  .mnav[hidden] { display: none; }
+  .mnav__scroll { overflow-y: auto; flex: 1; padding: 1rem 0 6rem; }
+  .mnav__grp { border-bottom: 1px solid var(--c-border); }
+  .mnav__grp summary {
+    list-style: none; cursor: pointer; padding: 1rem 1.25rem;
+    font-family: var(--f-title); font-size: 1.16rem; font-weight: 580; color: var(--sauge-800);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .mnav__grp summary::-webkit-details-marker { display: none; }
+  .mnav__grp summary::after {
+    content: ''; width: 10px; height: 10px; border-right: 2px solid var(--sauge-500);
+    border-bottom: 2px solid var(--sauge-500); transform: rotate(45deg); transition: transform .2s ease;
+  }
+  .mnav__grp[open] summary::after { transform: rotate(-135deg); }
+  .mnav__body { padding: 0 1.25rem 1.1rem; }
+  .mnav__title {
+    font-size: .66rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--cuivre-500); margin: 1rem 0 .4rem;
+  }
+  .mnav__link, .mnav__all {
+    display: block; padding: .58rem 0; font-size: .92rem; color: var(--gris-700);
+    text-decoration: none; border-bottom: 1px solid rgba(226,220,207,.55);
+  }
+  .mnav__all { font-weight: 650; color: var(--sauge-700); }
+  .mnav__simple { padding: 1rem 1.25rem; }
+  .mnav__foot {
+    padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+    border-top: 1px solid var(--c-border); background: var(--c-bg-alt);
+  }
+  body.nav-open { overflow: hidden; }
+
+  /* ---------- Barre d'action mobile ---------- */
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 88;
+    display: none; gap: .55rem; padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom));
+    background: rgba(252,250,245,.95); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--c-border);
+  }
+  .dock__btn {
+    flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+    padding: .78rem .5rem; border-radius: var(--r-pill);
+    font-size: .82rem; font-weight: 650; text-decoration: none; text-align: center;
+  }
+  .dock__btn--call { background: #fff; border: 1.5px solid var(--sauge-300); color: var(--sauge-800); flex: 0 0 38%; }
+  .dock__btn--diag { background: var(--sauge-700); color: #F7F4EC; }
+  @media (max-width: 780px) {
+    .dock { display: flex; }
+    body { padding-bottom: 68px; }
+  }
+  body.nav-open .dock { display: none; }
+</style>
+
+<script is:inline>
+  (() => {
+    const hdr = document.getElementById('hdr');
+    const burger = document.getElementById('burger');
+    const panel = document.getElementById('mobile-nav');
+    if (burger && panel) {
+      burger.addEventListener('click', () => {
+        const open = burger.getAttribute('aria-expanded') === 'true';
+        burger.setAttribute('aria-expanded', String(!open));
+        burger.setAttribute('aria-label', open ? 'Ouvrir le menu' : 'Fermer le menu');
+        panel.hidden = open;
+        document.body.classList.toggle('nav-open', !open);
+      });
+      panel.addEventListener('click', (e) => {
+        if (e.target instanceof HTMLAnchorElement) {
+          burger.setAttribute('aria-expanded', 'false');
+          panel.hidden = true;
+          document.body.classList.remove('nav-open');
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !panel.hidden) burger.click();
+      });
+    }
+    if (hdr) {
+      let ticking = false;
+      addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          hdr.classList.toggle('is-stuck', scrollY > 8);
+          ticking = false;
+        });
+      }, { passive: true });
+    }
+  })();
+</script>

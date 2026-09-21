@@ -1,0 +1,122 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import { SITE } from '~/data/site';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Politique de confidentialité' }];
+---
+<Base
+  title="Politique de confidentialité"
+  description="Quelles données sont collectées via ce site, pourquoi, combien de temps elles sont conservées et comment exercer vos droits."
+  path="/politique-de-confidentialite" crumbs={crumbs}
+>
+  <PageHero
+    eyebrow="Données personnelles"
+    title="Politique de confidentialité"
+    lead="Ce site collecte le minimum de données nécessaire pour répondre à une demande. Cette page décrit précisément lesquelles, pourquoi, et comment vous pouvez agir dessus."
+    crumbs={crumbs}
+    cta={false}
+  />
+
+  <section class="section">
+    <div class="wrap-narrow prose">
+      <h2>Ce que nous collectons</h2>
+      <p>
+        Les seules données personnelles collectées par ce site sont celles que vous nous
+        transmettez volontairement via le formulaire de demande de diagnostic :
+      </p>
+      <ul>
+        <li>nom et prénom ;</li>
+        <li>numéro de téléphone ;</li>
+        <li>adresse électronique, si vous la renseignez ;</li>
+        <li>commune et département ;</li>
+        <li>informations relatives au bâtiment et au problème observé ;</li>
+        <li>photographies, si vous en joignez.</li>
+      </ul>
+      <p>
+        Aucune donnée n’est collectée à votre insu par la navigation elle-même. Ce site
+        n’utilise ni traceur publicitaire, ni outil de mesure d’audience tiers, ni bouton de
+        réseau social chargeant un script externe.
+      </p>
+
+      <h2>Pourquoi nous les collectons</h2>
+      <p>
+        Uniquement pour répondre à votre demande : vous rappeler, préciser votre situation,
+        organiser une visite le cas échéant, et établir un devis. Ces données ne sont utilisées
+        pour aucune autre finalité.
+      </p>
+      <p>
+        La base légale de ce traitement est votre consentement, matérialisé par la case que vous
+        cochez avant l’envoi du formulaire, ainsi que l’exécution de mesures précontractuelles
+        prises à votre demande.
+      </p>
+
+      <h2>Ce que nous n’en faisons pas</h2>
+      <ul>
+        <li>Nous ne les vendons pas.</li>
+        <li>Nous ne les cédons ni ne les louons à des tiers.</li>
+        <li>Nous ne les utilisons pas à des fins de prospection pour des services sans rapport.</li>
+        <li>Nous ne les transférons pas hors de l’Union européenne.</li>
+      </ul>
+
+      <h2>Combien de temps nous les conservons</h2>
+      <ul>
+        <li><strong>Demande sans suite :</strong> les données sont supprimées au plus tard douze mois après le dernier contact.</li>
+        <li><strong>Devis établi sans acceptation :</strong> conservation pendant la durée de validité du devis, puis suppression dans les douze mois.</li>
+        <li><strong>Intervention réalisée :</strong> conservation pendant la durée nécessaire au suivi, puis pendant les durées légales applicables aux documents comptables et contractuels.</li>
+      </ul>
+
+      <h2>Qui y a accès</h2>
+      <p>
+        Seules les personnes de l’entreprise chargées de traiter votre demande. Les éventuels
+        prestataires techniques intervenant sur l’hébergement ou la messagerie agissent en
+        qualité de sous-traitants, dans le cadre d’engagements de confidentialité.
+      </p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Conformément à la réglementation applicable en matière de protection des données, vous
+        disposez d’un droit d’accès, de rectification, d’effacement, de limitation du traitement,
+        d’opposition et de portabilité de vos données.
+      </p>
+      <p>
+        Pour exercer ces droits, contactez-nous au <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a>
+        {SITE.email ? <> ou à l’adresse <strong>{SITE.email}</strong></> : <> (adresse électronique à compléter)</>}.
+        Nous répondons dans un délai d’un mois.
+      </p>
+      <p>
+        Vous disposez également du droit d’introduire une réclamation auprès de l’autorité de
+        contrôle compétente en matière de protection des données personnelles.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Ce site ne dépose aucun cookie de mesure d’audience, de publicité ou de profilage.
+        Aucun bandeau de consentement n’est donc affiché, puisqu’il n’y a rien à consentir.
+      </p>
+      <p>
+        Si un outil de mesure d’audience venait à être mis en place, cette page serait mise à
+        jour et un mécanisme de recueil du consentement serait ajouté préalablement.
+      </p>
+
+      <h2>Photographies transmises</h2>
+      <p>
+        Les photographies que vous nous adressez sont utilisées uniquement pour préparer
+        l’échange et le diagnostic. Elles ne sont ni publiées, ni diffusées, ni utilisées à des
+        fins de communication sans votre accord écrit préalable et explicite.
+      </p>
+
+      <h2>Sécurité</h2>
+      <p>
+        Le site est servi en HTTPS. Les données transmises via le formulaire sont acheminées de
+        manière chiffrée et stockées dans des conditions d’accès restreint.
+      </p>
+
+      <h2>Modification de cette politique</h2>
+      <p>
+        Cette politique peut être amenée à évoluer, notamment en cas d’ajout d’un nouvel outil.
+        Toute modification substantielle sera signalée sur cette page.
+      </p>
+    </div>
+  </section>
+</Base>

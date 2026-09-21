@@ -1,0 +1,76 @@
+---
+import BatimentPage from '~/components/BatimentPage.astro';
+---
+<BatimentPage
+  path="/traitement-charpente-maison"
+  seoTitle="Traitement de charpente de maison individuelle"
+  seoDescription="Traitement de charpente pour maison individuelle : charpentes traditionnelles en sapin et fermettes industrialisées, préparation du comble, évaluation des sections, injection et pulvérisation. Île-de-France."
+  eyebrow="Type de bâtiment"
+  h1="Traitement de charpente de maison : le cas le plus fréquent"
+  lead="La maison individuelle représente la majorité de nos interventions. Deux configurations dominent, et elles n’appellent ni le même diagnostic, ni la même technique : la charpente traditionnelle en sapin et la fermette industrialisée."
+  answer="Dans une maison individuelle, la charpente est presque toujours en <strong>résineux</strong>, ce qui désigne le <a href='/capricorne-des-maisons'>capricorne des maisons</a> comme suspect principal. Le facteur décisif est l’<strong>accessibilité du comble</strong> : perdu et dégagé, l’intervention est simple et complète ; aménagé, une partie du bois reste hors d’atteinte et doit être signalée comme telle."
+  serviceName="Traitement de charpente de maison individuelle"
+  sections={[
+    {
+      h2: 'Charpente traditionnelle ou fermette : deux profils',
+      intro: "L’année de construction donne presque toujours la réponse, et elle oriente immédiatement l’examen.",
+      paragraphs: [
+        "<strong>Avant les années 1970</strong>, la charpente est traditionnelle : pannes, chevrons, fermes, assemblages bois. Les sections sont plus généreuses, mais les bois n’ont généralement reçu aucun traitement à la construction. C’est la configuration la plus exposée au capricorne des maisons, et celle où nous trouvons les attaques les plus anciennes.",
+        "<strong>À partir des années 1970</strong>, la fermette industrialisée s’impose : des membres minces, assemblés par connecteurs métalliques à dents, traités en usine. La protection d’origine est réelle, mais calibrée pour une durée limitée, et les coupes réalisées sur chantier exposent du bois vierge. La faible épaisseur des membres fait par ailleurs qu’une dégradation devient vite critique.",
+        "Dans les deux cas, nous commençons par identifier l’essence et le mode constructif avant de regarder les trous : cela conditionne à la fois les espèces plausibles et la technique à employer.",
+      ],
+    },
+    {
+      h2: 'L’accessibilité décide de tout',
+      paragraphs: [
+        "C’est le facteur qui explique l’essentiel des écarts entre devis, et l’essentiel des traitements décevants constatés après coup.",
+        "Un <strong>comble perdu et dégagé</strong> est la situation idéale : toutes les faces des pièces sont accessibles, le traitement est complet, l’intervention rapide. Un <strong>comble encombré</strong> demande un dégagement préalable qui vous revient : un volume rempli de cartons ne permet ni de lire les chevrons, ni d’appliquer correctement.",
+        "Un <strong>comble aménagé</strong> est le cas délicat. L’isolant et le doublage masquent précisément les pièces les plus exposées : pieds de chevron, bois de rive, sablières. Nous inspectons ce qui est accessible, pratiquons si nécessaire des ouvertures ponctuelles, et écrivons explicitement dans le rapport ce que nous n’avons pas pu examiner.",
+      ],
+    },
+    {
+      h2: 'Ce qui relève du traitement, et ce qui relève du charpentier',
+      paragraphs: [
+        "Sur une maison individuelle, la distinction est particulièrement importante, parce que les sections sont modestes et la marge faible.",
+        "Le traitement arrête l’attaque. Il ne restitue pas la résistance d’un bois déjà consommé. Sur un chevron de 63 × 75 mm dont l’aubier a été évidé sur quinze millimètres de pourtour, il reste un problème mécanique après le traitement, et ce problème relève du charpentier : doublage, moisage, remplacement.",
+        "Nous présentons systématiquement les deux volets séparément, avec la liste des pièces concernées. Cela permet d’arbitrer, d’étaler dans le temps si nécessaire, et de faire intervenir l’entreprise de son choix pour la partie structure.",
+      ],
+    },
+  ]}
+  vigilance={{
+    title: 'Ce que nous examinons en priorité',
+    items: [
+      'Les <strong>pieds de chevron</strong> et bois de rive, au droit des gouttières',
+      'Les <strong>sablières</strong>, posées sur la maçonnerie de couronnement',
+      'Les <strong>coupes et entailles</strong> réalisées sur chantier, souvent non retraitées',
+      'Les <strong>abords des nœuds</strong>, zones de ponte privilégiées',
+      'Le <strong>sol du comble</strong>, où la sciure signale la pièce concernée',
+      'Les <strong>connecteurs</strong> des fermettes, et le bois qui les entoure',
+    ],
+  }}
+  aside={{
+    title: 'Avant d’isoler vos combles',
+    text: "C’est le moment le plus favorable pour contrôler et traiter : le bois est nu, accessible sur toutes ses faces. Une fois les rampants isolés, une partie devient inaccessible pour vingt ans. <a href='/prevention-insectes-xylophages'>Prévention et surveillance</a>.",
+  }}
+  etapes={[
+    { title: 'Visite et sondage', text: 'Parcours complet du comble, sondage des pièces suspectes en priorité aux appuis et aux abouts, mesure d’humidité, identification de l’espèce.' },
+    { title: 'Rapport et devis', text: 'Cartographie des pièces concernées, distinction entre ce qui se traite et ce qui doit être renforcé, devis détaillé avec méthodes et produits.' },
+    { title: 'Préparation du comble', text: 'Dégagement à votre charge, dépose éventuelle d’isolants ou de doublages selon ce que le diagnostic a montré.' },
+    { title: 'Bûchage et dépoussiérage', text: 'Élimination des parties dégradées jusqu’au bois sain, puis brossage et aspiration complète, sans lesquels le produit ne pénètre pas.' },
+    { title: 'Injection et pulvérisation', text: 'Injection sous pression dans les pièces de forte section, pulvérisation en passes croisées sur l’ensemble des faces accessibles.' },
+    { title: 'Zones témoins et rapport final', text: 'Mise en place de repères nettoyés et datés, remise du rapport d’intervention avec les produits employés et les consignes de réintégration.' },
+  ]}
+  faq={[
+    { q: 'Combien de temps dure le chantier sur une maison ?', a: "Un à trois jours d'intervention selon la surface, l'accessibilité et l'ampleur du bûchage. La préparation — dégagement du comble, dépose de ce qui masque le bois — prend souvent autant de temps, et elle est fréquemment sous-estimée dans les plannings." },
+    { q: 'Puis-je rester chez moi pendant le traitement ?', a: "Cela dépend du produit employé, du volume traité et de la ventilation des locaux. Le délai de réintégration figure sur la fiche de données de sécurité du produit et vous est communiqué au moment du devis, pas le jour du chantier." },
+    { q: 'Faut-il traiter le garage et les dépendances ?', a: "Lorsqu'ils sont accolés ou proches, nous le recommandons. Une charpente de garage ou d'abri attaquée constitue une source de recolonisation permanente : traiter la maison seule revient souvent à recommencer quelques années plus tard." },
+    { q: 'Une maison récente peut-elle être concernée ?', a: "Oui. Les fermettes sont traitées en usine, mais la protection est calibrée pour une durée limitée et les coupes de chantier exposent du bois non traité. Nous intervenons régulièrement sur des charpentes de vingt à quarante ans présentant des sorties de capricorne." },
+  ]}
+  liens={[
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Le cadre général : zones sensibles, méthodes selon les sections.' },
+    { label: 'Capricorne des maisons', href: '/capricorne-des-maisons', text: 'L’espèce dominante dans les charpentes en résineux.' },
+    { label: 'Prévention et surveillance', href: '/prevention-insectes-xylophages', text: 'Traiter préventivement avant d’isoler : le bon moment.' },
+  ]}
+  ctaTitle="Faire examiner la charpente de votre maison"
+  ctaText="Décrivez-nous ce que vous observez et l’année de construction approximative : ces deux informations orientent déjà largement l’échange."
+/>

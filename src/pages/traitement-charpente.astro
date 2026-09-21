@@ -1,0 +1,198 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import Charpente from '~/components/illus/Charpente.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Traitements', href: '/traitement-insectes-xylophages' },
+  { label: 'Traitement de charpente' },
+];
+const faq = [
+  { q: 'Traitement de charpente : à quel moment le faire ?', a: "Le meilleur moment est celui où la charpente est accessible. Avant d'isoler ou d'aménager un comble, les bois sont visibles sur toutes leurs faces et le traitement les atteint intégralement, pour un coût sans commune mesure avec celui d'une intervention après doublage. Après des travaux de couverture ou une infiltration, un contrôle s'impose également, car l'humidité a pu créer des conditions nouvelles." },
+  { q: 'Faut-il déposer la couverture ?', a: "Non, dans la quasi-totalité des cas. Le traitement s'effectue par l'intérieur, depuis le comble. Une dépose de couverture ne se justifie que si la charpente est inaccessible par le dessous, ce qui reste exceptionnel, ou si des travaux de couverture sont de toute façon programmés — auquel cas il est judicieux de coordonner les deux." },
+  { q: 'Que faire des combles aménagés ?', a: "Un comble aménagé masque les pièces les plus exposées : pieds de chevron, bois de rive, sablières. Nous inspectons ce qui est accessible, réalisons si nécessaire des ouvertures ponctuelles aux endroits les plus significatifs, et indiquons explicitement dans le rapport ce qui n'a pas pu être examiné. Selon l'ampleur de l'attaque, la dépose partielle d'un doublage peut devenir nécessaire." },
+  { q: 'Une charpente industrialisée se traite-t-elle différemment ?', a: "Les principes sont les mêmes, mais les sections changent tout. Les fermettes sont constituées de bois minces assemblés par connecteurs métalliques : l'injection y est rarement nécessaire, une application de surface soignée suffit généralement. En revanche, la perte de section y est plus vite critique qu'avec des pièces massives, et les connecteurs demandent une attention particulière." },
+  { q: 'Le traitement protège-t-il aussi contre les champignons ?', a: "Cela dépend du produit. Certains produits de protection du bois ont une action fongicide en plus de leur action insecticide. Mais aucun produit ne règle un problème d'eau : si une infiltration persiste, la dégradation fongique reprendra. La reprise de la cause reste prioritaire, et nous l'indiquons systématiquement lorsqu'elle est en jeu." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Traitement de charpente', description: "Traitement curatif et préventif des charpentes traditionnelles et industrialisées : inspection, bûchage, injection, pulvérisation et renfort des pièces affaiblies, en Île-de-France.", path: '/traitement-charpente', serviceType: 'Traitement de charpente' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement de charpente : inspection, curatif et préventif"
+  description="Traitement de charpente contre les insectes xylophages : inspection des pièces, bûchage, injection sous pression, pulvérisation, renfort. Charpentes traditionnelles, anciennes et fermettes. Île-de-France."
+  path="/traitement-charpente" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Par ouvrage"
+    title="Traitement de charpente : la structure avant le produit"
+    lead="La charpente est l’ouvrage sur lequel nous intervenons le plus souvent, et celui où l’erreur coûte le plus cher. Une pièce mal évaluée, c’est une toiture dont on n’a pas mesuré la marge réelle."
+    answer="Le traitement d’une charpente suppose d’abord d’accéder aux bois : isolants et doublages déposés, comble dégagé. Vient ensuite le <strong>bûchage</strong>, le <strong>dépoussiérage</strong>, puis l’<strong>injection</strong> dans les pièces de forte section et la <strong>pulvérisation</strong> généralisée. Les pièces dont la section saine est insuffisante sont renforcées ou remplacées, en liaison avec un charpentier."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Les pièces que nous examinons en priorité</h2>
+            <p class="lead">
+              Une charpente ne se dégrade pas uniformément. Certaines pièces cumulent les facteurs
+              défavorables, et ce sont elles qui déterminent la suite.
+            </p>
+            <h3>Les abouts d’entrait et les sablières</h3>
+            <p>
+              Elles reposent directement sur la maçonnerie, qui peut conserver de l’humidité,
+              particulièrement sur les façades nord et dans les murs épais de meulière ou de pierre.
+              C’est la jonction bois-maçonnerie qui pose problème, bien plus que le bois lui-même.
+            </p>
+            <h3>Les pieds de chevron et les bois de rive</h3>
+            <p>
+              Ils se trouvent au voisinage des chéneaux et des entrées d’eau. Une gouttière
+              débordante, une noue mal étanche, et l’humidité s’installe à l’endroit précis où le
+              chevron transmet sa charge.
+            </p>
+            <h3>Les assemblages et les entailles</h3>
+            <p>
+              Toute entaille réduit la section, et toute entaille a été faite à la scie, donc dans
+              du bois dont les fibres sont ouvertes. Ce sont des points d’entrée pour l’eau comme
+              pour la ponte.
+            </p>
+            <h3>Les zones autour des nœuds</h3>
+            <p>
+              Les femelles de capricorne pondent volontiers dans les fentes qui se forment au
+              voisinage des nœuds. C’est souvent là que l’on trouve les premiers trous de sortie
+              sur une pièce résineuse.
+            </p>
+          </div>
+          <figure class="fig">
+            <Charpente />
+            <figcaption>
+              Repérage des zones sensibles d’une ferme traditionnelle. Le sondage commence toujours
+              par les points où les efforts se concentrent.
+            </figcaption>
+          </figure>
+        </div>
+        <aside class="split__side">
+          <div class="card card--sage">
+            <h3 style="font-size:1.08rem">Trois types de charpentes</h3>
+            <ul class="list-dot small" style="margin-top:.7rem">
+              <li><strong>Traditionnelle en résineux</strong> — pavillonnaire du XX<sup>e</sup> siècle. Terrain privilégié du capricorne des maisons.</li>
+              <li><strong>Traditionnelle en chêne</strong> — bâti ancien, fermes, centres historiques. Grosse vrillette en cas d’humidité, aubier vulnérable.</li>
+              <li><strong>Industrialisée (fermettes)</strong> — depuis les années 1970. Bois minces, traitement d’usine dont l’effet s’estompe.</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Par type de bâtiment</h3>
+            <ul class="list-dot small" style="margin-top:.7rem">
+              <li><a href="/traitement-charpente-maison">Charpente de maison</a></li>
+              <li><a href="/traitement-charpente-ancienne">Charpente ancienne</a></li>
+              <li><a href="/traitement-charpente-copropriete">Charpente en copropriété</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Accessibilité</p>
+        <h2>Le vrai sujet d’un traitement de charpente</h2>
+        <p class="lead">
+          Ce n’est ni le produit ni la méthode : c’est la possibilité d’atteindre le bois. Presque
+          tous les traitements décevants que nous constatons après coup s’expliquent par là.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Comble perdu, non encombré</h3>
+          <p>
+            La situation idéale. Toutes les faces des pièces sont accessibles, le traitement est
+            complet et rapide. C’est aussi le moment le plus favorable pour un traitement préventif
+            avant isolation.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Comble encombré</h3>
+          <p>
+            Le bois est là mais on ne le voit pas. Un comble rempli de cartons ne permet ni de lire
+            les chevrons ni d’appliquer correctement. Le dégagement préalable vous revient, et il
+            conditionne la qualité du résultat.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Comble aménagé</h3>
+          <p>
+            Le cas le plus délicat. Les pièces les plus exposées sont enfermées dans le doublage.
+            Nous procédons par ouvertures ponctuelles, et nous écrivons précisément ce que nous
+            n’avons pas pu voir.
+          </p>
+        </div>
+      </div>
+      <div class="note note--copper" style="margin-top:1.75rem">
+        <span class="note__title">Le bon moment, c’est avant l’isolation</span>
+        Si vous envisagez d’aménager ou d’isoler un comble, faites contrôler et traiter la charpente
+        avant. Une fois les rampants isolés et les plafonds posés, une partie du bois devient
+        inaccessible pour des années, et le coût d’une intervention ultérieure change d’échelle.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions sur le traitement de charpente</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment traiter une charpente contre les insectes ?">
+          <p>
+            En dégageant les bois, en bûchant les parties dégradées jusqu’au bois sain, en
+            dépoussiérant l’ensemble, puis en injectant sous pression les pièces de forte section et
+            en pulvérisant toutes les faces accessibles en passes croisées.
+          </p>
+          <p>
+            Les pièces dont la section saine est devenue insuffisante relèvent ensuite de la
+            charpenterie : doublage, moisage, remplacement. Aucun produit ne s’y substitue.
+          </p>
+        </Answer>
+        <Answer question="Faut-il traiter toute la charpente ?">
+          <p>
+            Tous les bois de même nature dans le même volume, oui, parce que l’insecte ne se limite
+            pas aux pièces où les trous sont visibles. Mais pas de la même manière partout :
+            injection pour les fortes sections, application pour les bois minces, et certaines zones
+            peuvent être écartées après examen.
+          </p>
+        </Answer>
+        <Answer question="Combien de temps dure un traitement de charpente ?">
+          <p>
+            Pour une maison individuelle, comptez un à trois jours d’intervention selon la surface,
+            l’accessibilité et l’ampleur du bûchage. La préparation — dégagement, dépose des
+            éléments masquant le bois — prend souvent autant de temps, et elle est fréquemment
+            sous-estimée.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le traitement de charpente" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Insectes dans la charpente', href: '/insectes-charpente', text: 'Quelles espèces s’y développent, et selon quelles conditions.' },
+    { label: 'Traitement du capricorne', href: '/traitement-capricorne', text: 'L’espèce la plus fréquente dans les charpentes en résineux.' },
+    { label: 'Prévention et surveillance', href: '/prevention-insectes-xylophages', text: 'Traiter préventivement avant d’isoler : le moment le plus favorable.' },
+  ]} />
+  <CtaBand primary={{ label: 'Faire examiner ma charpente', href: '/demander-un-diagnostic' }} />
+</Base>

@@ -1,0 +1,16 @@
+---
+/** Réponse directe à une question, conçue pour être citable telle quelle. */
+interface Props { question: string; id?: string; variant?: 'default' | 'plain' }
+const { question, id, variant = 'default' } = Astro.props;
+---
+<div class={`ans ans--${variant}`} id={id}>
+  <h3 class="ans__q">{question}</h3>
+  <div class="ans__a"><slot /></div>
+</div>
+<style>
+  .ans { border-top: 1px solid var(--c-rule); padding-top: 1.35rem; }
+  .ans__q { font-size: var(--t-h4); margin-bottom: .55rem; scroll-margin-top: 6rem; }
+  .ans__a { color: var(--c-text-soft); font-size: var(--t-sm); line-height: 1.7; max-width: 72ch; }
+  .ans__a > * + * { margin-top: .75rem; }
+  .ans--plain { border-top: 0; padding-top: 0; }
+</style>

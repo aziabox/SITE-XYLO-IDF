@@ -1,0 +1,92 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Faq from '~/components/Faq.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Types de bâtiments' }];
+const types = [
+  { t: 'Maison individuelle', href: '/traitement-charpente-maison', d: 'Charpentes traditionnelles en sapin et fermettes industrialisées. L’accessibilité du comble décide de tout.', k: 'Capricorne des maisons' },
+  { t: 'Logement et appartement', href: '/traitement-bois-maison', d: 'Parquets, lambourdes, solives, boiseries, escaliers, menuiseries. Concilier efficacité et respect de la finition.', k: 'Vrillettes, lyctus' },
+  { t: 'Bâtiment ancien', href: '/traitement-charpente-ancienne', d: 'Chêne de forte section, planchers à la française, pans de bois. Distinguer l’ancien de l’actif avant tout.', k: 'Grosse vrillette, humidité' },
+  { t: 'Immeuble et copropriété', href: '/traitement-charpente-copropriete', d: 'Qualification des ouvrages, rapport exploitable en assemblée générale, chantier en site occupé.', k: 'Circuit de décision' },
+  { t: 'Commerce et local professionnel', href: '/traitement-bois-commerce', d: 'Agencements, structures apparentes, réserves. Intervention hors horaires et traçabilité des produits.', k: 'Continuité d’activité' },
+  { t: 'Bâtiment d’activité et grange', href: '/traitement-bois-batiment', d: 'Charpentes de grande portée, anciens ateliers, dépendances. Les appuis avant tout le reste.', k: 'Portée et appuis' },
+];
+const faq = [
+  { q: 'Pourquoi le type de bâtiment change-t-il le diagnostic ?', a: "Parce qu'il détermine trois choses : les essences de bois employées, et donc les espèces plausibles ; la configuration des ouvrages, et donc ce qu'il est possible d'observer ; et le circuit de décision, qui conditionne le délai réel d'une intervention. Une même attaque de capricorne ne s'aborde pas de la même façon dans un pavillon, dans un immeuble en copropriété et dans une grange en cours de reconversion." },
+  { q: 'Intervenez-vous sur tous les types de bâtiments ?', a: "Oui, dès lors qu'il s'agit d'ouvrages bois : maisons, appartements, immeubles, copropriétés, bâtiments anciens, commerces, locaux professionnels, dépendances et bâtiments d'activité. Sur les bâtiments protégés ou situés aux abords d'un monument historique, nous réalisons le diagnostic et les préconisations en coordination avec le maître d'œuvre chargé du dossier." },
+  { q: 'Un même bâtiment peut-il relever de plusieurs situations ?', a: "C'est fréquent. Un commerce installé au rez-de-chaussée d'un immeuble ancien en copropriété cumule trois logiques : celle du local professionnel, celle du bâti ancien, et celle des parties communes. Notre rapport qualifie alors chaque ouvrage séparément, afin que chaque décideur sache ce qui le concerne." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Types de bâtiments : maisons, immeubles, bâti ancien, commerces"
+  description="Le type de bâtiment détermine les essences de bois, les espèces plausibles et le circuit de décision. Maisons, appartements, copropriétés, bâti ancien, commerces et bâtiments d’activité."
+  path="/types-de-batiments" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Types de bâtiments"
+    title="Le bâtiment fait partie du diagnostic"
+    lead="Le bois ne se comporte pas de la même façon dans un comble de pavillon, un plancher d’immeuble haussmannien ou une charpente de grange. Le contexte bâti détermine les espèces plausibles, ce qu’il est possible d’observer, et qui décide."
+    answer="Le type de bâtiment détermine trois choses : les <strong>essences employées</strong>, donc les espèces plausibles ; la <strong>configuration des ouvrages</strong>, donc ce qu’il est possible d’examiner ; et le <strong>circuit de décision</strong>, donc le délai réel d’une intervention. C’est pourquoi nous abordons chaque famille de bâtiment séparément."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {types.map((t) => (
+          <a href={t.href} class="card card--link">
+            <p class="sci">{t.k}</p>
+            <h3>{t.t}</h3>
+            <p>{t.d}</p>
+            <span class="card__foot link-arrow">Consulter</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Le point commun</p>
+        <h2>Trois questions posées à chaque bâtiment</h2>
+        <p class="lead">
+          Quelle que soit la famille, notre examen part des mêmes interrogations. Ce sont les
+          réponses qui diffèrent.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Quel bois, et dans quel état ?</h3>
+          <p>
+            Résineux ou feuillu, aubier ou duramen, sec ou humide. Cette première lecture écarte
+            souvent la moitié des hypothèses avant même d’avoir regardé un trou.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Que porte-t-il ?</h3>
+          <p>
+            Une pièce de structure et un ouvrage de finition ne posent pas le même problème. Sur
+            une pièce porteuse, c’est la section saine restante qui commande la décision.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Qui décide, et dans quel délai ?</h3>
+          <p>
+            Un propriétaire seul, une copropriété, un exploitant, un maître d’œuvre. Le circuit
+            de décision détermine la forme du rapport autant que son contenu.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes" />
+  <ZonesMini />
+  <CtaBand />
+</Base>

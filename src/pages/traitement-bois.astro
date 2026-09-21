@@ -1,0 +1,176 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Traitements', href: '/traitement-insectes-xylophages' },
+  { label: 'Traitement du bois' },
+];
+const ouvrages = [
+  { t: 'Planchers et solives', d: 'Bois porteurs, souvent invisibles entre un plafond et un parquet. Le diagnostic passe par une ouverture ponctuelle ou par le vide sanitaire. L’enjeu est structurel : c’est la section saine qui décide.', m: 'Injection dans les solives, application sur les faces accessibles, évaluation de la portance.' },
+  { t: 'Parquets et lambourdes', d: 'On croit souvent le parquet en cause alors que c’est la lambourde qui porte qui est attaquée. Un affaissement localisé sans trou visible en surface est typique de cette configuration.', m: 'Dépose d’une lame pour atteindre le support, traitement par le dessous ou par les joints.' },
+  { t: 'Boiseries, lambris et escaliers', d: 'Ouvrages vus, souvent anciens, parfois de grande valeur. Le traitement doit être compatible avec la finition existante, et les perçages restent discrets.', m: 'Essai préalable sur zone peu visible, produit incolore, injection par petits perçages rebouchés.' },
+  { t: 'Menuiseries extérieures et volets', d: 'Exposées à l’alternance de pluie et de soleil. La dégradation y est souvent mixte : humidité, champignon, puis insecte. Traiter sans rétablir la protection ne règle rien.', m: 'Purge, traitement, puis reprise de la finition. Coordination avec un menuisier si nécessaire.' },
+  { t: 'Mobilier', d: 'Petite vrillette le plus souvent, lyctus sur les pièces récentes ou en bois exotique. La question est patrimoniale : il s’agit de conserver l’objet.', m: 'Traitement adapté à la finition, ou recours à un restaurateur pour les pièces de valeur.' },
+  { t: 'Ossatures et bardages', d: 'Constructions récentes, généralement traitées d’origine. Les points sensibles sont les coupes de chantier et les zones exposées aux intempéries.', m: 'Traitement ciblé des zones atteintes, retraitement des coupes, contrôle de la protection d’ensemble.' },
+];
+const faq = [
+  { q: 'Quelle différence entre traiter une poutre et traiter un meuble ?', a: "Tout, sauf le principe. Sur une poutre, l'enjeu est mécanique : on mesure la section saine, on bûche, on injecte en profondeur, et l'aspect final importe peu. Sur un meuble, l'enjeu est la conservation de l'objet : on adapte le produit à la finition, on fait un essai préalable, et les perçages doivent rester invisibles. Ce sont deux métiers dans un même geste." },
+  { q: 'Peut-on traiter un bois peint ou verni ?', a: "Oui, mais la finition constitue une barrière. Un produit appliqué sur une peinture ne pénètre pas : il faut soit atteindre le bois par des perçages, soit décaper localement. C'est une des raisons pour lesquelles un traitement sur boiserie ancienne demande plus de temps qu'une pulvérisation sur charpente brute." },
+  { q: 'Le bois traité change-t-il d’aspect ?', a: "Sur un bois brut de charpente, l'application laisse un aspect légèrement plus foncé qui s'atténue avec le temps. Sur un bois vu, ciré ou plaqué, le risque de marque est réel et doit être anticipé : essai préalable sur une zone peu visible, choix d'un produit incolore, et parfois reprise de la finition après traitement." },
+  { q: 'Un bois neuf doit-il être traité ?', a: "Cela dépend de sa classe d'emploi et de sa mise en œuvre. Les bois de construction sont normalement traités pour la classe correspondant à leur exposition. Le point souvent négligé est le retraitement des coupes et usinages réalisés sur chantier : une entaille ou une coupe de longueur met à nu du bois non protégé, et c'est précisément là que les problèmes commencent quelques années plus tard." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Traitement du bois', description: "Traitement des ouvrages bois contre les insectes xylophages : planchers, parquets, boiseries, menuiseries, mobilier, ossatures. Île-de-France.", path: '/traitement-bois', serviceType: 'Traitement du bois' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement du bois : méthodes selon l’ouvrage concerné"
+  description="Traitement du bois contre les insectes xylophages : planchers, parquets et lambourdes, boiseries, menuiseries, mobilier, ossatures. Une méthode par ouvrage, en Île-de-France."
+  path="/traitement-bois" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Par ouvrage"
+    title="Traitement du bois : une méthode par ouvrage, pas une recette unique"
+    lead="Une solive de plancher, un parquet posé sur lambourdes, un lambris ciré du XVIIIᵉ siècle et un bardage extérieur sont tous du bois. Ils n’appellent ni la même technique, ni le même produit, ni la même précaution."
+    answer="Le traitement varie selon la fonction de l’ouvrage. Sur un bois <strong>porteur</strong>, l’enjeu est la section saine restante : bûchage et injection. Sur un bois <strong>vu</strong> — boiserie, parquet, mobilier — l’enjeu est la conservation : produit compatible avec la finition, essai préalable, perçages discrets. Sur un bois <strong>extérieur</strong>, le traitement ne vaut que si la protection contre l’eau est rétablie."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Les ouvrages</p>
+        <h2>Six familles, six approches</h2>
+        <p class="lead">
+          Nous intervenons sur l’ensemble des ouvrages bois du bâtiment. Voici ce qui change d’une
+          famille à l’autre.
+        </p>
+      </div>
+      <div class="ouv">
+        {ouvrages.map((o) => (
+          <article class="ouv__item">
+            <h3>{o.t}</h3>
+            <p>{o.d}</p>
+            <p class="ouv__m"><span>Méthode</span> {o.m}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Comprendre le matériau change la conduite à tenir</h2>
+            <p class="lead">
+              Deux notions expliquent l’essentiel de ce qui arrive au bois d’un bâtiment : la
+              distinction aubier/duramen, et la notion de classe d’emploi.
+            </p>
+            <h3>Aubier et duramen</h3>
+            <p>
+              L’aubier est la partie périphérique et jeune du bois, encore riche en réserves au
+              moment de l’abattage. C’est la zone que recherchent la plupart des insectes
+              xylophages. Le duramen, ou bois de cœur, est plus dense et imprégné de substances qui
+              le rendent bien moins attractif.
+            </p>
+            <p>
+              Conséquence pratique : une pièce de chêne correctement purgée de son aubier est
+              naturellement peu sensible, alors qu’une pièce comportant beaucoup d’aubier reste
+              vulnérable, quelle que soit la réputation de l’essence. C’est pourquoi nous regardons
+              la coupe du bois autant que son espèce.
+            </p>
+            <h3>La classe d’emploi</h3>
+            <p>
+              Les normes européennes classent les situations d’exposition du bois, de la plus sèche
+              — un bois abrité en intérieur — à la plus exposée — un bois en contact permanent avec
+              l’eau ou le sol. À chaque classe correspond un niveau de protection nécessaire.
+            </p>
+            <p>
+              Beaucoup de désordres viennent d’un décalage entre les deux : un bois prévu pour
+              l’intérieur mis en œuvre sur une terrasse, ou un bois de classe adaptée mais dont les
+              coupes de chantier n’ont jamais été retraitées.
+            </p>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">Le détail qui coûte cher</h3>
+            <p style="margin-top:.6rem">
+              Une pièce de charpente traitée en usine l’est sur sa périphérie. Chaque coupe de
+              longueur, chaque entaille d’assemblage réalisée sur le chantier expose du bois non
+              protégé, au cœur de la pièce.
+            </p>
+            <p style="margin-top:.8rem">
+              Le retraitement de ces coupes prend quelques minutes et coûte presque rien. Il est
+              pourtant omis dans une grande partie des chantiers, et c’est souvent par là que
+              commence une attaque, quinze ou vingt ans plus tard.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions sur le traitement du bois</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Quels insectes attaquent les planchers ?">
+          <p>
+            Dans un plancher sur solives en résineux, le capricorne des maisons. Dans un plancher
+            ancien en chêne, la petite vrillette dans les zones d’aubier, ou la grosse vrillette si
+            le bois est humide — typiquement au-dessus d’une cave mal ventilée.
+          </p>
+          <p>
+            Les termites peuvent également atteindre les planchers bas depuis le sol, sans laisser
+            de trou. <a href="/insectes-plancher">Insectes dans le plancher</a>.
+          </p>
+        </Answer>
+        <Answer question="Comment protéger des poutres anciennes ?">
+          <p>
+            En veillant d’abord à ce qu’elles restent sèches : ce sont les infiltrations et les
+            contacts prolongés avec une maçonnerie humide qui créent les conditions d’une attaque,
+            bien plus que l’âge du bois.
+          </p>
+          <p>
+            Sur des poutres apparentes de valeur, un traitement préventif incolore est possible,
+            avec essai préalable. Il ne remplace pas une surveillance périodique des abouts engagés
+            dans les murs, qui sont les points les plus exposés.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le traitement du bois" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Le cas le plus fréquent, et celui où l’accessibilité décide de tout.' },
+    { label: 'Insectes dans les poutres', href: '/insectes-poutres', text: 'Fortes sections : comment évaluer ce qui reste de sain.' },
+    { label: 'Prévention et surveillance', href: '/prevention-insectes-xylophages', text: 'Classes d’emploi, retraitement des coupes, ventilation.' },
+  ]} />
+  <CtaBand />
+</Base>
+
+<style>
+  .ouv { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--c-rule); border: 1px solid var(--c-rule); border-radius: var(--r-lg); overflow: hidden; }
+  .ouv__item { background: var(--c-surface); padding: 1.6rem 1.5rem; }
+  .ouv__item h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+  .ouv__item p { font-size: var(--t-sm); color: var(--c-text-soft); }
+  .ouv__m { margin-top: .9rem; padding-top: .8rem; border-top: 1px dashed var(--c-border); font-size: .8rem !important; }
+  .ouv__m span { display: block; font-size: .64rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cuivre-500); margin-bottom: .25rem; }
+</style>

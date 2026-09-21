@@ -1,0 +1,163 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Etapes from '~/components/Etapes.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Bois attaqué par des insectes' }];
+const signes = [
+  { t: 'Des trous', d: 'Ronds ou ovales, de 1 à 10 mm. Notez la forme, le diamètre et la couleur des bords.', href: '/trous-dans-charpente' },
+  { t: 'De la sciure', d: 'Au sol, sur une plinthe, sur un meuble. Ne la nettoyez pas avant de l’avoir observée.', href: '/sciure-charpente' },
+  { t: 'De la vermoulure', d: 'Découverte en grattant ou en ouvrant une pièce. Sa granulométrie est un critère d’espèce.', href: '/vermoulure-bois' },
+  { t: 'Un son creux', d: 'Le bois sonne différemment au maillet alors que sa surface paraît saine.', href: '/insectes-poutres' },
+  { t: 'Un affaissement', d: 'Un plancher qui fléchit, un chevron qui s’affaisse, une lame qui cède sous l’appui.', href: '/insectes-plancher' },
+  { t: 'Des cordonnets de terre', d: 'Tunnels de quelques millimètres le long d’un mur ou d’un soubassement.', href: '/termites' },
+  { t: 'Un bruit', d: 'Grignotement en été, tic-tac au printemps : deux espèces différentes.', href: '/insectes-charpente' },
+  { t: 'Des insectes observés', d: 'Adultes en vol ou sur un appui de fenêtre. Conservez-les, même morts.', href: '/insectes-xylophages' },
+];
+const etapes = [
+  { title: 'Observer avant de toucher', text: 'Photographiez la zone telle que vous l’avez trouvée : vue d’ensemble, gros plan des trous, gros plan de la sciure avec un objet donnant l’échelle. Ces images ne pourront pas être refaites après nettoyage.' },
+  { title: 'Identifier l’essence si possible', text: 'Résineux ou feuillu ? Un sapin est clair, tendre, avec des nœuds ronds bien marqués ; un chêne est plus dense, plus sombre, avec des rayons visibles sur la coupe. Cette seule information écarte souvent la moitié des hypothèses.' },
+  { title: 'Tester la résistance du bois', text: 'Appuyez la lame d’un tournevis plat perpendiculairement au fil, sans forcer exagérément. Un bois sain résiste nettement. Notez les endroits où la lame s’enfonce, et de combien.' },
+  { title: 'Repérer et dater une zone témoin', text: 'Nettoyez complètement une zone, marquez-la avec un morceau d’adhésif et inscrivez la date. La réapparition de sciure est le test d’activité le plus fiable qui existe.' },
+  { title: 'Chercher l’eau', text: 'Regardez autour : traces d’humidité, auréoles, peinture cloquée, odeur de cave. L’humidité explique une grande partie des situations, et elle change complètement la conduite à tenir.' },
+  { title: 'Décider si une visite s’impose', text: 'Un affaissement, un bois qui s’enfonce, des trous nombreux et frais ou une sciure qui réapparaît vite justifient un examen. Un tas isolé sans autre signe peut d’abord faire l’objet d’un contrôle différé.' },
+];
+const faq = [
+  { q: 'Le bois attaqué doit-il toujours être remplacé ?', a: "Non, et c'est souvent l'inverse. La plupart des pièces attaquées conservent une section saine suffisante et peuvent être bûchées, traitées et maintenues en place. Le remplacement ne s'impose que lorsque la section restante ne permet plus de reprendre les efforts, ou lorsque la dégradation se situe au droit d'un appui. C'est une décision qui se prend pièce par pièce, au sondage." },
+  { q: 'Une attaque peut-elle s’étendre à toute la maison ?', a: "Cela dépend entièrement de l'espèce. Un lyctus reste confiné à l'ouvrage en feuillu récent qu'il a colonisé. Un capricorne peut progresser dans l'ensemble des bois résineux d'un même volume. Des termites peuvent atteindre tout le bâtiment et même le suivant. C'est l'une des raisons pour lesquelles l'identification précède toujours la décision de périmètre." },
+  { q: 'Les insectes du bois sont-ils dangereux pour les occupants ?', a: "Ils ne piquent pas, ne mordent pas et ne transmettent pas de maladie. Le risque qu'ils créent est matériel : il porte sur la solidité des ouvrages. Les précautions sanitaires concernent les produits de traitement, dont les consignes de réintégration doivent être respectées, et la poussière de bois dégagée pendant un bûchage." },
+  { q: 'Mon assurance peut-elle prendre en charge les travaux ?', a: "Les dégâts d'insectes xylophages sont généralement exclus des garanties multirisques habitation, car ils relèvent d'un phénomène progressif plutôt que d'un sinistre soudain. Certaines situations font exception, notamment lorsque l'attaque est la conséquence directe d'un dégât des eaux couvert. Vérifiez vos conditions particulières, et conservez le rapport de diagnostic : il constitue une pièce utile dans tous les cas." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Bois attaqué par des insectes : signes, gestes et conduite à tenir"
+  description="Vous avez découvert du bois attaqué : les huit signes à reconnaître, les six gestes à faire avant toute intervention, et comment savoir si l’attaque est encore active."
+  path="/bois-attaque-insectes" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Vous constatez"
+    title="Du bois attaqué par des insectes : par où commencer"
+    lead="Avant de chercher quel insecte, avant de demander un devis, il y a six gestes simples qui donnent plus d’information que n’importe quelle recherche en ligne. Ils prennent un quart d’heure."
+    answer="Face à un bois attaqué, la séquence utile est : <strong>observer et photographier avant de nettoyer</strong>, <strong>identifier l’essence</strong> (résineux ou feuillu), <strong>tester la résistance</strong> au tournevis, <strong>nettoyer une zone témoin et la dater</strong>, puis <strong>chercher l’origine d’une éventuelle humidité</strong>. La réapparition de sciure sur la zone témoin est le test d’activité le plus fiable."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Les signes</p>
+        <h2>Huit signes, et ce vers quoi chacun renvoie</h2>
+        <p class="lead">
+          Aucun ne suffit seul. C’est leur combinaison qui construit un diagnostic, et c’est pour
+          cette raison qu’il vaut mieux tous les vérifier avant de conclure.
+        </p>
+      </div>
+      <div class="grid grid-4">
+        {signes.map((s) => (
+          <a href={s.href} class="card card--link">
+            <h3 style="font-size:1.05rem">{s.t}</h3>
+            <p>{s.d}</p>
+            <span class="card__foot link-arrow">Voir</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <Etapes eyebrow="Marche à suivre" title="Six gestes avant toute décision" lead="Ils ne remplacent pas un examen professionnel, mais ils déterminent s’il en faut un — et ils rendent celui-ci beaucoup plus efficace." items={etapes} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Selon l’ouvrage</p>
+        <h2>Où se trouve le bois concerné ?</h2>
+        <p class="lead">
+          L’ouvrage détermine à la fois les espèces plausibles et l’enjeu réel de la situation.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <a href="/insectes-charpente" class="card card--link">
+          <h3>Dans la charpente</h3>
+          <p>Chevrons, pannes, entraits, fermettes. L’enjeu est structurel : c’est la section saine restante qui décide.</p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+        <a href="/insectes-poutres" class="card card--link">
+          <h3>Dans les poutres</h3>
+          <p>Fortes sections, souvent en chêne, abouts engagés dans la maçonnerie. Le sondage prime sur l’examen visuel.</p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+        <a href="/insectes-plancher" class="card card--link">
+          <h3>Dans le plancher</h3>
+          <p>Solives, lambourdes, parquet. Le désordre se manifeste souvent par un affaissement plutôt que par des trous.</p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Ce que l’on se demande en premier</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Est-ce que les insectes xylophages peuvent fragiliser une charpente ?">
+          <p>
+            Oui, mais pas tous et pas dans les mêmes proportions. Le capricorne des maisons et les
+            termites peuvent compromettre la résistance d’une pièce porteuse. Le lyctus, limité à
+            l’aubier, dégrade surtout les ouvrages de finition. La petite vrillette se situe entre
+            les deux selon l’ouvrage concerné.
+          </p>
+          <p>
+            La bonne question n’est donc pas « y a-t-il des insectes ? » mais « quelle section de
+            bois sain reste-t-il dans les pièces qui portent ? ».
+          </p>
+        </Answer>
+        <Answer question="Peut-on attendre avant d’intervenir ?">
+          <p>
+            Dans certains cas oui, et c’est même raisonnable : une attaque dont l’ancienneté est
+            incertaine gagne à être observée pendant une saison avant qu’on engage des travaux.
+          </p>
+          <p>
+            Dans d’autres, non : un affaissement constaté, un bois qui s’enfonce sous la pression
+            au droit d’un appui, ou la présence de cordonnets de terre appellent un examen sans
+            délai.
+          </p>
+        </Answer>
+        <Answer question="Comment savoir si c’est un insecte ou de l’humidité ?">
+          <p>
+            Un bois dégradé par l’eau et les champignons se fissure en cubes ou en lamelles, change
+            de couleur, et se réduit en poudre brunâtre sous le doigt sans présenter de galeries
+            nettes. Un bois attaqué par un insecte présente des galeries de section régulière,
+            remplies de vermoulure, et des trous de sortie en surface.
+          </p>
+          <p>
+            Les deux coexistent fréquemment : la pourriture prépare le terrain, l’insecte s’installe
+            ensuite. Dans ce cas, c’est l’eau qu’il faut traiter en premier.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que comporte une visite et ce que contient le rapport.' },
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Les quatre critères d’identification et le tableau comparatif.' },
+    { label: 'Traitement des insectes xylophages', href: '/traitement-insectes-xylophages', text: 'Curatif ou préventif : ce que recouvre chaque prestation.' },
+  ]} />
+  <CtaBand />
+</Base>

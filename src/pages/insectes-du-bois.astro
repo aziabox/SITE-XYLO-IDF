@@ -1,0 +1,148 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Insectes xylophages', href: '/insectes-xylophages' },
+  { label: 'Autres insectes du bois' },
+];
+const autres = [
+  {
+    nom: 'Sirex géant',
+    sci: 'Urocerus gigas',
+    type: 'Insecte de bois vert',
+    txt: "Hyménoptère spectaculaire, jaune et noir, souvent pris pour une grosse guêpe. La femelle pond dans les résineux fraîchement abattus ou dépérissants, et la larve poursuit son développement dans la grume. On découvre parfois un adulte émergeant d'une charpente neuve : il provient du bois d'origine et ne recolonisera pas un bois sec mis en œuvre.",
+    action: "Aucun traitement n'est nécessaire. L'émergence se produit une fois, le trou de sortie est grand — jusqu'à 7 mm, rond et très net — mais l'histoire s'arrête là.",
+  },
+  {
+    nom: 'Hespérophane',
+    sci: 'Trichoferus holosericeus',
+    type: 'Longicorne des feuillus',
+    txt: "Un longicorne qui s'attaque aux feuillus, notamment au chêne, contrairement au capricorne des maisons. Ses trous de sortie sont ovales et de taille comparable, ce qui explique la confusion. On le rencontre surtout dans le bâti ancien du sud de la France, plus rarement en Île-de-France.",
+    action: "Une identification précise s'impose avant traitement, car les trous ovales dans du chêne écartent d'emblée le capricorne des maisons et orientent vers d'autres hypothèses.",
+  },
+  {
+    nom: 'Fourmis charpentières',
+    sci: 'Camponotus spp.',
+    type: 'Creuse le bois sans le consommer',
+    txt: "Ces fourmis ne se nourrissent pas de bois : elles y creusent leur nid, en privilégiant un bois déjà ramolli par l'humidité ou par un champignon. Les galeries sont lisses, larges, sans vermoulure tassée, et l'on trouve au pied de l'ouvrage des fragments de bois grossiers plutôt qu'une poudre fine.",
+    action: "Le traitement ne relève pas de la même logique : il s'agit d'éliminer la colonie et, surtout, de supprimer l'humidité qui a rendu le bois colonisable.",
+  },
+  {
+    nom: 'Vrillette du pain',
+    sci: 'Stegobium paniceum',
+    type: 'Insecte des denrées, pas du bois',
+    txt: "Proche parente de la petite vrillette par la silhouette, elle s'attaque aux denrées sèches — farines, épices, biscuits, aliments pour animaux — et non au bois de construction. On la découvre dans un placard de cuisine, et sa ressemblance avec la petite vrillette provoque régulièrement des inquiétudes injustifiées sur la charpente.",
+    action: "Aucune intervention sur le bois. Le traitement passe par l'élimination des denrées infestées et le nettoyage des rangements.",
+  },
+  {
+    nom: 'Scolytes',
+    sci: 'Scolytinae',
+    type: 'Insecte de bois vert',
+    txt: "Ils creusent des galeries caractéristiques sous l'écorce des arbres vivants ou récemment abattus. On peut les observer sur du bois de chauffage ou sur une grume stockée, mais ils ne se développent pas dans un bois écorcé et sec mis en œuvre dans un bâtiment.",
+    action: "Pas de traitement du bâtiment. Il est simplement préférable de ne pas stocker de bois écorcé ou fraîchement coupé à l'intérieur.",
+  },
+  {
+    nom: 'Abeilles charpentières',
+    sci: 'Xylocopa violacea',
+    type: 'Creuse le bois sans le consommer',
+    txt: "Grande abeille noire aux reflets bleutés, impressionnante mais peu agressive. Elle creuse des galeries parfaitement rondes, d'environ 12 à 15 mm, dans du bois mort, sec et non traité : poutres extérieures, bardages, mobilier de jardin. Elle est pollinisatrice et protégée dans plusieurs contextes.",
+    action: "Les dégâts sont généralement limités à un ouvrage précis. La prévention consiste à protéger le bois extérieur par une finition, ce qui le rend peu attractif.",
+  },
+];
+const faq = [
+  { q: 'Un insecte sorti d’une charpente neuve est-il inquiétant ?', a: "Pas nécessairement. Certains insectes de bois vert, comme le sirex, terminent leur cycle dans un bois déjà mis en œuvre : l'adulte émerge, laisse un trou net, et l'histoire s'arrête là parce que l'espèce ne se reproduit pas dans un bois sec. Ce qui doit alerter, c'est l'apparition progressive de nouveaux trous au fil des saisons, ou la présence de vermoulure fraîche." },
+  { q: 'Comment distinguer un insecte xylophage d’un insecte qui creuse seulement ?', a: "Par ce qu'il laisse. Un xylophage véritable consomme le bois et produit de la vermoulure — une poudre fine, avec des granulés dont la forme varie selon l'espèce. Les fourmis et abeilles charpentières, elles, évacuent des fragments grossiers, presque des copeaux, et leurs galeries sont lisses et propres. La texture de ce que l'on trouve au sol est donc très informative." },
+  { q: 'Faut-il traiter dès qu’on voit un insecte dans la maison ?', a: "Non. La grande majorité des insectes observés dans un logement n'ont aucun rapport avec le bois de la structure. Avant d'envisager quoi que ce soit, il faut établir qu'il y a bien une attaque en cours sur un ouvrage bois : trous de sortie, vermoulure fraîche, bois qui sonne creux. Si vous le pouvez, conservez l'insecte, même mort : il constitue l'élément d'identification le plus direct." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Autres insectes du bois : espèces rares et fausses alertes"
+  description="Sirex, hespérophane, fourmis et abeilles charpentières, vrillette du pain, scolytes : les espèces moins fréquentes, et celles que l’on prend à tort pour des insectes xylophages du bâtiment."
+  path="/insectes-du-bois" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Espèces moins fréquentes"
+    title="Autres insectes du bois : ce qui en est un, et ce qui n’en est pas"
+    lead="Une partie des inquiétudes que l’on nous soumet concerne des insectes qui ne menacent pas du tout le bâtiment. Distinguer un vrai xylophage d’une fausse alerte évite des traitements aussi coûteux qu’inutiles."
+    answer="Toutes les espèces trouvées dans ou sur du bois ne sont pas des xylophages du bâtiment. Trois catégories se distinguent : les <strong>insectes de bois vert</strong> (sirex, scolytes), qui ne se reproduisent pas dans un bois sec mis en œuvre ; ceux qui <strong>creusent sans consommer</strong> (fourmis et abeilles charpentières) ; et les <strong>faux amis</strong>, comme la vrillette du pain, qui s’attaque aux denrées et non au bois."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Six espèces</p>
+        <h2>Les espèces que l’on rencontre occasionnellement</h2>
+        <p class="lead">
+          Pour chacune : ce qu’elle fait réellement, et ce que cela implique — y compris quand la
+          réponse est « rien ».
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {autres.map((a) => (
+          <article class="card aut">
+            <p class="sci">{a.sci}</p>
+            <h3>{a.nom}</h3>
+            <p class="aut__type">{a.type}</p>
+            <p>{a.txt}</p>
+            <p class="aut__act"><span>Conduite à tenir</span> {a.action}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Éviter les fausses alertes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="J’ai vu un gros insecte sortir d’une poutre : que faire ?">
+          <p>
+            Capturez-le si vous le pouvez, ou photographiez-le de près, de dessus et de profil, avec
+            un objet servant d’échelle. Notez la date et l’endroit exact. Un insecte adulte est
+            l’élément d’identification le plus direct dont on puisse disposer, et il se conserve
+            très bien, même mort, dans une boîte ou une enveloppe.
+          </p>
+        </Answer>
+        <Answer question="Des galeries lisses et de gros fragments de bois : quel insecte ?">
+          <p>
+            Cela évoque des fourmis charpentières plutôt qu’un xylophage. Elles ne consomment pas le
+            bois : elles l’évident pour y nicher, et rejettent des fragments grossiers. Les vrais
+            xylophages produisent une vermoulure fine, granuleuse ou farineuse selon l’espèce.
+          </p>
+          <p>
+            La question à se poser ensuite est celle de l’humidité : ces fourmis s’installent
+            presque toujours dans un bois déjà ramolli par l’eau ou par un champignon.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes" />
+  <ZonesMini />
+  <Maillage title="Revenir aux espèces principales" items={[
+    { label: 'Capricorne des maisons', href: '/capricorne-des-maisons', text: 'L’espèce la plus préoccupante pour les charpentes en résineux.' },
+    { label: 'Vrillettes', href: '/vrillette', text: 'Petite et grosse vrillette : le rôle décisif de l’humidité.' },
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Vue d’ensemble et tableau comparatif.' },
+  ]} />
+  <CtaBand title="Un doute sur ce que vous avez trouvé ?" text="Une photo nette de l’insecte ou de la vermoulure, avec un objet servant d’échelle, permet souvent d’écarter une fausse alerte sans déplacement." />
+</Base>
+
+<style>
+  .aut__type { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sauge-600) !important; margin-bottom: .8rem; }
+  .aut__act { margin-top: .9rem; padding-top: .8rem; border-top: 1px dashed var(--c-border); }
+  .aut__act span { display: block; font-size: .64rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cuivre-500); margin-bottom: .25rem; }
+</style>

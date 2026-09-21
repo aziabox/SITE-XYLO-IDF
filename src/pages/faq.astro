@@ -1,0 +1,105 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'FAQ' }];
+
+const groupes = [
+  {
+    titre: 'Reconnaître',
+    items: [
+      { q: 'Quels sont les principaux insectes xylophages ?', a: "Quatre familles concentrent l'essentiel des situations dans le bâti francilien. Le <a href=\"/capricorne-des-maisons\">capricorne des maisons</a>, qui attaque l'aubier des résineux et pose le plus souvent un problème de structure. Les <a href=\"/vrillette\">vrillettes</a>, petite et grosse, qui touchent respectivement les ouvrages de menuiserie et les feuillus humidifiés. Le <a href=\"/lyctus\">lyctus</a>, limité aux feuillus récents riches en amidon. Et les <a href=\"/termites\">termites</a>, insectes sociaux dont la colonie vit dans le sol." },
+      { q: 'Comment reconnaître un capricorne ?', a: "L'adulte est un coléoptère brun foncé à noir de 8 à 25 mm, au corps aplati, dont le pronotum porte deux taches claires et luisantes évoquant des yeux. On le rencontre de juin à août. Sans voir l'insecte, deux critères suffisent presque : des trous de sortie ovales de 5 à 10 mm dans un bois résineux. Un trou ovale dans du chêne désigne autre chose." },
+      { q: 'Comment reconnaître une vrillette ?', a: "Des trous ronds — 1 à 3 mm pour la petite vrillette, 3 à 4 mm pour la grosse — souvent nombreux et groupés, accompagnés d'une vermoulure granuleuse qui s'écoule et forme de petits tas. La petite vrillette produit des granulés en forme de citron qui crissent sous le doigt ; la grosse, des granulés aplatis en lentille, et elle émet un tic-tac régulier au printemps." },
+      { q: 'Comment savoir si des termites sont présents ?', a: "En cherchant ce qu'ils construisent plutôt que ce qu'ils laissent. Les termites ne produisent ni trou de sortie ni vermoulure : ils bâtissent des cordonnets de terre le long des maçonneries pour relier le sol au bois. Cherchez-les en cave, sur les soubassements, au pied des murs. Un bois attaqué paraît intact, sonne creux, et se révèle feuilleté à l'intérieur avec des cloisons de terre." },
+      { q: 'Quel insecte fait des trous dans le bois ?', a: "Plusieurs, et le diamètre oriente : 1 à 2 mm avec une poudre farineuse pointent vers le lyctus ; 1 à 3 mm avec une poudre granuleuse vers la petite vrillette ; 3 à 4 mm dans un chêne humide vers la grosse vrillette ; 5 à 10 mm et de forme ovale dans un résineux vers le capricorne. Si vous trouvez du bois dégradé sans aucun trou, pensez aux termites." },
+      { q: 'Quelle est la différence entre termites et capricornes ?', a: "Elle est nette. Le capricorne est un coléoptère dont la larve creuse seule sa galerie, laisse des trous de sortie ovales et de la vermoulure, et n'attaque que les résineux. Les termites sont des insectes sociaux vivant en colonie dans le sol, qui consomment le bois de l'intérieur sans laisser ni trou ni sciure, mais construisent des cordonnets de terre." },
+    ],
+  },
+  {
+    titre: 'Évaluer',
+    items: [
+      { q: 'Comment savoir si une attaque est active ?', a: "Aucun signe ne suffit seul. On recoupe quatre indices : la couleur des bords de trous — clairs et nets pour une sortie récente, sombres et empoussiérés pour une sortie ancienne ; la fraîcheur de la vermoulure ; la présence d'adultes en période d'émergence ; et surtout la réapparition de sciure sur une zone préalablement nettoyée. Ce dernier test, le contrôle différé, est de loin le plus fiable." },
+      { q: 'Les insectes xylophages peuvent-ils fragiliser une charpente ?', a: "Oui, mais pas tous ni dans les mêmes proportions. Le capricorne des maisons et les termites peuvent compromettre la résistance d'une pièce porteuse. Le lyctus, limité à l'aubier, dégrade surtout les ouvrages de finition. La vraie question n'est donc pas la présence d'un insecte, mais la section de bois sain qui subsiste dans les pièces qui portent." },
+      { q: 'Que faire en présence de sciure ?', a: "Ne nettoyez pas tout de suite. Recueillez un échantillon sur une feuille blanche, photographiez-le à côté d'un objet servant d'échelle, puis nettoyez soigneusement la zone et repérez-la avec un adhésif daté. Si de la sciure réapparaît au même endroit dans les semaines qui suivent, l'attaque est active. Cette observation simple vaut mieux qu'une identification hasardeuse à partir d'une photo." },
+      { q: 'Beaucoup de trous signifie-t-il une attaque grave ?', a: "Pas nécessairement, et c'est contre-intuitif. Chaque trou correspond à la sortie d'un seul adulte, pas à l'étendue des galeries. Le capricorne des maisons, l'espèce la plus destructrice pour une charpente en résineux, laisse souvent très peu de trous alors qu'il a largement évidé la pièce. C'est le sondage du bois, et non le comptage, qui renseigne sur la gravité." },
+      { q: 'Comment se déroule un diagnostic ?', a: "Par un échange préalable, puis une visite qui associe un examen visuel à la lampe rasante, un sondage au maillet et au poinçon, une mesure d'humidité du bois en plusieurs points, et une identification par recoupement de l'essence, des trous et de la vermoulure. Il aboutit à un rapport écrit qui distingue ce qui est constaté, ce qui en est déduit, ce qui reste incertain et ce qui n'a pas pu être examiné." },
+    ],
+  },
+  {
+    titre: 'Traiter',
+    items: [
+      { q: 'Faut-il traiter toute une charpente ?', a: "Tous les bois de même nature dans le même volume, oui : l'insecte ne se limite pas aux pièces où les trous sont visibles, et une pièce non traitée à côté d'une pièce traitée constitue un réservoir. Cela ne signifie pas traiter partout de la même manière : les fortes sections demandent une injection, les bois minces une application soignée, et certaines zones peuvent être écartées après examen." },
+      { q: 'Combien de temps dure un traitement ?', a: "Pour une charpente de maison individuelle, l'intervention s'étale généralement sur un à trois jours, selon la surface, l'accessibilité et l'ampleur du bûchage. La préparation — dégagement du comble, dépose de ce qui masque le bois — prend souvent autant de temps, et elle est fréquemment sous-estimée." },
+      { q: 'Peut-on traiter soi-même une charpente ?', a: "Les produits existent en vente libre et l'application est techniquement accessible. Ce qui ne l'est pas, c'est le reste : évaluer la section saine d'une pièce porteuse, bûcher sans fragiliser, injecter au bon maillage, et travailler en sécurité dans un comble. Pour un ouvrage non structurel — meuble, lambris, planche — un traitement soigneux par vos soins est parfaitement envisageable." },
+      { q: 'Faut-il quitter son logement pendant le traitement ?', a: "Cela dépend du produit employé, du volume traité et de la ventilation des locaux. Le délai de réintégration figure sur la fiche de données de sécurité du produit utilisé et vous est communiqué au moment du devis, avant l'intervention, et non le jour du chantier." },
+      { q: 'Peut-on prévenir les insectes xylophages ?', a: "On peut réduire nettement le risque. Employer des bois traités pour leur classe d'emploi et retraiter les coupes faites sur chantier, ventiler les combles et les vides sanitaires, traiter les infiltrations sans attendre, éviter de stocker du bois non traité dans les dépendances, et contrôler visuellement la charpente tous les deux à trois ans : ce sont des mesures simples, et ce sont les plus efficaces." },
+      { q: 'Un traitement est-il garanti dans le temps ?', a: "La durée d'efficacité dépend du produit, du support et surtout des conditions du bâtiment. Un traitement appliqué dans un comble ventilé et sec conserve son effet bien plus longtemps que le même produit appliqué sur un bois qui reste humide. C'est pourquoi nous traitons la cause de l'humidité avant l'insecte lorsque les deux sont liés, et pourquoi nous préférons parler de surveillance plutôt que de garantie définitive." },
+    ],
+  },
+  {
+    titre: 'Nous et vous',
+    items: [
+      { q: 'Une garantie décennale est-elle proposée ?', a: "Tous les travaux de traitement du bois ne relèvent pas de la garantie décennale : celle-ci concerne les ouvrages dont un désordre compromettrait la solidité du bâtiment ou le rendrait impropre à sa destination. Lorsque l'intervention entre dans ce champ, l'attestation d'assurance correspondante est remise avec le devis et sa validité peut être vérifiée auprès de l'assureur. Nous n'affichons pas cette mention comme un argument général. <a href=\"/garanties-et-assurances\">En savoir plus</a>." },
+      { q: 'Dans quels départements intervenez-vous ?', a: "Dans les huit départements d'Île-de-France : Paris, la Seine-et-Marne, les Yvelines, l'Essonne, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne et le Val-d'Oise. Les délais de déplacement varient selon l'éloignement et vous sont annoncés à la prise de rendez-vous. <a href=\"/zones-intervention\">Voir les zones</a>." },
+      { q: 'Le diagnostic est-il payant ?', a: "Les modalités vous sont indiquées lors de l'échange préalable, avant tout déplacement, et sans ambiguïté. Nous ne pratiquons pas la visite « gratuite » qui n'a d'autre objet que de placer un devis : le temps d'un examen sérieux, sondages et mesures compris, a une valeur, et le dire clairement fait partie de la relation de confiance." },
+      { q: 'Publiez-vous des avis clients ?', a: "Pas tant que nous n'en avons pas reçu de véritables, qui soient vérifiables et attribuables. Un espace est prévu pour cela sur le site. Fabriquer des témoignages est une pratique courante dans notre secteur ; nous considérons qu'elle disqualifie tout le reste du discours d'une entreprise." },
+      { q: 'Pourquoi n’affichez-vous pas de statistiques d’infestation ?', a: "Parce qu'il n'existe pas de donnée publique fiable à l'échelle communale ou départementale sur la présence des insectes xylophages. Les chiffres qui circulent sur le sujet sont soit des extrapolations sans source, soit des arguments commerciaux. Ce que nous pouvons décrire honnêtement, c'est le bâti réel et les configurations qui rendent une attaque plausible." },
+    ],
+  },
+];
+
+const tous = groupes.flatMap((g) => g.items);
+const jsonLd = [faqSchema(tous)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="FAQ : insectes xylophages, diagnostic et traitement du bois"
+  description="Toutes les réponses sur les insectes xylophages : reconnaître les espèces, évaluer une attaque, comprendre un traitement, et ce que nous nous engageons — ou non — à affirmer."
+  path="/faq" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Questions fréquentes"
+    title="Vos questions, nos réponses"
+    lead="Les réponses ci-dessous valent pour les situations courantes. Elles n’engagent rien sur un bâtiment que nous n’avons pas vu — et quand une question n’a pas de réponse générale, nous le disons plutôt que d’en inventer une."
+    crumbs={crumbs}
+  />
+
+  {groupes.map((g, i) => (
+    <section class={`section ${i % 2 === 1 ? 'section--sage' : ''}`}>
+      <div class="wrap">
+        <div class="faqwrap">
+          <div class="faqwrap__head">
+            <p class="eyebrow">{`0${i + 1}`}</p>
+            <h2>{g.titre}</h2>
+          </div>
+          <div class="faq faqwrap__body">
+            {g.items.map((qa) => (
+              <details>
+                <summary>{qa.q}</summary>
+                <div class="faq__body"><p set:html={qa.a} /></div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <Maillage title="Pour aller plus loin" items={[
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Les quatre critères d’identification et le tableau comparatif.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que comporte une visite et ce que contient le rapport.' },
+    { label: 'Garanties et assurances', href: '/garanties-et-assurances', text: 'Ce que nous engageons par écrit, et ce que nous n’affichons pas.' },
+  ]} />
+
+  <CtaBand />
+</Base>
+
+<style>
+  .faqwrap { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(1.5rem, 1rem + 4vw, 4rem); align-items: start; }
+  .faqwrap__head { position: sticky; top: 110px; }
+  .faqwrap__head h2 { font-size: var(--t-h2); margin-top: .6rem; }
+  @media (max-width: 860px) { .faqwrap { grid-template-columns: 1fr; } .faqwrap__head { position: static; } }
+</style>

@@ -1,0 +1,134 @@
+---
+import { SITE } from '~/data/site';
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+const d = SITE.decennale;
+const verified = d.verified === true;
+---
+<section class="section section--warm" id="garanties">
+  <div class="wrap">
+    <div class="gar">
+      <div class="gar__head">
+        <p class="eyebrow">Transparence</p>
+        <h2>Une intervention couverte par une garantie décennale ?</h2>
+        <p class="lead">
+          C’est une question que l’on nous pose souvent, et elle mérite une réponse précise
+          plutôt qu’un argument commercial.
+        </p>
+      </div>
+
+      <div class="gar__body">
+        {verified ? (
+          <div class="gar__card gar__card--ok">
+            <p class="gar__badge">Assurance décennale en cours de validité</p>
+            <dl class="gar__dl">
+              <div><dt>Assureur</dt><dd>{d.insurer}</dd></div>
+              {d.policyNumber && <div><dt>Numéro de police</dt><dd>{d.policyNumber}</dd></div>}
+              {(d.validFrom || d.validUntil) && (
+                <div><dt>Période de validité</dt><dd>{d.validFrom} — {d.validUntil}</dd></div>
+              )}
+              {d.coveredActivities && (
+                <div><dt>Activités garanties</dt><dd>{d.coveredActivities.join(', ')}</dd></div>
+              )}
+              {d.territory && <div><dt>Territoire couvert</dt><dd>{d.territory}</dd></div>}
+            </dl>
+            <p class="gar__legal">
+              La garantie et les conditions d’application sont celles prévues au contrat
+              d’assurance et aux documents contractuels remis au client.
+            </p>
+          </div>
+        ) : (
+          <div class="gar__card">
+            <p class="gar__badge gar__badge--wait">Mention affichée uniquement sur justificatif</p>
+            <p>
+              Tous les travaux de traitement du bois ne relèvent pas de la garantie décennale.
+              Celle-ci concerne les ouvrages qui, en cas de désordre, compromettent la solidité
+              du bâtiment ou le rendent impropre à sa destination. Un traitement préventif
+              d’appoint et le renforcement d’une charpente porteuse ne se situent pas sur
+              le même plan.
+            </p>
+            <p>
+              Nous n’affichons donc pas de mention « garantie décennale » comme argument
+              général. Lorsque l’intervention envisagée entre dans le champ de cette garantie,
+              l’attestation d’assurance correspondante vous est remise avec le devis, et vous
+              pouvez en vérifier la validité directement auprès de l’assureur.
+            </p>
+            <div class="gar__slot">
+              <p class="gar__slottitle">Informations communiquées sur demande, avant signature</p>
+              <ul class="list-check small">
+                <li>Nom de l’assureur</li>
+                <li>Numéro de contrat ou de police</li>
+                <li>Période de validité de l’attestation</li>
+                <li>Nature des activités garanties</li>
+                <li>Territoire couvert</li>
+              </ul>
+            </div>
+            <p class="gar__legal">
+              La garantie et les conditions d’application sont celles prévues au contrat
+              d’assurance et aux documents contractuels remis au client.
+            </p>
+          </div>
+        )}
+
+        {!compact && (
+          <div class="gar__side">
+            <h3 class="gar__stitle">Nos engagements</h3>
+            <ul class="list-check">
+              <li><strong>Un devis écrit et détaillé</strong> avant toute intervention, indiquant les ouvrages concernés, la méthode et les produits.</li>
+              <li><strong>Un rapport d’intervention</strong> précisant ce qui a été observé, traité, et ce qui ne l’a pas été.</li>
+              <li><strong>La traçabilité des produits</strong> employés, avec leurs fiches de données de sécurité.</li>
+              <li><strong>Les consignes de réintégration</strong> communiquées avant l’intervention, pas après.</li>
+              <li><strong>Des conseils de prévention</strong> adaptés au bâtiment, y compris lorsqu’ils ne débouchent sur aucun travail.</li>
+            </ul>
+            <p class="gar__note">
+              Nous n’affichons aucune certification que nous ne détenons pas, aucun avis
+              client que nous n’avons pas reçu et aucune statistique que nous ne pouvons pas
+              sourcer. C’est la contrepartie normale de ce que nous demandons à nos clients :
+              de la confiance.
+            </p>
+            <a href="/garanties-et-assurances" class="link-arrow">Garanties et assurances en détail</a>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gar__head { max-width: 62ch; margin-bottom: clamp(1.75rem, 1rem + 2.5vw, 3rem); }
+  .gar__head > * + * { margin-top: .8rem; }
+  .gar__body { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: clamp(1.5rem, 1rem + 2vw, 3rem); align-items: start; }
+  .gar__card {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--r-lg); padding: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);
+    box-shadow: var(--sh-xs);
+  }
+  .gar__card > p { font-size: var(--t-sm); color: var(--c-text-soft); }
+  .gar__card > p + p { margin-top: .9rem; }
+  .gar__card--ok { border-color: var(--sauge-300); }
+  .gar__badge {
+    display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--sauge-800); background: var(--sauge-100);
+    padding: .32rem .7rem; border-radius: var(--r-pill); margin-bottom: 1rem;
+  }
+  .gar__badge--wait { color: var(--cuivre-600); background: var(--cuivre-100); }
+  .gar__dl > div { display: flex; gap: 1rem; padding: .65rem 0; border-bottom: 1px solid var(--c-border); }
+  .gar__dl dt { font-size: var(--t-xs); font-weight: 650; color: var(--c-text-muted); min-width: 150px; }
+  .gar__dl dd { font-size: var(--t-sm); color: var(--sauge-800); font-weight: 600; margin: 0; }
+  .gar__slot {
+    margin-top: 1.25rem; padding: 1.1rem 1.2rem;
+    background: var(--sauge-50); border: 1px dashed var(--sauge-300); border-radius: var(--r-md);
+  }
+  .gar__slottitle { font-size: var(--t-xs); font-weight: 700; color: var(--sauge-800); margin-bottom: .6rem; }
+  .gar__legal {
+    margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--c-border);
+    font-size: var(--t-xs); color: var(--c-text-muted); font-style: italic;
+  }
+  .gar__stitle { font-size: var(--t-h4); margin-bottom: 1rem; }
+  .gar__side .list-check li { font-size: var(--t-sm); color: var(--c-text-soft); }
+  .gar__note {
+    margin-top: 1.25rem; font-size: var(--t-xs); color: var(--c-text-muted);
+    border-left: 2px solid var(--cuivre-300); padding-left: .9rem; line-height: 1.6;
+  }
+  .gar__side .link-arrow { margin-top: 1.1rem; }
+</style>

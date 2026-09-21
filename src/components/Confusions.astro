@@ -1,0 +1,30 @@
+---
+interface Props { items: { avec: string; difference: string }[]; title?: string; intro?: string }
+const {
+  items,
+  title = 'Ne pas confondre',
+  intro = 'Les erreurs d’identification les plus courantes, et le critère qui permet de trancher.',
+} = Astro.props;
+---
+<section class="section section--warm">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Distinguer</p>
+      <h2>{title}</h2>
+      <p class="lead">{intro}</p>
+    </div>
+    <div class="grid grid-2">
+      {items.map((c) => (
+        <div class="card conf">
+          <p class="conf__vs">Avec <strong>{c.avec}</strong></p>
+          <p>{c.difference}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .conf__vs { font-size: var(--t-xs); text-transform: uppercase; letter-spacing: .1em; color: var(--c-text-muted); margin-bottom: .7rem; }
+  .conf__vs strong { color: var(--sauge-800); letter-spacing: 0; }
+  .conf p:last-child { font-size: var(--t-sm); color: var(--c-text-soft); line-height: 1.7; }
+</style>

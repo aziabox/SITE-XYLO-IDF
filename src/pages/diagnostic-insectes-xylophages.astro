@@ -1,0 +1,155 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Diagnostic d’infestation' }];
+const etapes = [
+  { title: 'L’échange préalable', text: 'Vous décrivez ce que vous observez : la pièce concernée, l’aspect des trous, la présence ou non de sciure, l’âge du bâtiment. Nous vous indiquons ce qu’il est utile de vérifier vous-même, et parfois qu’une visite ne s’impose pas.' },
+  { title: 'Le repérage du bâtiment', text: 'Époque de construction, nature des structures, essences probables, historique des travaux et des sinistres. Ce contexte oriente l’examen : on ne cherche pas la même chose dans une fermette de 1985 et dans une ferme briarde de 1780.' },
+  { title: 'L’examen visuel', text: 'Parcours méthodique des ouvrages bois accessibles : charpente, planchers, solives, boiseries, menuiseries, caves et abords lorsque c’est pertinent. Observation à la lampe rasante, qui révèle les reliefs de surface invisibles en éclairage direct.' },
+  { title: 'Le sondage', text: 'Maillet et poinçon sur les zones suspectes, en priorité au droit des appuis, des abouts et des assemblages. C’est l’étape qui renseigne réellement sur l’état du bois, là où l’examen visuel ne fait qu’alerter.' },
+  { title: 'La mesure d’humidité', text: 'Relevés en plusieurs points. L’humidité départage certaines espèces, révèle des désordres d’eau non encore visibles et explique souvent pourquoi le bois est devenu vulnérable.' },
+  { title: 'L’identification', text: 'Recoupement de l’essence, de la forme et du diamètre des trous, de la texture de la vermoulure et de l’humidité mesurée. Lorsque ces éléments ne convergent pas, nous le disons plutôt que de trancher au hasard.' },
+  { title: 'Le rapport', text: 'Un document qui distingue ce qui a été constaté, ce qui en est déduit, ce qui reste incertain et ce qui n’a pas pu être examiné. Avec, le cas échéant, les préconisations et un devis chiffré.' },
+];
+const faq = [
+  { q: 'Le diagnostic est-il payant ?', a: "Les modalités vous sont indiquées lors de l'échange préalable, avant tout déplacement, et sans ambiguïté. Nous ne pratiquons pas la visite « gratuite » qui n'a d'autre objet que de placer un devis : le temps d'un examen sérieux, sondages et mesures compris, a une valeur, et le dire clairement fait partie de la relation de confiance." },
+  { q: 'Est-ce la même chose qu’un diagnostic termites réglementaire ?', a: "Non, ce sont deux choses distinctes. L'état relatif à la présence de termites est un document réglementaire, exigé dans le dossier de diagnostic technique lors d'une vente pour les biens situés en zone délimitée par arrêté préfectoral, et réalisé par un diagnostiqueur certifié. Notre diagnostic d'infestation est une expertise technique destinée à comprendre un désordre et à décider d'un traitement. Les deux peuvent être complémentaires." },
+  { q: 'Que se passe-t-il si vous ne pouvez pas conclure ?', a: "Nous l'écrivons. Il existe des situations où un examen unique ne permet pas de dire si une attaque est active : un bois ancien largement piqué, sans vermoulure fraîche, en dehors de la période d'émergence. Dans ce cas, nous mettons en place des zones témoins nettoyées et repérées, et nous revenons après un délai adapté. C'est plus honnête, et bien moins coûteux, qu'un traitement décidé par précaution." },
+  { q: 'Combien de temps dure la visite ?', a: "Comptez une à deux heures pour une maison individuelle, davantage pour un bâtiment ancien, un immeuble ou une charpente de grande portée. Une visite expédiée en vingt minutes ne permet ni de sonder correctement, ni de mesurer l'humidité en plusieurs points." },
+  { q: 'Faut-il préparer quelque chose ?', a: "Oui, et cela change beaucoup la qualité de l'examen. Dégagez l'accès aux combles et, dans la mesure du possible, les bois eux-mêmes : un comble rempli de cartons ne permet pas de lire les chevrons. Rassemblez les documents dont vous disposez — travaux antérieurs, sinistres, diagnostics de vente. Et ne nettoyez pas la sciure que vous avez trouvée : photographiez-la et conservez-en un peu." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Diagnostic d’infestation par les insectes xylophages', description: "Examen des ouvrages bois, sondage, mesure d’humidité, identification de l’espèce et évaluation de l’étendue des dégâts, avec rapport écrit. Île-de-France.", path: '/diagnostic-insectes-xylophages', serviceType: 'Diagnostic des insectes xylophages' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Diagnostic des insectes xylophages : méthode et rapport"
+  description="Comment se déroule un diagnostic d’infestation : examen visuel, sondage du bois, mesure d’humidité, identification de l’espèce et évaluation de la section saine. Rapport écrit, Île-de-France."
+  path="/diagnostic-insectes-xylophages" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Diagnostic"
+    title="Diagnostic d’infestation : comprendre avant de traiter"
+    lead="Un diagnostic n’est pas une formalité avant devis. C’est l’étape qui détermine s’il faut traiter, quoi traiter, et parfois qu’il ne faut rien traiter du tout. Nous préférons le dire quand c’est le cas."
+    answer="Un diagnostic sérieux associe un <strong>examen visuel</strong> à la lampe rasante, un <strong>sondage</strong> au maillet et au poinçon, une <strong>mesure d’humidité</strong> du bois en plusieurs points et une <strong>identification</strong> par recoupement de l’essence, des trous et de la vermoulure. Il aboutit à un rapport écrit qui distingue ce qui est constaté de ce qui est déduit."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <Etapes eyebrow="Méthode" title="Les sept temps d’une visite" lead="La séquence n’est pas figée, mais l’ordre a une logique : on comprend le bâtiment avant de regarder le bois, et on sonde avant de conclure." items={etapes} />
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Le livrable</p>
+        <h2>Ce que contient le rapport</h2>
+        <p class="lead">
+          Un rapport utile est un rapport dans lequel on distingue clairement quatre registres. Sans
+          cette distinction, le document ne permet ni de décider, ni de comparer deux avis.
+        </p>
+      </div>
+      <div class="grid grid-4">
+        <div class="card">
+          <span class="rep__n">01</span>
+          <h3>Ce qui est constaté</h3>
+          <p>Les faits observables : localisation, essences, trous mesurés, vermoulure décrite, humidité relevée, état au sondage.</p>
+        </div>
+        <div class="card">
+          <span class="rep__n">02</span>
+          <h3>Ce qui en est déduit</h3>
+          <p>L’espèce probable, le caractère actif ou ancien de l’attaque, la section saine estimée, les causes identifiées.</p>
+        </div>
+        <div class="card">
+          <span class="rep__n">03</span>
+          <h3>Ce qui reste incertain</h3>
+          <p>Les points qu’un examen unique ne permet pas de trancher, et la façon de lever le doute : contrôle différé, ouverture ponctuelle, avis complémentaire.</p>
+        </div>
+        <div class="card">
+          <span class="rep__n">04</span>
+          <h3>Ce qui n’a pas été vu</h3>
+          <p>Les zones inaccessibles : bois enfermés dans un doublage, comble encombré, plancher non ouvert. Un rapport qui n’en parle pas est un rapport incomplet.</p>
+        </div>
+      </div>
+      <div class="note note--stone" style="margin-top:1.75rem">
+        <span class="note__title">Pourquoi cette dernière rubrique compte</span>
+        C’est celle qui protège le propriétaire. Un rapport qui conclut « charpente saine » sans
+        préciser qu’un tiers des bois étaient masqués par un doublage donne une assurance qui n’a
+        pas de fondement. Nous préférons écrire ce que nous n’avons pas pu examiner.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions qui reviennent</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment savoir si une charpente est attaquée ?">
+          <p>
+            En observant d’abord : des trous de sortie, de la sciure au sol ou sur les entretoises,
+            une surface qui ondule, un bois qui a changé de couleur. Puis en sondant : un maillet
+            révèle les zones creuses, une lame de tournevis appuyée perpendiculairement au fil
+            mesure la profondeur de bois dégradé.
+          </p>
+          <p>
+            Ces gestes sont à votre portée. Ce qui l’est moins, c’est d’en tirer une conclusion
+            fiable sur la capacité portante des pièces, et de distinguer une attaque terminée d’une
+            attaque en cours.
+          </p>
+        </Answer>
+        <Answer question="Comment différencier une attaque ancienne d’une infestation active ?">
+          <p>
+            Quatre indices convergent : la couleur des trous — clairs et nets pour une sortie
+            récente, sombres et empoussiérés pour une sortie ancienne ; la présence de vermoulure
+            fraîche, plus claire que le bois environnant ; le comportement du bois au sondage ; et
+            l’observation d’adultes en période d’émergence.
+          </p>
+          <p>
+            Le test décisif reste le contrôle différé : nettoyer une zone témoin, la repérer, et
+            vérifier la réapparition de sciure après quelques semaines ou mois.
+            <a href="/blog/diagnostic/attaque-ancienne-ou-active">La méthode en détail</a>.
+          </p>
+        </Answer>
+        <Answer question="Quand faire contrôler une charpente ?">
+          <p>
+            Quatre moments justifient une visite sans attendre un signe : après des travaux de
+            couverture ou une infiltration ; avant d’isoler ou d’aménager un comble, car le bois
+            deviendra inaccessible ; lors de l’achat d’un bien ancien ; et dès l’apparition de
+            sciure, de trous nouveaux ou d’un affaissement.
+          </p>
+          <p>
+            En l’absence de tout signe, un contrôle visuel tous les deux à trois ans est une
+            précaution raisonnable et peu coûteuse.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le diagnostic" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Les quatre critères qui permettent de distinguer les espèces.' },
+    { label: 'Traitement des insectes xylophages', href: '/traitement-insectes-xylophages', text: 'Ce que comporte réellement une intervention curative.' },
+    { label: 'Bois attaqué : que faire ?', href: '/bois-attaque-insectes', text: 'Les premiers gestes utiles quand on découvre un bois dégradé.' },
+  ]} />
+  <CtaBand title="Faire examiner une charpente" text="Décrivez-nous ce que vous observez. Nous vous dirons franchement si une visite s’impose, ou si quelques vérifications de votre part suffisent pour le moment." />
+</Base>
+
+<style>
+  .rep__n { display: block; font-family: var(--f-title); font-size: 1.25rem; color: var(--cuivre-500); margin-bottom: .5rem; }
+</style>

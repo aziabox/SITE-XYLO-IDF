@@ -1,0 +1,157 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '~/layouts/Base.astro';
+import Breadcrumb from '~/components/Breadcrumb.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Faq from '~/components/Faq.astro';
+import { getCollection, render } from 'astro:content';
+import { CATEGORIES } from '~/content.config';
+import { articleSchema, faqSchema, frDate } from '~/lib/schema';
+import { SITE } from '~/data/site';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog');
+  return posts.map((p) => ({
+    params: { cat: p.data.category, slug: p.id },
+    props: { p, posts },
+  }));
+}) satisfies GetStaticPaths;
+
+const { p, posts } = Astro.props;
+const { Content, headings } = await render(p);
+const cat = CATEGORIES[p.data.category];
+const path = `/blog/${cat.slug}/${p.id}`;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Blog', href: '/blog' },
+  { label: cat.name, href: `/blog/${cat.slug}` },
+  { label: p.data.title },
+];
+const related = p.data.related.length
+  ? posts.filter((o) => p.data.related.includes(o.id))
+  : posts.filter((o) => o.id !== p.id && o.data.category === p.data.category).slice(0, 3);
+const suite = related.length ? related : posts.filter((o) => o.id !== p.id).slice(0, 3);
+const jsonLd = [
+  articleSchema({
+    title: p.data.title,
+    description: p.data.description,
+    path,
+    published: p.data.published,
+    modified: p.data.updated,
+    section: cat.name,
+  }),
+  faqSchema(p.data.faq),
+].filter(Boolean) as Record<string, any>[];
+const toc = headings.filter((h) => h.depth === 2);
+---
+<Base
+  title={p.data.seoTitle ?? p.data.title}
+  description={p.data.description}
+  path={path}
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+  ogType="article"
+  publishedTime={p.data.published}
+  modifiedTime={p.data.updated ?? p.data.published}
+>
+  <article>
+    <header class="ahead grain">
+      <Breadcrumb items={crumbs} />
+      <div class="wrap ahead__in">
+        <p class="eyebrow"><a href={`/blog/${cat.slug}`} style="color:inherit;text-decoration:none">{cat.name}</a></p>
+        <h1>{p.data.title}</h1>
+        <p class="lead">{p.data.description}</p>
+        <p class="ahead__meta">
+          <time datetime={p.data.published}>Publié le {frDate(p.data.published)}</time>
+          {p.data.updated && <span> · Mis à jour le {frDate(p.data.updated)}</span>}
+          {p.data.readingTime && <span> · {p.data.readingTime} min de lecture</span>}
+        </p>
+        <div class="ahead__answer">
+          <p class="ahead__alabel">Réponse courte</p>
+          <p set:html={p.data.answer} />
+        </div>
+      </div>
+    </header>
+
+    <div class="section">
+      <div class="wrap abody">
+        <div class="prose">
+          <Content />
+        </div>
+
+        <aside class="aside">
+          {toc.length > 2 && (
+            <nav class="toc" aria-label="Sommaire">
+              <p class="toc__title">Sommaire</p>
+              <ol>
+                {toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}
+              </ol>
+            </nav>
+          )}
+          {p.data.links.length > 0 && (
+            <div class="card card--sage" style="margin-top:1.25rem">
+              <h2 style="font-size:1.05rem">Sur le site</h2>
+              <ul class="list-dot small" style="margin-top:.6rem">
+                {p.data.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+              </ul>
+            </div>
+          )}
+          <div class="card card--dark" style="margin-top:1.25rem">
+            <h2 style="font-size:1.05rem">Un doute sur votre charpente ?</h2>
+            <p style="margin-top:.5rem;font-size:var(--t-sm)">
+              Décrivez ce que vous observez. Nous vous dirons franchement si une visite s’impose.
+            </p>
+            <a href="/demander-un-diagnostic" class="btn btn--light btn--sm btn--block" style="margin-top:1rem">Demander un diagnostic</a>
+            <a href={SITE.phoneHref} class="btn btn--outline-light btn--sm btn--block" style="margin-top:.5rem">{SITE.phoneDisplay}</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </article>
+
+  {p.data.faq.length > 0 && <Faq items={p.data.faq} title="Questions fréquentes" />}
+
+  {suite.length > 0 && (
+    <section class="section section--warm">
+      <div class="wrap">
+        <h2 style="font-size:var(--t-h3);margin-bottom:1.6rem">À lire ensuite</h2>
+        <div class="grid grid-3">
+          {suite.map((o) => (
+            <a href={`/blog/${o.data.category}/${o.id}`} class="card card--link">
+              <p class="sci">{CATEGORIES[o.data.category].name}</p>
+              <h3>{o.data.title}</h3>
+              <p>{o.data.description}</p>
+              <span class="card__foot link-arrow">Lire</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</Base>
+
+<style>
+  .ahead { background: linear-gradient(180deg, var(--ivoire-warm) 0%, var(--ivoire) 100%); padding-bottom: clamp(2rem, 1.5rem + 2vw, 3rem); border-bottom: 1px solid var(--c-border); }
+  .ahead__in { max-width: 780px; }
+  .ahead__in > * + * { margin-top: 1rem; }
+  .ahead h1 { font-size: var(--t-h1); }
+  .ahead__meta { font-size: var(--t-xs); color: var(--c-text-muted); }
+  .ahead__answer {
+    margin-top: 1.75rem; border-left: 3px solid var(--cuivre-500); background: var(--c-surface);
+    padding: 1.1rem 1.35rem; border-radius: 0 var(--r-md) var(--r-md) 0; box-shadow: var(--sh-xs);
+  }
+  .ahead__alabel { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cuivre-500); margin-bottom: .45rem; }
+  .ahead__answer p:last-child { font-size: var(--t-sm); line-height: 1.65; color: var(--c-text-soft); }
+  .abody { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: start; }
+  .aside { position: sticky; top: 100px; }
+  .toc { border: 1px solid var(--c-border); border-radius: var(--r-lg); padding: 1.25rem 1.35rem; background: var(--c-surface); }
+  .toc__title { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cuivre-500); margin-bottom: .75rem; }
+  .toc ol { counter-reset: t; }
+  .toc li { counter-increment: t; margin-bottom: .5rem; display: flex; gap: .3rem; }
+  .toc li::before { content: counter(t) '. '; color: var(--cuivre-300); font-size: .78rem; }
+  .toc a { font-size: .82rem; color: var(--gris-700); text-decoration: none; line-height: 1.4; display: block; }
+  .toc a:hover { color: var(--sauge-700); }
+  @media (max-width: 960px) { .abody { grid-template-columns: 1fr; } .aside { position: static; } }
+</style>

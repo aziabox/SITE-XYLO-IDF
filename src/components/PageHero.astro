@@ -1,0 +1,62 @@
+---
+import Breadcrumb from './Breadcrumb.astro';
+import type { Crumb } from './Breadcrumb.astro';
+import { SITE } from '~/data/site';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  crumbs: Crumb[];
+  tone?: 'sage' | 'paper' | 'dark';
+  /** Réponse directe, affichée en encadré sous le chapô. */
+  answer?: string;
+  cta?: boolean;
+}
+const { eyebrow, title, lead, crumbs, tone = 'paper', answer, cta = true } = Astro.props;
+---
+<section class={`phero phero--${tone} grain`}>
+  <Breadcrumb items={crumbs} tone={tone === 'dark' ? 'dark' : 'light'} />
+  <div class="wrap phero__in">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    <p class="lead phero__lead">{lead}</p>
+    {answer && (
+      <div class="phero__answer">
+        <p class="phero__alabel">En bref</p>
+        <p set:html={answer} />
+      </div>
+    )}
+    {cta && (
+      <div class="btn-row phero__cta">
+        <a href="/demander-un-diagnostic" class="btn btn--primary">Demander un diagnostic</a>
+        <a href={SITE.phoneHref} class="btn btn--ghost">Appeler le {SITE.phoneDisplay}</a>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .phero { position: relative; padding-bottom: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); border-bottom: 1px solid var(--c-border); }
+  .phero--paper { background: linear-gradient(180deg, var(--ivoire-warm) 0%, var(--ivoire) 100%); }
+  .phero--sage { background: linear-gradient(180deg, var(--sauge-50) 0%, var(--ivoire) 100%); }
+  .phero--dark { background: var(--sauge-900); color: rgba(243,239,228,.78); border-bottom: 0; }
+  .phero--dark h1 { color: #F5F1E6; }
+  .phero--dark .phero__lead { color: rgba(243,239,228,.75); }
+  .phero__in { max-width: 860px; padding-top: .5rem; }
+  .phero__in > * + * { margin-top: 1rem; }
+  .phero__lead { font-size: var(--t-lg); max-width: 68ch; }
+  .phero__answer {
+    margin-top: 1.75rem; max-width: 70ch;
+    border-left: 3px solid var(--cuivre-500); background: var(--c-surface);
+    padding: 1.1rem 1.35rem; border-radius: 0 var(--r-md) var(--r-md) 0; box-shadow: var(--sh-xs);
+  }
+  .phero--dark .phero__answer { background: rgba(255,255,255,.06); box-shadow: none; }
+  .phero__alabel {
+    font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--cuivre-500); margin-bottom: .45rem;
+  }
+  .phero__answer p:last-child { font-size: var(--t-sm); line-height: 1.65; color: var(--c-text-soft); }
+  .phero--dark .phero__answer p:last-child { color: rgba(243,239,228,.8); }
+  .phero__cta { margin-top: 1.85rem; }
+</style>

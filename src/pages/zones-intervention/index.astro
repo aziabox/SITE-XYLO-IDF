@@ -1,0 +1,158 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CarteIdf from '~/components/CarteIdf.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Faq from '~/components/Faq.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import { DEPARTEMENTS } from '~/data/departements';
+import { VILLES, VILLES_BY_DEPT } from '~/data/villes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Zones d’intervention' }];
+const faq = [
+  { q: 'Dans quels départements intervenez-vous ?', a: "Dans les huit départements d'Île-de-France : Paris (75), la Seine-et-Marne (77), les Yvelines (78), l'Essonne (91), les Hauts-de-Seine (92), la Seine-Saint-Denis (93), le Val-de-Marne (94) et le Val-d'Oise (95). Les délais de déplacement varient selon l'éloignement et vous sont annoncés à la prise de rendez-vous." },
+  { q: 'Intervenez-vous dans les communes rurales ?', a: "Oui. La Seine-et-Marne, le Vexin français dans le Val-d'Oise, le Hurepoix en Essonne et le sud des Yvelines comportent de nombreuses communes rurales, et le bâti qu'on y trouve — fermes, longères, granges, maisons de village — est précisément celui qui demande le plus d'attention sur le plan du bois." },
+  { q: 'Pourquoi certaines villes ont-elles une page dédiée et d’autres non ?', a: "Nous ne créons une page communale que lorsqu'il existe un contexte bâti réellement spécifique à décrire : un tissu architectural particulier, une configuration d'habitat qui change la façon d'aborder le bois. Générer une page par commune francilienne produirait des centaines de textes interchangeables sans aucune valeur pour le lecteur. Notre intervention, elle, ne se limite pas aux communes listées." },
+  { q: 'La carte indique-t-elle vos interventions passées ?', a: "Non, et c'est volontaire. La carte représente les zones desservies et les communes disposant d'une page dédiée. Elle ne comporte aucun marqueur d'intervention, de chantier ou de client : ces données n'ont pas à figurer sur un site public, et leur mise en scène n'apporterait rien d'honnête au visiteur." },
+  { q: 'Le déplacement est-il facturé ?', a: "Les modalités vous sont indiquées lors de l'échange préalable, avant tout déplacement. Nous préférons annoncer clairement ce qui est dû plutôt que de pratiquer une visite dite gratuite dont le coût se retrouve ailleurs." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Traitement des insectes xylophages en Île-de-France', description: "Diagnostic et traitement des insectes xylophages dans les huit départements d’Île-de-France.", path: '/zones-intervention' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement des insectes xylophages en Île-de-France : zones d’intervention"
+  description="Nos zones d’intervention en Île-de-France : Paris, Seine-et-Marne, Yvelines, Essonne, Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne et Val-d’Oise. Carte interactive et pages départementales."
+  path="/zones-intervention" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Île-de-France"
+    title="Traitement des insectes xylophages en Île-de-France"
+    lead="Nous intervenons dans les huit départements de la région. Le bâti francilien est d’une diversité rare — immeubles haussmanniens, pavillonnaire de l’entre-deux-guerres, fermes briardes, maisons de meulière, villas des bords de Marne — et chacun de ces ensembles pose au bois des questions différentes."
+    answer="Nous couvrons les <strong>huit départements d’Île-de-France</strong>. Chaque page départementale décrit le bâti local, les ouvrages bois qui y demandent le plus d’attention et les conditions qui rendent une attaque plausible. La carte ci-dessous représente les <strong>zones réellement desservies</strong> : elle ne comporte aucun marqueur d’intervention ni de client."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap-wide">
+      <CarteIdf id="carte-zones" />
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Les départements</p>
+        <h2>Huit territoires, huit contextes bâtis</h2>
+        <p class="lead">
+          Chaque page départementale est écrite à partir de ce que l’on rencontre réellement sur
+          place : types de construction, essences employées, configurations qui posent problème.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {DEPARTEMENTS.map((d) => (
+          <a href={`/zones-intervention/${d.slug}`} class="card card--link dep">
+            <span class="dep__code">{d.code}</span>
+            <h3>{d.name}</h3>
+            <p>{d.intro}</p>
+            {(VILLES_BY_DEPT[d.slug] ?? []).length > 0 && (
+              <p class="dep__villes">
+                Pages communales : {(VILLES_BY_DEPT[d.slug] ?? []).map((v) => v.name).join(', ')}
+              </p>
+            )}
+            <span class="card__foot link-arrow">Voir les interventions {d.inName}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Communes</p>
+        <h2>Villes disposant d’une page dédiée</h2>
+        <p class="lead">
+          Nous n’écrivons une page communale que lorsqu’il existe un contexte bâti réellement
+          spécifique à décrire. Notre intervention, elle, ne se limite pas à cette liste.
+        </p>
+      </div>
+      <div class="villes">
+        {VILLES.map((v) => (
+          <a href={`/traitement-xylophages-${v.slug}`} class="villes__item">
+            <span class="villes__name">{v.name}</span>
+            <span class="villes__cp">{v.cp}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions sur nos zones d’intervention</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Le bâti francilien présente-t-il des particularités ?">
+          <p>
+            Deux, principalement. D’abord une forte proportion de <strong>pavillonnaire de
+            l’entre-deux-guerres</strong>, construit avec des charpentes en sapin de sections
+            modestes, rarement traitées à l’origine : c’est le terrain de prédilection du capricorne
+            des maisons.
+          </p>
+          <p>
+            Ensuite un <strong>bâti ancien dense</strong>, où le bois est presque toujours invisible
+            — solives prises entre plafond et parquet, charpentes enfermées par des aménagements de
+            comble. Les signes y apparaissent tard, et souvent de façon indirecte.
+          </p>
+        </Answer>
+        <Answer question="Les termites sont-ils présents en Île-de-France ?">
+          <p>
+            La présence de termites fait l’objet d’arrêtés préfectoraux qui délimitent les zones
+            concernées, commune par commune, et ces arrêtés évoluent. L’information se vérifie
+            auprès de la mairie ou de la préfecture du département.
+          </p>
+          <p>
+            Nous ne publions pas de liste de communes classées et nous n’affirmerons jamais qu’une
+            adresse est, ou n’est pas, en zone délimitée : une information obsolète sur un site
+            commercial peut avoir des conséquences réelles dans une vente.
+            <a href="/termites#reglementation">En savoir plus sur la réglementation</a>.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur nos interventions" />
+  <Maillage title="Nos prestations" items={[
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Examen, sondage, mesure d’humidité et rapport écrit.' },
+    { label: 'Traitement des insectes xylophages', href: '/traitement-insectes-xylophages', text: 'Curatif et préventif : ce que comporte réellement une intervention.' },
+    { label: 'Types de bâtiments', href: '/types-de-batiments', text: 'Maisons, copropriétés, bâti ancien, commerces, bâtiments d’activité.' },
+  ]} />
+  <CtaBand />
+</Base>
+
+<style>
+  .dep { position: relative; }
+  .dep__code {
+    position: absolute; top: 1.25rem; right: 1.4rem;
+    font-family: var(--f-title); font-size: 1.5rem; font-weight: 600;
+    color: var(--cuivre-300); line-height: 1;
+  }
+  .dep h3 { padding-right: 3rem; }
+  .dep__villes { font-size: .76rem !important; color: var(--c-text-muted) !important; margin-top: .7rem; padding-top: .7rem; border-top: 1px dashed var(--c-border); }
+  .villes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .6rem; }
+  .villes__item {
+    display: flex; align-items: baseline; justify-content: space-between; gap: .75rem;
+    padding: .75rem 1rem; border: 1px solid var(--c-border); border-radius: var(--r-md);
+    background: var(--c-surface); text-decoration: none;
+  }
+  .villes__item:hover { border-color: var(--sauge-400); background: var(--sauge-50); }
+  .villes__name { font-size: .88rem; font-weight: 600; color: var(--sauge-800); }
+  .villes__cp { font-size: .72rem; color: var(--c-text-muted); font-variant-numeric: tabular-nums; }
+</style>

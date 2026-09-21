@@ -1,0 +1,161 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Vous constatez', href: '/bois-attaque-insectes' },
+  { label: 'Vermoulure dans le bois' },
+];
+const faq = [
+  { q: 'Vermoulure et sciure, est-ce la même chose ?', a: "Dans l'usage courant on emploie les deux mots indifféremment, mais ils ne désignent pas tout à fait la même chose. La sciure évoque ce que l'on trouve au sol, tombé d'un ouvrage. La vermoulure désigne plus précisément la matière que la larve produit et laisse dans sa galerie : un mélange de particules de bois et de déjections, dont la forme des granulés est caractéristique de l'espèce. Un bois dit vermoulu est un bois dont l'intérieur a été transformé en cette matière." },
+  { q: 'Peut-on identifier l’insecte à la seule vermoulure ?', a: "On peut souvent l'orienter avec une bonne fiabilité, surtout aux extrêmes : une poudre impalpable évoque très fortement le lyctus, et des granulés cylindriques tassés le capricorne. Mais l'orientation n'est pas l'identification. Elle doit être confirmée par l'essence du bois, la forme des trous et l'état de la pièce au sondage. Une identification annoncée à partir d'une seule photo de poudre est une identification hasardeuse." },
+  { q: 'La vermoulure est-elle dangereuse à manipuler ?', a: "Elle n'est pas toxique en elle-même. Comme toute poussière de bois, il est préférable d'éviter de l'inhaler massivement, et un masque est recommandé lors d'un nettoyage important ou d'un bûchage, qui en libère de grandes quantités. Pour prélever un échantillon à des fins d'observation, aucune précaution particulière n'est nécessaire." },
+  { q: 'Un bois vermoulu peut-il être conservé ?', a: "Cela dépend de ce qui reste. Si la vermoulure occupe la périphérie d'une pièce de forte section dont le cœur est intact, la pièce peut souvent être bûchée, traitée et conservée. Si elle traverse la section, ou si elle se situe au droit d'un appui, la pièce doit être renforcée ou remplacée. C'est une décision qui se prend au sondage, pièce par pièce, et non au vu de l'aspect général." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Vermoulure dans le bois : ce que révèle sa texture"
+  description="Qu’est-ce que la vermoulure, comment la distinguer de la simple poussière, et ce que la forme de ses granulés indique sur l’insecte responsable. Guide d’observation pratique."
+  path="/vermoulure-bois" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Vous constatez"
+    title="Vermoulure : lire la poudre pour comprendre le bois"
+    lead="La vermoulure est le seul élément d’une attaque que l’on peut examiner sans outil, sans démonter et sans compétence particulière. C’est aussi celui qui porte le plus d’information, à condition de savoir quoi regarder."
+    answer="La vermoulure est le mélange de particules de bois et de déjections produit par la larve dans sa galerie. Sa <strong>granulométrie</strong> est caractéristique : <strong>farine impalpable</strong> pour le lyctus, <strong>granulés en citron qui crissent</strong> pour la petite vrillette, <strong>granulés en lentille</strong> pour la grosse, <strong>granulés cylindriques tassés</strong> pour le capricorne. Les termites, eux, n’en produisent pas."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Ce qu’est réellement la vermoulure</h2>
+            <p class="lead">
+              Le mot désigne mieux qu’on ne le croit un phénomène précis, et cette précision est
+              utile pour l’observation.
+            </p>
+            <p>
+              Lorsqu’une larve creuse, elle ne se contente pas de déplacer du bois : elle le
+              consomme, en digère une partie et rejette le reste. Ce qu’elle laisse derrière elle
+              est donc un mélange de fines particules ligneuses et de déjections, dont la forme est
+              déterminée par l’anatomie de l’insecte. C’est pour cette raison que la granulométrie
+              constitue un critère d’espèce, et non un hasard.
+            </p>
+            <p>
+              Selon les espèces, cette matière reste tassée dans la galerie — c’est le cas du
+              capricorne — ou s’écoule par les trous de sortie, comme chez les vrillettes et le
+              lyctus. Cette différence explique pourquoi une attaque de capricorne ne produit
+              presque jamais de tas au sol, alors qu’une attaque de lyctus en produit
+              abondamment.
+            </p>
+            <p>
+              Un bois qu’on dit « vermoulu » est un bois dont une partie de la masse a été remplacée
+              par cette matière : il est plus léger, sonne creux, et cède sous une pression modérée.
+            </p>
+          </div>
+
+          <div>
+            <h2>Distinguer la vermoulure d’une simple poussière</h2>
+            <p>
+              C’est la première vérification, et elle évite bien des inquiétudes inutiles. Plusieurs
+              matières ressemblent à de la vermoulure sans en être.
+            </p>
+            <ul class="list-dot">
+              <li><strong>Le plâtre dégradé</strong> : poudre très claire, irrégulière, plus légère, qui blanchit les doigts. Fréquente dans les immeubles anciens sous un plafond.</li>
+              <li><strong>La poussière de chantier</strong> : hétérogène, grise, contenant des fibres et des débris divers.</li>
+              <li><strong>Les fragments de fourmis charpentières</strong> : grossiers, presque des copeaux, avec parfois des débris d’insectes mêlés.</li>
+              <li><strong>Le bois pourri sec</strong> : se réduit en poudre brunâtre au toucher, mais provient d’une dégradation fongique, pas d’une galerie. Le bois autour est alors fissuré en cubes ou en lamelles.</li>
+            </ul>
+            <p>
+              La vermoulure d’insecte, elle, est homogène, de granulométrie régulière, et sa couleur
+              est proche de celle du bois — souvent plus claire lorsqu’elle est fraîche.
+            </p>
+          </div>
+
+          <div>
+            <h2>Une méthode d’observation en trois minutes</h2>
+            <ol class="list-num">
+              <li>Recueillez une pincée sur une feuille de papier blanc, qui fait ressortir la couleur et la granulométrie.</li>
+              <li>Étalez-la du bout du doigt en une fine couche, puis observez à la loupe ou en gros plan photographique.</li>
+              <li>Frottez-la entre le pouce et l’index : notez si elle crisse, si elle coule, ou si elle reste compacte.</li>
+              <li>Comparez sa teinte à celle du bois dont elle provient : plus claire, elle est probablement fraîche.</li>
+              <li>Conservez l’échantillon dans une enveloppe annotée avec la date et l’emplacement.</li>
+            </ol>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--sage">
+            <h3 style="font-size:1.08rem">Quatre textures, quatre pistes</h3>
+            <ul class="list-dot small" style="margin-top:.7rem">
+              <li><strong>Farine impalpable</strong> → <a href="/lyctus">lyctus</a>, ouvrage feuillu récent</li>
+              <li><strong>Granuleuse, crisse</strong> → <a href="/vrillette">petite vrillette</a></li>
+              <li><strong>Grossière, en lentilles</strong> → <a href="/vrillette">grosse vrillette</a>, bois humide</li>
+              <li><strong>Tassée, cylindrique</strong> → <a href="/capricorne-des-maisons">capricorne</a>, bois résineux</li>
+              <li><strong>Aucune vermoulure</strong> → <a href="/termites">termites</a> ou dégradation fongique</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Le test de fraîcheur</h3>
+            <p style="margin-top:.5rem">
+              Nettoyez entièrement une zone, posez un morceau d’adhésif à côté avec la date, et
+              revenez vérifier après quelques semaines. C’est la seule manière simple et fiable de
+              savoir si l’attaque est encore active.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="De la vermoulure sans trou visible : est-ce possible ?">
+          <p>
+            Oui, et c’est plus fréquent qu’on ne le pense. La face de la pièce qui porte les trous
+            peut être celle que vous ne voyez pas : plaquée contre une maçonnerie, contre un
+            doublage, ou tournée vers le haut. La vermoulure, elle, tombe et devient visible.
+          </p>
+          <p>
+            Cela signifie simplement qu’il faut chercher au-delà de l’angle accessible, quitte à
+            utiliser un miroir d’inspection ou une lampe orientée.
+          </p>
+        </Answer>
+        <Answer question="Faut-il conserver la vermoulure pour le diagnostic ?">
+          <p>
+            Oui, un échantillon suffit et il se conserve indéfiniment. C’est un élément que nous
+            examinons systématiquement, et qui a l’avantage de rester disponible même si la zone a
+            été nettoyée entre-temps.
+          </p>
+          <p>
+            Notez simplement la date et l’emplacement précis sur l’enveloppe : sans cette
+            information, l’échantillon perd une partie de sa valeur.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur la vermoulure" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Sciure sous la charpente', href: '/sciure-charpente', text: 'Les gestes à faire avant de nettoyer, et le tableau des textures.' },
+    { label: 'Bois attaqué par des insectes', href: '/bois-attaque-insectes', text: 'Tous les signes réunis, et la conduite à tenir.' },
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Les quatre critères d’identification et le tableau comparatif.' },
+  ]} />
+  <CtaBand />
+</Base>

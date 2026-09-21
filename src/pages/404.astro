@@ -1,0 +1,48 @@
+---
+import Base from '~/layouts/Base.astro';
+import { SITE } from '~/data/site';
+
+const pistes = [
+  { t: 'Les insectes xylophages', h: '/insectes-xylophages', d: 'Reconnaître les espèces et comprendre ce qui les distingue.' },
+  { t: 'Bois attaqué : que faire ?', h: '/bois-attaque-insectes', d: 'Les signes, et les six gestes utiles avant toute décision.' },
+  { t: 'Diagnostic d’infestation', h: '/diagnostic-insectes-xylophages', d: 'Ce que comporte une visite et ce que contient le rapport.' },
+  { t: 'Traitement de charpente', h: '/traitement-charpente', d: 'Le protocole complet, étape par étape.' },
+  { t: 'Zones d’intervention', h: '/zones-intervention', d: 'Les huit départements d’Île-de-France et la carte interactive.' },
+  { t: 'Blog', h: '/blog', d: 'Articles sur l’identification, le traitement et la prévention.' },
+];
+---
+<Base
+  title="Page introuvable"
+  description="Cette page n’existe pas ou a été déplacée."
+  path="/404"
+  noindex
+  crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Page introuvable' }]}
+>
+  <section class="section">
+    <div class="wrap-narrow" style="text-align:center">
+      <p class="eyebrow eyebrow--plain" style="justify-content:center">Erreur 404</p>
+      <h1 style="margin-top:.8rem">Cette page n’existe pas</h1>
+      <p class="lead" style="margin-top:1rem">
+        Le lien est peut-être ancien, ou l’adresse comporte une erreur. Voici les pages
+        les plus consultées du site.
+      </p>
+      <div class="btn-row" style="justify-content:center;margin-top:1.75rem">
+        <a href="/" class="btn btn--primary">Retour à l’accueil</a>
+        <a href={SITE.phoneHref} class="btn btn--ghost">Appeler le {SITE.phoneDisplay}</a>
+      </div>
+    </div>
+  </section>
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {pistes.map((p) => (
+          <a href={p.h} class="card card--link">
+            <h2 style="font-size:1.08rem">{p.t}</h2>
+            <p>{p.d}</p>
+            <span class="card__foot link-arrow">Consulter</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

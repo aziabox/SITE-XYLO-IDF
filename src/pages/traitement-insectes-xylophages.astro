@@ -1,0 +1,261 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Traitement des insectes xylophages' }];
+
+const protocole = [
+  { title: 'Mise à nu des bois', text: 'Dépose des isolants, doublages, revêtements et encombrants qui empêchent d’atteindre le bois. Un produit appliqué sur un rampant isolé ne touche pas la charpente : cette étape n’est pas optionnelle.' },
+  { title: 'Bûchage', text: 'Élimination mécanique des parties fortement dégradées jusqu’au bois sain. Cette opération remplit deux fonctions : elle supprime le bois sans résistance et elle révèle l’étendue réelle de l’attaque, souvent plus large que ce que laissaient penser les trous.' },
+  { title: 'Dépoussiérage', text: 'Brossage et aspiration de l’ensemble des surfaces. Un bois poussiéreux n’absorbe pas le produit : l’étape est invisible dans le résultat final, mais elle conditionne l’efficacité de tout ce qui suit.' },
+  { title: 'Injection sous pression', text: 'Dans les pièces de forte section, perçage et mise en place de chevilles selon un maillage régulier, puis injection du produit jusqu’au cœur. C’est la seule façon d’atteindre des galeries situées à plusieurs centimètres de la surface.' },
+  { title: 'Pulvérisation ou badigeonnage', text: 'Application généralisée en plusieurs passes croisées sur toutes les faces accessibles, y compris les parties hautes et les zones d’appui, jusqu’au refus du bois.' },
+  { title: 'Renfort ou remplacement', text: 'Lorsque la section saine ne suffit plus, la pièce est renforcée ou remplacée, en liaison avec un charpentier. Aucun traitement chimique ne restitue la résistance d’un bois déjà consommé.' },
+  { title: 'Rapport et suivi', text: 'Remise d’un document précisant ce qui a été traité, comment, avec quels produits, et ce qui n’a pas pu l’être. Un contrôle différé est proposé lorsque l’ancienneté de l’attaque laissait un doute.' },
+];
+
+const faq = [
+  {
+    q: 'Quelle est la différence entre traitement curatif et préventif ?',
+    a: "Le traitement curatif s'applique à un bois déjà attaqué : il comprend le bûchage des parties dégradées et une injection en profondeur destinée à atteindre les larves présentes dans les galeries. Le traitement préventif s'applique à un bois sain pour le rendre impropre au développement d'un insecte : il se limite le plus souvent à une application de surface soignée. Les deux n'ont ni le même coût, ni la même durée, ni le même objectif.",
+  },
+  {
+    q: 'Combien de temps dure un traitement ?',
+    a: "Pour une charpente de maison individuelle, l'intervention s'étale généralement sur un à trois jours, selon la surface, l'accessibilité et l'ampleur du bûchage. La préparation — dégagement du comble, dépose de ce qui masque le bois — prend souvent autant de temps que l'application elle-même, et elle est fréquemment sous-estimée dans les plannings.",
+  },
+  {
+    q: 'Faut-il quitter le logement ?',
+    a: "Cela dépend du produit employé, du volume traité et de la ventilation des locaux. Le délai de réintégration figure sur la fiche de données de sécurité du produit utilisé. Nous vous communiquons cette information au moment du devis, avant l'intervention, et non le jour du chantier.",
+  },
+  {
+    q: 'Les produits utilisés sont-ils réglementés ?',
+    a: "Oui. Les produits de protection du bois relèvent de la réglementation européenne sur les produits biocides, et leur application professionnelle suppose la détention des certificats requis. Nous remettons la fiche de données de sécurité des produits employés et indiquons leur composition sur le rapport d'intervention.",
+  },
+  {
+    q: 'Le traitement laisse-t-il des traces sur le bois ?',
+    a: "Sur un bois brut de charpente, l'application laisse généralement un aspect légèrement plus foncé qui s'atténue. Sur un bois vu, ciré, peint ou plaqué, le risque de marque est réel : nous réalisons alors un essai préalable sur une zone peu visible et choisissons un produit incolore compatible avec la finition. Les perçages d'injection sont réalisés dans des zones discrètes et rebouchés.",
+  },
+  {
+    q: 'Un traitement est-il garanti dans le temps ?',
+    a: "La durée d'efficacité dépend du produit, du support et surtout des conditions du bâtiment. Un traitement appliqué dans un comble ventilé et sec conserve son effet bien plus longtemps que le même produit appliqué sur un bois qui reste humide. C'est pourquoi nous traitons la cause de l'humidité avant l'insecte lorsque les deux sont liés, et pourquoi nous préférons parler de surveillance plutôt que de garantie définitive.",
+  },
+];
+
+const jsonLd = [
+  serviceSchema({
+    name: 'Traitement des insectes xylophages',
+    description: "Traitement curatif et préventif des bois du bâtiment : bûchage, dépoussiérage, injection sous pression, pulvérisation, renfort de structure et suivi, en Île-de-France.",
+    path: '/traitement-insectes-xylophages',
+  }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement des insectes xylophages : méthodes curatives et préventives"
+  description="Comment se déroule un traitement des insectes xylophages : bûchage, dépoussiérage, injection sous pression, pulvérisation, renfort des pièces affaiblies. Curatif ou préventif, en Île-de-France."
+  path="/traitement-insectes-xylophages"
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Traitement"
+    title="Traitement des insectes xylophages : ce que comporte réellement une intervention"
+    lead="Un traitement du bois n’est pas une pulvérisation. C’est une succession d’étapes dont chacune conditionne l’efficacité de la suivante, et dont deux au moins — le bûchage et le dépoussiérage — sont invisibles dans le résultat final."
+    answer="Un traitement curatif complet comprend la <strong>mise à nu des bois</strong>, le <strong>bûchage</strong> des parties dégradées, un <strong>dépoussiérage</strong> soigné, une <strong>injection sous pression</strong> dans les pièces de forte section et une <strong>pulvérisation</strong> généralisée. Les pièces dont la section saine est insuffisante doivent être renforcées ou remplacées : aucun produit ne restitue la résistance d’un bois déjà consommé."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <Etapes
+        eyebrow="Protocole"
+        title="Les sept étapes d’un traitement curatif"
+        lead="Sauter une étape ne fait pas gagner du temps : cela rend le reste inutile. C’est la raison pour laquelle deux devis très éloignés en prix ne décrivent en général pas la même prestation."
+        items={protocole}
+      />
+    </div>
+  </section>
+
+  {/* ---------------- CURATIF VS PRÉVENTIF ---------------- */}
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Deux logiques</p>
+        <h2>Traitement curatif ou traitement préventif ?</h2>
+        <p class="lead">
+          On les confond souvent, et cette confusion explique beaucoup d’écarts de prix
+          incompréhensibles entre deux devis.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Traitement curatif</h3>
+          <p><strong>Objectif :</strong> arrêter une attaque en cours.</p>
+          <ul class="list-check small" style="margin-top:.9rem">
+            <li>S’applique à un bois déjà attaqué</li>
+            <li>Comprend obligatoirement le bûchage des parties dégradées</li>
+            <li>Nécessite une injection en profondeur dans les fortes sections</li>
+            <li>Suppose une évaluation de la section saine restante</li>
+            <li>Peut déboucher sur un renfort ou un remplacement de pièces</li>
+          </ul>
+          <p style="margin-top:1rem" class="small muted">
+            C’est l’intervention la plus lourde, et la seule qui réponde à une infestation active.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Traitement préventif</h3>
+          <p><strong>Objectif :</strong> rendre un bois sain impropre au développement d’un insecte.</p>
+          <ul class="list-check small" style="margin-top:.9rem">
+            <li>S’applique à un bois sain et sec</li>
+            <li>Se limite à une application de surface soignée</li>
+            <li>Particulièrement pertinent avant isolation ou aménagement d’un comble</li>
+            <li>Indispensable sur les coupes et usinages réalisés sur chantier</li>
+            <li>Ne dispense pas d’une surveillance périodique</li>
+          </ul>
+          <p style="margin-top:1rem" class="small muted">
+            Économique et rapide, à condition d’être appliqué au bon moment : quand le bois est
+            encore accessible. <a href="/prevention-insectes-xylophages">En savoir plus sur la prévention</a>.
+          </p>
+        </div>
+      </div>
+      <div class="note note--copper" style="margin-top:1.75rem">
+        <span class="note__title">Un point de vigilance sur les devis</span>
+        Un devis de traitement curatif qui ne mentionne ni bûchage, ni dépoussiérage, ni injection
+        décrit en réalité une prestation préventive appliquée sur un bois attaqué. Le prix est
+        logiquement plus bas ; l’efficacité sur une infestation en cours l’est aussi. Vérifiez la
+        présence de ces trois postes.
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- PAR INSECTE ---------------- */}
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Selon l’espèce</p>
+        <h2>Le traitement dépend de l’insecte identifié</h2>
+        <p class="lead">
+          Ce n’est pas une formule de style : les protocoles diffèrent sur des points structurants,
+          jusqu’à l’ordre dans lequel les travaux doivent être menés.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <a href="/traitement-capricorne" class="card card--link">
+          <h3>Capricorne des maisons</h3>
+          <p>
+            Injection profonde indispensable, bûchage étendu, et surtout évaluation de la section
+            saine pièce par pièce : c’est l’espèce qui débouche le plus souvent sur un renfort de
+            structure.
+          </p>
+          <span class="card__foot link-arrow">Protocole</span>
+        </a>
+        <a href="/traitement-vrillette" class="card card--link">
+          <h3>Vrillettes</h3>
+          <p>
+            L’humidité passe avant l’insecte. Assainir, ventiler, supprimer la cause, puis traiter.
+            Sur le mobilier et les boiseries, compatibilité avec la finition existante.
+          </p>
+          <span class="card__foot link-arrow">Protocole</span>
+        </a>
+        <a href="/traitement-termites" class="card card--link">
+          <h3>Termites</h3>
+          <p>
+            Logique entièrement différente : il s’agit d’atteindre une colonie installée dans le
+            sol. Barrière périmétrique ou systèmes d’appâts, traitement des bois, puis suivi.
+          </p>
+          <span class="card__foot link-arrow">Protocole</span>
+        </a>
+      </div>
+      <div class="grid grid-3" style="margin-top:1.25rem">
+        <a href="/traitement-charpente" class="card card--link card--sage">
+          <h3>Traitement de charpente</h3>
+          <p>Le cas le plus fréquent : accessibilité, préparation du comble, injection des fortes sections.</p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+        <a href="/traitement-bois" class="card card--link card--sage">
+          <h3>Traitement du bois</h3>
+          <p>Planchers, parquets, boiseries, menuiseries, mobilier : des ouvrages qui appellent des méthodes différentes.</p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+        <a href="/diagnostic-insectes-xylophages" class="card card--link card--sage">
+          <h3>Avant tout : le diagnostic</h3>
+          <p>Aucun traitement sérieux ne se décide sans avoir identifié l’espèce et mesuré l’étendue.</p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- GEO ---------------- */}
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Ce que les clients demandent avant de signer</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment traiter une charpente contre les insectes ?">
+          <p>
+            En dégageant d’abord entièrement les bois, puis en bûchant les parties dégradées, en
+            dépoussiérant, en injectant sous pression les pièces de forte section et en pulvérisant
+            l’ensemble en passes croisées. Les pièces trop affaiblies sont renforcées ou remplacées.
+          </p>
+          <p>
+            L’étape la plus souvent escamotée est le dépoussiérage : sans elle, le produit reste en
+            surface et ne pénètre pas. <a href="/traitement-charpente">Traitement de charpente en détail</a>.
+          </p>
+        </Answer>
+        <Answer question="Faut-il traiter toute la charpente ou seulement les pièces attaquées ?">
+          <p>
+            En pratique, l’ensemble des bois de même nature dans le même volume. Les insectes ne
+            s’arrêtent pas aux pièces où les trous sont visibles, et laisser une pièce non traitée
+            à côté d’une pièce traitée revient à conserver un point de départ.
+          </p>
+          <p>
+            Cela ne signifie pas traiter partout de la même manière : les fortes sections demandent
+            une injection, les bois minces une simple application, et certaines zones peuvent être
+            écartées après examen — un bois sec, sain et d’une essence non concernée, par exemple.
+          </p>
+        </Answer>
+        <Answer question="Peut-on traiter soi-même une charpente ?">
+          <p>
+            Les produits existent en vente libre et l’application est techniquement accessible. Ce
+            qui ne l’est pas, c’est le reste : évaluer la section saine d’une pièce porteuse,
+            bûcher sans fragiliser, injecter au bon maillage, et travailler en sécurité dans un
+            comble encombré.
+          </p>
+          <p>
+            Pour un ouvrage non structurel — un meuble, un lambris, une planche — un traitement
+            soigneux par vous-même est parfaitement envisageable. Pour une charpente, l’enjeu n’est
+            pas le produit, c’est le diagnostic qui l’accompagne.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le traitement" />
+
+  <ZonesMini />
+
+  <Maillage
+    title="Poursuivre"
+    items={[
+      { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'L’étape qui détermine tout le reste : identification et évaluation.' },
+      { label: 'Prévention et surveillance', href: '/prevention-insectes-xylophages', text: 'Après le traitement : ce qui évite une nouvelle attaque.' },
+      { label: 'Garanties et assurances', href: '/garanties-et-assurances', text: 'Ce que nous engageons par écrit, et ce que nous n’affichons pas.' },
+    ]}
+  />
+
+  <CtaBand
+    title="Vous comparez plusieurs devis ?"
+    text="Vérifiez que le bûchage, le dépoussiérage et l’injection y figurent explicitement. Nous pouvons vous expliquer ce que recouvre chaque poste, même si vous choisissez une autre entreprise."
+  />
+</Base>

@@ -1,0 +1,159 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CarteIdf from '~/components/CarteIdf.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Faq from '~/components/Faq.astro';
+import Maillage from '~/components/Maillage.astro';
+import { VILLES } from '~/data/villes';
+import { DEPT_BY_SLUG } from '~/data/departements';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+export const getStaticPaths = (() =>
+  VILLES.map((v) => ({ params: { ville: v.slug }, props: { v } }))) satisfies GetStaticPaths;
+
+const { v } = Astro.props;
+const dept = DEPT_BY_SLUG[v.dept];
+const path = `/traitement-xylophages-${v.slug}`;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: dept.name, href: `/zones-intervention/${dept.slug}` },
+  { label: v.name },
+];
+const jsonLd = [
+  serviceSchema({
+    name: `Traitement des insectes xylophages à ${v.name}`,
+    description: v.intro,
+    path,
+    areaName: v.name,
+  }),
+  faqSchema(v.faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title={`Traitement des insectes xylophages à ${v.name} (${v.cp})`}
+  description={v.intro}
+  path={path}
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow={`${v.name} · ${v.cp}`}
+    title={`Insectes xylophages à ${v.name} : diagnostic et traitement du bois`}
+    lead={v.intro}
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Le contexte bâti à {v.name}</h2>
+            {v.contexte.map((p, i) => (i === 0 ? <p class="lead">{p}</p> : <p>{p}</p>))}
+          </div>
+
+          <div>
+            <h2>Les types de bâtiments concernés</h2>
+            <ul class="list-dot">{v.habitat.map((h) => <li>{h}</li>)}</ul>
+          </div>
+
+          <div>
+            <h2>Les ouvrages bois à contrôler en priorité</h2>
+            <p>
+              Compte tenu de ce bâti, voici les pièces par lesquelles nous commençons un examen
+              à {v.name}.
+            </p>
+            <ul class="list-check">{v.zones.map((z) => <li>{z}</li>)}</ul>
+          </div>
+
+          <div>
+            <h2>Comment se déroule une intervention</h2>
+            <p>
+              La démarche est la même que partout ailleurs, et c’est volontaire : elle ne doit pas
+              dépendre de la commune. Un échange préalable pour comprendre ce que vous observez.
+              Une visite avec examen des ouvrages accessibles, sondage des pièces suspectes et
+              mesure d’humidité. Un rapport écrit qui distingue ce qui est constaté de ce qui est
+              déduit, et qui indique ce qui n’a pas pu être examiné.
+            </p>
+            <p>
+              Si un traitement se justifie, le devis détaille les ouvrages concernés, la méthode
+              et les produits. Si aucun traitement ne s’impose, nous vous le disons — et c’est un
+              cas plus fréquent qu’on ne l’imagine, notamment lorsque les traces observées
+              correspondent à une attaque terminée depuis longtemps.
+              <a href="/diagnostic-insectes-xylophages">Le diagnostic en détail</a>.
+            </p>
+          </div>
+
+          <div class="note note--stone">
+            <span class="note__title">Pas de chiffres inventés</span>
+            Vous ne trouverez sur cette page ni statistique d’infestation à {v.name}, ni nombre
+            d’interventions réalisées, ni témoignage. Ces données n’existent pas sous une forme
+            vérifiable à l’échelle communale, et nous ne les fabriquons pas. Ce que nous pouvons
+            décrire honnêtement, c’est le bâti local et ce qu’il implique pour le bois.
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">{v.name}</h3>
+            <dl class="v__dl">
+              <div><dt>Code postal</dt><dd>{v.cp}</dd></div>
+              <div><dt>Département</dt><dd>{dept.name} ({dept.code})</dd></div>
+              <div><dt>Région</dt><dd>Île-de-France</dd></div>
+            </dl>
+            <a href={`/zones-intervention/${dept.slug}`} class="btn btn--outline-light btn--sm btn--block" style="margin-top:1.1rem">
+              Voir tout le département
+            </a>
+          </div>
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.05rem">Espèces à envisager</h3>
+            <ul class="list-dot small" style="margin-top:.6rem">
+              <li><a href="/capricorne-des-maisons">Capricorne des maisons</a> — charpentes en résineux</li>
+              <li><a href="/vrillette">Vrillettes</a> — parquets, boiseries, bois humides</li>
+              <li><a href="/lyctus">Lyctus</a> — ouvrages récents en feuillu</li>
+              <li><a href="/termites">Termites</a> — selon arrêté préfectoral</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap-wide">
+      <div class="section-head">
+        <p class="eyebrow">Carte</p>
+        <h2>{v.name} dans {dept.name}</h2>
+        <p class="lead">
+          Les zones desservies en Île-de-France. Aucun marqueur ne représente une intervention ou
+          un client.
+        </p>
+      </div>
+      <CarteIdf active={dept.slug} id={`carte-${v.slug}`} compact />
+    </div>
+  </section>
+
+  <Faq items={v.faq} title={`Questions fréquentes à ${v.name}`} />
+
+  <Maillage title="Poursuivre" items={[
+    { label: `Insectes xylophages ${dept.inName}`, href: `/zones-intervention/${dept.slug}`, text: `Le contexte bâti ${dept.ofName} et les ouvrages à surveiller.` },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que comporte une visite et ce que contient le rapport.' },
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Protocole complet, de la mise à nu des bois au contrôle différé.' },
+  ]} />
+
+  <CtaBand
+    title={`Une charpente à faire examiner à ${v.name} ?`}
+    text="Décrivez-nous ce que vous observez : l’endroit, l’aspect des trous, la présence ou non de sciure. Nous vous dirons franchement si une visite s’impose."
+  />
+</Base>
+
+<style>
+  .v__dl { margin-top: .9rem; }
+  .v__dl > div { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .v__dl > div:last-child { border-bottom: 0; }
+  .v__dl dt { font-size: var(--t-xs); opacity: .65; }
+  .v__dl dd { margin: 0; font-size: var(--t-sm); font-weight: 600; color: #F3EFE4; }
+</style>

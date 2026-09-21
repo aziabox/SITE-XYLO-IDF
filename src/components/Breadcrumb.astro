@@ -1,0 +1,25 @@
+---
+export type Crumb = { label: string; href?: string };
+interface Props { items: Crumb[]; tone?: 'light' | 'dark' }
+const { items, tone = 'light' } = Astro.props;
+---
+<nav class={`crumbs crumbs--${tone}`} aria-label="Fil d’Ariane">
+  <div class="wrap">
+    <ol>
+      {items.map((c, i) =>
+        c.href && i < items.length - 1 ? (
+          <li><a href={c.href}>{c.label}</a></li>
+        ) : (
+          <li><span aria-current="page">{c.label}</span></li>
+        ),
+      )}
+    </ol>
+  </div>
+</nav>
+<style>
+  .crumbs--dark { color: rgba(243,239,228,.6); }
+  .crumbs--dark a { color: rgba(243,239,228,.6); }
+  .crumbs--dark a:hover { color: #fff; }
+  .crumbs--dark [aria-current] { color: rgba(243,239,228,.9); }
+  .crumbs--dark li:not(:last-child)::after { color: rgba(243,239,228,.35); }
+</style>

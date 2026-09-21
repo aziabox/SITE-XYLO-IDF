@@ -1,0 +1,67 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '~/content.config';
+import { frDate } from '~/lib/schema';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('blog');
+  return Object.values(CATEGORIES)
+    .map((c) => ({
+      params: { cat: c.slug },
+      props: {
+        cat: c,
+        posts: posts
+          .filter((p) => p.data.category === c.slug)
+          .sort((a, b) => b.data.published.localeCompare(a.data.published)),
+      },
+    }))
+    .filter((e) => e.props.posts.length > 0);
+}) satisfies GetStaticPaths;
+
+const { cat, posts } = Astro.props;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Blog', href: '/blog' },
+  { label: cat.name },
+];
+const autres = Object.values(CATEGORIES).filter((c) => c.slug !== cat.slug);
+---
+<Base
+  title={`${cat.name} — articles sur les insectes xylophages`}
+  description={cat.desc}
+  path={`/blog/${cat.slug}`}
+  crumbs={crumbs}
+>
+  <PageHero eyebrow="Blog" title={cat.name} lead={cat.desc} crumbs={crumbs} cta={false} />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {posts.map((p) => (
+          <a href={`/blog/${cat.slug}/${p.id}`} class="card card--link">
+            <p class="sci">{frDate(p.data.published)}</p>
+            <h3>{p.data.title}</h3>
+            <p>{p.data.description}</p>
+            <span class="card__foot link-arrow">Lire</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight section--sage">
+    <div class="wrap">
+      <h2 style="font-size:var(--t-h3);margin-bottom:1.1rem">Autres catégories</h2>
+      <div class="tags">
+        {autres.map((c) => <a href={`/blog/${c.slug}`} class="tag">{c.name}</a>)}
+        <a href="/blog" class="tag tag--copper">Tous les articles</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

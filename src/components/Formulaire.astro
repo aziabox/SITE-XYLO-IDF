@@ -1,0 +1,171 @@
+---
+import { SITE } from '~/data/site';
+import { DEPARTEMENTS } from '~/data/departements';
+interface Props { compact?: boolean; id?: string }
+const { compact = false, id = 'formulaire' } = Astro.props;
+
+const problemes = [
+  'Trous dans le bois',
+  'Sciure ou vermoulure',
+  'Charpente',
+  'Poutres',
+  'Plancher ou parquet',
+  'Termites suspectés',
+  'Capricornes suspectés',
+  'Vrillettes suspectées',
+  'Autre',
+  'Je ne sais pas',
+];
+const batiments = [
+  'Maison individuelle',
+  'Appartement',
+  'Immeuble ou copropriété',
+  'Bâtiment ancien',
+  'Commerce ou local professionnel',
+  'Dépendance, grange ou atelier',
+  'Autre',
+];
+const zones = [
+  'Charpente et combles',
+  'Poutres apparentes',
+  'Plancher ou parquet',
+  'Solives et planchers entre étages',
+  'Boiseries, lambris ou escalier',
+  'Menuiseries extérieures',
+  'Cave, sous-sol ou vide sanitaire',
+  'Meuble',
+  'Je ne sais pas encore',
+];
+---
+<form
+  class={`form ${compact ? 'form--compact' : ''}`}
+  id={id}
+  method="post"
+  action={SITE.formEndpoint ?? '/merci'}
+  enctype="multipart/form-data"
+  novalidate
+>
+  <div class="field-row">
+    <label class="field">
+      <span>Nom et prénom <span class="req" aria-hidden="true">*</span></span>
+      <input type="text" name="nom" autocomplete="name" required />
+    </label>
+    <label class="field">
+      <span>Téléphone <span class="req" aria-hidden="true">*</span></span>
+      <input type="tel" name="telephone" autocomplete="tel" inputmode="tel" required />
+    </label>
+  </div>
+
+  <div class="field-row">
+    <label class="field">
+      <span>Email</span>
+      <input type="email" name="email" autocomplete="email" inputmode="email" />
+    </label>
+    <label class="field">
+      <span>Ville <span class="req" aria-hidden="true">*</span></span>
+      <input type="text" name="ville" autocomplete="address-level2" required />
+    </label>
+  </div>
+
+  <div class="field-row">
+    <label class="field">
+      <span>Département</span>
+      <select name="departement">
+        <option value="">Sélectionner</option>
+        {DEPARTEMENTS.map((d) => <option value={d.code}>{d.code} — {d.name}</option>)}
+        <option value="autre">Hors Île-de-France</option>
+      </select>
+    </label>
+    <label class="field">
+      <span>Type de bâtiment</span>
+      <select name="batiment">
+        <option value="">Sélectionner</option>
+        {batiments.map((b) => <option value={b}>{b}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <div class="field-row">
+    <label class="field">
+      <span>Problème observé</span>
+      <select name="probleme">
+        <option value="">Sélectionner</option>
+        {problemes.map((p) => <option value={p}>{p}</option>)}
+      </select>
+    </label>
+    <label class="field">
+      <span>Zone concernée</span>
+      <select name="zone">
+        <option value="">Sélectionner</option>
+        {zones.map((z) => <option value={z}>{z}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <label class="field">
+    <span>Votre message</span>
+    <textarea
+      name="message"
+      placeholder="Décrivez ce que vous avez observé : à quel endroit, depuis quand, la taille approximative des trous, la présence ou non de sciure…"
+    ></textarea>
+    <span class="hint">
+      Plus la description est précise, plus l’échange préalable est utile. L’âge du bâtiment
+      et l’essence du bois, lorsque vous la connaissez, sont des informations précieuses.
+    </span>
+  </label>
+
+  <label class="field">
+    <span>Photo éventuelle</span>
+    <input type="file" name="photo" accept="image/*" />
+    <span class="hint">
+      Une photo peut aider à préparer l’échange, mais ne permet pas toujours de confirmer
+      l’identification d’un insecte. Le cadrage le plus utile associe une vue d’ensemble de
+      la pièce de bois et un gros plan avec un objet servant d’échelle, une pièce de monnaie
+      par exemple.
+    </span>
+  </label>
+
+  <label class="check">
+    <input type="checkbox" name="consentement" required />
+    <span>
+      J’accepte que ces informations soient utilisées pour répondre à ma demande.
+      Elles ne sont ni revendues ni utilisées à d’autres fins.
+      <a href="/politique-de-confidentialite">Politique de confidentialité</a>.
+    </span>
+  </label>
+
+  {/* Piège à robots : champ invisible qui doit rester vide. */}
+  <div class="hp" aria-hidden="true">
+    <label>Ne pas remplir <input type="text" name="site_web" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div class="form__foot">
+    <button type="submit" class="btn btn--primary">Envoyer ma demande</button>
+    <p class="form__alt">
+      ou appelez directement le <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a>
+    </p>
+  </div>
+
+  {!SITE.formEndpoint && (
+    <p class="form__todo">
+      <strong>À configurer.</strong> Renseignez <code>formEndpoint</code> dans
+      <code>src/data/site.ts</code> pour brancher ce formulaire sur la boîte de réception
+      ou le back-office de l’entreprise.
+    </p>
+  )}
+</form>
+
+<style>
+  .form { max-width: 720px; }
+  .form__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+  .form__alt { font-size: var(--t-sm); color: var(--c-text-muted); }
+  .form__alt a { font-weight: 650; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .form .check { margin-top: 1.25rem; }
+  .form__todo {
+    margin-top: 1.5rem; padding: .8rem 1rem; border-radius: var(--r-md);
+    background: var(--cuivre-100); color: var(--cuivre-600); font-size: var(--t-xs);
+  }
+  .form__todo code { background: rgba(255,255,255,.6); }
+  .form--compact .field-row { grid-template-columns: 1fr; }
+</style>

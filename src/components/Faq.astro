@@ -1,0 +1,30 @@
+---
+import type { QA } from '~/lib/schema';
+interface Props { items: QA[]; title?: string; intro?: string; eyebrow?: string; id?: string }
+const { items, title = 'Questions fréquentes', intro, eyebrow = 'FAQ', id = 'faq' } = Astro.props;
+---
+<section class="section" id={id}>
+  <div class="wrap">
+    <div class="faqwrap">
+      <div class="faqwrap__head">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2>{title}</h2>
+        {intro && <p class="lead">{intro}</p>}
+      </div>
+      <div class="faq faqwrap__body">
+        {items.map((qa) => (
+          <details>
+            <summary>{qa.q}</summary>
+            <div class="faq__body"><p set:html={qa.a} /></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .faqwrap { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: start; }
+  .faqwrap__head > * + * { margin-top: .85rem; }
+  .faqwrap__head { position: sticky; top: 110px; }
+  @media (max-width: 860px) { .faqwrap { grid-template-columns: 1fr; } .faqwrap__head { position: static; } }
+</style>

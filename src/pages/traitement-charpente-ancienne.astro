@@ -1,0 +1,83 @@
+---
+import BatimentPage from '~/components/BatimentPage.astro';
+---
+<BatimentPage
+  path="/traitement-charpente-ancienne"
+  seoTitle="Traitement de charpente ancienne : prudence et conservation"
+  seoDescription="Traitement d’une charpente ancienne en chêne : distinguer attaque ancienne et active, préserver les bois d’origine, méthodes compatibles avec le patrimoine. Île-de-France."
+  eyebrow="Type de bâtiment"
+  h1="Charpente ancienne : conserver plutôt que remplacer"
+  lead="Sur un bois de deux ou trois siècles, la première compétence n’est pas technique, elle est interprétative. Un chêne ancien porte presque toujours des traces d’attaques passées, et les confondre avec une infestation en cours conduit à des travaux inutiles sur un patrimoine fragile."
+  answer="Une charpente ancienne en chêne est <strong>peu sensible</strong> aux espèces les plus courantes : le capricorne n’attaque pas les feuillus, et le lyctus a depuis longtemps délaissé un bois sans amidon. Le risque y vient de l’<strong>humidité</strong> : un about d’entrait ou une panne humidifiée devient favorable à la <a href='/vrillette'>grosse vrillette</a> et aux champignons. L’enjeu du diagnostic est de distinguer <strong>l’ancien de l’actif</strong>."
+  serviceName="Traitement de charpente ancienne"
+  sections={[
+    {
+      h2: 'Le chêne ancien est plus résistant qu’on ne le croit',
+      intro: "C’est une réalité contre-intuitive, et elle change complètement la manière d’aborder ces charpentes.",
+      paragraphs: [
+        "Le duramen du chêne — son cœur — est dense et imprégné de substances qui le rendent peu nutritif et peu attractif. Les charpentiers d’autrefois purgeaient largement l’aubier, précisément parce qu’ils en connaissaient la fragilité. Une pièce de chêne bien choisie et restée sèche peut traverser les siècles sans dommage.",
+        "Cela n’en fait pas un bois invulnérable. L’aubier résiduel, quand il en reste, peut être attaqué par la petite vrillette. Et surtout, une pièce humidifiée par une infiltration change complètement de statut : elle devient un terrain favorable à la grosse vrillette et aux champignons de pourriture, qui travaillent souvent ensemble.",
+        "En pratique, sur une charpente ancienne, nous cherchons l’eau autant que l’insecte. Neuf fois sur dix, une dégradation active s’explique par un désordre d’humidité identifiable : une noue, un chéneau, un mur pignon, un about engagé dans une maçonnerie humide.",
+      ],
+    },
+    {
+      h2: 'Ancien ou actif : la question centrale',
+      paragraphs: [
+        "Un chêne ancien est presque toujours marqué : galeries d’aubier, piqûres, trous de sortie brunis. Ces traces témoignent d’attaques parfois très anciennes, et ne justifient aucun traitement en elles-mêmes.",
+        "Le travail consiste à établir si quelque chose se passe <em>aujourd’hui</em>. On s’appuie sur la couleur des bords de trous, l’aspect et la fraîcheur de la vermoulure, la réaction du bois au sondage, et l’observation d’adultes en saison. Lorsque ces indices ne convergent pas, nous ne tranchons pas : nous mettons en place des zones témoins nettoyées, repérées et datées, et nous revenons.",
+        "Ce contrôle différé coûte une fraction du prix d’un traitement, et il évite d’intervenir chimiquement sur un bois qui n’en a pas besoin. Sur un bâtiment ancien, cette retenue fait partie du travail.",
+      ],
+    },
+    {
+      h2: 'Des méthodes compatibles avec la conservation',
+      paragraphs: [
+        "Sur un bois vu — charpente apparente, planchers à la française, lambris, pans de bois — le traitement doit être compatible avec la finition et avec la valeur de l’ouvrage.",
+        "Nous procédons par essai préalable sur une zone peu visible, privilégions les produits incolores, et réalisons les perçages d’injection dans des endroits discrets, rebouchés ensuite. Le bûchage est conduit avec retenue : on retire ce qui n’a plus de résistance, pas ce qui est simplement marqué.",
+        "Sur les pièces dont la section ne suffit plus, nous privilégions le renfort au remplacement : moisage par flasques latérales, prothèse d’about, renfort métallique. Ces techniques conservent la pièce d’origine et évitent une dépose qui, sur un bâtiment ancien, peut déstabiliser l’ouvrage.",
+      ],
+    },
+    {
+      h2: 'Bâtiments protégés et abords de monuments',
+      paragraphs: [
+        "Sur un immeuble inscrit ou classé, ou situé aux abords d’un monument historique, les travaux relèvent de procédures particulières et de l’avis des services compétents.",
+        "Nous réalisons le diagnostic et établissons les préconisations, en coordination avec le maître d’œuvre ou l’architecte du patrimoine chargé du dossier. Le traitement intérieur du bois ne modifie pas l’aspect extérieur et ne relève pas, en principe, d’une autorisation d’urbanisme ; en revanche, la dépose ou le remplacement d’éléments visibles peut en relever.",
+      ],
+    },
+  ]}
+  vigilance={{
+    title: 'Les points sensibles du bâti ancien',
+    items: [
+      'Les <strong>abouts d’entrait</strong> engagés dans la maçonnerie, invisibles et souvent humides',
+      'Les <strong>sablières</strong> posées directement sur un mur épais',
+      'Les <strong>noues, arêtiers et chéneaux encaissés</strong> des toitures complexes',
+      'Les <strong>pignons</strong> exposés et les façades nord, qui sèchent mal',
+      'Les <strong>granges et dépendances</strong>, peu chauffées et rarement inspectées',
+      'Les <strong>zones d’aubier</strong> résiduel, seules parties tendres du chêne',
+    ],
+  }}
+  aside={{
+    title: 'Une règle simple',
+    text: "Sur un bâtiment ancien, on ne traite pas parce qu’il y a des trous. On traite parce qu’on a établi qu’une attaque est active, ou parce qu’une pièce a perdu la section nécessaire. Le reste relève de la surveillance.",
+  }}
+  etapes={[
+    { title: 'Comprendre le bâtiment', text: 'Époque, mode constructif, historique des travaux et des sinistres, nature des remaniements. Une charpente ancienne a presque toujours été modifiée, et ces reprises expliquent beaucoup de ce qu’on observe.' },
+    { title: 'Relever l’humidité', text: 'Mesures en plusieurs points, en insistant sur les abouts, les appuis et les zones de couverture complexe. C’est le relevé qui oriente le plus sûrement vers la cause réelle.' },
+    { title: 'Distinguer ancien et actif', text: 'Examen des bords de trous, de la vermoulure, du comportement au sondage. En cas de doute, zones témoins nettoyées, repérées et datées plutôt qu’une conclusion hâtive.' },
+    { title: 'Évaluer pièce par pièce', text: 'Cartographie des sections saines. Sur une charpente ancienne, la conclusion est presque toujours nuancée : certaines pièces se conservent, quelques-unes se renforcent, rarement plus.' },
+    { title: 'Traiter avec retenue', text: 'Essai préalable, produits incolores sur les bois vus, perçages discrets, bûchage limité à ce qui n’a plus de résistance.' },
+    { title: 'Coordonner si nécessaire', text: 'Avec un couvreur pour la cause d’humidité, un charpentier pour les renforts, un architecte du patrimoine si le bâtiment est protégé.' },
+  ]}
+  faq={[
+    { q: 'Des trous anciens dans une poutre justifient-ils un traitement ?', a: "Pas à eux seuls. Des trous de sortie anciens signifient qu'une attaque a eu lieu, sans indiquer si elle est terminée ou en cours. C'est la présence de vermoulure fraîche, des bords de trous clairs et nets, ou une progression constatée entre deux contrôles qui orientent vers une activité actuelle." },
+    { q: 'Un traitement peut-il abîmer des boiseries anciennes ?', a: "Le risque existe, et c'est ce qui conditionne le choix de la méthode. Sur des bois vus, cirés, peints ou plaqués, nous privilégions des produits incolores compatibles avec la finition, des essais préalables sur zone peu visible, et une injection discrète plutôt qu'un traitement de surface généralisé. Sur un élément de grande valeur, il est parfois préférable de faire intervenir un restaurateur en complément." },
+    { q: 'Comment savoir si l’attaque d’une vieille grange est encore active ?', a: "On s'appuie sur plusieurs indices convergents : la couleur des trous et de la vermoulure, la réapparition de sciure après nettoyage d'une zone témoin, l'aspect du bois au sondage, et parfois l'observation d'adultes en saison. Un doute persistant se lève par un contrôle différé, pas par une affirmation immédiate." },
+    { q: 'Faut-il traiter préventivement une charpente ancienne saine ?', a: "Rarement. Un chêne ancien, sec, purgé de son aubier et dans un volume ventilé ne tire qu'un bénéfice limité d'un traitement préventif. L'investissement le plus rentable est ailleurs : dans l'étanchéité de la couverture et dans la ventilation du comble." },
+  ]}
+  liens={[
+    { label: 'Insectes dans les poutres', href: '/insectes-poutres', text: 'Fortes sections et abouts engagés : comment évaluer ce qui reste.' },
+    { label: 'Vrillettes', href: '/vrillette', text: 'La grosse vrillette et le rôle déterminant de l’humidité.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Le contrôle différé, et pourquoi il vaut mieux qu’une conclusion hâtive.' },
+  ]}
+  ctaTitle="Une charpente ancienne à faire examiner ?"
+  ctaText="Nous vous dirons franchement si une attaque est active, si le doute impose d’attendre une saison, ou si les traces observées sont simplement l’histoire du bâtiment."
+/>

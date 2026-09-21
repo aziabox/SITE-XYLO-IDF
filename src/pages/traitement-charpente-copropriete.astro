@@ -1,0 +1,76 @@
+---
+import BatimentPage from '~/components/BatimentPage.astro';
+---
+<BatimentPage
+  path="/traitement-charpente-copropriete"
+  seoTitle="Traitement de charpente en copropriété : rapport pour le syndic"
+  seoDescription="Traitement de charpente en copropriété : distinction parties communes et privatives, rapport exploitable en assemblée générale, organisation du chantier en site occupé. Île-de-France."
+  eyebrow="Type de bâtiment"
+  h1="Charpente en copropriété : la décision compte autant que la technique"
+  lead="En copropriété, un traitement ne bute presque jamais sur un obstacle technique. Il bute sur un circuit de décision : un syndic à informer, un conseil syndical à convaincre, une assemblée générale à convoquer, des devis à comparer."
+  answer="En copropriété, la charpente et les planchers structurels relèvent généralement des <strong>parties communes</strong> : la décision revient à l’<strong>assemblée générale</strong>, sur proposition du syndic. Les parquets, boiseries et menuiseries intérieures privatives relèvent du propriétaire. Un rapport utile <strong>qualifie chaque ouvrage</strong> concerné, faute de quoi le dossier reste bloqué."
+  serviceName="Traitement de charpente en copropriété"
+  sections={[
+    {
+      h2: 'Qualifier les ouvrages avant tout',
+      intro: "C’est le point sur lequel un rapport standard fait perdre des mois à une copropriété.",
+      paragraphs: [
+        "La charpente, les planchers séparant deux lots et les gros murs relèvent en principe des parties communes ; les revêtements de sol, les boiseries intérieures et les aménagements privatifs relèvent du lot. Entre les deux, beaucoup de situations demandent une lecture du règlement de copropriété.",
+        "Un rapport qui se contente de constater « présence de capricorne dans les bois du comble » laisse le syndic devant une question qu’il n’a pas les moyens de trancher. Nous qualifions donc chaque ouvrage : sa nature, sa localisation, et à quel titre il est concerné. Cela permet d’inscrire la question à l’ordre du jour sans allers-retours.",
+        "Lorsque des lots privatifs sont également touchés — un parquet, des solives dans un appartement — nous les traitons dans une partie distincte du rapport, avec un chiffrage séparé. Chaque propriétaire peut alors décider pour son lot indépendamment du vote de l’assemblée.",
+      ],
+    },
+    {
+      h2: 'Un rapport fait pour être lu en assemblée générale',
+      paragraphs: [
+        "Un document technique destiné à un professionnel et un document destiné à des copropriétaires ne se rédigent pas de la même façon. Le second doit être compréhensible par des non-spécialistes tout en restant rigoureux.",
+        "Nous structurons le rapport en quatre registres explicites : ce qui a été <strong>constaté</strong>, ce qui en est <strong>déduit</strong>, ce qui reste <strong>incertain</strong>, et ce qui <strong>n’a pas pu être examiné</strong>. Cette dernière rubrique est essentielle en copropriété : elle indique précisément quels lots ou quels volumes n’ont pas été accessibles le jour de la visite.",
+        "Le devis est présenté poste par poste, avec les quantités, de façon à pouvoir être comparé à celui d’une autre entreprise. Une copropriété doit pouvoir mettre deux offres côte à côte : c’est son droit, et cela suppose que les prestations soient décrites de la même manière.",
+      ],
+    },
+    {
+      h2: 'Organiser un chantier en site occupé',
+      paragraphs: [
+        "Les combles d’un immeuble sont rarement vides : ils servent de caves hautes, de rangements, parfois de logements. L’accès traverse souvent des parties privatives, et les horaires doivent tenir compte de la vie de l’immeuble.",
+        "Nous établissons avec le syndic un calendrier précis, une liste des accès nécessaires, et un affichage destiné aux occupants indiquant les dates, les consignes et les délais de réintégration. Les copropriétaires doivent être informés avant le chantier, pas le jour même.",
+        "Lorsque des locataires sont concernés, l’information leur est transmise par le propriétaire bailleur ou par le syndic selon les cas. La décision de traitement, elle, revient au propriétaire ou à la copropriété, jamais à l’occupant.",
+      ],
+    },
+  ]}
+  vigilance={{
+    title: 'Les points spécifiques à la copropriété',
+    items: [
+      'La <strong>qualification</strong> commune ou privative de chaque ouvrage',
+      'Les <strong>combles utilisés en rangement</strong>, qui doivent être dégagés',
+      'Les <strong>accès traversant des parties privatives</strong>',
+      'Les <strong>planchers entre lots</strong>, souvent les plus difficiles à examiner',
+      'Le <strong>calendrier des assemblées</strong>, qui conditionne le délai réel',
+      'L’<strong>information des occupants</strong> avant intervention',
+    ],
+  }}
+  aside={{
+    title: 'Pour le syndic',
+    text: "Nous fournissons un rapport structuré, un devis détaillé poste par poste et, si vous le souhaitez, une note de synthèse d’une page destinée à la convocation d’assemblée générale. Ces documents sont conçus pour être annexés tels quels.",
+  }}
+  etapes={[
+    { title: 'Prise de contact avec le syndic', text: 'Recueil du règlement de copropriété si nécessaire, identification des volumes à visiter et des accès à organiser.' },
+    { title: 'Visite avec accès organisés', text: 'Parcours des parties communes, et des lots concernés lorsque les propriétaires ont donné leur accord. Ce qui n’a pas été accessible est noté.' },
+    { title: 'Rapport qualifié', text: 'Constat, déduction, incertitudes, zones non examinées — et qualification commune ou privative de chaque ouvrage concerné.' },
+    { title: 'Devis comparable', text: 'Poste par poste, avec quantités, pour permettre une mise en concurrence loyale.' },
+    { title: 'Présentation si souhaitée', text: 'Nous pouvons présenter les conclusions au conseil syndical, ou fournir une note de synthèse annexable à la convocation.' },
+    { title: 'Chantier planifié et affiché', text: 'Calendrier, consignes et délais de réintégration communiqués aux occupants avant le début des travaux.' },
+  ]}
+  faq={[
+    { q: 'Qui décide d’un traitement en copropriété ?', a: "Lorsque le bois concerné relève des parties communes, la décision appartient à l'assemblée générale, sur proposition du syndic et du conseil syndical. Pour un bois privatif, le propriétaire du lot décide seul. Notre rôle est de fournir un constat clair qui permette de porter le sujet à l'ordre du jour." },
+    { q: 'Qui prend en charge un plancher entre deux appartements ?', a: "Un plancher séparant deux lots relève généralement des parties communes, sous réserve de ce que prévoit le règlement de copropriété. La décision et le financement passent alors par la copropriété. C'est l'une des raisons pour lesquelles notre rapport qualifie précisément les ouvrages concernés." },
+    { q: 'Peut-on traiter un seul appartement ?', a: "Pour des boiseries ou un parquet purement privatifs, oui. Pour une charpente ou des solives communes, non : traiter un seul lot d'un ensemble continu laisse des zones non protégées à proximité immédiate, et ne règle rien durablement." },
+    { q: 'Les locataires doivent-ils être informés ?', a: "Oui. Ils doivent être informés des dates, des consignes et des délais de réintégration, et être présents ou représentés lors des visites concernant leur logement. La décision de traitement, en revanche, revient au propriétaire ou à la copropriété." },
+  ]}
+  liens={[
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Le cadre technique : zones sensibles et méthodes.' },
+    { label: 'Insectes dans le plancher', href: '/insectes-plancher', text: 'Solives et lambourdes : l’ouvrage le plus concerné en immeuble.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que contient un rapport exploitable en assemblée générale.' },
+  ]}
+  ctaTitle="Syndic ou conseil syndical ?"
+  ctaText="Nous établissons un rapport qualifié et un devis comparable poste par poste, conçus pour être annexés à une convocation d’assemblée générale."
+/>

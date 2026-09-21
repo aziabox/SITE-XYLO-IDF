@@ -1,0 +1,306 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import SignesBois from '~/components/illus/SignesBois.astro';
+import { INSECTES, COMPARATIF } from '~/data/insectes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Insectes xylophages' }];
+
+const faq = [
+  {
+    q: 'Qu’est-ce qu’un insecte xylophage ?',
+    a: "C'est un insecte dont le développement dépend du bois, qu'il consomme directement ou dont il exploite les composants. Dans le bâtiment, quatre groupes concentrent l'essentiel des situations : les coléoptères à larve xylophage (capricorne, vrillettes, lyctus), dont c'est la larve qui creuse ; et les termites, insectes sociaux dont la colonie entière exploite le bois. Les autres espèces rencontrées sont soit des insectes de bois vert, qui ne poursuivent pas leur développement dans un bois mis en œuvre, soit des insectes qui creusent le bois sans le consommer, comme les fourmis charpentières.",
+  },
+  {
+    q: 'Tous les bois sont-ils concernés de la même façon ?',
+    a: "Non, et c'est le premier tri que fait un diagnostic. Le capricorne des maisons n'attaque que l'aubier des résineux. Le lyctus ne s'intéresse qu'à l'aubier de certains feuillus riches en amidon, et seulement tant qu'ils sont récents. La grosse vrillette exige un feuillu déjà humidifié et altéré. La petite vrillette est la plus généraliste. Les termites, eux, consomment toutes les essences ainsi que d'autres matériaux cellulosiques.",
+  },
+  {
+    q: 'Le duramen et l’aubier, quelle différence ?',
+    a: "L'aubier est la partie périphérique et jeune du bois, encore riche en réserves nutritives au moment de l'abattage : c'est la zone que recherchent la plupart des insectes xylophages. Le duramen, ou bois de cœur, est plus dense, imprégné de substances qui le rendent moins attractif et plus durable. Un chêne bien purgé de son aubier est donc naturellement peu sensible, alors qu'une pièce comportant beaucoup d'aubier reste vulnérable quelle que soit l'essence.",
+  },
+  {
+    q: 'Une attaque s’arrête-t-elle toute seule ?',
+    a: "Parfois, oui, et c'est une réalité que trop peu de professionnels mentionnent. Une attaque de lyctus s'éteint quand l'amidon est épuisé. Une attaque de grosse vrillette régresse si le bois s'assèche durablement. En revanche, une attaque de capricorne dans un comble sec ne s'arrête pas spontanément, et une colonie de termites encore moins. C'est précisément pour cela que l'identification de l'espèce détermine la conduite à tenir.",
+  },
+  {
+    q: 'À quelle saison observe-t-on les insectes adultes ?',
+    a: "Principalement du printemps au début de l'été. Les vrillettes émergent surtout en mai et juin, le capricorne des maisons de juin à août, et les essaimages de termites ailés se produisent au printemps ou en été par temps chaud. Le lyctus fait exception : dans un local chauffé, il peut émerger une grande partie de l'année. Une observation d'adulte est une information précieuse — conservez-le si vous le pouvez, même mort.",
+  },
+  {
+    q: 'Les insectes xylophages sont-ils dangereux pour la santé ?',
+    a: "Ils ne piquent pas, ne mordent pas et ne transmettent pas de maladie. Le risque qu'ils créent est matériel : il porte sur la solidité des ouvrages bois. Les précautions sanitaires concernent plutôt les produits de traitement, dont les consignes d'usage et de réintégration doivent être respectées, et la poussière de bois dégagée lors du bûchage, qui justifie une protection respiratoire pendant le chantier.",
+  },
+];
+
+const jsonLd = [
+  serviceSchema({
+    name: 'Identification et traitement des insectes xylophages',
+    description: "Reconnaissance des insectes qui dégradent le bois du bâtiment, évaluation des dégâts et traitement adapté en Île-de-France.",
+    path: '/insectes-xylophages',
+  }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Insectes xylophages : reconnaître les insectes qui attaquent le bois"
+  description="Termites, capricorne des maisons, vrillettes, lyctus : quels insectes attaquent le bois du bâtiment, à quels signes les reconnaître et ce qu’ils impliquent pour une charpente. Guide complet, Île-de-France."
+  path="/insectes-xylophages"
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Vue d’ensemble"
+    title="Insectes xylophages : comprendre ce qui attaque le bois"
+    lead="Un même trou dans une poutre peut correspondre à cinq situations différentes, dont certaines ne demandent aucun travail. Cette page explique ce qui distingue les espèces, ce que chacune implique réellement, et à quel moment un examen devient utile."
+    answer="Un insecte xylophage est un insecte dont le développement dépend du bois. Dans le bâti francilien, quatre groupes dominent : le <strong>capricorne des maisons</strong> (résineux), les <strong>vrillettes</strong> (feuillus et résineux, humidité), le <strong>lyctus</strong> (feuillus récents) et les <strong>termites</strong> (insectes sociaux, toutes essences). Ils ne s’identifient pas au même signe et n’appellent pas la même réponse."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Ce que fait réellement un insecte xylophage</h2>
+            <p class="lead">
+              Le mot évoque une image un peu fausse : celle d’un insecte qui rongerait le bois en
+              surface. Dans presque tous les cas, ce n’est pas ce qui se passe.
+            </p>
+            <p>
+              Chez les coléoptères — capricorne, vrillettes, lyctus — c’est la larve qui consomme
+              le bois, et elle le fait à l’intérieur de la pièce. Un adulte pond dans une fente ou
+              dans un vaisseau ouvert, la larve éclôt et creuse, parfois pendant des années, sans
+              jamais revenir à la surface. Ce n’est qu’à la fin du cycle que l’insecte transformé
+              perce le bois pour sortir. <strong>Le trou de sortie est donc la fin de l’histoire, pas
+              le début.</strong>
+            </p>
+            <p>
+              Chez les termites, l’organisation est tout autre : une colonie installée dans le sol
+              envoie des ouvriers qui exploitent le bois en continu, le consomment de l’intérieur
+              et n’en ressortent jamais. Il n’y a ni trou de sortie, ni sciure rejetée.
+            </p>
+            <p>
+              Cette différence de comportement explique tout le reste : les signes à chercher, le
+              délai entre le début de l’attaque et sa découverte, et la nature du traitement.
+            </p>
+          </div>
+
+          <figure class="fig">
+            <SignesBois />
+            <figcaption>
+              La larve creuse à l’intérieur et tasse la sciure derrière elle. La surface reste
+              intacte jusqu’à l’émergence de l’adulte, ce qui donne à une pièce déjà affaiblie
+              l’apparence d’un bois sain.
+            </figcaption>
+          </figure>
+
+          <div>
+            <h2>Quatre critères permettent de trancher</h2>
+            <p>
+              Un diagnostic ne consiste pas à reconnaître un insecte à l’œil nu — on en voit
+              rarement. Il consiste à recouper quatre éléments.
+            </p>
+            <h3>1. L’essence du bois</h3>
+            <p>
+              C’est le critère le plus discriminant, et celui que l’on néglige le plus. Résineux ou
+              feuillu ? Aubier ou duramen ? Un trou ovale de 7 mm dans du sapin oriente vers le
+              capricorne ; le même trou dans du chêne oriente ailleurs, car cette espèce ne touche
+              pas les feuillus.
+            </p>
+            <h3>2. La forme et le diamètre des trous</h3>
+            <p>
+              Ovale de 5 à 10 mm pour le capricorne, rond de 1 à 3 mm pour la petite vrillette,
+              rond de 3 à 4 mm pour la grosse vrillette, rond de 1 à 2 mm pour le lyctus, aucun
+              trou pour les termites. Ces ordres de grandeur orientent, mais ils se recoupent
+              partiellement : ils ne suffisent jamais seuls.
+            </p>
+            <h3>3. La texture de la vermoulure</h3>
+            <p>
+              C’est souvent l’élément décisif. Granulés cylindriques tassés pour le capricorne,
+              granulés en citron qui crissent pour la petite vrillette, granulés en lentille pour
+              la grosse, farine impalpable pour le lyctus. Une loupe et une feuille blanche
+              suffisent à faire la distinction.
+            </p>
+            <h3>4. L’humidité du bois</h3>
+            <p>
+              Elle départage les espèces autant qu’elle explique la situation. Un bois à 12 % ne
+              peut pas héberger une grosse vrillette. Un bois à 25 % pose d’abord un problème
+              d’eau, et l’insecte n’en est que la conséquence visible.
+            </p>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.1rem">Ce qu’un seul signe ne permet pas</h3>
+            <p style="margin-top:.6rem">
+              Conclure à une espèce à partir d’une photo de trous, affirmer qu’une attaque est
+              active parce qu’il y a de la sciure, ou estimer la gravité au nombre de trous.
+            </p>
+            <p style="margin-top:.8rem">
+              Ces trois raccourcis sont les plus fréquents, et ils conduisent soit à des travaux
+              inutiles sur un bois sain, soit à une fausse tranquillité sur un bois en train de
+              céder.
+            </p>
+          </div>
+          <div class="card" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Les quatre fiches espèces</h3>
+            <ul class="list-dot small" style="margin-top:.7rem">
+              <li><a href="/termites">Termites</a></li>
+              <li><a href="/capricorne-des-maisons">Capricorne des maisons</a></li>
+              <li><a href="/vrillette">Petite et grosse vrillette</a></li>
+              <li><a href="/lyctus">Lyctus</a></li>
+              <li><a href="/insectes-du-bois">Autres insectes du bois</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- LES ESPÈCES ---------------- */}
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Les espèces</p>
+        <h2>Les insectes que nous rencontrons en Île-de-France</h2>
+        <p class="lead">
+          Chaque fiche détaille l’identification, les zones du bâtiment concernées, le risque
+          structurel réel et la conduite à tenir.
+        </p>
+      </div>
+      <div class="grid grid-2">
+        {INSECTES.map((i) => (
+          <a href={`/${i.slug}`} class="card card--link">
+            <p class="sci">{i.scientific}</p>
+            <h3>{i.name}</h3>
+            <p>{i.tagline}</p>
+            <ul class="mini">
+              <li><span>Bois</span> {i.essences.slice(0, 3).join(', ')}</li>
+              <li><span>Trous</span> {i.trousDiam}</li>
+              <li><span>Cycle</span> {i.cycle.split(',')[0]}</li>
+            </ul>
+            <span class="card__foot link-arrow">Fiche complète</span>
+          </a>
+        ))}
+        <a href="/insectes-du-bois" class="card card--link card--sage">
+          <p class="sci">Espèces moins fréquentes</p>
+          <h3>Autres insectes du bois</h3>
+          <p>
+            Sirex, hespérophane, fourmis charpentières, insectes de bois vert : les espèces que
+            l’on rencontre occasionnellement, et celles qu’on confond avec un xylophage sans en
+            être un.
+          </p>
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- TABLEAU ---------------- */}
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Orientation</p>
+        <h2>Tableau comparatif des insectes xylophages</h2>
+        <p class="lead">
+          À lire comme une grille d’orientation, jamais comme un outil de diagnostic automatique.
+        </p>
+      </div>
+      <div class="table-scroll">
+        <table class="data">
+          <caption>Ordres de grandeur destinés à orienter l’observation.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Insecte</th><th scope="col">Bois concerné</th>
+              <th scope="col">Signes possibles</th><th scope="col">Zones fréquentes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPARATIF.map((r) => (
+              <tr>
+                <th scope="row"><a href={r.href}>{r.insecte}</a></th>
+                <td>{r.bois}</td><td>{r.signes}</td><td>{r.zones}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- GEO ---------------- */}
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions les plus fréquentes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Quel insecte fait des trous dans le bois ?">
+          <p>
+            Plusieurs espèces, et le diamètre oriente : 1 à 2 mm et une poudre farineuse pointent
+            vers le lyctus ; 1 à 3 mm avec une poudre granuleuse vers la petite vrillette ; 3 à
+            4 mm dans un chêne humide vers la grosse vrillette ; 5 à 10 mm et de forme ovale dans
+            un résineux vers le capricorne des maisons.
+          </p>
+          <p>
+            Si vous trouvez du bois dégradé <em>sans</em> aucun trou, pensez aux termites, qui n’en
+            laissent pas, ou à une dégradation par un champignon.
+          </p>
+        </Answer>
+        <Answer question="Quels insectes attaquent les poutres ?">
+          <p>
+            Cela dépend de l’essence de la poutre. Dans un résineux, le capricorne des maisons est
+            l’hypothèse principale. Dans un chêne, la grosse vrillette si la pièce est humide, ou
+            la petite vrillette dans les zones d’aubier. Les termites peuvent atteindre les poutres
+            de plancher bas par le sol.
+          </p>
+          <p>
+            Sur une pièce de forte section, la question n’est pas seulement l’espèce mais la
+            section saine restante. <a href="/insectes-poutres">Insectes dans les poutres</a>.
+          </p>
+        </Answer>
+        <Answer question="Quand faut-il faire contrôler une charpente ?">
+          <p>
+            Sans signe particulier, un contrôle visuel tous les deux à trois ans suffit. Il devient
+            prioritaire dans quatre situations : après des travaux de couverture ou une
+            infiltration ; avant d’isoler ou d’aménager un comble, car le bois devient ensuite
+            inaccessible ; lors de l’achat d’un bien ancien ; et dès l’apparition de sciure, de
+            trous nouveaux ou d’un affaissement.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur les insectes xylophages" />
+
+  <ZonesMini />
+
+  <Maillage
+    title="Passer à l’étape suivante"
+    items={[
+      { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Comment se déroule une visite, ce qui est observé, ce que contient le rapport.' },
+      { label: 'Traitement des insectes xylophages', href: '/traitement-insectes-xylophages', text: 'Curatif, préventif, injection, pulvérisation : les méthodes et leurs limites.' },
+      { label: 'Prévention et surveillance', href: '/prevention-insectes-xylophages', text: 'Ce qui rend un bois vulnérable, et comment éviter une nouvelle infestation.' },
+    ]}
+  />
+
+  <CtaBand />
+</Base>
+
+<style>
+  .sci { font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cuivre-500); margin-bottom: .5rem; }
+  .mini { margin-top: 1rem; display: grid; gap: .35rem; }
+  .mini li { font-size: .78rem; color: var(--c-text-muted); line-height: 1.45; }
+  .mini span { display: inline-block; min-width: 46px; font-weight: 700; color: var(--sauge-700); }
+  .fig figcaption { margin-top: .9rem; font-size: var(--t-xs); color: var(--c-text-muted); line-height: 1.55; }
+</style>

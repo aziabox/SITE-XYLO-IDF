@@ -1,0 +1,532 @@
+---
+import Base from '~/layouts/Base.astro';
+import Charpente from '~/components/illus/Charpente.astro';
+import SignesBois from '~/components/illus/SignesBois.astro';
+import CarteIdf from '~/components/CarteIdf.astro';
+import Garanties from '~/components/Garanties.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Etapes from '~/components/Etapes.astro';
+import { SITE } from '~/data/site';
+import { COMPARATIF } from '~/data/insectes';
+import { faqSchema, serviceSchema, frDate } from '~/lib/schema';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '~/content.config';
+
+const posts = (await getCollection('blog'))
+  .sort((a, b) => b.data.published.localeCompare(a.data.published))
+  .slice(0, 3);
+
+const signes = [
+  { t: 'De petits trous', d: 'Ronds ou ovales, de 1 à 10 mm selon l’espèce. Leur diamètre et leur forme sont les premiers éléments d’orientation.' },
+  { t: 'De la sciure', d: 'Au sol, sur une plinthe ou sur un meuble. Sa finesse et sa texture renseignent davantage que sa quantité.' },
+  { t: 'De la vermoulure', d: 'Poudre de bois tassée dans les galeries, que l’on découvre souvent en grattant ou en ouvrant une pièce.' },
+  { t: 'Des galeries', d: 'Visibles quand le bois se fend ou s’effrite. Leur direction et leur section aident à identifier l’insecte.' },
+  { t: 'Un bois fragilisé', d: 'Une lame de tournevis qui s’enfonce, un son creux au choc, une surface qui ondule légèrement.' },
+  { t: 'Un bruit', d: 'Grignotement en été pour le capricorne, tic-tac au printemps pour la grosse vrillette.' },
+  { t: 'Des déformations', d: 'Un plancher qui fléchit, un chevron qui s’affaisse, une plinthe qui se décolle sans raison apparente.' },
+  { t: 'Des insectes observés', d: 'Adultes en vol ou sur un appui de fenêtre, souvent au printemps ou au début de l’été.' },
+  { t: 'Des traces anciennes', d: 'Trous sombres, empoussiérés, sans sciure fraîche : une attaque a eu lieu, sans preuve qu’elle continue.' },
+];
+
+const insectes = [
+  { name: 'Termites', href: '/termites', sci: 'Reticulitermes spp.', pitch: 'Insectes sociaux qui évident le bois de l’intérieur, sans trou ni sciure visible. Cordonnets de terre caractéristiques.' },
+  { name: 'Capricornes', href: '/capricorne-des-maisons', sci: 'Hylotrupes bajulus', pitch: 'Trous ovales de 5 à 10 mm dans les résineux. L’insecte qui pose le plus souvent un problème de structure.' },
+  { name: 'Vrillettes', href: '/vrillette', sci: 'Anobium, Xestobium', pitch: 'Trous ronds groupés, vermoulure granuleuse. La grosse vrillette signale un bois humide et altéré.' },
+  { name: 'Lyctus', href: '/lyctus', sci: 'Lyctus brunneus', pitch: 'Feuillus récents riches en amidon. Vermoulure d’une finesse de farine, cycle très court.' },
+  { name: 'Autres insectes du bois', href: '/insectes-du-bois', sci: 'Espèces moins fréquentes', pitch: 'Sirex, hespérophane, fourmis charpentières : ce qu’il faut savoir pour éviter les confusions.' },
+];
+
+const methode = [
+  { title: 'Échange initial', text: 'Vous décrivez ce que vous observez : l’endroit, l’aspect des trous, la présence ou non de sciure. Nous vous indiquons ce qu’il est utile de vérifier avant même de nous déplacer.' },
+  { title: 'Observation', text: 'Sur place, nous examinons les ouvrages bois accessibles : charpente, planchers, solives, boiseries, menuiseries, et les abords lorsque c’est pertinent.' },
+  { title: 'Identification', text: 'Essence du bois, forme et diamètre des trous, texture de la vermoulure, humidité mesurée : ces éléments convergent, ou non, vers une espèce.' },
+  { title: 'Évaluation des dégâts', text: 'Le sondage permet d’estimer la section saine restante, pièce par pièce, et de distinguer ce qui se traite de ce qui doit être renforcé ou remplacé.' },
+  { title: 'Proposition de traitement', text: 'Un devis écrit détaille les ouvrages concernés, la méthode retenue, les produits employés et ce qui reste à votre charge en préparation.' },
+  { title: 'Intervention', text: 'Mise à nu des bois, bûchage des parties dégradées, dépoussiérage, puis injection et pulvérisation selon la section des pièces.' },
+  { title: 'Suivi lorsqu’il est prévu', text: 'Un contrôle différé permet de vérifier l’arrêt effectif de l’activité, notamment sur les attaques dont l’ancienneté était incertaine.' },
+];
+
+const batiments = [
+  { t: 'Maisons individuelles', d: 'Charpentes traditionnelles et fermettes, combles aménagés ou non.', href: '/traitement-charpente-maison' },
+  { t: 'Appartements', d: 'Planchers sur solives, lambourdes de parquet, boiseries et menuiseries.', href: '/traitement-bois-maison' },
+  { t: 'Immeubles et copropriétés', d: 'Charpentes communes, planchers entre lots, rapport exploitable en assemblée générale.', href: '/traitement-charpente-copropriete' },
+  { t: 'Bâtiments anciens', d: 'Chêne de forte section, planchers à la française, pans de bois, boiseries d’époque.', href: '/traitement-charpente-ancienne' },
+  { t: 'Commerces et locaux', d: 'Agencements, planchers techniques, structures bois apparentes.', href: '/traitement-bois-commerce' },
+  { t: 'Bâtiments d’activité', d: 'Charpentes de grande portée, anciens ateliers, granges et dépendances reconverties.', href: '/traitement-bois-batiment' },
+];
+
+const faq = [
+  {
+    q: 'Quels sont les principaux insectes xylophages en Île-de-France ?',
+    a: "Dans le bâti francilien, on rencontre principalement le capricorne des maisons dans les charpentes en résineux, la petite vrillette dans les parquets, boiseries et mobilier, la grosse vrillette dans les bois de feuillus humidifiés, et le lyctus dans les ouvrages récents en feuillus. Les termites relèvent d'une logique différente : ce sont des insectes sociaux, dont la présence est encadrée par des arrêtés préfectoraux qu'il faut consulter commune par commune.",
+  },
+  {
+    q: 'Comment savoir si une attaque est encore active ?',
+    a: "Aucun signe ne suffit à lui seul. On recoupe plusieurs indices : la couleur des trous de sortie, l'aspect et la fraîcheur de la vermoulure, la réaction du bois au sondage, la présence d'adultes en saison. Le moyen le plus fiable reste le contrôle différé : on nettoie une zone témoin, on la repère, et l'on vérifie quelques semaines ou quelques mois plus tard si de la sciure fraîche est réapparue.",
+  },
+  {
+    q: 'Les insectes xylophages peuvent-ils fragiliser une charpente ?',
+    a: "Oui, mais pas tous ni dans les mêmes proportions. Le capricorne des maisons et les termites peuvent compromettre la résistance d'une pièce porteuse. Le lyctus, qui se limite à l'aubier, dégrade surtout les ouvrages de finition. La vraie question n'est donc pas la présence d'un insecte, mais la section de bois sain qui subsiste dans les pièces concernées.",
+  },
+  {
+    q: 'Que faire en présence de sciure sous une poutre ?',
+    a: "Ne nettoyez pas tout de suite. Recueillez un échantillon sur une feuille blanche, photographiez-le à côté d'un objet servant d'échelle, puis nettoyez soigneusement la zone et repérez-la. Si de la sciure réapparaît au même endroit dans les semaines qui suivent, l'attaque est active. Cette observation simple vaut mieux qu'une identification hasardeuse à partir d'une seule photo.",
+  },
+  {
+    q: 'Faut-il traiter toute une charpente ?',
+    a: "Souvent oui, pour une raison pratique : les insectes ne s'arrêtent pas aux pièces où les trous sont visibles, et traiter partiellement laisse des zones non protégées à proximité immédiate. Mais cela ne signifie pas traiter de la même manière partout. Les pièces de forte section demandent une injection, les bois minces une simple application, et certaines zones peuvent être écartées après examen.",
+  },
+  {
+    q: 'Combien de temps dure un traitement ?',
+    a: "L'intervention elle-même s'étale généralement sur un à trois jours pour une charpente de maison individuelle, selon la surface, l'accessibilité et l'ampleur du bûchage. La préparation, c'est-à-dire le dégagement des combles et la dépose des éléments qui masquent le bois, prend souvent autant de temps que l'application. Le délai de réintégration dépend du produit employé et vous est indiqué avant l'intervention.",
+  },
+  {
+    q: 'Peut-on prévenir les insectes xylophages ?',
+    a: "On peut réduire nettement le risque. Employer des bois traités pour leur classe d'emploi et retraiter les coupes faites sur chantier, ventiler les combles et les vides sanitaires, traiter les infiltrations sans attendre, éviter de stocker du bois non traité dans les dépendances, et contrôler visuellement la charpente tous les deux à trois ans : ce sont des mesures simples, et ce sont les plus efficaces.",
+  },
+  {
+    q: 'Quelle est la différence entre termites et capricornes ?',
+    a: "Elle est nette. Le capricorne est un coléoptère dont la larve creuse seule sa galerie, laisse des trous de sortie ovales et de la vermoulure, et n'attaque que les résineux. Les termites sont des insectes sociaux vivant en colonie dans le sol, qui consomment le bois de l'intérieur sans laisser ni trou ni sciure, mais construisent des cordonnets de terre le long des maçonneries.",
+  },
+  {
+    q: 'Une garantie décennale est-elle proposée ?',
+    a: "Tous les travaux de traitement du bois ne relèvent pas de la garantie décennale : celle-ci concerne les ouvrages dont un désordre compromettrait la solidité du bâtiment ou le rendrait impropre à sa destination. Lorsque l'intervention entre dans ce champ, l'attestation d'assurance correspondante est remise avec le devis et sa validité peut être vérifiée auprès de l'assureur. Nous n'affichons pas cette mention comme un argument général.",
+  },
+  {
+    q: 'Dans quels départements intervenez-vous ?',
+    a: "Dans les huit départements d'Île-de-France : Paris, la Seine-et-Marne, les Yvelines, l'Essonne, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne et le Val-d'Oise. Les délais de déplacement varient selon l'éloignement et vous sont annoncés à la prise de rendez-vous.",
+  },
+];
+
+const jsonLd = [
+  serviceSchema({
+    name: 'Diagnostic et traitement des insectes xylophages',
+    description:
+      "Identification des insectes responsables des dégradations du bois, évaluation des dégâts, traitement curatif et préventif des charpentes, poutres, planchers et boiseries en Île-de-France.",
+    path: '/',
+  }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Insectes xylophages en Île-de-France : diagnostic et traitement du bois"
+  description="Diagnostic et traitement des insectes xylophages en Île-de-France : termites, capricornes, vrillettes, lyctus. Identification de l’insecte, évaluation des dégâts et traitement adapté des charpentes, poutres et planchers."
+  path="/"
+  jsonLd={jsonLd}
+  crumbs={[{ label: 'Accueil' }]}
+>
+  {/* ============================ HERO ============================ */}
+  <section class="hero grain">
+    <div class="wrap-wide hero__in">
+      <div class="hero__txt">
+        <p class="eyebrow">Traitement du bois • Île-de-France</p>
+        <h1>Insectes xylophages en Île-de-France : diagnostic et traitement du bois</h1>
+        <p class="hero__lead">
+          Nous intervenons pour identifier les insectes responsables des dégradations du bois
+          et proposer une solution adaptée à la structure concernée. Charpentes, poutres,
+          planchers, boiseries : chaque ouvrage appelle une méthode différente, et le choix
+          se fait après observation, pas au téléphone.
+        </p>
+        <div class="btn-row hero__cta">
+          <a href="/demander-un-diagnostic" class="btn btn--primary">Demander un diagnostic</a>
+          <a href={SITE.phoneHref} class="btn btn--ghost">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 2.2 6.6 5 5.3 6.5c.8 1.6 2.1 2.9 3.7 3.7L10.5 9l2.8 1.4v2.4c0 .6-.5 1-1.1 1C6.6 13.4 2.1 8.9 2 2.9c0-.6.4-1.1 1-1.1h2.2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            Appeler un spécialiste
+          </a>
+        </div>
+        <p class="hero__phone">
+          <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a>
+          <span>Du lundi au samedi · Île-de-France</span>
+        </p>
+      </div>
+
+      <figure class="hero__fig">
+        <div class="hero__frame">
+          <Charpente />
+        </div>
+        <figcaption>
+          Les points qu’une inspection de charpente examine en priorité : abouts d’entrait
+          au contact de la maçonnerie, pieds de chevron en rive, assemblages en tête.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  {/* ==================== MESSAGE DE CONFIANCE ==================== */}
+  <section class="trust">
+    <div class="wrap-wide trust__in">
+      <div class="trust__item">
+        <span class="trust__i" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h2>Diagnostic précis</h2>
+        <p>Identifier l’insecte et l’étendue réelle de l’attaque, avant de parler de traitement.</p>
+      </div>
+      <div class="trust__item">
+        <span class="trust__i" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 20h18M6 20V9l6-5 6 5v11" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 20v-5h4v5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </span>
+        <h2>Intervention adaptée</h2>
+        <p>La méthode dépend de l’essence du bois, de la section des pièces et du niveau d’infestation.</p>
+      </div>
+      <div class="trust__item">
+        <span class="trust__i" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3 4 6v6c0 4.4 3.3 8.3 8 9 4.7-.7 8-4.6 8-9V6l-8-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </span>
+        <h2>Protection du patrimoine</h2>
+        <p>Préserver les charpentes, poutres et structures bois plutôt que les remplacer par défaut.</p>
+      </div>
+      <div class="trust__item">
+        <span class="trust__i trust__i--copper" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 3h9l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3v5h5M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <h2>Engagements écrits</h2>
+        <p>
+          Devis détaillé, rapport d’intervention et traçabilité des produits.
+          <a href="/garanties-et-assurances">Garanties et assurances</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== DOUTE SUR LA CHARPENTE ==================== */}
+  <section class="section section--sage" id="signes">
+    <div class="wrap">
+      <div class="doute">
+        <div class="doute__head">
+          <p class="eyebrow">Ce que vous observez</p>
+          <h2>Vous avez un doute sur votre charpente ?</h2>
+          <p class="lead">
+            La plupart des appels commencent de la même manière : quelqu’un a remarqué quelque
+            chose d’inhabituel sur une pièce de bois. Voici les signes qui justifient un examen,
+            et ce qu’ils permettent — ou non — de conclure.
+          </p>
+          <div class="note note--copper">
+            <span class="note__title">Un signe seul ne désigne pas une espèce</span>
+            Une petite quantité de sciure sous une poutre ne permet pas, à elle seule, d’identifier
+            l’insecte responsable. Elle peut correspondre à une attaque ancienne comme à une attaque
+            active. L’observation des trous, leur diamètre, leur répartition et l’état du bois
+            permettent d’orienter le diagnostic.
+          </div>
+        </div>
+
+        <figure class="doute__fig">
+          <SignesBois />
+          <figcaption>
+            Ce qui se voit en surface ne représente qu’une part de ce qui se passe à l’intérieur
+            de la pièce : les galeries sont creusées sous une pellicule de bois restée intacte.
+          </figcaption>
+        </figure>
+      </div>
+
+      <ul class="signes">
+        {signes.map((s) => (
+          <li class="signes__item">
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div class="btn-row" style="margin-top:2rem">
+        <a href="/bois-attaque-insectes" class="btn btn--ghost btn--sm">Bois attaqué : que faire ?</a>
+        <a href="/sciure-charpente" class="btn btn--ghost btn--sm">J’ai trouvé de la sciure</a>
+        <a href="/trous-dans-charpente" class="btn btn--ghost btn--sm">Des trous dans la charpente</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== LES INSECTES ==================== */}
+  <section class="section" id="insectes">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Les espèces</p>
+        <h2>Les principaux insectes xylophages</h2>
+        <p class="lead">
+          Quatre familles concentrent l’essentiel des situations rencontrées dans le bâti
+          francilien. Elles n’attaquent ni les mêmes essences, ni les mêmes ouvrages, et ne
+          demandent pas le même traitement.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        {insectes.map((i) => (
+          <a href={i.href} class="card card--link ins">
+            <p class="ins__sci">{i.sci}</p>
+            <h3>{i.name}</h3>
+            <p>{i.pitch}</p>
+            <span class="card__foot link-arrow">Fiche détaillée</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== TABLEAU COMPARATIF ==================== */}
+  <section class="section section--warm" id="comparatif">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Orientation</p>
+        <h2>Comment savoir quel insecte attaque le bois ?</h2>
+        <p class="lead">
+          Ce tableau sert à orienter une observation, pas à conclure. Plusieurs espèces
+          produisent des signes proches, et une attaque terminée depuis vingt ans laisse
+          exactement les mêmes trous qu’une attaque en cours.
+        </p>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data">
+          <caption>
+            Ordres de grandeur destinés à orienter l’observation. L’identification repose sur
+            l’examen du bois sur place, jamais sur un seul critère.
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Insecte</th>
+              <th scope="col">Bois concerné</th>
+              <th scope="col">Signes possibles</th>
+              <th scope="col">Zones fréquentes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {COMPARATIF.map((r) => (
+              <tr>
+                <th scope="row"><a href={r.href}>{r.insecte}</a></th>
+                <td>{r.bois}</td>
+                <td>{r.signes}</td>
+                <td>{r.zones}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note note--stone" style="margin-top:1.5rem">
+        <span class="note__title">Ce tableau ne remplace pas un diagnostic</span>
+        Un même diamètre de trou peut correspondre à deux espèces différentes selon l’essence du
+        bois. À l’inverse, une charpente peut être largement attaquée avec très peu de trous
+        visibles. C’est la convergence de plusieurs indices, et le sondage du bois, qui permettent
+        de conclure. <a href="/diagnostic-insectes-xylophages">Comment se déroule un diagnostic</a>.
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== NOTRE MÉTHODE ==================== */}
+  <section class="section" id="methode">
+    <div class="wrap">
+      <Etapes
+        eyebrow="Notre méthode"
+        title="De l’appel au suivi, sept étapes"
+        lead="Une intervention utile commence par une observation honnête. Nous préférons dire qu’un bois est sain plutôt que vendre un traitement qui ne s’impose pas."
+        items={methode}
+      />
+    </div>
+  </section>
+
+  {/* ==================== CHAÎNE DE PROTECTION ==================== */}
+  <section class="section blueprint chain">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <p class="eyebrow eyebrow--plain">Principe</p>
+        <h2>Protéger le bois, c’est protéger le bâtiment</h2>
+        <p class="lead">
+          Une charpente attaquée n’est pas un problème d’insectes : c’est un problème de
+          structure. La chaîne qui va du diagnostic à la prévention n’a de sens que si aucun
+          maillon n’est sauté.
+        </p>
+      </div>
+      <ol class="chain__list">
+        {[
+          { n: 'Diagnostic', d: 'Observer avant de conclure' },
+          { n: 'Identification', d: 'Nommer l’espèce, ou dire qu’on ne peut pas' },
+          { n: 'Traitement', d: 'Adapté au bois et à la section' },
+          { n: 'Contrôle', d: 'Vérifier l’arrêt de l’activité' },
+          { n: 'Prévention', d: 'Supprimer ce qui a rendu le bois vulnérable' },
+        ].map((s, i) => (
+          <li class="chain__item">
+            <span class="chain__dot">{i + 1}</span>
+            <h3>{s.n}</h3>
+            <p>{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* ==================== TYPES DE BÂTIMENTS ==================== */}
+  <section class="section section--sage" id="batiments">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Types de bâtiments</p>
+        <h2>Nous intervenons sur tous les ouvrages bois</h2>
+        <p class="lead">
+          Le bois ne se comporte pas de la même façon dans un comble de pavillon, un plancher
+          d’immeuble haussmannien ou une charpente de grange. Le contexte bâti fait partie du
+          diagnostic.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        {batiments.map((b) => (
+          <a href={b.href} class="card card--link">
+            <h3>{b.t}</h3>
+            <p>{b.d}</p>
+            <span class="card__foot link-arrow">En savoir plus</span>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:1.5rem">
+        <a href="/types-de-batiments" class="link-arrow">Voir tous les types de bâtiments</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ==================== ÎLE-DE-FRANCE ==================== */}
+  <section class="section" id="zones">
+    <div class="wrap-wide">
+      <div class="section-head">
+        <p class="eyebrow">Zones d’intervention</p>
+        <h2>Les huit départements d’Île-de-France</h2>
+        <p class="lead">
+          Cette carte représente les zones réellement desservies. Elle ne comporte aucun
+          marqueur d’intervention ni de client : uniquement les départements couverts et les
+          communes disposant d’une page dédiée.
+        </p>
+      </div>
+      <CarteIdf />
+      <p style="margin-top:1.75rem">
+        <a href="/zones-intervention" class="link-arrow">Page complète des zones d’intervention</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ==================== GARANTIES ==================== */}
+  <Garanties />
+
+  {/* ==================== FAQ ==================== */}
+  <Faq items={faq} title="Questions fréquentes sur les insectes xylophages"
+       intro="Les réponses ci-dessous valent pour les situations courantes. Elles n’engagent rien sur un bâtiment que nous n’avons pas vu." />
+
+  {/* ==================== BLOG ==================== */}
+  {posts.length > 0 && (
+    <section class="section section--warm" id="blog">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Ressources</p>
+          <h2>Comprendre les insectes du bois</h2>
+          <p class="lead">
+            Des articles écrits à partir de ce que l’on observe réellement sur le terrain,
+            sans raccourci ni dramatisation.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          {posts.map((p) => (
+            <a href={`/blog/${CATEGORIES[p.data.category].slug}/${p.id.split('/').pop()}`} class="card card--link">
+              <p class="ins__sci">{CATEGORIES[p.data.category].name} · {frDate(p.data.published)}</p>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+              <span class="card__foot link-arrow">Lire l’article</span>
+            </a>
+          ))}
+        </div>
+        <p style="margin-top:1.75rem"><a href="/blog" class="link-arrow">Tous les articles</a></p>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</Base>
+
+<style>
+  /* ---------------- HERO ---------------- */
+  .hero {
+    background:
+      radial-gradient(1100px 520px at 88% 8%, rgba(164,191,173,.28), transparent 62%),
+      linear-gradient(180deg, var(--ivoire-warm) 0%, var(--ivoire) 100%);
+    padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(3rem, 2rem + 4vw, 5.5rem);
+    border-bottom: 1px solid var(--c-border);
+  }
+  .hero__in { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4.5rem); align-items: center; }
+  .hero__txt > * + * { margin-top: 1.15rem; }
+  .hero h1 { font-size: var(--t-hero); max-width: 16ch; }
+  .hero__lead { font-size: var(--t-lg); color: var(--c-text-soft); max-width: 54ch; line-height: 1.6; }
+  .hero__cta { margin-top: 1.9rem; }
+  .hero__phone { display: flex; flex-direction: column; gap: .15rem; margin-top: 1.4rem; }
+  .hero__phone a {
+    font-family: var(--f-title); font-size: 1.62rem; font-weight: 600;
+    color: var(--sauge-800); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .hero__phone a:hover { color: var(--cuivre-600); }
+  .hero__phone span { font-size: var(--t-xs); color: var(--c-text-muted); }
+  .hero__frame {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--r-xl); padding: clamp(1rem, .5rem + 2vw, 1.85rem);
+    box-shadow: var(--sh-lg);
+  }
+  .hero__fig figcaption {
+    margin-top: .9rem; font-size: var(--t-xs); color: var(--c-text-muted);
+    line-height: 1.55; max-width: 48ch;
+  }
+  @media (max-width: 980px) {
+    .hero__in { grid-template-columns: 1fr; }
+    .hero h1 { max-width: 20ch; }
+    .hero__fig { order: -1; }
+  }
+
+  /* ---------------- CONFIANCE ---------------- */
+  .trust { background: var(--sauge-800); color: rgba(243,239,228,.76); padding-block: clamp(2rem, 1.5rem + 2vw, 3rem); }
+  .trust__in { display: grid; grid-template-columns: repeat(auto-fit, minmax(212px, 1fr)); gap: 2rem 2.5rem; }
+  .trust__item h2 { font-size: 1.06rem; color: #F3EFE4; margin-bottom: .35rem; font-weight: 600; }
+  .trust__item p { font-size: .82rem; line-height: 1.6; }
+  .trust__item a { color: var(--sauge-200); }
+  .trust__i {
+    display: grid; place-items: center; width: 40px; height: 40px; border-radius: 11px;
+    background: rgba(164,191,173,.16); color: var(--sauge-200); margin-bottom: .9rem;
+  }
+  .trust__i--copper { background: rgba(219,166,132,.18); color: var(--cuivre-300); }
+
+  /* ---------------- DOUTE / SIGNES ---------------- */
+  .doute { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: center; }
+  .doute__head > * + * { margin-top: 1rem; }
+  .doute__fig figcaption { margin-top: .9rem; font-size: var(--t-xs); color: var(--c-text-muted); line-height: 1.55; }
+  @media (max-width: 900px) { .doute { grid-template-columns: 1fr; } }
+
+  .signes {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1px; background: var(--c-rule); border: 1px solid var(--c-rule);
+    border-radius: var(--r-lg); overflow: hidden; margin-top: clamp(2rem, 1rem + 3vw, 3.25rem);
+  }
+  .signes__item { background: var(--ivoire); padding: 1.35rem 1.4rem; }
+  .signes__item h3 { font-size: 1.02rem; margin-bottom: .35rem; }
+  .signes__item p { font-size: var(--t-sm); color: var(--c-text-soft); }
+
+  /* ---------------- INSECTES ---------------- */
+  .ins__sci {
+    font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--cuivre-500); margin-bottom: .55rem; font-style: normal;
+  }
+
+  /* ---------------- CHAÎNE ---------------- */
+  .chain { color: rgba(243,239,228,.72); }
+  .chain h2 { color: #F5F1E6; }
+  .chain .lead { color: rgba(243,239,228,.7); }
+  .chain .eyebrow { color: var(--cuivre-300); }
+  .chain__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 1rem; }
+  .chain__item {
+    position: relative; padding: 1.5rem 1.25rem;
+    border: 1px solid rgba(164,191,173,.22); border-radius: var(--r-lg);
+    background: rgba(164,191,173,.05); text-align: center;
+  }
+  .chain__item:not(:last-child)::after {
+    content: '→'; position: absolute; right: -.95rem; top: 50%; transform: translateY(-50%);
+    color: var(--cuivre-300); z-index: 2; font-size: 1rem;
+  }
+  .chain__dot {
+    display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(219,166,132,.16); color: var(--cuivre-300);
+    font-family: var(--f-title); font-size: .88rem; font-weight: 600; margin-bottom: .75rem;
+  }
+  .chain__item h3 { font-size: 1.02rem; color: #F3EFE4; margin-bottom: .25rem; }
+  .chain__item p { font-size: .78rem; line-height: 1.5; }
+  @media (max-width: 700px) { .chain__item::after { display: none !important; } }
+</style>

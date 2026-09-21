@@ -1,0 +1,437 @@
+---
+import { DEPT_SHAPES, RIVIERES, CITY_POINTS, VIEWBOX, REGION_OUTLINE } from '~/data/carte';
+import { DEPT_BY_SLUG } from '~/data/departements';
+import { VILLES_BY_DEPT } from '~/data/villes';
+
+interface Props {
+  /** Département mis en avant (page départementale ou communale). */
+  active?: string;
+  /** Hauteur réduite pour les intégrations secondaires. */
+  compact?: boolean;
+  id?: string;
+}
+const { active, compact = false, id = 'carte-idf' } = Astro.props;
+
+const panelData = DEPT_SHAPES.map((s) => {
+  const d = DEPT_BY_SLUG[s.slug];
+  return {
+    slug: s.slug,
+    code: s.code,
+    name: s.name,
+    prefecture: d?.prefecture ?? '',
+    villes: (VILLES_BY_DEPT[s.slug] ?? []).map((v) => ({ name: v.name, href: `/traitement-xylophages-${v.slug}` })),
+  };
+});
+---
+<div class={`map ${compact ? 'map--compact' : ''}`} id={id} data-active={active ?? ''}>
+  <div class="map__stage">
+    <svg
+      class="map__svg"
+      viewBox={`${VIEWBOX.x} ${VIEWBOX.y} ${VIEWBOX.w} ${VIEWBOX.h}`}
+      role="img"
+      aria-labelledby={`${id}-t ${id}-d`}
+      data-vb={`${VIEWBOX.x} ${VIEWBOX.y} ${VIEWBOX.w} ${VIEWBOX.h}`}
+    >
+      <title id={`${id}-t`}>Carte des zones d’intervention en Île-de-France</title>
+      <desc id={`${id}-d`}>
+        Les huit départements d’Île-de-France sont représentés et cliquables. La liste
+        équivalente est disponible sous la carte pour une consultation sans interaction.
+      </desc>
+
+      <defs>
+        <filter id={`${id}-sh`} x="-12%" y="-12%" width="124%" height="124%">
+          <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#1E2B24" flood-opacity="0.13" />
+        </filter>
+        <pattern id={`${id}-grain`} width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+          <line x1="0" y1="0" x2="0" y2="9" stroke="#3A5344" stroke-width="0.7" opacity="0.09" />
+        </pattern>
+      </defs>
+
+      <g class="map__pan">
+        {/* Fond continu de la région : évite toute discontinuité entre les tracés. */}
+        <path d={REGION_OUTLINE} class="map__region" filter={`url(#${id}-sh)`} />
+
+        {/* Départements cliquables */}
+        {DEPT_SHAPES.map((s) => (
+          <a
+            href={`/zones-intervention/${s.slug}`}
+            class="map__dept"
+            data-slug={s.slug}
+            aria-label={`Insectes xylophages ${DEPT_BY_SLUG[s.slug]?.inName ?? s.name} (${s.code})`}
+          >
+            <path d={s.d} class="map__shape" />
+            <path d={s.d} class="map__texture" fill={`url(#${id}-grain)`} />
+          </a>
+        ))}
+
+        {/* Repères hydrographiques */}
+        <g class="map__rivers" aria-hidden="true">
+          {RIVIERES.map((r) => <path d={r.d} />)}
+        </g>
+
+        {/* Étiquettes de départements */}
+        <g class="map__labels" aria-hidden="true">
+          {DEPT_SHAPES.map((s) =>
+            s.chip ? (
+              <g class="map__chip" data-slug={s.slug}>
+                <circle cx={s.labelX} cy={s.labelY} r="15" />
+                <text x={s.labelX} y={s.labelY} dy="4.6">{s.code}</text>
+              </g>
+            ) : (
+              <g class="map__name" data-slug={s.slug}>
+                <text x={s.labelX} y={s.labelY}>{s.name}</text>
+                <text x={s.labelX} y={s.labelY} dy="19" class="map__code">{s.code}</text>
+              </g>
+            ),
+          )}
+        </g>
+
+        {/* Communes disposant d'une page dédiée */}
+        <g class="map__cities">
+          {CITY_POINTS.map((c) => (
+            <a
+              href={`/traitement-xylophages-${c.slug}`}
+              class:list={['map__city', c.always && 'is-always']}
+              data-dept={c.dept}
+              aria-label={`Traitement des insectes xylophages à ${c.name}`}
+            >
+              <circle cx={c.x} cy={c.y} r="11" class="map__hit" />
+              <circle cx={c.x} cy={c.y} r="4" class="map__dot" />
+              <text
+                x={c.x}
+                y={c.y}
+                dy={c.dy ?? -9}
+                dx={c.anchor === 'start' ? 8 : c.anchor === 'end' ? -8 : 0}
+                text-anchor={c.anchor ?? 'middle'}
+              >{c.name}</text>
+            </a>
+          ))}
+        </g>
+      </g>
+    </svg>
+
+    <div class="map__zoom" role="group" aria-label="Zoom de la carte">
+      <button type="button" data-z="in" aria-label="Zoomer">+</button>
+      <button type="button" data-z="out" aria-label="Dézoomer">−</button>
+      <button type="button" data-z="reset" aria-label="Réinitialiser la vue">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8A5.5 5.5 0 1 1 8 2.5c1.9 0 3.5.9 4.6 2.4M13 2v3h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <p class="map__hint">Cliquez sur un département · molette ou pincement pour zoomer</p>
+  </div>
+
+  <aside class="map__panel" aria-live="polite">
+    <div class="map__panel-in" data-state="idle">
+      <p class="map__eyebrow">Zones d’intervention</p>
+      <h3 class="map__ptitle">Île-de-France</h3>
+      <p class="map__ptext">
+        Nous intervenons dans les huit départements de la région pour le diagnostic
+        et le traitement des insectes xylophages dans les bâtiments et les structures bois.
+        Sélectionnez un département pour afficher le détail.
+      </p>
+      <div class="map__plinks"></div>
+      <a href="/zones-intervention" class="btn btn--ghost btn--sm map__pcta">Voir toutes les zones</a>
+    </div>
+  </aside>
+
+  {/* Équivalent textuel : indexable et utilisable sans JavaScript */}
+  <nav class="map__list" aria-label="Départements desservis">
+    {panelData.map((d) => (
+      <a href={`/zones-intervention/${d.slug}`} class="map__listitem" data-slug={d.slug}>
+        <span class="map__listcode">{d.code}</span>
+        <span class="map__listname">{d.name}</span>
+      </a>
+    ))}
+  </nav>
+
+  <script type="application/json" class="map__data" set:html={JSON.stringify(panelData)} is:inline />
+</div>
+
+<style>
+  .map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    grid-template-areas: 'stage panel' 'list list';
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .map__stage {
+    grid-area: stage; position: relative;
+    background: linear-gradient(170deg, #F6F3EB 0%, #EFEBE0 100%);
+    border: 1px solid var(--c-border); border-radius: var(--r-xl);
+    overflow: hidden; touch-action: pan-y;
+  }
+  .map__svg { width: 100%; height: auto; display: block; aspect-ratio: 1000 / 860; cursor: grab; }
+  .map__svg.is-drag { cursor: grabbing; }
+  .map--compact .map__svg { aspect-ratio: 1000 / 700; }
+
+  .map__region { fill: var(--sauge-300); }
+  .map__shape {
+    fill: var(--sauge-300); stroke: #FBF8F1; stroke-width: 2.4; stroke-linejoin: round;
+    transition: fill .2s ease;
+  }
+  .map__texture { pointer-events: none; }
+  .map__dept { cursor: pointer; outline: none; }
+  .map__dept:hover .map__shape,
+  .map__dept:focus-visible .map__shape { fill: var(--sauge-500); }
+  .map__dept.is-active .map__shape { fill: var(--sauge-600); }
+  .map__dept.is-current .map__shape { fill: var(--sauge-700); }
+  .map__dept:focus-visible .map__shape { stroke: var(--cuivre-500); stroke-width: 3.5; }
+
+  .map__rivers path { fill: none; stroke: #8FA8C4; stroke-width: 2.2; stroke-linecap: round; opacity: .5; }
+
+  .map__labels { pointer-events: none; }
+  .map__name text {
+    font-family: var(--f-title); font-size: 21px; font-weight: 600; fill: #22301F;
+    text-anchor: middle; paint-order: stroke; stroke: rgba(251,248,241,.8); stroke-width: 3.5;
+  }
+  .map__name .map__code {
+    font-family: var(--f-body); font-size: 12px; font-weight: 600;
+    fill: var(--cuivre-600); letter-spacing: .1em;
+  }
+  .map__chip circle { fill: #FBF8F1; stroke: var(--sauge-600); stroke-width: 2; }
+  .map__chip text {
+    font-family: var(--f-body); font-size: 13px; font-weight: 700;
+    fill: var(--sauge-800); text-anchor: middle;
+  }
+
+  .map__city { cursor: pointer; }
+  .map__hit { fill: transparent; }
+  .map__dot { fill: var(--cuivre-500); stroke: #FBF8F1; stroke-width: 2; transition: r .15s ease; }
+  .map__city text {
+    font-family: var(--f-body); font-size: 13px; font-weight: 600; fill: #3D372E;
+    paint-order: stroke; stroke: rgba(251,248,241,.92); stroke-width: 3.2;
+    opacity: 0; transition: opacity .15s ease; pointer-events: none;
+  }
+  .map__city.is-always text { opacity: 1; }
+  .map__city:hover text, .map__city:focus-visible text { opacity: 1; }
+  .map__city:hover .map__dot, .map__city:focus-visible .map__dot { r: 6; }
+  .map__cities.is-dimmed .map__city:not(.is-on) { opacity: .28; }
+  .map__cities.is-dimmed .map__city.is-on text { opacity: 1; }
+
+  .map__zoom {
+    position: absolute; right: .8rem; top: .8rem; display: flex; flex-direction: column; gap: .3rem;
+  }
+  .map__zoom button {
+    width: 34px; height: 34px; border-radius: var(--r-sm);
+    background: rgba(255,255,255,.94); border: 1px solid var(--c-border);
+    color: var(--sauge-800); font-size: 1.05rem; line-height: 1;
+    display: grid; place-items: center; box-shadow: var(--sh-xs);
+  }
+  .map__zoom button:hover { background: #fff; border-color: var(--sauge-400); }
+  .map__hint {
+    position: absolute; left: .9rem; bottom: .75rem; margin: 0;
+    font-size: .7rem; color: var(--gris-500); background: rgba(255,255,255,.8);
+    padding: .25rem .6rem; border-radius: var(--r-pill);
+  }
+
+  .map__panel { grid-area: panel; }
+  .map__panel-in {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--r-lg); padding: 1.5rem 1.4rem; box-shadow: var(--sh-xs);
+    position: sticky; top: 100px;
+  }
+  .map__eyebrow {
+    font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--cuivre-500); margin-bottom: .5rem;
+  }
+  .map__ptitle { font-size: 1.5rem; margin-bottom: .6rem; }
+  .map__ptext { font-size: .85rem; color: var(--c-text-soft); line-height: 1.6; }
+  .map__plinks { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  .map__plinks a {
+    font-size: .74rem; font-weight: 600; text-decoration: none;
+    background: var(--sauge-50); color: var(--sauge-800);
+    padding: .3rem .65rem; border-radius: var(--r-pill); border: 1px solid var(--sauge-200);
+  }
+  .map__plinks a:hover { background: var(--sauge-100); }
+  .map__pcta { margin-top: 1.25rem; }
+
+  .map__list {
+    grid-area: list; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .5rem;
+  }
+  .map__listitem {
+    display: flex; align-items: center; gap: .6rem; text-decoration: none;
+    padding: .62rem .8rem; border: 1px solid var(--c-border); border-radius: var(--r-md);
+    background: var(--c-surface); transition: border-color .16s ease, background-color .16s ease;
+  }
+  .map__listitem:hover, .map__listitem.is-active { border-color: var(--sauge-400); background: var(--sauge-50); }
+  .map__listcode {
+    font-family: var(--f-title); font-size: .78rem; font-weight: 700; color: var(--cuivre-600);
+    background: var(--cuivre-100); border-radius: var(--r-xs); padding: .1rem .35rem;
+  }
+  .map__listname { font-size: .82rem; font-weight: 600; color: var(--sauge-800); }
+
+  @media (max-width: 900px) {
+    .map { grid-template-columns: 1fr; grid-template-areas: 'stage' 'panel' 'list'; }
+    .map__panel-in { position: static; }
+    .map__hint { display: none; }
+    .map__name text { font-size: 24px; }
+    .map__city text { font-size: 15px; }
+  }
+</style>
+
+<script>
+  type PanelDept = { slug: string; code: string; name: string; prefecture: string; villes: { name: string; href: string }[] };
+
+  const init = (root: HTMLElement) => {
+    const svg = root.querySelector<SVGSVGElement>('.map__svg');
+    const panel = root.querySelector<HTMLElement>('.map__panel-in');
+    const dataEl = root.querySelector<HTMLScriptElement>('.map__data');
+    if (!svg || !panel || !dataEl) return;
+
+    const depts: PanelDept[] = JSON.parse(dataEl.textContent || '[]');
+    const bySlug = new Map(depts.map((d) => [d.slug, d]));
+    const base = (svg.dataset.vb || '0 0 1000 860').split(' ').map(Number) as [number, number, number, number];
+    const cities = root.querySelector<SVGGElement>('.map__cities');
+
+    let [vx, vy, vw, vh] = base;
+    const apply = () => svg.setAttribute('viewBox', `${vx} ${vy} ${vw} ${vh}`);
+
+    const clamp = () => {
+      const minW = base[2] * 0.3;
+      const maxW = base[2] * 1.25;
+      vw = Math.min(maxW, Math.max(minW, vw));
+      vh = (vw / base[2]) * base[3];
+      vx = Math.min(base[0] + base[2] - vw * 0.35, Math.max(base[0] - vw * 0.65, vx));
+      vy = Math.min(base[1] + base[3] - vh * 0.35, Math.max(base[1] - vh * 0.65, vy));
+    };
+
+    const zoomAt = (factor: number, cx = vx + vw / 2, cy = vy + vh / 2) => {
+      const nw = vw * factor;
+      const ratio = nw / vw;
+      vx = cx - (cx - vx) * ratio;
+      vy = cy - (cy - vy) * ratio;
+      vw = nw;
+      clamp();
+      apply();
+    };
+
+    root.querySelectorAll<HTMLButtonElement>('.map__zoom button').forEach((b) => {
+      b.addEventListener('click', () => {
+        const mode = b.dataset.z;
+        if (mode === 'in') zoomAt(0.72);
+        else if (mode === 'out') zoomAt(1 / 0.72);
+        else { [vx, vy, vw, vh] = base; apply(); }
+      });
+    });
+
+    svg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const pt = toSvg(e.clientX, e.clientY);
+      zoomAt(e.deltaY > 0 ? 1.12 : 0.89, pt.x, pt.y);
+    }, { passive: false });
+
+    const toSvg = (clientX: number, clientY: number) => {
+      const r = svg.getBoundingClientRect();
+      return { x: vx + ((clientX - r.left) / r.width) * vw, y: vy + ((clientY - r.top) / r.height) * vh };
+    };
+
+    /* --- Déplacement à la souris et au doigt --- */
+    let dragging = false, moved = 0, last = { x: 0, y: 0 };
+    const down = (x: number, y: number) => { dragging = true; moved = 0; last = { x, y }; svg.classList.add('is-drag'); };
+    const move = (x: number, y: number) => {
+      if (!dragging) return;
+      const r = svg.getBoundingClientRect();
+      const dx = ((x - last.x) / r.width) * vw;
+      const dy = ((y - last.y) / r.height) * vh;
+      moved += Math.abs(dx) + Math.abs(dy);
+      vx -= dx; vy -= dy; last = { x, y };
+      clamp(); apply();
+    };
+    const up = () => { dragging = false; svg.classList.remove('is-drag'); };
+
+    svg.addEventListener('pointerdown', (e) => { if (e.button === 0) down(e.clientX, e.clientY); });
+    addEventListener('pointermove', (e) => move(e.clientX, e.clientY));
+    addEventListener('pointerup', up);
+    addEventListener('pointercancel', up);
+
+    let pinch = 0;
+    svg.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2) {
+        pinch = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      }
+    }, { passive: true });
+    svg.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2 && pinch) {
+        e.preventDefault();
+        const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        const mid = toSvg((e.touches[0].clientX + e.touches[1].clientX) / 2, (e.touches[0].clientY + e.touches[1].clientY) / 2);
+        zoomAt(pinch / d, mid.x, mid.y);
+        pinch = d;
+      }
+    }, { passive: false });
+    svg.addEventListener('touchend', () => { pinch = 0; }, { passive: true });
+
+    /* --- Panneau d'information --- */
+    const listItems = root.querySelectorAll<HTMLElement>('.map__listitem');
+    const deptNodes = root.querySelectorAll<SVGAElement>('.map__dept');
+
+    const select = (slug: string) => {
+      const d = bySlug.get(slug);
+      if (!d) return;
+      deptNodes.forEach((n) => n.classList.toggle('is-active', n.dataset.slug === slug));
+      listItems.forEach((n) => n.classList.toggle('is-active', n.dataset.slug === slug));
+      cities?.classList.add('is-dimmed');
+      cities?.querySelectorAll<SVGAElement>('.map__city').forEach((c) => {
+        c.classList.toggle('is-on', c.dataset.dept === slug);
+      });
+      const villes = d.villes.length
+        ? `<div class="map__plinks">${d.villes.map((v) => `<a href="${v.href}">${v.name}</a>`).join('')}</div>`
+        : '';
+      panel.innerHTML =
+        `<p class="map__eyebrow">Département ${d.code}</p>` +
+        `<h3 class="map__ptitle">${d.name}</h3>` +
+        `<p class="map__ptext">Interventions pour le diagnostic et le traitement des insectes xylophages dans les bâtiments et structures bois${d.prefecture ? `, depuis ${d.name === 'Paris' ? 'Paris' : 'la préfecture de ' + d.prefecture} jusqu’aux communes les plus éloignées` : ''}.</p>` +
+        villes +
+        `<a href="/zones-intervention/${d.slug}" class="btn btn--primary btn--sm map__pcta">Voir les interventions ${prep(d.name)}</a>`;
+      panel.dataset.state = 'dept';
+    };
+
+    const prep = (name: string) => {
+      const map: Record<string, string> = {
+        Paris: 'à Paris',
+        'Seine-et-Marne': 'en Seine-et-Marne',
+        Yvelines: 'dans les Yvelines',
+        Essonne: 'en Essonne',
+        'Hauts-de-Seine': 'dans les Hauts-de-Seine',
+        'Seine-Saint-Denis': 'en Seine-Saint-Denis',
+        'Val-de-Marne': 'dans le Val-de-Marne',
+        "Val-d'Oise": "dans le Val-d'Oise",
+      };
+      return map[name] ?? `dans le ${name}`;
+    };
+
+    deptNodes.forEach((node) => {
+      const slug = node.dataset.slug!;
+      node.addEventListener('pointerenter', () => select(slug));
+      node.addEventListener('focus', () => select(slug));
+      node.addEventListener('click', (e) => {
+        /* Un glissement de carte ne doit pas déclencher la navigation. */
+        if (moved > 6) { e.preventDefault(); return; }
+      });
+    });
+    listItems.forEach((node) => {
+      node.addEventListener('pointerenter', () => select(node.dataset.slug!));
+    });
+
+    /* Département courant mis en évidence sur les pages locales. */
+    const current = root.dataset.active;
+    if (current) {
+      deptNodes.forEach((n) => n.classList.toggle('is-current', n.dataset.slug === current));
+      select(current);
+    }
+  };
+
+  const mount = () => document.querySelectorAll<HTMLElement>('.map').forEach(init);
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { init(en.target as HTMLElement); obs.unobserve(en.target); }
+      });
+    }, { rootMargin: '300px' });
+    document.querySelectorAll<HTMLElement>('.map').forEach((el) => io.observe(el));
+  } else {
+    mount();
+  }
+</script>

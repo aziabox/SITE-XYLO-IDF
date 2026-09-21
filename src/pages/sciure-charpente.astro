@@ -1,0 +1,176 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Vous constatez', href: '/bois-attaque-insectes' },
+  { label: 'Sciure sous la charpente' },
+];
+const gestes = [
+  { title: 'Ne nettoyez pas tout de suite', text: 'C’est le réflexe le plus naturel et le plus dommageable. La sciure est, à ce stade, votre seule pièce à conviction : sa texture, sa couleur et sa localisation portent l’essentiel de l’information.' },
+  { title: 'Prélevez un échantillon', text: 'Recueillez-en une petite quantité sur une feuille de papier blanc. Le contraste rend la granulométrie visible, et l’échantillon se conserve indéfiniment dans une enveloppe ou une boîte.' },
+  { title: 'Photographiez de près', text: 'Un gros plan avec une pièce de monnaie posée à côté donne l’échelle. Photographiez aussi la pièce de bois d’où la sciure semble provenir, et une vue d’ensemble du volume.' },
+  { title: 'Frottez-la entre vos doigts', text: 'Elle crisse légèrement et contient de minuscules granulés ? Vrillette. Elle est impalpable et coule comme de la farine ? Lyctus. Elle est faite de fragments grossiers, presque des copeaux ? Ce n’est probablement pas un xylophage, mais des fourmis charpentières.' },
+  { title: 'Cherchez les trous au-dessus', text: 'Remontez à la verticale du tas. Trouvez-vous des trous ? Sont-ils ronds ou ovales ? De quel diamètre approximatif ? Sont-ils clairs et nets, ou sombres et empoussiérés ?' },
+  { title: 'Nettoyez, repérez, datez', text: 'Une fois l’observation faite, nettoyez complètement la zone, marquez-la avec un morceau d’adhésif et notez la date. Si de la sciure réapparaît au même endroit dans les semaines qui suivent, l’attaque est active. C’est le test le plus fiable, et il ne coûte rien.' },
+];
+const faq = [
+  { q: 'De la sciure signifie-t-elle forcément une attaque en cours ?', a: "Non. Une vibration, un courant d'air, un passage dans le comble ou même une variation d'hygrométrie peuvent faire tomber de la vermoulure accumulée depuis des années dans des galeries anciennes. C'est une cause fréquente de fausse alerte. Le seul moyen de trancher est le contrôle différé : nettoyer, repérer, et vérifier si la sciure réapparaît." },
+  { q: 'Quelle quantité de sciure doit inquiéter ?', a: "La quantité n'est pas un bon indicateur. Une petite quantité peut correspondre à une attaque active récente, une grande quantité à un dépôt ancien libéré d'un coup. Ce qui compte, c'est la récurrence : de la sciure qui réapparaît après un nettoyage complet est un signe, un tas ponctuel ne l'est pas." },
+  { q: 'Et si la sciure vient d’un plafond ?', a: "Dans un immeuble ancien, une poussière fine qui tombe d'un plafond peut provenir des solives situées au-dessus, ou simplement d'un plâtre qui se désagrège. Recueillez-en : la vermoulure d'insecte a une granulométrie régulière et souvent une forme caractéristique, alors qu'un plâtre dégradé produit une poudre irrégulière, plus claire et plus légère." },
+  { q: 'La couleur de la sciure est-elle informative ?', a: "Oui, en relatif. Une vermoulure fraîche est généralement plus claire que le bois qui l'entoure, parce qu'elle n'a pas été exposée à la lumière ni à la poussière. Une vermoulure ancienne prend la teinte grisâtre de l'empoussièrement ambiant. C'est un indice parmi d'autres, à croiser avec l'aspect des bords des trous." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Sciure sous une charpente : que faire et comment l’interpréter"
+  description="J’ai trouvé de la sciure sous ma charpente : les six gestes à faire avant de nettoyer, comment lire la texture de la vermoulure et comment savoir si l’attaque est encore active."
+  path="/sciure-charpente" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Vous constatez"
+    title="J’ai découvert de la sciure sous ma charpente : que faire ?"
+    lead="C’est l’une des découvertes qui inquiètent le plus, et c’est aussi celle sur laquelle on se trompe le plus souvent — dans les deux sens : en dramatisant un dépôt ancien, ou en négligeant une attaque réelle."
+    answer="Le premier geste est de <strong>ne pas nettoyer</strong>. Prélevez un échantillon sur une feuille blanche, photographiez-le avec un objet donnant l’échelle, puis observez sa texture : granuleuse et crissante pour une vrillette, farineuse pour un lyctus, en granulés cylindriques pour un capricorne. Nettoyez ensuite, <strong>repérez la zone et datez-la</strong> : une réapparition signe une attaque active."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <Etapes eyebrow="Marche à suivre" title="Six gestes, dans cet ordre" lead="Ils prennent dix minutes, ne coûtent rien, et donnent plus d’information qu’une visite précipitée." items={gestes} />
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Lire la vermoulure</p>
+        <h2>Ce que la texture indique</h2>
+        <p class="lead">
+          C’est le critère le plus accessible et l’un des plus discriminants. Une loupe de lecture
+          suffit, et même l’œil nu permet souvent de trancher.
+        </p>
+      </div>
+      <div class="table-scroll">
+        <table class="data">
+          <caption>Correspondances indicatives. Elles orientent l’observation sans constituer une identification.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Aspect de la sciure</th><th scope="col">Au toucher</th>
+              <th scope="col">Oriente vers</th><th scope="col">À vérifier ensuite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Poudre fine avec granulés en forme de citron</th>
+              <td>Crisse légèrement</td>
+              <td><a href="/vrillette">Petite vrillette</a></td>
+              <td>Trous ronds de 1 à 3 mm, souvent groupés</td>
+            </tr>
+            <tr>
+              <th scope="row">Poudre plus grossière, granulés en lentille</th>
+              <td>Nettement granuleuse</td>
+              <td><a href="/vrillette">Grosse vrillette</a></td>
+              <td>Humidité du bois, présence d’une pourriture</td>
+            </tr>
+            <tr>
+              <th scope="row">Poudre impalpable, coule comme de la farine</th>
+              <td>Aucun grain perceptible</td>
+              <td><a href="/lyctus">Lyctus</a></td>
+              <td>Ouvrage récent, essence feuillue</td>
+            </tr>
+            <tr>
+              <th scope="row">Sciure fine avec granulés cylindriques courts</th>
+              <td>Tassée, ne s’écoule pas seule</td>
+              <td><a href="/capricorne-des-maisons">Capricorne des maisons</a></td>
+              <td>Bois résineux, trous ovales de 5 à 10 mm</td>
+            </tr>
+            <tr>
+              <th scope="row">Fragments grossiers, presque des copeaux</th>
+              <td>Irrégulière, non poudreuse</td>
+              <td><a href="/insectes-du-bois">Fourmis charpentières</a></td>
+              <td>Galeries lisses, bois humide ou ramolli</td>
+            </tr>
+            <tr>
+              <th scope="row">Aucune sciure, mais du bois creux</th>
+              <td>—</td>
+              <td><a href="/termites">Termites</a></td>
+              <td>Cordonnets de terre, bois feuilleté</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note note--copper" style="margin-top:1.5rem">
+        <span class="note__title">Le piège classique</span>
+        Une petite quantité de sciure sous une poutre ne permet pas, à elle seule, d’identifier
+        l’insecte responsable. Elle peut correspondre à une attaque ancienne comme à une attaque
+        active. L’observation des trous, leur diamètre, leur répartition et l’état du bois
+        permettent d’orienter le diagnostic — jamais un seul indice pris isolément.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions qui suivent immédiatement</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Que signifie la présence de sciure sous une poutre ?">
+          <p>
+            Qu’un insecte a creusé cette pièce, à un moment donné. Cela ne dit ni quand, ni si c’est
+            terminé. Une galerie creusée il y a trente ans peut encore contenir de la vermoulure qui
+            se libère à l’occasion d’une vibration.
+          </p>
+          <p>
+            La question utile n’est donc pas « y a-t-il de la sciure ? » mais « en réapparaît-il
+            après un nettoyage complet ? ».
+          </p>
+        </Answer>
+        <Answer question="Comment différencier une attaque ancienne d’une attaque active ?">
+          <p>
+            Quatre indices : des bords de trous clairs et nets plutôt que sombres et empoussiérés ;
+            une vermoulure plus claire que le bois environnant ; la présence d’adultes en période
+            d’émergence, du printemps au début de l’été ; et surtout la réapparition de sciure sur
+            une zone préalablement nettoyée.
+          </p>
+          <p>
+            Ce dernier test demande de la patience — quelques semaines à quelques mois selon la
+            saison — mais c’est de loin le plus fiable.
+            <a href="/blog/diagnostic/attaque-ancienne-ou-active">La méthode détaillée</a>.
+          </p>
+        </Answer>
+        <Answer question="Dois-je faire venir quelqu’un immédiatement ?">
+          <p>
+            Pas nécessairement. Si vous découvrez un tas isolé, sans trou frais visible et sans
+            autre signe, les gestes décrits plus haut suffisent dans un premier temps, et le
+            contrôle différé vous donnera une réponse.
+          </p>
+          <p>
+            En revanche, une visite se justifie sans attendre si vous constatez un affaissement, un
+            bois qui s’enfonce sous la pression, des trous nombreux et frais, ou si la sciure
+            réapparaît rapidement après nettoyage.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur la sciure" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Vermoulure dans le bois', href: '/vermoulure-bois', text: 'Comprendre ce qu’est la vermoulure et ce que sa forme révèle.' },
+    { label: 'Trous dans la charpente', href: '/trous-dans-charpente', text: 'Lire le diamètre et la forme des trous de sortie.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que comporte un examen complet sur place.' },
+  ]} />
+  <CtaBand title="Envoyez-nous vos photos" text="Une photo de la sciure sur fond blanc, avec une pièce de monnaie pour l’échelle, et une photo des trous : cela suffit souvent à orienter l’échange avant même un déplacement." />
+</Base>

@@ -1,0 +1,95 @@
+---
+import Logo from './Logo.astro';
+import { FOOTER_NAV } from '~/data/nav';
+import { SITE } from '~/data/site';
+const year = new Date().getFullYear();
+---
+<footer class="ft">
+  <div class="wrap-wide">
+    <div class="ft__top">
+      <div class="ft__brand">
+        <Logo variant="light" />
+        <p class="ft__pitch">
+          Nous intervenons en Île-de-France pour identifier les insectes responsables
+          des dégradations du bois et proposer un traitement adapté à la structure concernée :
+          charpentes, poutres, planchers, boiseries.
+        </p>
+        <a href={SITE.phoneHref} class="ft__phone">{SITE.phoneDisplay}</a>
+        <p class="ft__hours">
+          {SITE.openingHours.map((h) => <span>{h.days} · {h.hours}</span>)}
+        </p>
+      </div>
+
+      <div class="ft__cols">
+        {FOOTER_NAV.map((col) => (
+          <nav class="ft__col" aria-label={col.title}>
+            <p class="ft__title">{col.title}</p>
+            <ul>
+              {col.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            </ul>
+          </nav>
+        ))}
+      </div>
+    </div>
+
+    <div class="ft__mid">
+      <p class="ft__note">
+        <strong>Information.</strong> Les descriptions publiées sur ce site aident à orienter une observation.
+        Elles ne remplacent pas l’examen du bois sur place : un même signe peut correspondre
+        à plusieurs espèces, ou à une attaque terminée depuis longtemps.
+      </p>
+    </div>
+
+    <div class="ft__bottom">
+      <p class="ft__copy">© {year} {SITE.name}. Traitement des insectes xylophages en Île-de-France.</p>
+      <ul class="ft__legal">
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+        <li><a href="/politique-de-confidentialite">Confidentialité</a></li>
+        <li><a href="/garanties-et-assurances">Garanties et assurances</a></li>
+        <li><a href="/plan-du-site">Plan du site</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ft {
+    background: var(--sauge-900); color: rgba(243,239,228,.72);
+    padding-block: clamp(3rem, 2rem + 4vw, 5rem) 2rem; font-size: .85rem;
+    position: relative;
+  }
+  .ft::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: repeating-linear-gradient(90deg, var(--bois-600) 0 16px, var(--bois-500) 16px 26px, var(--cuivre-600) 26px 30px);
+    opacity: .7;
+  }
+  .ft__top { display: grid; grid-template-columns: minmax(260px, 1fr) 2.1fr; gap: 3rem; }
+  .ft__pitch { margin-top: 1.25rem; max-width: 38ch; line-height: 1.65; }
+  .ft__phone {
+    display: inline-block; margin-top: 1.4rem;
+    font-family: var(--f-title); font-size: 1.55rem; font-weight: 600; letter-spacing: -0.01em;
+    color: #F3EFE4; text-decoration: none;
+  }
+  .ft__phone:hover { color: var(--cuivre-300); }
+  .ft__hours { display: flex; flex-direction: column; gap: .15rem; margin-top: .6rem; font-size: .78rem; opacity: .68; }
+  .ft__cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem 1.5rem; }
+  .ft__title {
+    font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--cuivre-300); margin-bottom: .9rem;
+  }
+  .ft__col li { margin-bottom: .45rem; }
+  .ft__col a { color: rgba(243,239,228,.72); text-decoration: none; font-size: .82rem; line-height: 1.45; }
+  .ft__col a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .ft__mid { margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid rgba(243,239,228,.13); }
+  .ft__note { max-width: 78ch; font-size: .78rem; line-height: 1.6; opacity: .65; }
+  .ft__note strong { color: rgba(243,239,228,.9); }
+  .ft__bottom {
+    margin-top: 1.6rem; padding-top: 1.4rem; border-top: 1px solid rgba(243,239,228,.13);
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;
+    font-size: .76rem; opacity: .6;
+  }
+  .ft__legal { display: flex; flex-wrap: wrap; gap: 1.15rem; }
+  .ft__legal a { color: inherit; text-decoration: none; }
+  .ft__legal a:hover { color: #fff; text-decoration: underline; }
+  @media (max-width: 900px) { .ft__top { grid-template-columns: 1fr; gap: 2.5rem; } }
+</style>

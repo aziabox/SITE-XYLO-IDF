@@ -1,0 +1,96 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Etapes from '~/components/Etapes.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+export interface Props {
+  path: string;
+  seoTitle: string;
+  seoDescription: string;
+  eyebrow: string;
+  h1: string;
+  lead: string;
+  answer: string;
+  serviceName: string;
+  /** Corps éditorial : titres de section et paragraphes. */
+  sections: { h2: string; intro?: string; paragraphs?: string[]; list?: { t: string; d: string }[] }[];
+  /** Encadré latéral : points de vigilance propres à ce type de bâtiment. */
+  vigilance: { title: string; items: string[] };
+  /** Encadré secondaire optionnel. */
+  aside?: { title: string; text: string };
+  /** Déroulé de l'intervention adapté à ce type de bâtiment. */
+  etapes?: { title: string; text: string }[];
+  etapesTitle?: string;
+  etapesLead?: string;
+  faq: { q: string; a: string }[];
+  liens: { label: string; href: string; text: string }[];
+  ctaTitle?: string;
+  ctaText?: string;
+}
+const p = Astro.props;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Types de bâtiments', href: '/types-de-batiments' },
+  { label: p.h1.split(':')[0].trim() },
+];
+const jsonLd = [
+  serviceSchema({ name: p.serviceName, description: p.seoDescription, path: p.path }),
+  faqSchema(p.faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base title={p.seoTitle} description={p.seoDescription} path={p.path} crumbs={crumbs} jsonLd={jsonLd}>
+  <PageHero eyebrow={p.eyebrow} title={p.h1} lead={p.lead} answer={p.answer} crumbs={crumbs} />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          {p.sections.map((s) => (
+            <div>
+              <h2>{s.h2}</h2>
+              {s.intro && <p class="lead">{s.intro}</p>}
+              {s.paragraphs?.map((t) => <p set:html={t} />)}
+              {s.list && (
+                <ul class="list-dot" style="margin-top:1rem">
+                  {s.list.map((i) => <li><strong>{i.t}</strong> — <span set:html={i.d} /></li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">{p.vigilance.title}</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              {p.vigilance.items.map((i) => <li set:html={i} />)}
+            </ul>
+          </div>
+          {p.aside && (
+            <div class="card card--sage" style="margin-top:1.25rem">
+              <h3 style="font-size:1.05rem">{p.aside.title}</h3>
+              <p style="margin-top:.5rem" set:html={p.aside.text} />
+            </div>
+          )}
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {p.etapes && (
+    <section class="section section--sage">
+      <div class="wrap">
+        <Etapes eyebrow="Déroulé" title={p.etapesTitle ?? 'Comment se déroule l’intervention'} lead={p.etapesLead} items={p.etapes} />
+      </div>
+    </section>
+  )}
+
+  <Faq items={p.faq} title="Questions fréquentes" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={p.liens} />
+  <CtaBand title={p.ctaTitle} text={p.ctaText} />
+</Base>

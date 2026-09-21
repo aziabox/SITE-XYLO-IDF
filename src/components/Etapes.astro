@@ -1,0 +1,62 @@
+---
+interface Props {
+  items: { title: string; text: string }[];
+  eyebrow?: string;
+  title?: string;
+  lead?: string;
+  variant?: 'numbered' | 'chain';
+}
+const { items, eyebrow, title, lead, variant = 'numbered' } = Astro.props;
+---
+<div class="etapes">
+  {(eyebrow || title) && (
+    <div class="section-head">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      {title && <h2>{title}</h2>}
+      {lead && <p class="lead">{lead}</p>}
+    </div>
+  )}
+  <ol class={`etapes__list etapes__list--${variant}`}>
+    {items.map((s, i) => (
+      <li class="etapes__item">
+        <span class="etapes__num">{String(i + 1).padStart(2, '0')}</span>
+        <div class="etapes__body">
+          <h3 class="etapes__title">{s.title}</h3>
+          <p class="etapes__text" set:html={s.text} />
+        </div>
+      </li>
+    ))}
+  </ol>
+</div>
+
+<style>
+  .etapes__list { display: grid; gap: 0; }
+  .etapes__item {
+    display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 1.5rem;
+    padding: 1.5rem 0; border-top: 1px solid var(--c-rule); position: relative;
+  }
+  .etapes__item:last-child { border-bottom: 1px solid var(--c-rule); }
+  .etapes__num {
+    font-family: var(--f-title); font-size: 1.5rem; font-weight: 500;
+    color: var(--cuivre-500); font-variant-numeric: tabular-nums; line-height: 1;
+    padding-top: .15rem;
+  }
+  .etapes__title { font-size: var(--t-h4); margin-bottom: .4rem; }
+  .etapes__text { font-size: var(--t-sm); color: var(--c-text-soft); max-width: 68ch; }
+
+  .etapes__list--chain { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+  .etapes__list--chain .etapes__item {
+    grid-template-columns: 1fr; gap: .7rem; border: 1px solid var(--c-border);
+    border-radius: var(--r-lg); padding: 1.35rem 1.25rem; background: var(--c-surface);
+  }
+  .etapes__list--chain .etapes__item::after {
+    content: '→'; position: absolute; right: -1.05rem; top: 50%; transform: translateY(-50%);
+    color: var(--cuivre-300); font-size: 1.1rem; z-index: 2;
+  }
+  .etapes__list--chain .etapes__item:last-child::after { display: none; }
+  .etapes__list--chain .etapes__num { font-size: 1.05rem; }
+  @media (max-width: 620px) {
+    .etapes__item { grid-template-columns: 52px minmax(0, 1fr); gap: 1rem; }
+    .etapes__list--chain .etapes__item::after { display: none; }
+  }
+</style>

@@ -1,0 +1,107 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Formulaire from '~/components/Formulaire.astro';
+import Etapes from '~/components/Etapes.astro';
+import { SITE } from '~/data/site';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Demander un diagnostic' }];
+const etapes = [
+  { title: 'Vous décrivez ce que vous observez', text: 'Par téléphone ou par le formulaire. L’endroit, l’aspect des trous, la présence ou non de sciure, l’âge du bâtiment. Quelques photos aident beaucoup.' },
+  { title: 'Nous vous répondons franchement', text: 'Parfois en vous indiquant simplement ce qu’il est utile de vérifier vous-même. Il arrive qu’une visite ne s’impose pas, et nous le disons.' },
+  { title: 'Nous convenons d’un rendez-vous', text: 'Avec les modalités annoncées à l’avance, sans ambiguïté. Nous vous indiquons ce qu’il est utile de dégager pour que la visite soit exploitable.' },
+  { title: 'Nous examinons sur place', text: 'Examen visuel, sondage au maillet et au poinçon, mesure d’humidité en plusieurs points, identification lorsque les indices convergent.' },
+  { title: 'Vous recevez un rapport écrit', text: 'Constat, déductions, incertitudes et zones non examinées. Avec, s’il y a lieu, les préconisations et un devis détaillé poste par poste.' },
+];
+---
+<Base
+  title="Demander un diagnostic des insectes xylophages"
+  description="Décrivez ce que vous observez sur votre charpente, vos poutres ou votre plancher. Nous vous dirons franchement si une visite s’impose. Île-de-France, 07 56 82 27 85."
+  path="/demander-un-diagnostic" crumbs={crumbs}
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Faire examiner une charpente, une poutre ou un plancher"
+    lead="Décrivez-nous ce que vous avez observé. Nous vous indiquerons ce qu’il est utile de vérifier, et nous organiserons une visite si l’examen du bois sur place est nécessaire."
+    crumbs={crumbs}
+    cta={false}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="contact">
+        <div class="contact__form">
+          <h2>Décrire votre situation</h2>
+          <p class="lead" style="margin:.7rem 0 2rem">
+            Plus la description est précise, plus l’échange préalable est utile — et parfois il
+            suffit à vous éviter un déplacement.
+          </p>
+          <Formulaire />
+        </div>
+
+        <aside class="contact__side">
+          <div class="card card--dark">
+            <p class="ct__label">Parler à un spécialiste</p>
+            <a href={SITE.phoneHref} class="ct__phone">{SITE.phoneDisplay}</a>
+            <ul class="ct__hours">
+              {SITE.openingHours.map((h) => <li><span>{h.days}</span><span>{h.hours}</span></li>)}
+            </ul>
+            <p class="small" style="margin-top:1.1rem;opacity:.75">
+              Intervention dans les huit départements d’Île-de-France.
+            </p>
+          </div>
+
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h2 style="font-size:1.05rem">Ce qui nous aide le plus</h2>
+            <ul class="list-check small" style="margin-top:.7rem">
+              <li>Une photo de la <strong>vermoulure sur fond blanc</strong>, avec une pièce de monnaie pour l’échelle</li>
+              <li>Une photo des <strong>trous</strong>, en gros plan et en vue d’ensemble</li>
+              <li>L’<strong>essence du bois</strong> si vous la connaissez : résineux ou chêne</li>
+              <li>L’<strong>année de construction</strong> approximative du bâtiment</li>
+              <li>L’<strong>historique</strong> : travaux de couverture, infiltrations, dégâts des eaux</li>
+              <li>Si vous avez <strong>nettoyé</strong> la zone, et quand</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:1.25rem">
+            <h2 style="font-size:1.05rem">Avant notre venue</h2>
+            <p style="margin-top:.5rem">
+              Dégagez l’accès aux combles et, si possible, les bois eux-mêmes : un comble rempli de
+              cartons ne permet pas de lire les chevrons. Et surtout, <strong>ne nettoyez pas la
+              sciure</strong> que vous avez trouvée — photographiez-la et conservez-en un peu.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <Etapes eyebrow="Ce qui se passe ensuite" title="Cinq étapes, sans surprise" items={etapes} />
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="note note--copper">
+        <span class="note__title">Une photo ne remplace pas un examen</span>
+        Une photo peut aider à préparer l’échange, mais ne permet pas toujours de confirmer
+        l’identification d’un insecte. Plusieurs espèces produisent des signes proches, et une
+        attaque terminée depuis vingt ans laisse exactement les mêmes trous qu’une attaque en
+        cours. Nous vous dirons ce que l’image permet de conclure, et ce qu’elle ne permet pas.
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 340px); gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: start; }
+  .contact__side { position: sticky; top: 100px; }
+  .ct__label { font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--cuivre-300); margin-bottom: .6rem; }
+  .ct__phone { display: block; font-family: var(--f-title); font-size: 1.85rem; font-weight: 600; color: #F5F1E6; text-decoration: none; letter-spacing: -0.01em; }
+  .ct__phone:hover { color: var(--cuivre-300); }
+  .ct__hours { margin-top: 1.1rem; padding-top: .9rem; border-top: 1px solid rgba(255,255,255,.12); }
+  .ct__hours li { display: flex; justify-content: space-between; gap: 1rem; font-size: .78rem; padding: .25rem 0; opacity: .8; }
+  @media (max-width: 940px) { .contact { grid-template-columns: 1fr; } .contact__side { position: static; } }
+</style>

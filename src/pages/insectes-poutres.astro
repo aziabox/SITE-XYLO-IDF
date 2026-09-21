@@ -1,0 +1,174 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Vous constatez', href: '/bois-attaque-insectes' },
+  { label: 'Insectes dans les poutres' },
+];
+const faq = [
+  { q: 'Quels insectes attaquent les poutres ?', a: "Cela dépend de l'essence. Dans une poutre résineuse, le capricorne des maisons. Dans une poutre de chêne, la grosse vrillette si le bois a été humidifié, et la petite vrillette dans les zones d'aubier. Le lyctus ne concerne que les poutres en feuillu récentes, ce qui est rare. Les termites peuvent atteindre une poutre de plancher bas par le sol, sans laisser de trou." },
+  { q: 'Une poutre attaquée doit-elle être remplacée ?', a: "Rarement, en réalité. Une poutre de forte section dont seule la périphérie est touchée conserve souvent une capacité portante suffisante : elle se bûche, se traite et se conserve. Le remplacement ou le renfort s'impose lorsque la dégradation traverse la section, ou lorsqu'elle se situe au droit d'un appui. C'est le sondage qui tranche, pas l'aspect général de la pièce." },
+  { q: 'Pourquoi les abouts de poutre sont-ils critiques ?', a: "Parce qu'ils cumulent trois facteurs défavorables. Ils sont engagés dans une maçonnerie qui peut conserver de l'humidité. Ils sont invisibles, donc jamais contrôlés. Et c'est précisément là que la poutre transmet sa charge au mur. Une dégradation de vingt centimètres à l'about a plus de conséquences qu'une dégradation d'un mètre en travée." },
+  { q: 'Peut-on renforcer une poutre plutôt que la remplacer ?', a: "Oui, et c'est souvent préférable sur un bâtiment ancien, où le remplacement à l'identique est coûteux et où la dépose peut déstabiliser l'ouvrage. Les techniques existent : moisage par flasques latérales, prothèse d'about, renfort métallique. Elles relèvent d'un charpentier, et nous travaillons en coordination avec lui." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Insectes dans les poutres : évaluer avant de conclure"
+  description="Insectes dans les poutres apparentes ou de plancher : quelles espèces selon l’essence, pourquoi les abouts engagés dans les murs sont critiques, et comment évaluer la section saine restante."
+  path="/insectes-poutres" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Par ouvrage"
+    title="Insectes dans les poutres : ce qui compte, c’est ce qui reste"
+    lead="Sur une poutre, l’apparence trompe dans les deux sens. Une pièce criblée de trous anciens peut être parfaitement saine mécaniquement ; une pièce presque vierge peut être creuse à son about."
+    answer="Sur une poutre, la question n’est pas l’aspect mais la <strong>section saine restante</strong>. Une poutre de forte section dont seule la périphérie est touchée se bûche, se traite et se conserve. Les <strong>abouts engagés dans la maçonnerie</strong> sont les zones critiques : invisibles, potentiellement humides, et c’est là que la charge est transmise au mur."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>La règle de la forte section</h2>
+            <p class="lead">
+              Une poutre n’est pas un chevron. Cette évidence a des conséquences pratiques qui
+              changent complètement la conduite à tenir.
+            </p>
+            <p>
+              Les insectes xylophages consomment prioritairement l’aubier, c’est-à-dire la
+              périphérie de la pièce. Sur un chevron de 63 × 75 mm, l’aubier peut représenter une
+              fraction importante de la section : sa disparition compromet directement la
+              résistance.
+            </p>
+            <p>
+              Sur une poutre de 220 × 250 mm, la même épaisseur d’aubier consommé représente une
+              proportion bien plus faible du total. Le cœur, en duramen, n’intéresse pas la plupart
+              des espèces. C’est pourquoi <strong>une poutre très marquée en surface peut conserver
+              une capacité portante largement suffisante</strong>.
+            </p>
+            <p>
+              Cette réalité est mal connue, et elle explique un certain nombre de remplacements
+              coûteux qui n’étaient pas nécessaires. Elle explique aussi pourquoi un avis donné à
+              distance, sur photo, n’a ici aucune valeur : seul le sondage renseigne sur la
+              profondeur réelle de la dégradation.
+            </p>
+          </div>
+
+          <div>
+            <h2>Les abouts : le vrai point de vigilance</h2>
+            <p>
+              Dans le bâti ancien, les poutres sont engagées dans les murs. Leur extrémité —
+              l’about — repose dans une réservation de la maçonnerie, parfois sans aucune
+              ventilation, parfois directement au contact de la pierre ou de la brique.
+            </p>
+            <p>
+              Trois facteurs s’y cumulent. L’humidité, que le mur peut conserver longtemps,
+              particulièrement en façade nord. L’invisibilité : personne ne contrôle un about
+              encastré. Et la fonction : c’est précisément par l’about que la poutre transmet sa
+              charge.
+            </p>
+            <p>
+              Une dégradation de vingt centimètres à cet endroit a donc plus de conséquences qu’une
+              dégradation d’un mètre en partie courante. C’est là que nous sondons en premier, en
+              partant du principe que ce qui ne se voit pas mérite plus d’attention que ce qui se
+              voit.
+            </p>
+            <div class="note note--copper" style="margin-top:1.25rem">
+              <span class="note__title">Le geste qui renseigne</span>
+              Frappez la poutre au maillet en progressant depuis le milieu vers l’appui. Le son
+              change nettement lorsqu’on atteint une zone creuse. C’est un test que vous pouvez
+              faire vous-même, et il localise souvent le problème mieux qu’une inspection visuelle
+              prolongée.
+            </div>
+          </div>
+
+          <div>
+            <h2>Conserver, renforcer ou remplacer</h2>
+            <ul class="list-dot">
+              <li><strong>Conserver</strong> : la section saine suffit. On bûche les parties dégradées, on traite, et la poutre reste en place. C’est le cas le plus fréquent.</li>
+              <li><strong>Renforcer</strong> : la section est insuffisante localement. Moisage par flasques latérales, prothèse d’about, renfort métallique — des techniques qui évitent la dépose et conviennent bien au bâti ancien.</li>
+              <li><strong>Remplacer</strong> : la dégradation traverse la section sur une longueur significative. La dépose d’une poutre engagée dans deux murs est une opération de charpenterie à part entière, qui suppose un étaiement.</li>
+            </ul>
+            <p>
+              Nous distinguons systématiquement ces trois cas, pièce par pièce, dans le rapport.
+              Cette distinction est ce qui permet au propriétaire d’arbitrer un budget, plutôt que
+              de recevoir un devis global impossible à discuter.
+            </p>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--sage">
+            <h3 style="font-size:1.08rem">Selon l’essence de la poutre</h3>
+            <ul class="list-dot small" style="margin-top:.7rem">
+              <li><strong>Résineux</strong> → <a href="/capricorne-des-maisons">capricorne des maisons</a></li>
+              <li><strong>Chêne humide</strong> → <a href="/vrillette">grosse vrillette</a> et champignons</li>
+              <li><strong>Chêne avec aubier</strong> → <a href="/vrillette">petite vrillette</a></li>
+              <li><strong>Plancher bas près du sol</strong> → <a href="/termites">termites</a> possibles</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Poutres apparentes de valeur</h3>
+            <p style="margin-top:.5rem">
+              Sur un bois vu, le traitement doit être compatible avec la finition existante. Essai
+              préalable sur zone peu visible, produit incolore, perçages discrets et rebouchés.
+              <a href="/traitement-bois">Traitement du bois</a>.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment protéger des poutres anciennes ?">
+          <p>
+            En veillant d’abord à ce qu’elles restent sèches. Les infiltrations et les contacts
+            prolongés avec une maçonnerie humide créent les conditions d’une attaque bien plus
+            sûrement que l’âge du bois.
+          </p>
+          <p>
+            Un traitement préventif incolore est possible sur des poutres apparentes, avec essai
+            préalable. Il ne dispense pas d’un contrôle périodique des abouts, qui sont les points
+            les plus exposés et les moins visibles.
+          </p>
+        </Answer>
+        <Answer question="Une poutre qui sonne creux est-elle dangereuse ?">
+          <p>
+            Pas nécessairement : une poutre peut sonner creux en raison d’une fente interne, d’une
+            gerce de séchage ou d’un défaut de croissance, sans qu’aucun insecte soit en cause.
+          </p>
+          <p>
+            Ce qui compte est la suite du test : si un poinçon s’enfonce de plusieurs millimètres,
+            si le bois s’effrite ou si l’on débouche dans une galerie remplie de vermoulure, alors
+            il y a bien une perte de matière à quantifier.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur les poutres" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Traitement du bois', href: '/traitement-bois', text: 'Méthodes selon l’ouvrage, y compris sur les bois apparents.' },
+    { label: 'Charpente ancienne', href: '/traitement-charpente-ancienne', text: 'Bâti ancien : prudence sur le diagnostic comme sur la méthode.' },
+    { label: 'Vermoulure dans le bois', href: '/vermoulure-bois', text: 'Identifier l’espèce à partir de la texture de la poudre.' },
+  ]} />
+  <CtaBand />
+</Base>

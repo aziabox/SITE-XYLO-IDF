@@ -1,0 +1,101 @@
+/* =========================================================================
+   XYLO PATRIMOINE — Jetons de design
+   Identite : vert sauge profond + bois + pierre + accent cuivre.
+   ========================================================================= */
+:root {
+  /* --- Vert sauge (couleur principale) --- */
+  --sauge-50:  #F3F7F4;
+  --sauge-100: #E3EDE6;
+  --sauge-200: #C7D9CD;
+  --sauge-300: #A4BFAD;
+  --sauge-400: #7C9E89;
+  --sauge-500: #5D7E6A; /* vert sauge profond */
+  --sauge-600: #4A6957;
+  --sauge-700: #3A5344; /* vert foret discret */
+  --sauge-800: #2C3E33;
+  --sauge-900: #1E2B24;
+
+  /* --- Bois naturel --- */
+  --bois-100: #EFE4D3;
+  --bois-200: #E0CFB6;
+  --bois-300: #C8AE8B;
+  --bois-400: #AD8F69;
+  --bois-500: #8A6F52;
+  --bois-600: #6E5740;
+  --bois-700: #574332;
+  --bois-800: #3E3024;
+
+  /* --- Pierre / ivoire --- */
+  --ivoire:      #FCFAF5;
+  --ivoire-warm: #F8F4EA;
+  --pierre-100:  #F1ECE1;
+  --pierre-200:  #E5DDCC;
+  --pierre-300:  #D3C8B2;
+
+  /* --- Gris chauds --- */
+  --gris-100: #EDEBE6;
+  --gris-200: #DCD8D0;
+  --gris-300: #BFB9AD;
+  --gris-500: #837C70;
+  --gris-600: #635D53;
+  --gris-700: #4A453D;
+  --gris-900: #262320;
+
+  /* --- Accent cuivre / terre cuite (usage tres parcimonieux) --- */
+  --cuivre-100: #F4E6DC;
+  --cuivre-300: #DBA684;
+  --cuivre-500: #A9663F;
+  --cuivre-600: #8F5333;
+
+  /* --- Roles semantiques --- */
+  --c-bg:            var(--ivoire);
+  --c-bg-alt:        var(--ivoire-warm);
+  --c-bg-sage:       var(--sauge-50);
+  --c-bg-dark:       var(--sauge-900);
+  --c-surface:       #FFFFFF;
+  --c-text:          var(--gris-900);
+  --c-text-soft:     var(--gris-600);
+  --c-text-muted:    var(--gris-500);
+  --c-text-invert:   #F6F2E9;
+  --c-brand:         var(--sauge-600);
+  --c-brand-strong:  var(--sauge-800);
+  --c-accent:        var(--cuivre-500);
+  --c-border:        #E2DCCF;
+  --c-border-strong: var(--pierre-300);
+  --c-rule:          rgba(93, 126, 106, 0.22);
+
+  /* --- Typographie --- */
+  --f-title: 'Fraunces Variable', 'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --f-body:  'DM Sans Variable', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --t-xs:   0.78rem;
+  --t-sm:   0.875rem;
+  --t-base: clamp(1rem, 0.97rem + 0.14vw, 1.0625rem);
+  --t-lg:   clamp(1.09rem, 1.04rem + 0.24vw, 1.22rem);
+  --t-xl:   clamp(1.25rem, 1.17rem + 0.38vw, 1.5rem);
+  --t-h4:   clamp(1.18rem, 1.1rem + 0.4vw, 1.4rem);
+  --t-h3:   clamp(1.38rem, 1.24rem + 0.66vw, 1.78rem);
+  --t-h2:   clamp(1.72rem, 1.45rem + 1.25vw, 2.55rem);
+  --t-h1:   clamp(2.05rem, 1.6rem + 2.1vw, 3.5rem);
+  --t-hero: clamp(2.25rem, 1.6rem + 2.9vw, 4.1rem);
+
+  /* --- Rythme --- */
+  --sp-1: 0.25rem; --sp-2: 0.5rem;  --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-5: 1.5rem;  --sp-6: 2rem;    --sp-7: 2.75rem; --sp-8: 3.5rem;
+  --sp-9: 4.5rem;  --sp-10: 6rem;
+  --section-y: clamp(3.25rem, 2rem + 5vw, 6.5rem);
+  --wrap: 1180px;
+  --wrap-narrow: 760px;
+  --wrap-wide: 1400px;
+
+  /* --- Formes --- */
+  --r-xs: 3px; --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px; --r-pill: 999px;
+
+  /* --- Ombres (douces, jamais dures) --- */
+  --sh-xs: 0 1px 2px rgba(45, 40, 32, 0.05);
+  --sh-sm: 0 2px 8px rgba(45, 40, 32, 0.06);
+  --sh-md: 0 6px 24px -8px rgba(45, 40, 32, 0.14);
+  --sh-lg: 0 18px 48px -18px rgba(30, 43, 36, 0.26);
+
+  --ring: 0 0 0 3px rgba(93, 126, 106, 0.28);
+}

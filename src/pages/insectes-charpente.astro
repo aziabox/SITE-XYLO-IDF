@@ -1,0 +1,156 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Charpente from '~/components/illus/Charpente.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Vous constatez', href: '/bois-attaque-insectes' },
+  { label: 'Insectes dans la charpente' },
+];
+const faq = [
+  { q: 'Quels insectes attaquent une charpente ?', a: "Dans une charpente en résineux — le cas le plus fréquent en pavillonnaire — le capricorne des maisons domine largement. Dans une charpente en chêne, on rencontre plutôt la grosse vrillette lorsque le bois a été humidifié, et la petite vrillette dans les zones d'aubier. Les termites atteignent rarement une charpente en premier, puisqu'ils remontent du sol, mais ils peuvent y parvenir si l'infestation dure." },
+  { q: 'Une charpente récente peut-elle être attaquée ?', a: "Oui. Les fermettes industrialisées sont traitées en usine, mais cette protection est calibrée pour une durée limitée et se concentre en périphérie de la pièce. Les coupes de longueur et les entailles réalisées sur chantier mettent à nu du bois non traité. Nous intervenons régulièrement sur des charpentes de vingt à quarante ans présentant des sorties de capricorne." },
+  { q: 'Peut-on inspecter une charpente sous isolation ?', a: "Partiellement seulement, et c'est une vraie limite. Un isolant posé en rampant masque les chevrons sur une grande partie de leur longueur, ainsi que les pieds et les bois de rive — précisément les pièces les plus exposées. Nous inspectons ce qui est accessible, pratiquons si besoin des ouvertures ponctuelles, et indiquons explicitement dans le rapport ce qui n'a pas pu être vu." },
+  { q: 'Faut-il s’inquiéter d’un bruit dans la charpente ?', a: "Un grignotement irrégulier entendu par temps chaud, dans le silence, évoque une larve de capricorne en activité. Un tic-tac régulier au printemps évoque plutôt la grosse vrillette. Dans les deux cas, cela indique une activité en cours et justifie un examen. Beaucoup d'attaques actives sont toutefois totalement silencieuses : l'absence de bruit ne prouve rien." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Insectes dans la charpente : espèces, zones et conduite à tenir"
+  description="Quels insectes attaquent une charpente, où ils se développent en priorité, comment évaluer le risque structurel et à quel moment une inspection s’impose. Île-de-France."
+  path="/insectes-charpente" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Par ouvrage"
+    title="Insectes dans la charpente : l’ouvrage où l’erreur coûte le plus cher"
+    lead="Une charpente ne prévient pas. Elle porte pendant des années une attaque invisible, puis un jour une pièce cède sous l’appui. C’est pour cette raison que l’inspection y compte plus que partout ailleurs."
+    answer="Dans une charpente en <strong>résineux</strong>, le <a href='/capricorne-des-maisons'>capricorne des maisons</a> est l’espèce dominante. Dans une charpente en <strong>chêne</strong>, la <a href='/vrillette'>grosse vrillette</a> si le bois a été humidifié, la petite vrillette dans l’aubier. Les zones à examiner en priorité sont les <strong>abouts d’entrait</strong> sur maçonnerie, les <strong>pieds de chevron</strong> en rive et les <strong>assemblages</strong>."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Trois familles de charpentes, trois profils de risque</h2>
+            <h3>La charpente traditionnelle en résineux</h3>
+            <p>
+              C’est le cas le plus répandu dans le pavillonnaire francilien, des lotissements de
+              l’entre-deux-guerres jusqu’aux constructions des années 1960. Bois de sapin, sections
+              modestes, très souvent non traités à l’origine, combles peu ventilés. C’est le terrain
+              de prédilection du capricorne des maisons, et celui où la perte de section devient le
+              plus vite problématique.
+            </p>
+            <h3>La charpente traditionnelle en chêne</h3>
+            <p>
+              Fermes briardes, maisons de village, centres anciens, immeubles parisiens. Le chêne
+              ancien, dense et pauvre en aubier, résiste bien : le capricorne des maisons ne
+              l’attaque pas, et le lyctus l’a depuis longtemps délaissé faute d’amidon. Le risque y
+              vient de l’eau : un about d’entrait humidifié par un mur, une panne mouillée par une
+              infiltration deviennent favorables à la grosse vrillette et aux champignons.
+            </p>
+            <h3>La charpente industrialisée</h3>
+            <p>
+              Les fermettes, posées depuis les années 1970. Bois minces assemblés par connecteurs
+              métalliques, traités en usine. Deux points de vigilance : les coupes réalisées sur
+              chantier, qui exposent du bois non protégé, et la faible marge de section — une
+              dégradation qui serait anodine sur une panne massive ne l’est pas sur un membre de
+              fermette.
+            </p>
+          </div>
+
+          <figure class="fig">
+            <Charpente />
+            <figcaption>
+              Les zones que l’inspection examine en priorité, parce qu’elles cumulent concentration
+              des efforts et exposition à l’humidité.
+            </figcaption>
+          </figure>
+
+          <div>
+            <h2>Ce que nous regardons, et dans quel ordre</h2>
+            <ol class="list-num">
+              <li><strong>Les abouts d’entrait et les sablières</strong>, au contact de la maçonnerie, qui peut conserver de l’humidité.</li>
+              <li><strong>Les pieds de chevron et les bois de rive</strong>, au voisinage des chéneaux et des entrées d’eau.</li>
+              <li><strong>Les assemblages et les entailles</strong>, où la section est réduite et les fibres ouvertes.</li>
+              <li><strong>Les abords des nœuds</strong>, où les femelles de capricorne pondent volontiers.</li>
+              <li><strong>Le sol du comble</strong>, où la sciure s’accumule et signale la pièce concernée.</li>
+              <li><strong>Les faces cachées</strong>, à l’aide d’un miroir ou d’une lampe orientée : une pièce peut paraître vierge du seul angle accessible.</li>
+            </ol>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">Quand inspecter sans attendre</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              <li>Après des travaux de couverture ou une infiltration</li>
+              <li>Avant d’isoler ou d’aménager un comble</li>
+              <li>À l’achat d’un bien ancien</li>
+              <li>Dès l’apparition de sciure ou de trous nouveaux</li>
+              <li>En cas d’affaissement ou de déformation visible</li>
+            </ul>
+          </div>
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.05rem">Le bon réflexe avant isolation</h3>
+            <p style="margin-top:.5rem">
+              Une charpente nue se contrôle et se traite intégralement. Une fois les rampants
+              isolés, une partie du bois devient inaccessible pour vingt ans.
+              <a href="/prevention-insectes-xylophages">Prévention et surveillance</a>.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment savoir si une charpente est attaquée ?">
+          <p>
+            En observant à la lampe rasante, qui révèle les reliefs de surface invisibles en
+            éclairage direct : trous, ondulations, changements de teinte. Puis en sondant : le
+            maillet repère les zones creuses, le poinçon mesure la profondeur de bois dégradé.
+          </p>
+          <p>
+            Le sol du comble est un excellent révélateur : la sciure s’y accumule à l’aplomb de la
+            pièce concernée.
+          </p>
+        </Answer>
+        <Answer question="Faut-il traiter toute la charpente ?">
+          <p>
+            Tous les bois de même nature dans le même volume, oui : l’insecte ne se limite pas aux
+            pièces où les trous sont visibles, et une pièce non traitée à côté d’une pièce traitée
+            constitue un réservoir.
+          </p>
+          <p>
+            Cela ne veut pas dire traiter partout de la même manière. Les fortes sections demandent
+            une injection, les bois minces une application soignée, et certaines zones peuvent être
+            écartées après examen. <a href="/traitement-charpente">Le traitement en détail</a>.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur les insectes de charpente" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Accessibilité, protocole, et ce qui relève de la charpenterie.' },
+    { label: 'Trous dans la charpente', href: '/trous-dans-charpente', text: 'Lire la forme et le diamètre des trous de sortie.' },
+    { label: 'Capricorne des maisons', href: '/capricorne-des-maisons', text: 'L’espèce la plus préoccupante pour les charpentes en résineux.' },
+  ]} />
+  <CtaBand primary={{ label: 'Faire examiner ma charpente', href: '/demander-un-diagnostic' }} />
+</Base>

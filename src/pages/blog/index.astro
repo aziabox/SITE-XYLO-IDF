@@ -1,0 +1,101 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '~/content.config';
+import { frDate } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Blog' }];
+const posts = (await getCollection('blog')).sort((a, b) => b.data.published.localeCompare(a.data.published));
+const byCat = Object.values(CATEGORIES).map((c) => ({
+  ...c,
+  posts: posts.filter((p) => p.data.category === c.slug),
+}));
+const [une, ...reste] = posts;
+const href = (p: (typeof posts)[number]) => `/blog/${p.data.category}/${p.id}`;
+---
+<Base
+  title="Blog : comprendre les insectes xylophages et le traitement du bois"
+  description="Articles sur les insectes xylophages : reconnaître une attaque, distinguer les espèces, comprendre le traitement d’une charpente et prévenir une nouvelle infestation."
+  path="/blog" crumbs={crumbs}
+>
+  <PageHero
+    eyebrow="Ressources"
+    title="Comprendre les insectes du bois"
+    lead="Des articles écrits à partir de ce que l’on observe réellement sur le terrain. Sans dramatisation, sans raccourci, et en disant ce qu’on ne peut pas conclure autant que ce qu’on peut affirmer."
+    crumbs={crumbs}
+    cta={false}
+  />
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <nav class="cats" aria-label="Catégories du blog">
+        {byCat.filter((c) => c.posts.length > 0).map((c) => (
+          <a href={`/blog/${c.slug}`} class="cats__item">
+            <span class="cats__name">{c.name}</span>
+            <span class="cats__n">{c.posts.length}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+
+  {une && (
+    <section class="section section--tight">
+      <div class="wrap">
+        <a href={href(une)} class="une">
+          <div class="une__txt">
+            <p class="eyebrow">{CATEGORIES[une.data.category].name} · {frDate(une.data.published)}</p>
+            <h2>{une.data.title}</h2>
+            <p class="lead">{une.data.description}</p>
+            <p class="une__answer">{une.data.answer}</p>
+            <span class="link-arrow">Lire l’article</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid grid-3">
+        {reste.map((p) => (
+          <a href={href(p)} class="card card--link">
+            <p class="sci">{CATEGORIES[p.data.category].name} · {frDate(p.data.published)}</p>
+            <h3>{p.data.title}</h3>
+            <p>{p.data.description}</p>
+            <span class="card__foot link-arrow">Lire</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .cats { display: flex; flex-wrap: wrap; gap: .55rem; }
+  .cats__item {
+    display: inline-flex; align-items: center; gap: .5rem; text-decoration: none;
+    padding: .5rem .95rem; border: 1px solid var(--c-border); border-radius: var(--r-pill);
+    background: var(--c-surface); font-size: .84rem; font-weight: 600; color: var(--sauge-800);
+  }
+  .cats__item:hover { border-color: var(--sauge-400); background: var(--sauge-50); }
+  .cats__n { font-size: .7rem; color: var(--cuivre-600); background: var(--cuivre-100); padding: .05rem .4rem; border-radius: var(--r-pill); }
+  .une {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--sauge-50); border: 1px solid var(--sauge-200);
+    border-radius: var(--r-xl); padding: clamp(1.75rem, 1rem + 3vw, 3.25rem);
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .une:hover { border-color: var(--sauge-400); box-shadow: var(--sh-md); color: inherit; }
+  .une__txt { max-width: 68ch; }
+  .une__txt > * + * { margin-top: .9rem; }
+  .une h2 { font-size: var(--t-h2); }
+  .une__answer {
+    font-size: var(--t-sm); color: var(--c-text-soft); border-left: 3px solid var(--cuivre-500);
+    padding-left: 1rem; line-height: 1.65;
+  }
+</style>

@@ -1,0 +1,170 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Traitements', href: '/traitement-insectes-xylophages' },
+  { label: 'Traitement des termites' },
+];
+const etapes = [
+  { title: 'Reconnaissance complète', text: 'Repérage des cordonnets de terre, sondage des bois bas, examen des caves, vides sanitaires et abords. L’objectif n’est pas seulement de confirmer la présence, mais de comprendre par où la colonie circule.' },
+  { title: 'Suppression des points d’entrée', text: 'Élimination des contacts bois-sol évitables, retrait des réserves de cellulose (bois stocké, cartons, souches), reprise des désordres d’humidité qui facilitent la progression.' },
+  { title: 'Traitement de sol périmétrique', text: 'Création d’une barrière continue entre le sol et le bâtiment, par injection dans le terrain et dans les maçonneries en contact. La continuité est déterminante : une interruption, et les ouvriers passent par là.' },
+  { title: 'Traitement des bois atteints', text: 'Bûchage des parties consommées, puis injection et application sur les pièces conservées. Les pièces dont la section saine est insuffisante sont renforcées ou remplacées.' },
+  { title: 'Ou surveillance par appâts', text: 'Lorsque la barrière chimique n’est pas réalisable — sol non accessible, contraintes du site — un dispositif de stations de surveillance et d’élimination est mis en place autour du bâtiment, puis relevé périodiquement.' },
+  { title: 'Suivi dans la durée', text: 'Des contrôles programmés vérifient l’absence de reprise. C’est une composante du traitement, pas une option commerciale : une colonie peut se reconstituer par un cheminement différent.' },
+];
+const faq = [
+  { q: 'Barrière chimique ou appâts : que choisir ?', a: "Cela dépend d'abord de la configuration du site. La barrière de sol offre une protection immédiate et continue du bâtiment, mais elle suppose de pouvoir intervenir sur tout le périmètre, ce qui n'est pas toujours possible en milieu urbain dense ou sur un bâtiment mitoyen. Les systèmes d'appâts visent la colonie elle-même et conviennent mieux lorsque le sol n'est pas accessible, mais ils demandent des relevés réguliers et agissent plus progressivement. Les deux approches sont parfois combinées." },
+  { q: 'Faut-il traiter aussi le terrain autour de la maison ?', a: "Très souvent, oui. Une colonie de termites souterrains est installée dans le sol, pas dans le bâtiment. Traiter uniquement les bois attaqués revient à retirer la nourriture visible sans toucher à ce qui la consomme. La suppression des souches, des bois stockés à même la terre et des vieux poteaux fait partie intégrante de l'intervention." },
+  { q: 'Mes voisins doivent-ils être informés ?', a: "Une colonie ne s'arrête pas aux limites de propriété, et un traitement efficace suppose souvent une coordination. Dans les zones délimitées par arrêté préfectoral, la déclaration en mairie de la présence de termites participe précisément de cette logique collective. Nous vous indiquons ce qui relève de vos obligations et ce qui relève de la simple bonne pratique de voisinage." },
+  { q: 'Combien de temps dure l’intervention ?', a: "La reconnaissance occupe généralement une demi-journée à une journée. La mise en œuvre d'une barrière périmétrique s'étale sur un à plusieurs jours selon le linéaire et la nature des sols. La pose d'un dispositif d'appâts est rapide, mais elle engage une série de relevés étalés sur plusieurs mois. Le calendrier complet vous est présenté avec le devis." },
+  { q: 'Peut-on vendre un bien où des termites ont été traités ?', a: "Oui. Un traitement réalisé et documenté est un élément favorable dans une transaction, à condition d'être transparent. Dans les zones délimitées par arrêté préfectoral, un état relatif à la présence de termites doit de toute façon être joint au dossier de diagnostic technique. Le rapport d'intervention et les justificatifs de suivi ont toute leur place dans le dossier remis à l'acquéreur." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Traitement des termites', description: "Barrière de sol périmétrique, traitement des bois atteints, systèmes de surveillance par appâts et suivi dans le temps, en Île-de-France.", path: '/traitement-termites', serviceType: 'Traitement des termites' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement des termites : barrière de sol, appâts et suivi"
+  description="Comment traite-t-on une infestation de termites : reconnaissance des cheminements, barrière de sol périmétrique, traitement des bois, systèmes d’appâts et surveillance. Île-de-France."
+  path="/traitement-termites" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Traitement"
+    title="Traitement des termites : atteindre la colonie, pas seulement le bois"
+    lead="C’est la seule situation où traiter les pièces attaquées ne suffit jamais. Une colonie de termites souterrains vit dans le sol ; tant qu’elle n’est pas atteinte, elle reviendra par un autre chemin."
+    answer="Un traitement anti-termites repose sur deux leviers : une <strong>barrière de sol périmétrique</strong> continue entre la colonie et le bâtiment, ou un <strong>système de surveillance et d’élimination par appâts</strong> lorsque le sol n’est pas accessible. Le traitement des bois atteints s’y ajoute, mais ne s’y substitue pas. Un <strong>suivi dans la durée</strong> fait partie du dispositif."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Pourquoi la logique change complètement</h2>
+            <p class="lead">
+              Face à un capricorne, on traite une pièce de bois. Face à des termites, on traite une
+              relation entre un sol et un bâtiment.
+            </p>
+            <p>
+              Les ouvriers ne supportent ni la lumière ni l’air sec. Ils circulent dans le sol, dans
+              le bois, ou dans des tunnels de terre qu’ils construisent pour franchir un obstacle.
+              Le foyer se trouve dans le terrain, parfois à plusieurs mètres du premier bois
+              attaqué, parfois sur une parcelle voisine.
+            </p>
+            <p>
+              Cela signifie qu’un traitement limité aux bois visibles produit un résultat trompeur :
+              l’attaque semble arrêtée, puis elle réapparaît ailleurs, dix-huit mois plus tard, par
+              un cheminement qui n’avait pas été identifié. La reconnaissance initiale — comprendre
+              par où ils passent — vaut autant que l’application des produits.
+            </p>
+          </div>
+          <div>
+            <h2>Les deux stratégies possibles</h2>
+            <h3>La barrière de sol périmétrique</h3>
+            <p>
+              Elle consiste à créer, par injection dans le terrain et dans les maçonneries en
+              contact, une zone continue que les ouvriers ne peuvent pas franchir. C’est la
+              solution la plus directe, et sa protection est immédiate. Sa faiblesse tient à sa
+              continuité : une interruption — un passage de réseau, une dalle non traitée, une
+              mitoyenneté inaccessible — devient un point de passage.
+            </p>
+            <h3>Les systèmes de surveillance et d’élimination</h3>
+            <p>
+              Des stations sont installées dans le sol autour du bâtiment. Les termites les
+              découvrent au cours de leur prospection, et un appât agit ensuite au niveau de la
+              colonie. L’effet est moins immédiat, mais il vise l’origine du problème plutôt que
+              son périmètre. Cette approche s’impose quand le sol n’est pas accessible, et elle
+              suppose des relevés réguliers pendant plusieurs mois.
+            </p>
+            <p>
+              Le choix se fait sur site, après reconnaissance. Nous expliquons les deux options,
+              leurs limites respectives et ce qu’elles impliquent en termes de suivi, avant de
+              recommander l’une ou l’autre.
+            </p>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.1rem">Avant notre passage</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              <li>Ne détruisez pas les cordonnets de terre : ils indiquent les cheminements.</li>
+              <li>Ne déplacez pas les bois stockés au sol avant que nous les ayons vus.</li>
+              <li>Conservez, si possible, quelques insectes ailés observés lors d’un essaimage.</li>
+              <li>Rassemblez les documents de vente si un état termites a déjà été établi.</li>
+            </ul>
+          </div>
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.05rem">Vérification réglementaire</h3>
+            <p style="margin-top:.5rem">
+              Le zonage termites relève d’arrêtés préfectoraux qui évoluent. Il se vérifie auprès de
+              la mairie ou de la préfecture. Nous ne publions pas de liste de communes et ne nous
+              substituons pas à cette vérification. <a href="/termites#reglementation">En savoir plus</a>.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <Etapes eyebrow="Protocole" title="Comment se déroule l’intervention"
+        lead="L’ordre compte : supprimer les facteurs favorables avant de poser une barrière évite d’avoir à recommencer."
+        items={etapes} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Ce qu’il faut savoir avant de s’engager</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Un traitement termites est-il définitif ?">
+          <p>
+            Non. Une colonie est un organisme durable installé dans le sol, et son territoire peut
+            dépasser la parcelle traitée. Un traitement bien conduit interrompt l’attaque et protège
+            le bâtiment, mais il s’inscrit dans une logique de surveillance.
+          </p>
+          <p>
+            Toute promesse d’éradication définitive doit être regardée avec méfiance : elle ne
+            correspond pas à ce que l’on peut techniquement garantir.
+          </p>
+        </Answer>
+        <Answer question="Que se passe-t-il si les termites reviennent ?">
+          <p>
+            C’est précisément l’objet du suivi. Les contrôles programmés permettent de détecter une
+            reprise avant qu’elle ne redevienne significative, et d’intervenir de façon ciblée
+            plutôt que de reprendre l’ensemble du dispositif.
+          </p>
+          <p>
+            Les modalités et la durée de ce suivi figurent au devis. Nous préférons les écrire
+            plutôt que de les évoquer oralement.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le traitement des termites" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Fiche espèce : termites', href: '/termites', text: 'Biologie de la colonie, signes, réglementation et confusions fréquentes.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que comporte une visite et ce que contient le rapport remis.' },
+    { label: 'Prévention', href: '/prevention-insectes-xylophages', text: 'Supprimer les contacts bois-sol et les réserves de cellulose aux abords.' },
+  ]} />
+  <CtaBand title="Vous suspectez des termites ?" text="La première étape est une reconnaissance sur place. Elle détermine s’il s’agit bien de termites, et surtout par où ils accèdent au bâtiment." />
+</Base>

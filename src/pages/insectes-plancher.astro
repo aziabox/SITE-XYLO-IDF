@@ -1,0 +1,166 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Vous constatez', href: '/bois-attaque-insectes' },
+  { label: 'Insectes dans le plancher' },
+];
+const faq = [
+  { q: 'Un parquet qui grince est-il attaqué ?', a: "Le plus souvent non. Un grincement traduit un jeu mécanique entre lames, ou un léger dévers des lambourdes. Un parquet réellement attaqué présente plutôt un fléchissement localisé, des trous de sortie sur le chant des lames, ou une lame qui cède sous l'appui. Le grincement seul n'est pas un signe d'infestation." },
+  { q: 'Peut-on diagnostiquer sans démonter ?', a: "Dans une large mesure, oui. L'observation depuis le vide sanitaire ou la cave, l'examen des chants de lames, le sondage au poinçon et quelques points de contrôle bien choisis donnent déjà une image fiable. La dépose d'une lame n'est envisagée que si ces éléments laissent un doute sérieux, et elle se limite alors à une ou deux lames, reposées ensuite." },
+  { q: 'Qui prend en charge un plancher en copropriété ?', a: "Un plancher séparant deux lots relève généralement des parties communes, sous réserve de ce que prévoit le règlement de copropriété. La décision et le financement passent alors par l'assemblée générale. Un parquet posé au-dessus, purement privatif, relève du propriétaire. C'est l'une des raisons pour lesquelles notre rapport qualifie précisément chaque ouvrage concerné." },
+  { q: 'Des trous dans un parquet neuf, est-ce possible ?', a: "Oui, et c'est le cas typique du lyctus. L'attaque était déjà présente dans le bois à la livraison, sous forme d'œufs ou de jeunes larves, et le développement s'est poursuivi après la pose. La vermoulure est alors d'une finesse de farine. Il faut examiner l'ensemble du lot, pas seulement les lames où des trous apparaissent." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Insectes dans le plancher : solives, lambourdes et parquet"
+  description="Insectes dans un plancher : pourquoi le désordre se manifeste souvent par un affaissement sans trou visible, comment distinguer parquet et lambourde, et quelles espèces selon la configuration."
+  path="/insectes-plancher" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Par ouvrage"
+    title="Insectes dans le plancher : le bois qu’on ne voit jamais"
+    lead="Dans un plancher, le bois porteur est pris entre un plafond et un revêtement. Il n’est ni visible, ni ventilé, ni contrôlé. C’est l’ouvrage où une attaque progresse le plus longtemps sans que rien ne le signale."
+    answer="Un plancher attaqué se manifeste rarement par des trous visibles : il se manifeste par un <strong>fléchissement localisé</strong>, une lame qui cède, un bruit qui change. Le bois en cause est souvent la <strong>lambourde</strong> qui porte le parquet, et non le parquet lui-même. L’examen passe par le vide sanitaire, la cave, ou une ouverture ponctuelle."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Trois niveaux de bois, trois situations</h2>
+            <p class="lead">
+              Ce qu’on appelle « le plancher » superpose en réalité des ouvrages différents, qui ne
+              subissent pas les mêmes contraintes ni les mêmes attaques.
+            </p>
+            <h3>Les solives</h3>
+            <p>
+              Elles portent. Dans un immeuble ancien, elles sont en chêne ou en sapin, encastrées
+              dans les murs par leurs abouts, et invisibles depuis le logement. Une attaque s’y
+              développe dans un volume clos, non ventilé, sans que le moindre signe apparaisse
+              avant que la déformation devienne perceptible.
+            </p>
+            <h3>Les lambourdes</h3>
+            <p>
+              Elles reçoivent le parquet et reposent souvent sur une forme de sable, un remblai ou
+              une dalle. C’est le point faible classique : ce support peut rester humide pendant des
+              décennies, notamment après une fuite ancienne ou dans un rez-de-chaussée sur terre-plein.
+            </p>
+            <p>
+              Conséquence fréquente : <strong>c’est la lambourde qui est attaquée, pas le
+              parquet</strong>. On observe alors un affaissement localisé du sol, sans aucun trou
+              visible en surface. C’est une configuration que nous rencontrons régulièrement dans
+              les immeubles parisiens et des Hauts-de-Seine.
+            </p>
+            <h3>Le parquet</h3>
+            <p>
+              Ouvrage de finition, souvent en chêne. Il peut être attaqué par la petite vrillette,
+              ou par le lyctus s’il est récent. Les trous apparaissent alors sur la face ou sur le
+              chant des lames, et la vermoulure s’accumule dans les joints.
+            </p>
+          </div>
+
+          <div>
+            <h2>Comment on examine un plancher</h2>
+            <ol class="list-num">
+              <li><strong>Par le dessous quand c’est possible</strong> : vide sanitaire, cave, local technique. C’est la voie la plus riche en information, car les solives y sont directement visibles.</li>
+              <li><strong>Par le comportement du sol</strong> : marcher lentement en cherchant les points de souplesse, repérer les zones où le pas sonne différemment.</li>
+              <li><strong>Par les chants de lames</strong> : les trous de sortie y sont souvent plus visibles que sur la face, surtout sur un parquet ciré.</li>
+              <li><strong>Par les plinthes</strong> : leur pied révèle parfois de la vermoulure accumulée, et elles se déposent facilement.</li>
+              <li><strong>Par une dépose ponctuelle</strong> : une seule lame, choisie à l’endroit le plus significatif, permet d’atteindre la lambourde et de trancher.</li>
+            </ol>
+          </div>
+
+          <div>
+            <h2>Le rôle décisif de l’humidité</h2>
+            <p>
+              Un plancher bas au-dessus d’une cave mal ventilée, d’un vide sanitaire obstrué ou d’un
+              terre-plein reste humide en sous-face. Cette humidité favorise les champignons de
+              pourriture, puis la grosse vrillette qui s’installe dans le bois déjà altéré.
+            </p>
+            <p>
+              Dans ces situations, la première mesure n’est pas un traitement mais une remise en
+              service de la ventilation : rouvrir des grilles obstruées, dégager un vide sanitaire,
+              supprimer un revêtement étanche posé sur un sol qui respirait. C’est peu coûteux, et
+              c’est ce qui détermine la durabilité de tout le reste.
+            </p>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">Les signes d’un plancher atteint</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              <li>Un fléchissement localisé, souvent près d’un mur</li>
+              <li>Une lame qui cède ou qui s’enfonce sous l’appui</li>
+              <li>Un bruit de pas qui change à un endroit précis</li>
+              <li>De la vermoulure dans les joints ou au pied des plinthes</li>
+              <li>Des trous sur le chant des lames</li>
+              <li>Une poussière fine tombant d’un plafond à l’étage inférieur</li>
+            </ul>
+          </div>
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.05rem">En rez-de-chaussée</h3>
+            <p style="margin-top:.5rem">
+              Un plancher bas proche du sol est aussi la zone par laquelle des termites peuvent
+              atteindre le bâtiment. Recherchez des cordonnets de terre le long des murs de cave et
+              de soubassement. <a href="/termites">Fiche termites</a>.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Quels insectes attaquent les planchers ?">
+          <p>
+            Dans un plancher sur solives en résineux, le capricorne des maisons. Dans un plancher
+            ancien en chêne, la petite vrillette dans les zones d’aubier, ou la grosse vrillette si
+            le bois est humide — typiquement au-dessus d’une cave mal ventilée.
+          </p>
+          <p>
+            Sur un parquet récent en feuillu, le lyctus est l’hypothèse principale, avec sa
+            vermoulure caractéristique en farine. Les termites, enfin, peuvent atteindre les
+            planchers bas depuis le sol sans laisser de trou.
+          </p>
+        </Answer>
+        <Answer question="Mon parquet s’affaisse sans aucun trou visible : est-ce possible ?">
+          <p>
+            Oui, c’est même une situation classique. Ce n’est pas la lame qui est attaquée, mais la
+            lambourde qui la porte, souvent humidifiée par le support sur lequel elle repose.
+          </p>
+          <p>
+            Le diagnostic passe alors par la dépose d’une lame ou par un sondage permettant
+            d’atteindre le support. Un examen limité à la surface du parquet ne peut pas conclure.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur les planchers" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Traitement du bois', href: '/traitement-bois', text: 'Planchers, parquets et lambourdes : les méthodes par ouvrage.' },
+    { label: 'Charpente en copropriété', href: '/traitement-charpente-copropriete', text: 'Parties communes et privatives : qui décide, qui finance.' },
+    { label: 'Vrillettes', href: '/vrillette', text: 'L’espèce la plus fréquente dans les planchers humides.' },
+  ]} />
+  <CtaBand />
+</Base>

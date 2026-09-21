@@ -1,0 +1,129 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import { DEPARTEMENTS } from '~/data/departements';
+import { VILLES } from '~/data/villes';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '~/content.config';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Plan du site' }];
+const posts = (await getCollection('blog')).sort((a, b) => a.data.title.localeCompare(b.data.title, 'fr'));
+
+const sections = [
+  {
+    titre: 'Comprendre les insectes',
+    links: [
+      { l: 'Les insectes xylophages', h: '/insectes-xylophages' },
+      { l: 'Termites', h: '/termites' },
+      { l: 'Capricorne des maisons', h: '/capricorne-des-maisons' },
+      { l: 'Vrillettes', h: '/vrillette' },
+      { l: 'Lyctus', h: '/lyctus' },
+      { l: 'Autres insectes du bois', h: '/insectes-du-bois' },
+    ],
+  },
+  {
+    titre: 'Diagnostic et traitement',
+    links: [
+      { l: 'Diagnostic d’infestation', h: '/diagnostic-insectes-xylophages' },
+      { l: 'Traitement des insectes xylophages', h: '/traitement-insectes-xylophages' },
+      { l: 'Traitement des termites', h: '/traitement-termites' },
+      { l: 'Traitement du capricorne', h: '/traitement-capricorne' },
+      { l: 'Traitement des vrillettes', h: '/traitement-vrillette' },
+      { l: 'Traitement de charpente', h: '/traitement-charpente' },
+      { l: 'Traitement du bois', h: '/traitement-bois' },
+      { l: 'Prévention et surveillance', h: '/prevention-insectes-xylophages' },
+    ],
+  },
+  {
+    titre: 'Vous constatez',
+    links: [
+      { l: 'Bois attaqué par des insectes', h: '/bois-attaque-insectes' },
+      { l: 'Trous dans la charpente', h: '/trous-dans-charpente' },
+      { l: 'Sciure sous la charpente', h: '/sciure-charpente' },
+      { l: 'Vermoulure dans le bois', h: '/vermoulure-bois' },
+      { l: 'Insectes dans la charpente', h: '/insectes-charpente' },
+      { l: 'Insectes dans les poutres', h: '/insectes-poutres' },
+      { l: 'Insectes dans le plancher', h: '/insectes-plancher' },
+    ],
+  },
+  {
+    titre: 'Types de bâtiments',
+    links: [
+      { l: 'Tous les types de bâtiments', h: '/types-de-batiments' },
+      { l: 'Charpente de maison', h: '/traitement-charpente-maison' },
+      { l: 'Charpente ancienne', h: '/traitement-charpente-ancienne' },
+      { l: 'Charpente en copropriété', h: '/traitement-charpente-copropriete' },
+      { l: 'Bois en logement', h: '/traitement-bois-maison' },
+      { l: 'Bâtiments d’activité', h: '/traitement-bois-batiment' },
+      { l: 'Commerces et locaux', h: '/traitement-bois-commerce' },
+    ],
+  },
+  {
+    titre: 'Île-de-France',
+    links: [
+      { l: 'Zones d’intervention', h: '/zones-intervention' },
+      ...DEPARTEMENTS.map((d) => ({ l: `${d.name} (${d.code})`, h: `/zones-intervention/${d.slug}` })),
+    ],
+  },
+  {
+    titre: 'Villes',
+    links: VILLES.map((v) => ({ l: v.name, h: `/traitement-xylophages-${v.slug}` })),
+  },
+  {
+    titre: 'Blog — catégories',
+    links: [
+      { l: 'Tous les articles', h: '/blog' },
+      ...Object.values(CATEGORIES).map((c) => ({ l: c.name, h: `/blog/${c.slug}` })),
+    ],
+  },
+  {
+    titre: 'Informations',
+    links: [
+      { l: 'FAQ', h: '/faq' },
+      { l: 'Garanties et assurances', h: '/garanties-et-assurances' },
+      { l: 'Demander un diagnostic', h: '/demander-un-diagnostic' },
+      { l: 'Mentions légales', h: '/mentions-legales' },
+      { l: 'Politique de confidentialité', h: '/politique-de-confidentialite' },
+    ],
+  },
+];
+---
+<Base
+  title="Plan du site"
+  description="L’ensemble des pages du site : espèces, diagnostics, traitements, types de bâtiments, zones d’intervention en Île-de-France et articles de blog."
+  path="/plan-du-site" crumbs={crumbs}
+>
+  <PageHero eyebrow="Navigation" title="Plan du site" lead="Toutes les pages du site, organisées par thème." crumbs={crumbs} cta={false} />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sitemap">
+        {sections.map((s) => (
+          <nav class="sitemap__col" aria-label={s.titre}>
+            <h2>{s.titre}</h2>
+            <ul>{s.links.map((l) => <li><a href={l.h}>{l.l}</a></li>)}</ul>
+          </nav>
+        ))}
+        <nav class="sitemap__col sitemap__col--wide" aria-label="Articles du blog">
+          <h2>Blog — articles</h2>
+          <ul>
+            {posts.map((p) => (
+              <li><a href={`/blog/${p.data.category}/${p.id}`}>{p.data.title}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sitemap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem 2rem; }
+  .sitemap__col h2 { font-size: 1.05rem; margin-bottom: .9rem; padding-bottom: .6rem; border-bottom: 1px solid var(--c-border); }
+  .sitemap__col li { margin-bottom: .45rem; }
+  .sitemap__col a { font-size: .85rem; color: var(--gris-700); text-decoration: none; line-height: 1.5; }
+  .sitemap__col a:hover { color: var(--sauge-700); text-decoration: underline; text-underline-offset: 3px; }
+  .sitemap__col--wide { grid-column: 1 / -1; }
+  .sitemap__col--wide ul { columns: 2; column-gap: 2rem; }
+  @media (min-width: 900px) { .sitemap__col--wide ul { columns: 3; } }
+</style>

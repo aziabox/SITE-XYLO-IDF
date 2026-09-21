@@ -1,0 +1,243 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import FicheIdentite from '~/components/FicheIdentite.astro';
+import Confusions from '~/components/Confusions.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import SignesBois from '~/components/illus/SignesBois.astro';
+import { INSECTE_BY_SLUG } from '~/data/insectes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const c = INSECTE_BY_SLUG['capricorne-des-maisons'];
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Insectes xylophages', href: '/insectes-xylophages' },
+  { label: 'Capricorne des maisons' },
+];
+const jsonLd = [
+  serviceSchema({
+    name: 'Diagnostic et traitement du capricorne des maisons',
+    description: "Identification du capricorne des maisons, évaluation de la perte de section des bois résineux, bûchage, injection et traitement de charpente en Île-de-France.",
+    path: '/capricorne-des-maisons',
+    serviceType: 'Traitement du capricorne des maisons',
+  }),
+  faqSchema(c.faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Capricorne des maisons : reconnaître l’insecte et mesurer les dégâts"
+  description="Le capricorne des maisons attaque l’aubier des bois résineux et peut évider une charpente sans signe visible. Identification, trous ovales, vermoulure, risque structurel et traitement en Île-de-France."
+  path="/capricorne-des-maisons"
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Fiche espèce"
+    title="Capricorne des maisons : l’insecte qui vide le bois sans le montrer"
+    lead="C’est l’espèce qui cause le plus souvent des désordres de structure dans les charpentes franciliennes en résineux. Sa particularité : la larve travaille des années durant sous une pellicule de bois restée intacte, si bien que la surface ne trahit presque rien."
+    answer="Le capricorne des maisons (<em>Hylotrupes bajulus</em>) attaque <strong>uniquement l’aubier des bois résineux</strong> : sapin, épicéa, pin. Ses trous de sortie sont <strong>ovales, de 5 à 10 mm</strong>, et souvent peu nombreux au regard des dégâts réels. Le nombre de trous ne dit rien de la gravité : c’est le sondage du bois qui renseigne."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Pourquoi on le découvre toujours trop tard</h2>
+            <p class="lead">
+              La biologie de cet insecte explique à elle seule la plupart des situations que nous
+              rencontrons sur le terrain.
+            </p>
+            <p>
+              Une femelle pond dans une fente du bois, souvent au voisinage d’un nœud. La larve
+              éclôt et commence à creuser. Elle consomme l’aubier, c’est-à-dire la partie
+              périphérique et tendre de la pièce, en progressant dans toutes les directions, et
+              elle tasse derrière elle la sciure qu’elle produit. Elle ne remonte jamais à la
+              surface : rien ne tombe, rien ne s’écoule, rien ne se voit.
+            </p>
+            <p>
+              Ce travail dure de trois à dix ans, parfois davantage dans un comble froid ou dans
+              un bois pauvre. Ce n’est qu’à la fin de cette période que la larve se transforme et
+              que l’adulte perce enfin la surface pour sortir, en laissant un trou ovale. Autrement
+              dit, <strong>le premier trou visible signale une attaque qui a déjà plusieurs années
+              d’avance</strong>, et pendant lesquelles d’autres pontes ont pu avoir lieu sur la
+              même pièce.
+            </p>
+            <p>
+              C’est pourquoi nous ne raisonnons jamais en comptant les trous. Une panne peut
+              présenter deux trous et n’avoir plus qu’un tiers de sa section saine. Une autre peut
+              en présenter quinze et rester mécaniquement acceptable. Seul le sondage tranche.
+            </p>
+          </div>
+
+          <figure class="fig">
+            <SignesBois />
+            <figcaption>
+              Les galeries occupent l’aubier et restent invisibles tant que la peau du bois n’est
+              pas percée. Les trous de sortie ne représentent qu’une fraction de l’activité réelle.
+            </figcaption>
+          </figure>
+
+          <div>
+            <h2>Les signes d’une attaque de capricorne</h2>
+            <ul class="list-check">
+              {c.signes.map((s) => <li>{s}</li>)}
+            </ul>
+            <div class="note" style="margin-top:1.25rem">
+              <span class="note__title">Le test du tournevis</span>
+              Sur une pièce suspecte, appuyez la lame d’un tournevis plat perpendiculairement au
+              fil du bois, sans forcer exagérément. Un résineux sain résiste nettement. Un bois
+              dont l’aubier a été consommé cède, parfois sur plusieurs millimètres, et la lame
+              débouche dans une galerie remplie de sciure. C’est un geste simple, que vous pouvez
+              faire vous-même avant de nous appeler.
+            </div>
+          </div>
+
+          <div>
+            <h2>Ce que cela signifie pour la structure</h2>
+            <p>{c.risque}</p>
+            <p>
+              Concrètement, l’évaluation porte sur la section résiduelle de chaque pièce. Un
+              chevron de 63 × 75 mm dont l’aubier est consommé sur 15 mm de pourtour n’a plus la
+              résistance pour laquelle il a été dimensionné. À l’inverse, une poutre de forte
+              section dont seule la périphérie est touchée peut conserver une capacité portante
+              suffisante. La conclusion n’est donc jamais « il y a du capricorne, il faut
+              remplacer » : elle est pièce par pièce.
+            </p>
+            <p>
+              Les points les plus sensibles sont ceux où les efforts se concentrent : les appuis
+              sur maçonnerie, les abouts, les assemblages, les entailles. C’est là que nous
+              sondons en premier.
+            </p>
+          </div>
+
+          <div>
+            <h2>Où le rencontre-t-on en Île-de-France</h2>
+            <p>
+              Le bâti francilien offre deux terrains particulièrement favorables. D’abord les
+              charpentes traditionnelles en sapin des pavillons construits entre les deux guerres
+              et jusqu’aux années 1960, très présentes en Seine-Saint-Denis, dans le Val-d’Oise et
+              dans les couronnes pavillonnaires de l’Essonne : bois non traités à l’origine,
+              combles peu ventilés, inspection rare.
+            </p>
+            <p>
+              Ensuite, et c’est plus contre-intuitif, les fermettes industrialisées posées depuis
+              les années 1970. Leur bois est traité en usine, mais cette protection est calibrée
+              pour une durée limitée et se concentre en périphérie de la pièce ; les coupes faites
+              sur chantier mettent à nu du bois non traité. Nous intervenons régulièrement sur des
+              charpentes de vingt à quarante ans présentant des sorties de capricorne.
+            </p>
+            <ul class="list-dot">{c.zones.map((z) => <li>{z}</li>)}</ul>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <FicheIdentite insecte={c} />
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Reconnaître l’adulte</h3>
+            <p>{c.adulte}</p>
+          </div>
+          <div class="card" style="margin-top:1rem">
+            <h3 style="font-size:1.08rem">Et la larve ?</h3>
+            <p>{c.larve}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Méthode</p>
+        <h2>Comment nous diagnostiquons une attaque de capricorne</h2>
+        <p class="lead">
+          L’ordre des vérifications compte : commencer par l’essence évite les trois quarts des
+          erreurs d’identification.
+        </p>
+      </div>
+      <ol class="list-num">{c.diagnostic.map((d) => <li>{d}</li>)}</ol>
+      <div class="btn-row" style="margin-top:2rem">
+        <a href="/traitement-capricorne" class="btn btn--primary">Traitement du capricorne</a>
+        <a href="/traitement-charpente" class="btn btn--ghost">Traitement de charpente</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions que l’on nous pose sur le capricorne</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment reconnaître un capricorne ?">
+          <p>
+            Pour l’insecte adulte : un coléoptère brun foncé à noir, de 8 à 25 mm, au corps
+            aplati, aux longues antennes, dont le pronotum porte deux taches claires et luisantes
+            qui ressemblent à des yeux. On le rencontre surtout de juin à août.
+          </p>
+          <p>
+            Pour l’attaque, sans voir l’insecte : des trous de sortie <strong>ovales</strong> de 5
+            à 10 mm dans une pièce <strong>résineuse</strong>. Ces deux critères ensemble sont très
+            discriminants. Un trou ovale dans du chêne, ou un trou rond de 2 mm dans du sapin,
+            désignent autre chose.
+          </p>
+        </Answer>
+        <Answer question="Entend-on vraiment les larves ?">
+          <p>
+            Oui, dans des conditions précises : un local silencieux, une proximité immédiate avec
+            la pièce attaquée, et une période chaude, la larve étant plus active quand la
+            température monte. Le bruit est un grignotement irrégulier, comparable à celui d’un
+            ongle raclant du carton.
+          </p>
+          <p>
+            Ce n’est pas un critère fiable en soi — beaucoup d’attaques actives sont totalement
+            silencieuses pour l’oreille humaine — mais lorsqu’on l’entend, c’est un indice fort
+            d’activité en cours.
+          </p>
+        </Answer>
+        <Answer question="Peut-on traiter soi-même une charpente attaquée ?">
+          <p>
+            Les produits de traitement du bois existent en vente libre, et l’application au pinceau
+            ou au pulvérisateur est techniquement accessible. Le problème n’est pas là. Il est que
+            l’efficacité dépend de trois choses qu’un traitement amateur réussit rarement : le
+            bûchage préalable des parties dégradées, le dépoussiérage complet, et l’injection en
+            profondeur dans les pièces de forte section.
+          </p>
+          <p>
+            Un produit appliqué sur une surface poussiéreuse ne pénètre pas. Appliqué sur un bois
+            dont la galerie principale court à 30 mm de profondeur, il ne l’atteint pas. Le
+            résultat courant est une charpente qui paraît traitée, et dans laquelle l’attaque se
+            poursuit. <a href="/traitement-charpente">Ce que comporte un traitement complet</a>.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Confusions items={c.confusions} intro="Le critère de l’essence règle la plupart des cas : le capricorne des maisons ne touche pas les feuillus, et aucun de ses concurrents ne fait de trou ovale de cette taille." />
+
+  <Faq items={c.faq} title="Questions fréquentes sur le capricorne des maisons" />
+
+  <ZonesMini />
+
+  <Maillage
+    title="Poursuivre"
+    items={[
+      { label: 'Traitement du capricorne', href: '/traitement-capricorne', text: 'Bûchage, dépoussiérage, injection sous pression et pulvérisation : le protocole détaillé.' },
+      { label: 'Vrillette ou capricorne ?', href: '/blog/diagnostic/vrillette-ou-capricorne', text: 'Les critères qui permettent de trancher entre les deux espèces les plus confondues.' },
+      { label: 'Trous dans la charpente', href: '/trous-dans-charpente', text: 'Ce que le diamètre et la forme des trous permettent — ou non — de conclure.' },
+    ]}
+  />
+
+  <CtaBand
+    title="Des trous ovales dans une charpente en sapin ?"
+    text="C’est la configuration typique d’une attaque de capricorne. La question utile n’est pas de savoir s’il faut traiter, mais quelle section de bois sain il reste. Cela se mesure sur place."
+  />
+</Base>

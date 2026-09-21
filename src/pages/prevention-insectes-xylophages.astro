@@ -1,0 +1,192 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Prévention et surveillance' }];
+const surveillance = [
+  { title: 'Après le traitement, la première saison', text: 'Les zones témoins nettoyées et repérées lors de l’intervention sont vérifiées après une saison chaude. La réapparition de vermoulure au même endroit signalerait une activité résiduelle.' },
+  { title: 'Chaque printemps, cinq minutes', text: 'Un passage rapide dans le comble à la période d’émergence, lampe rasante à la main. C’est le moment où les adultes sortent, donc celui où les indices sont les plus frais.' },
+  { title: 'Tous les deux à trois ans, un contrôle complet', text: 'Parcours de l’ensemble des bois accessibles, sondage des points sensibles, vérification de la ventilation. Une demi-heure suffit sur une maison individuelle.' },
+  { title: 'Après tout événement d’eau', text: 'Fuite, infiltration, débordement de chéneau, dégât des eaux : le bois touché change de condition. Un contrôle dans les mois qui suivent évite de découvrir le problème des années plus tard.' },
+  { title: 'Avant tous travaux enfermant du bois', text: 'Isolation de comble, doublage, faux plafond, pose d’un plancher : ce qui va être recouvert doit être contrôlé et, si nécessaire, traité préventivement avant de devenir inaccessible.' },
+];
+const faq = [
+  { q: 'Un traitement préventif est-il toujours utile ?', a: "Non, et nous le disons quand ce n'est pas le cas. Sur un bois sain, sec, d'une essence peu sensible et dans un volume bien ventilé, l'apport d'un traitement préventif est limité. Il devient en revanche très pertinent dans trois situations : avant d'enfermer du bois derrière un doublage ou un isolant, sur des bois résineux non traités d'origine, et sur des ouvrages exposés à des variations d'humidité." },
+  { q: 'La ventilation suffit-elle à protéger un bois ?', a: "Elle ne protège pas contre toutes les espèces, mais elle change radicalement la donne pour celles qui dépendent de l'humidité — la grosse vrillette au premier chef, et les champignons de pourriture qui lui préparent le terrain. Un comble, une cave ou un vide sanitaire correctement ventilés maintiennent le bois sous le seuil qui rend ces attaques possibles. C'est la mesure de prévention la plus efficace par rapport à son coût." },
+  { q: 'Faut-il traiter le bois de chauffage ?', a: "Il ne s'agit pas de le traiter, mais de ne pas le stocker à l'intérieur ni contre un mur du bâtiment. Une réserve de bûches peut héberger des insectes, et certaines espèces peuvent en sortir pour coloniser des bois de construction proches. Un stockage extérieur, à distance de la façade et surélevé par rapport au sol, règle la question — et il supprime en prime un point de contact bois-sol favorable aux termites." },
+  { q: 'Les bois modernes sont-ils à l’abri ?', a: "Ils sont mieux protégés au départ, pas immunisés. Le traitement d'usine est calibré pour une durée limitée et se concentre en périphérie de la pièce ; les coupes et usinages faits sur chantier exposent du bois vierge. Nous intervenons régulièrement sur des charpentes industrialisées de vingt à quarante ans présentant des attaques de capricorne." },
+  { q: 'Que faire avant d’acheter une maison ancienne ?', a: "Demandez à voir les combles, et pas seulement depuis la trappe. Emportez une lampe et un tournevis : la lampe tenue rasante révèle les reliefs de surface, le tournevis permet de tester quelques pièces. Regardez les abouts de poutre au contact des murs, les pieds de chevron, et le sol du comble, où la sciure s'accumule. Un examen professionnel avant signature coûte infiniment moins cher qu'une charpente à reprendre après." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Prévention et surveillance des insectes xylophages', description: "Traitement préventif du bois, conseils de ventilation, retraitement des coupes de chantier et contrôles périodiques des charpentes, en Île-de-France.", path: '/prevention-insectes-xylophages', serviceType: 'Traitement préventif du bois' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Prévention des insectes xylophages : protéger et surveiller le bois"
+  description="Comment éviter une infestation : traitement préventif au bon moment, ventilation des combles et vides sanitaires, retraitement des coupes de chantier, contrôles périodiques. Île-de-France."
+  path="/prevention-insectes-xylophages" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Prévention"
+    title="Prévention : ce qui rend un bois vulnérable, et comment l’éviter"
+    lead="La prévention coûte peu et fonctionne bien, à condition d’être faite au bon moment. Après isolation d’un comble, la plupart des mesures utiles deviennent impossibles ou disproportionnées."
+    answer="Quatre mesures couvrent l’essentiel : employer des bois adaptés à leur <strong>classe d’emploi</strong> et <strong>retraiter les coupes</strong> faites sur chantier ; <strong>ventiler</strong> combles, caves et vides sanitaires ; <strong>traiter les infiltrations</strong> sans attendre ; et <strong>contrôler visuellement</strong> la charpente tous les deux à trois ans. Le traitement préventif du bois s’applique avant qu’il ne devienne inaccessible."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Trois facteurs rendent un bois attaquable</h2>
+            <p class="lead">
+              Un insecte ne choisit pas une maison au hasard. Il rencontre un bois qui réunit des
+              conditions précises. Supprimer l’une d’elles suffit souvent.
+            </p>
+            <h3>1. La nature du bois</h3>
+            <p>
+              L’aubier est la cible. Une pièce riche en aubier, quelle que soit l’essence, reste
+              vulnérable. Un chêne purgé ne l’est presque pas ; un sapin de charpente l’est par
+              nature. À la construction ou lors d’un remplacement de pièce, le choix du bois et sa
+              qualité de coupe comptent autant que son essence.
+            </p>
+            <h3>2. L’humidité</h3>
+            <p>
+              C’est le facteur le plus déterminant et le plus facile à corriger. Un bois qui reste
+              durablement au-dessus du seuil favorable devient accessible aux espèces qui en
+              dépendent, et surtout aux champignons de pourriture qui préparent le terrain. Les
+              causes sont toujours les mêmes : infiltration de couverture, remontée capillaire,
+              condensation dans un volume non ventilé, fuite de réseau.
+            </p>
+            <h3>3. L’accessibilité</h3>
+            <p>
+              Un bois protégé par une finition intacte, ou enfermé dans un ouvrage étanche, est
+              difficile à coloniser. À l’inverse, un bois brut, fendu, avec des coupes non
+              retraitées, offre des points de ponte. C’est pourquoi le retraitement des coupes de
+              chantier — une opération de quelques minutes — a un effet démesuré par rapport à son
+              coût.
+            </p>
+          </div>
+
+          <div class="note note--copper">
+            <span class="note__title">La fenêtre à ne pas manquer</span>
+            Le moment où une charpente est la plus facile à protéger est celui où elle est encore
+            nue : avant l’isolation, avant le doublage, avant l’aménagement d’un comble. À ce
+            stade, le traitement atteint toutes les faces de toutes les pièces. Quelques mois plus
+            tard, une partie du bois est inaccessible pour vingt ans.
+          </div>
+
+          <div>
+            <h2>Ce que nous préconisons, et ce que nous ne vendons pas</h2>
+            <p>
+              Une part importante de nos préconisations de prévention ne débouche sur aucune
+              prestation de notre part : rétablir une ventilation de comble, reprendre une gouttière
+              qui déborde, déplacer un tas de bois appuyé contre une façade, ouvrir une grille de
+              vide sanitaire obstruée.
+            </p>
+            <p>
+              Nous les écrivons quand même dans le rapport. Non par désintéressement, mais parce
+              qu’un traitement appliqué dans un bâtiment dont les causes n’ont pas été corrigées
+              donnera un résultat décevant, et que c’est notre travail qui en portera la
+              responsabilité aux yeux du client.
+            </p>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <div class="card card--sage">
+            <h3 style="font-size:1.08rem">Les gestes qui comptent</h3>
+            <ul class="list-check small" style="margin-top:.7rem">
+              <li>Ventiler combles, caves et vides sanitaires</li>
+              <li>Retraiter toutes les coupes faites sur chantier</li>
+              <li>Reprendre les infiltrations sans attendre</li>
+              <li>Ne pas stocker de bois non traité en comble ou en dépendance</li>
+              <li>Éviter tout contact direct bois-sol</li>
+              <li>Ne pas doubler un bois ancien sans lame d’air</li>
+              <li>Contrôler visuellement tous les deux à trois ans</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Ce qui ne fonctionne pas</h3>
+            <ul class="list-dot small" style="margin-top:.7rem">
+              <li>Repeindre par-dessus des trous de sortie</li>
+              <li>Boucher les trous pour « enfermer » l’insecte</li>
+              <li>Appliquer un produit sur un bois poussiéreux</li>
+              <li>Traiter un bois qui continue d’être mouillé</li>
+              <li>Traiter une seule pièce d’un ensemble homogène</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <Etapes eyebrow="Surveillance" title="Un calendrier de contrôle raisonnable" lead="La surveillance ne demande ni contrat, ni abonnement, ni matériel. Elle demande de savoir quoi regarder et à quel moment." items={surveillance} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions sur la prévention</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment éviter une nouvelle infestation après un traitement ?">
+          <p>
+            En supprimant ce qui a rendu le bois vulnérable. Si l’attaque était liée à l’humidité,
+            la ventilation et la reprise de la cause sont prioritaires. Si elle était liée à des
+            bois non protégés, le traitement préventif des pièces restantes et le retraitement des
+            coupes complètent l’intervention.
+          </p>
+          <p>
+            Dans tous les cas, quelques minutes de contrôle chaque printemps valent mieux qu’un
+            contrat de surveillance coûteux.
+          </p>
+        </Answer>
+        <Answer question="Quand faut-il faire inspecter une charpente ?">
+          <p>
+            À l’achat d’un bien ancien, avant d’isoler ou d’aménager un comble, après des travaux
+            de couverture ou une infiltration, et dès l’apparition de sciure, de trous nouveaux ou
+            d’un affaissement.
+          </p>
+          <p>
+            En l’absence de tout signe, un contrôle visuel tous les deux à trois ans constitue une
+            précaution raisonnable.
+          </p>
+        </Answer>
+        <Answer question="Le traitement préventif est-il obligatoire dans une construction neuve ?">
+          <p>
+            Les bois de construction doivent présenter une durabilité adaptée à leur classe
+            d’emploi, ce qui passe par le choix de l’essence ou par un traitement. Ce n’est pas une
+            option laissée à l’appréciation du constructeur.
+          </p>
+          <p>
+            Le point le plus souvent négligé reste le retraitement des coupes réalisées sur
+            chantier, qui exposent du bois non protégé au cœur de la pièce.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur la prévention" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Le traitement préventif avant isolation : le bon moment.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Faire le point sur l’état réel des bois avant de décider.' },
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Comprendre ce que chaque espèce recherche dans un bois.' },
+  ]} />
+  <CtaBand title="Vous envisagez d’isoler vos combles ?" text="C’est le moment idéal pour faire contrôler la charpente. Une fois les rampants isolés, une partie du bois devient inaccessible pour longtemps." />
+</Base>

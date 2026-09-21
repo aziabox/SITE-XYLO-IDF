@@ -1,0 +1,27 @@
+---
+/** Liens contextuels : peu nombreux, explicites, jamais une liste de bas de page. */
+interface Props {
+  title?: string;
+  items: { label: string; href: string; text?: string }[];
+  columns?: 2 | 3;
+}
+const { title = 'À lire ensuite', items, columns = 3 } = Astro.props;
+---
+<section class="section section--tight">
+  <div class="wrap">
+    <h2 class="mail__title">{title}</h2>
+    <div class={`grid grid-${columns}`}>
+      {items.map((i) => (
+        <a href={i.href} class="card card--link">
+          <h3 class="mail__lbl">{i.label}</h3>
+          {i.text && <p>{i.text}</p>}
+          <span class="card__foot link-arrow">Consulter</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .mail__title { font-size: var(--t-h3); margin-bottom: 1.6rem; }
+  .mail__lbl { font-size: var(--t-h4); }
+</style>

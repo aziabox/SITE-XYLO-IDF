@@ -1,0 +1,38 @@
+---
+import Base from '~/layouts/Base.astro';
+import { SITE } from '~/data/site';
+---
+<Base
+  title="Demande envoyée"
+  description="Votre demande a bien été transmise."
+  path="/merci"
+  noindex
+  crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Demande envoyée' }]}
+>
+  <section class="section" style="min-height:52vh;display:grid;place-items:center">
+    <div class="wrap-narrow" style="text-align:center">
+      <span class="ok" aria-hidden="true">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h1 style="margin-top:1.5rem">Votre demande est partie</h1>
+      <p class="lead" style="margin-top:1rem">
+        Nous revenons vers vous pour préciser ce que vous avez observé et vous indiquer
+        si une visite s’impose. Si votre situation est urgente — un bois qui s’enfonce,
+        un affaissement —, appelez-nous directement.
+      </p>
+      <div class="btn-row" style="justify-content:center;margin-top:2rem">
+        <a href={SITE.phoneHref} class="btn btn--primary">Appeler le {SITE.phoneDisplay}</a>
+        <a href="/" class="btn btn--ghost">Retour à l’accueil</a>
+      </div>
+      <p class="small muted" style="margin-top:2.5rem">
+        En attendant, ces pages répondent aux questions les plus fréquentes :
+        <a href="/bois-attaque-insectes">bois attaqué</a>,
+        <a href="/sciure-charpente">sciure sous une charpente</a>,
+        <a href="/diagnostic-insectes-xylophages">déroulé d’un diagnostic</a>.
+      </p>
+    </div>
+  </section>
+</Base>
+<style>
+  .ok { display: inline-grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; background: var(--sauge-100); color: var(--sauge-700); }
+</style>

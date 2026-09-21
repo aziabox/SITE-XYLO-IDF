@@ -1,0 +1,219 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Garanties from '~/components/Garanties.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Faq from '~/components/Faq.astro';
+import { SITE } from '~/data/site';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Garanties et assurances' }];
+const faq = [
+  { q: 'Tous les traitements du bois relèvent-ils de la décennale ?', a: "Non. La garantie décennale concerne les ouvrages dont un désordre compromettrait la solidité du bâtiment ou le rendrait impropre à sa destination. Un traitement préventif d'appoint sur des boiseries et le renforcement d'une charpente porteuse ne se situent pas sur le même plan. C'est pourquoi nous n'affichons pas cette mention comme un argument général, mais l'examinons au cas par cas, au moment du devis." },
+  { q: 'Comment vérifier une attestation d’assurance ?', a: "Une attestation indique l'assureur, le numéro de contrat, la période de validité, les activités garanties et le territoire couvert. Vous pouvez contacter directement l'assureur pour confirmer qu'elle est en cours de validité et qu'elle couvre bien l'activité concernée. C'est une démarche légitime, et une entreprise sérieuse ne s'en offusque pas." },
+  { q: 'Que se passe-t-il si le traitement ne fonctionne pas ?', a: "Nous revenons sur le chantier pour comprendre pourquoi avant toute autre chose. Trois causes dominent : une zone qui n'a pas été atteinte faute d'accès, une injection insuffisante sur une pièce de forte section, ou une cause d'humidité subsistante. L'identification de la cause détermine la suite, et elle est infiniment préférable à un second traitement appliqué à l'aveugle." },
+  { q: 'Affichez-vous des certifications ?', a: "Uniquement celles que nous détenons réellement et dont nous pouvons produire le justificatif. Tant qu'une certification n'est pas obtenue, elle ne figure pas sur ce site. Les logos de certification sont faciles à copier ; c'est précisément pour cela que leur présence ne devrait jamais suffire à établir une confiance." },
+  { q: 'Que contient le rapport d’intervention ?', a: "Les ouvrages concernés et leur localisation, les méthodes employées, les produits utilisés avec leurs références, les quantités appliquées, les dates, les zones témoins mises en place, et explicitement ce qui n'a pas pu être traité faute d'accès. Ce dernier point est celui qui protège le propriétaire : un rapport qui n'en parle pas donne une assurance sans fondement." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+const d = SITE.decennale;
+---
+<Base
+  title="Garanties et assurances : ce que nous engageons par écrit"
+  description="Garantie décennale, assurance professionnelle, certifications, rapport d’intervention : ce que nous affichons, ce que nous ne fabriquons pas, et comment vérifier une attestation."
+  path="/garanties-et-assurances" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Transparence"
+    title="Garanties et assurances"
+    lead="Cette page existe pour dire ce que nous engageons, et surtout ce que nous n’affirmons pas. Dans un secteur où les mentions rassurantes se recopient d’un site à l’autre sans justificatif, la vérifiabilité nous paraît être le seul argument qui vaille."
+    answer="Nous n’affichons <strong>aucune garantie, certification ou assurance</strong> dont nous ne pouvons pas produire le justificatif. La mention « garantie décennale » n’est pas un argument général : elle dépend de la nature des travaux, et l’attestation correspondante est remise avec le devis lorsque l’intervention entre dans ce champ."
+    crumbs={crumbs}
+    cta={false}
+  />
+
+  <Garanties compact />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nos engagements</p>
+        <h2>Ce que nous remettons, systématiquement</h2>
+        <p class="lead">
+          Ces documents ne sont pas des options à demander : ils font partie de la prestation.
+        </p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <span class="eng__n">01</span>
+          <h3>Un devis écrit et détaillé</h3>
+          <p>
+            Avant toute intervention. Il indique les ouvrages concernés, la méthode retenue, les
+            produits employés, les quantités, et ce qui reste à votre charge en préparation.
+            Chaque poste est chiffré séparément afin d’être comparable à une autre offre.
+          </p>
+        </div>
+        <div class="card">
+          <span class="eng__n">02</span>
+          <h3>Un rapport d’intervention</h3>
+          <p>
+            Après les travaux. Il précise ce qui a été observé, ce qui a été traité, comment, avec
+            quels produits — et explicitement ce qui n’a pas pu l’être faute d’accès. C’est ce
+            dernier point qui protège réellement le propriétaire.
+          </p>
+        </div>
+        <div class="card">
+          <span class="eng__n">03</span>
+          <h3>La traçabilité des produits</h3>
+          <p>
+            Références, compositions et fiches de données de sécurité des produits employés. Elles
+            contiennent notamment les consignes d’usage et le délai de réintégration, qui vous
+            sont communiqués avant l’intervention et non le jour du chantier.
+          </p>
+        </div>
+        <div class="card">
+          <span class="eng__n">04</span>
+          <h3>Des zones témoins</h3>
+          <p>
+            Des emplacements nettoyés, repérés et datés lors de l’intervention, qui permettent de
+            vérifier objectivement l’arrêt de l’activité au fil des saisons suivantes. C’est plus
+            honnête qu’une déclaration de réussite le jour du chantier.
+          </p>
+        </div>
+        <div class="card">
+          <span class="eng__n">05</span>
+          <h3>Des conseils de prévention</h3>
+          <p>
+            Y compris lorsqu’ils ne débouchent sur aucun travail de notre part : ventilation d’un
+            comble, reprise d’une gouttière, déplacement d’un tas de bois. Un traitement appliqué
+            sans correction des causes donne un résultat décevant.
+          </p>
+        </div>
+        <div class="card">
+          <span class="eng__n">06</span>
+          <h3>Un avis franc</h3>
+          <p>
+            Y compris quand il consiste à dire qu’aucun traitement ne s’impose, ou qu’il faut
+            attendre une saison avant de conclure. Cela arrive plus souvent qu’on ne l’imagine,
+            notamment sur du bâti ancien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- CERTIFICATIONS ---------------- */}
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Certifications et qualifications</h2>
+            {SITE.certifications.length > 0 ? (
+              <ul class="list-check">
+                {SITE.certifications.map((c) => (
+                  <li>
+                    <strong>{c.name}</strong> — délivrée par {c.issuer}
+                    {c.number && <span> · n° {c.number}</span>}
+                    {c.validUntil && <span> · valable jusqu’au {c.validUntil}</span>}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <>
+                <p class="lead">
+                  Aucune certification n’est affichée sur ce site à ce jour.
+                </p>
+                <p>
+                  Ce n’est pas une omission. Nous n’affichons que les certifications que nous
+                  détenons réellement et dont nous pouvons produire le justificatif à la demande.
+                  Tant qu’une certification n’est pas obtenue, elle ne figure pas ici.
+                </p>
+                <p>
+                  Il existe dans notre secteur des qualifications reconnues, et des logos qui leur
+                  ressemblent beaucoup. Les seconds sont faciles à copier. C’est précisément pour
+                  cette raison que la présence d’un logo ne devrait jamais suffire à établir une
+                  confiance : demandez toujours le numéro et la date de validité, et vérifiez-les
+                  auprès de l’organisme.
+                </p>
+              </>
+            )}
+          </div>
+
+          <div>
+            <h2>Cadre réglementaire des produits</h2>
+            <p>
+              Les produits de protection du bois relèvent de la réglementation européenne sur les
+              produits biocides. Leur mise sur le marché est encadrée, et leur application à titre
+              professionnel suppose la détention des certificats requis par la réglementation
+              française.
+            </p>
+            <p>
+              Concrètement, cela signifie que le choix d’un produit ne relève pas de la préférence
+              de l’applicateur : il dépend de l’usage autorisé, du support, du local et des
+              conditions de réintégration. C’est aussi pourquoi nous remettons systématiquement la
+              fiche de données de sécurité : elle contient les informations que vous êtes en droit
+              de connaître avant que le produit n’entre chez vous.
+            </p>
+          </div>
+
+          <div>
+            <h2>Avis clients</h2>
+            <p class="lead">
+              Aucun avis n’est publié sur ce site à ce jour.
+            </p>
+            <p>
+              Un espace est prévu pour les accueillir lorsque de véritables avis, vérifiables et
+              attribuables, auront été recueillis. En attendant, cette page reste vide plutôt que
+              remplie.
+            </p>
+            <p>
+              Fabriquer des témoignages est une pratique courante dans notre secteur. Nous
+              considérons qu’elle disqualifie tout le reste du discours d’une entreprise : si les
+              avis sont inventés, pourquoi le diagnostic ne le serait-il pas ?
+            </p>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">Ce que vous pouvez exiger</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              <li>Une <strong>attestation d’assurance</strong> nominative et datée</li>
+              <li>Le <strong>numéro et la validité</strong> de toute certification annoncée</li>
+              <li>Un <strong>devis détaillé</strong>, poste par poste, avec quantités</li>
+              <li>La <strong>fiche de données de sécurité</strong> des produits</li>
+              <li>Le <strong>délai de réintégration</strong>, par écrit</li>
+              <li>Un <strong>rapport d’intervention</strong> mentionnant les zones non traitées</li>
+            </ul>
+            <p class="small" style="margin-top:1rem;opacity:.75">
+              Ces demandes sont légitimes. Une entreprise sérieuse ne s’en offusque pas — et une
+              entreprise qui s’en offusque vous apprend quelque chose d’utile.
+            </p>
+          </div>
+          {!d.verified && (
+            <div class="card card--sage" style="margin-top:1.25rem">
+              <h3 style="font-size:1.05rem">Emplacement réservé</h3>
+              <p style="margin-top:.5rem">
+                Dès que l’attestation d’assurance décennale couvrant les prestations concernées
+                sera disponible, cette page affichera l’assureur, le numéro de police, la période
+                de validité, les activités garanties et le territoire couvert.
+              </p>
+            </div>
+          )}
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions sur les garanties" />
+
+  <CtaBand
+    title="Une question sur nos garanties ?"
+    text="Nous préférons répondre précisément avant un devis plutôt que d’afficher des mentions générales sur un site."
+  />
+</Base>
+
+<style>
+  .eng__n { display: block; font-family: var(--f-title); font-size: 1.2rem; color: var(--cuivre-500); margin-bottom: .5rem; }
+</style>

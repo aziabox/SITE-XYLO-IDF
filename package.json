@@ -1,0 +1,23 @@
+{
+  "name": "site-xylo-idf",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site specialise dans le diagnostic et le traitement des insectes xylophages en Ile-de-France",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
+    "@fontsource-variable/dm-sans": "^5.2.5",
+    "@fontsource-variable/fraunces": "^5.2.5",
+    "astro": "^5.16.0",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

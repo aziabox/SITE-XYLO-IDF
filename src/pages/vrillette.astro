@@ -1,0 +1,266 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import FicheIdentite from '~/components/FicheIdentite.astro';
+import Confusions from '~/components/Confusions.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import { INSECTE_BY_SLUG } from '~/data/insectes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const v = INSECTE_BY_SLUG['vrillette'];
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Insectes xylophages', href: '/insectes-xylophages' },
+  { label: 'Vrillettes' },
+];
+const jsonLd = [
+  serviceSchema({
+    name: 'Diagnostic et traitement des vrillettes',
+    description: "Identification de la petite et de la grosse vrillette, recherche de la cause d’humidité, traitement des bois, du mobilier et des charpentes en Île-de-France.",
+    path: '/vrillette',
+    serviceType: 'Traitement des vrillettes',
+  }),
+  faqSchema(v.faq),
+].filter(Boolean) as Record<string, any>[];
+
+const comparaison = [
+  { critere: 'Bois attaqué', petite: "Aubier des feuillus et des résineux, panneaux, contreplaqués", grosse: 'Feuillus de forte section, surtout le chêne, préalablement altérés par un champignon' },
+  { critere: 'Trous de sortie', petite: '1 à 3 mm, ronds, souvent groupés', grosse: '3 à 4 mm, ronds' },
+  { critere: 'Vermoulure', petite: 'Granuleuse, crissante, granulés en forme de citron', grosse: 'Plus grossière, granulés aplatis en forme de lentille' },
+  { critere: 'Humidité requise', petite: 'Modérée, local peu ventilé', grosse: 'Élevée, bois presque toujours déjà pourri' },
+  { critere: 'Bruit', petite: 'Aucun', grosse: 'Tic-tac au printemps, l’adulte frappe sa tête contre le bois' },
+  { critere: 'Ouvrages concernés', petite: 'Meubles, parquets, lambris, escaliers, solives', grosse: 'Poutres et entraits de chêne, planchers en zone humide' },
+  { critere: 'Ce que cela signale', petite: 'Un bois vulnérable, souvent dans un local peu ventilé', grosse: 'Un problème d’eau dans le bâtiment, avant même un problème d’insecte' },
+];
+---
+<Base
+  title="Vrillette : petite et grosse vrillette, signes et traitement"
+  description="Petite vrillette et grosse vrillette sont deux insectes différents. Trous, vermoulure, rôle de l’humidité, tic-tac de l’horloge de la mort : comment les distinguer et les traiter en Île-de-France."
+  path="/vrillette"
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Fiche espèce"
+    title="Vrillettes : deux insectes très différents sous un même nom"
+    lead="Dire « j’ai des vrillettes » ne suffit pas à décrire une situation. Derrière ce mot se cachent deux espèces qui n’attaquent pas les mêmes bois, ne demandent pas les mêmes conditions et n’appellent pas la même réponse."
+    answer="La <strong>petite vrillette</strong> (<em>Anobium punctatum</em>) attaque l’aubier des feuillus comme des résineux, dans les meubles, parquets et boiseries : trous ronds de 1 à 3 mm, vermoulure granuleuse. La <strong>grosse vrillette</strong> (<em>Xestobium rufovillosum</em>) s’attaque aux feuillus déjà altérés par un champignon : trous de 3 à 4 mm et, surtout, <strong>un bois humide</strong>. Sa présence signale d’abord un problème d’eau."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>L’humidité est la clé de lecture</h2>
+            <p class="lead">
+              C’est la différence qui structure tout le reste, et celle que l’on oublie le plus
+              souvent.
+            </p>
+            <p>
+              La petite vrillette se développe dans un bois d’humidité modérée, typiquement dans
+              un local fermé, peu chauffé ou mal ventilé : une cave, un grenier, une maison de
+              campagne ouverte quelques semaines par an, un meuble placé contre un mur froid. Elle
+              se contente de conditions ordinaires, et c’est pour cela qu’on la rencontre partout.
+            </p>
+            <p>
+              La grosse vrillette, elle, exige beaucoup plus. Elle ne s’installe pratiquement
+              jamais dans un bois sain et sec : il lui faut un bois nettement humide, et le plus
+              souvent déjà attaqué par un champignon de pourriture qui a commencé à en décomposer
+              les fibres. Autrement dit, <strong>quand on trouve de la grosse vrillette dans une
+              poutre de chêne, l’insecte n’est pas le problème principal : il en est le
+              symptôme</strong>.
+            </p>
+            <p>
+              Cette distinction change complètement l’ordre des travaux. Traiter une grosse
+              vrillette sans identifier et supprimer la source d’humidité — infiltration de
+              couverture, remontée capillaire, condensation, vide sanitaire non ventilé — revient
+              à appliquer un produit sur un bois qui va continuer de se dégrader.
+            </p>
+          </div>
+
+          <div>
+            <h2>Les signes à observer</h2>
+            <ul class="list-check">{v.signes.map((s) => <li>{s}</li>)}</ul>
+            <div class="note note--copper" style="margin-top:1.25rem">
+              <span class="note__title">Regardez la vermoulure de près</span>
+              C’est le critère le plus utile et le plus accessible. Recueillez un peu de poudre sur
+              une feuille blanche et frottez-la entre le pouce et l’index. Celle de la petite
+              vrillette crisse légèrement et contient de minuscules granulés en forme de citron ;
+              celle de la grosse vrillette est plus grossière, avec des granulés aplatis comme de
+              petites lentilles. Celle du lyctus, pour comparaison, est impalpable comme de la
+              farine.
+            </div>
+          </div>
+
+          <div>
+            <h2>Le tic-tac de l’horloge de la mort</h2>
+            <p>
+              La grosse vrillette porte en anglais le nom de <em>death watch beetle</em>, et en
+              français celui d’horloge de la mort. L’origine en est simple et n’a rien de
+              mystérieux : au printemps, l’adulte frappe sa tête contre la paroi de sa galerie pour
+              signaler sa présence à un partenaire. Le bois amplifie ce choc, qui devient un
+              tic-tac régulier, audible la nuit dans une maison silencieuse.
+            </p>
+            <p>
+              Ce bruit a nourri des superstitions, mais pour nous c’est une information technique
+              précieuse : il indique une activité en cours, et il localise la zone concernée. Si
+              vous l’entendez, notez la pièce et le moment, cela oriente directement l’inspection.
+            </p>
+          </div>
+
+          <div>
+            <h2>Le cas particulier du mobilier</h2>
+            <p>
+              La petite vrillette est la principale responsable des trous que l’on découvre dans un
+              meuble ancien, un cadre, un escalier ou un lambris. Sur ces ouvrages, la question
+              n’est plus structurelle mais patrimoniale : il s’agit de conserver l’objet.
+            </p>
+            <p>
+              Le traitement doit alors être compatible avec la finition existante — cire, vernis,
+              peinture, placage. Nous procédons par essai préalable sur une zone non visible, et
+              privilégions les produits incolores. Sur une pièce de valeur, il est parfois plus
+              raisonnable de faire intervenir un restaurateur en complément plutôt que d’appliquer
+              un traitement standard.
+            </p>
+            <ul class="list-dot">{v.zones.map((z) => <li>{z}</li>)}</ul>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <FicheIdentite insecte={v} />
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Risque pour la structure</h3>
+            <p>{v.risque}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- TABLEAU PETITE / GROSSE ---------------- */}
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Comparaison</p>
+        <h2>Petite vrillette ou grosse vrillette ?</h2>
+        <p class="lead">
+          Sept critères suffisent à les séparer. Le plus déterminant n’est pas le diamètre des
+          trous, c’est l’état d’humidité du bois.
+        </p>
+      </div>
+      <div class="table-scroll">
+        <table class="data">
+          <caption>Tableau de distinction entre les deux espèces couramment appelées « vrillettes ».</caption>
+          <thead>
+            <tr>
+              <th scope="col">Critère</th>
+              <th scope="col">Petite vrillette</th>
+              <th scope="col">Grosse vrillette</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparaison.map((r) => (
+              <tr>
+                <th scope="row">{r.critere}</th>
+                <td>{r.petite}</td>
+                <td>{r.grosse}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Méthode</p>
+        <h2>Comment nous diagnostiquons une attaque de vrillette</h2>
+        <p class="lead">
+          Une mesure d’humidité du bois fait partie intégrante de l’examen : sans elle, on ne peut
+          pas distinguer les deux espèces ni comprendre ce qui a rendu le bois vulnérable.
+        </p>
+      </div>
+      <ol class="list-num">{v.diagnostic.map((d) => <li>{d}</li>)}</ol>
+      <div class="btn-row" style="margin-top:2rem">
+        <a href="/traitement-vrillette" class="btn btn--primary">Traitement des vrillettes</a>
+        <a href="/vermoulure-bois" class="btn btn--ghost">Comprendre la vermoulure</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions que l’on nous pose sur les vrillettes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment reconnaître une vrillette ?">
+          <p>
+            L’adulte de la petite vrillette est un coléoptère brun de 2,5 à 5 mm, au thorax bombé
+            formant une sorte de capuchon qui masque la tête vue de dessus, et aux élytres marqués
+            de fines stries ponctuées. La grosse vrillette est plus grande, de 5 à 9 mm, brun sombre
+            tacheté de poils jaunâtres.
+          </p>
+          <p>
+            Sans voir l’insecte, on se fie aux trous — ronds, souvent nombreux et groupés — et à la
+            vermoulure granuleuse qui s’écoule et forme de petits tas, contrairement à celle du
+            capricorne qui reste tassée dans la galerie.
+          </p>
+        </Answer>
+        <Answer question="Un meuble attaqué peut-il contaminer toute la maison ?">
+          <p>
+            C’est possible mais rare. Les adultes volent et peuvent pondre ailleurs, mais ils
+            recherchent un bois dont les caractéristiques leur conviennent : essence, humidité,
+            état de surface. Un meuble attaqué placé dans un logement chauffé et sec a peu de
+            chances de déclencher une infestation de la charpente.
+          </p>
+          <p>
+            Cela dit, un meuble attaqué mérite d’être traité pour lui-même : la petite vrillette
+            peut ruiner un ouvrage de menuiserie en quelques cycles.
+          </p>
+        </Answer>
+        <Answer question="Que signifie la présence de sciure sous une poutre de chêne ?">
+          <p>
+            Dans du chêne, deux hypothèses dominent : la grosse vrillette si le bois est humide, ou
+            une attaque ancienne dont la sciure a été remobilisée par une vibration ou un courant
+            d’air. La petite vrillette est également possible si l’aubier est présent.
+          </p>
+          <p>
+            La méthode fiable consiste à nettoyer complètement la zone, à la repérer, et à
+            revenir vérifier quelques semaines plus tard. Une réapparition au même endroit signe
+            une activité en cours. <a href="/sciure-charpente">Sciure sous une charpente : que faire</a>.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Confusions items={v.confusions} />
+
+  <Faq items={v.faq} title="Questions fréquentes sur les vrillettes" />
+
+  <ZonesMini text="Nous intervenons dans les huit départements d’Île-de-France. Les situations de grosse vrillette sont plus fréquentes dans les secteurs de vallée et de bord de rivière, là où l’humidité des bois bas est structurellement plus élevée." />
+
+  <Maillage
+    title="Poursuivre"
+    items={[
+      { label: 'Traitement des vrillettes', href: '/traitement-vrillette', text: 'Traiter la cause avant l’insecte : assainissement, ventilation, puis traitement du bois.' },
+      { label: 'Vrillette ou capricorne ?', href: '/blog/diagnostic/vrillette-ou-capricorne', text: 'Trous, vermoulure, essence : les critères qui permettent de trancher.' },
+      { label: 'Insectes dans les poutres', href: '/insectes-poutres', text: 'Les pièces de forte section demandent une évaluation différente de celle des bois minces.' },
+    ]}
+  />
+
+  <CtaBand
+    title="Un tic-tac dans une poutre, ou de la sciure au sol ?"
+    text="Dans les deux cas, la première question est celle de l’humidité du bois. Nous la mesurons sur place avant de parler de traitement."
+  />
+</Base>

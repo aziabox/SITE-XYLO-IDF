@@ -1,0 +1,62 @@
+---
+import type { Insecte } from '~/data/insectes';
+interface Props { insecte: Insecte }
+const { insecte: i } = Astro.props;
+
+const lignes: { k: string; v: string | null }[] = [
+  { k: 'Nom scientifique', v: i.scientific },
+  { k: 'Bois attaqués', v: i.boisCibles },
+  { k: 'Trous de sortie', v: i.trousDiam },
+  { k: 'Vermoulure', v: i.vermoulure },
+  { k: 'Durée du cycle', v: i.cycle },
+  { k: 'Période d’émergence', v: i.emergence },
+  { k: 'Humidité du bois', v: i.humidite },
+  { k: 'Bruit perceptible', v: i.bruit ?? 'Aucun bruit perceptible.' },
+];
+---
+<div class="fiche">
+  <div class="fiche__head">
+    <p class="fiche__eyebrow">Fiche d’identité</p>
+    <h2 class="fiche__title">{i.name}</h2>
+    <p class="fiche__sci">{i.scientific}</p>
+    {i.aka && i.aka.length > 0 && (
+      <p class="fiche__aka">Également appelé : {i.aka.join(', ')}</p>
+    )}
+  </div>
+  <dl class="fiche__dl">
+    {lignes.filter((l) => l.v).map((l) => (
+      <div class="fiche__row">
+        <dt>{l.k}</dt>
+        <dd>{l.v}</dd>
+      </div>
+    ))}
+  </dl>
+  <div class="fiche__foot">
+    <p class="fiche__flabel">Essences concernées</p>
+    <ul class="tags">{i.essences.map((e) => <li class="tag tag--stone">{e}</li>)}</ul>
+  </div>
+</div>
+
+<style>
+  .fiche {
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--sh-sm);
+  }
+  .fiche__head {
+    background: var(--sauge-800); color: #F3EFE4;
+    padding: 1.4rem 1.5rem;
+  }
+  .fiche__eyebrow {
+    font-size: .62rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+    color: var(--cuivre-300); margin-bottom: .45rem;
+  }
+  .fiche__title { color: #F5F1E6; font-size: 1.5rem; margin-bottom: .1rem; }
+  .fiche__sci { font-style: italic; font-size: .85rem; color: rgba(243,239,228,.66); }
+  .fiche__aka { font-size: .74rem; color: rgba(243,239,228,.55); margin-top: .5rem; }
+  .fiche__row { display: grid; grid-template-columns: 155px minmax(0, 1fr); gap: 1rem; padding: .85rem 1.5rem; border-bottom: 1px solid var(--c-border); }
+  .fiche__row dt { font-size: var(--t-xs); font-weight: 650; color: var(--c-text-muted); }
+  .fiche__row dd { margin: 0; font-size: var(--t-sm); color: var(--c-text-soft); line-height: 1.6; }
+  .fiche__foot { padding: 1.15rem 1.5rem 1.4rem; background: var(--sauge-50); }
+  .fiche__flabel { font-size: var(--t-xs); font-weight: 650; color: var(--c-text-muted); margin-bottom: .55rem; }
+  @media (max-width: 560px) { .fiche__row { grid-template-columns: 1fr; gap: .2rem; } }
+</style>

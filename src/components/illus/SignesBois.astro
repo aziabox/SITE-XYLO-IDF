@@ -1,0 +1,79 @@
+---
+/**
+ * Coupe schématique d'une pièce de bois attaquée : galeries internes, trous de
+ * sortie et vermoulure. Sert de support pédagogique, sans effet sensationnaliste.
+ */
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<svg class={`illus-signes ${cls}`} viewBox="0 0 640 380" role="img"
+     aria-label="Coupe d’une pièce de bois montrant des galeries internes, des trous de sortie en surface et un dépôt de vermoulure au sol.">
+  <defs>
+    <linearGradient id="sg-wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#D6BE9C" /><stop offset=".55" stop-color="#C2A47E" /><stop offset="1" stop-color="#A98A63" />
+    </linearGradient>
+    <pattern id="sg-grain" width="6" height="6" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="6" y2="0" stroke="#8A6F52" stroke-width="0.7" opacity="0.25" />
+    </pattern>
+    <clipPath id="sg-clip"><rect x="60" y="70" width="520" height="150" rx="4" /></clipPath>
+  </defs>
+
+  {/* Pièce de bois */}
+  <rect x="60" y="70" width="520" height="150" rx="4" fill="url(#sg-wood)" stroke="#6E5740" stroke-width="2" />
+  <rect x="60" y="70" width="520" height="150" rx="4" fill="url(#sg-grain)" />
+
+  {/* Galeries internes */}
+  <g clip-path="url(#sg-clip)" fill="none" stroke="#7A6248" stroke-width="7" stroke-linecap="round" opacity=".78">
+    <path d="M100 190 C150 150 160 200 210 165 C255 135 270 185 320 160" />
+    <path d="M130 120 C180 100 200 145 255 118 C300 96 330 132 380 110" />
+    <path d="M330 200 C380 175 400 210 450 182 C495 158 515 195 558 172" />
+    <path d="M395 128 C430 112 455 148 500 126" />
+  </g>
+  {/* Vermoulure dans les galeries */}
+  <g clip-path="url(#sg-clip)" fill="none" stroke="#E4D3B4" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="3 5" opacity=".85">
+    <path d="M100 190 C150 150 160 200 210 165 C255 135 270 185 320 160" />
+    <path d="M130 120 C180 100 200 145 255 118 C300 96 330 132 380 110" />
+    <path d="M330 200 C380 175 400 210 450 182 C495 158 515 195 558 172" />
+  </g>
+
+  {/* Trous de sortie */}
+  <g fill="#3E3024">
+    <ellipse cx="196" cy="70" rx="7" ry="4" />
+    <ellipse cx="318" cy="70" rx="6.5" ry="3.8" />
+    <ellipse cx="452" cy="70" rx="7" ry="4" />
+    <circle cx="258" cy="220" r="2.6" /><circle cx="272" cy="220" r="2.2" />
+    <circle cx="500" cy="220" r="2.4" />
+  </g>
+
+  {/* Dépôt de vermoulure au sol */}
+  <g>
+    <path d="M232 312 Q258 292 288 312 Q262 320 232 312 Z" fill="#DCC9A6" stroke="#C3AC85" stroke-width="1" />
+    <path d="M472 314 Q496 296 524 314 Q498 321 472 314 Z" fill="#DCC9A6" stroke="#C3AC85" stroke-width="1" />
+    <g fill="#C9B28C">
+      <circle cx="248" cy="300" r="1.6" /><circle cx="268" cy="296" r="1.4" /><circle cx="278" cy="304" r="1.5" />
+      <circle cx="486" cy="302" r="1.5" /><circle cx="508" cy="299" r="1.4" />
+    </g>
+    <line x1="120" y1="316" x2="560" y2="316" stroke="#C6BAA4" stroke-width="2" />
+  </g>
+
+  {/* Filets de chute */}
+  <g stroke="#C3AC85" stroke-width="1" stroke-dasharray="2 6" opacity=".9">
+    <line x1="258" y1="224" x2="258" y2="300" /><line x1="500" y1="224" x2="500" y2="300" />
+  </g>
+
+  {/* Annotations */}
+  <g class="sg-an">
+    <line x1="196" y1="66" x2="196" y2="40" stroke="#A9663F" stroke-width="1.3" />
+    <text x="196" y="32" text-anchor="middle">Trous de sortie</text>
+    <line x1="380" y1="145" x2="600" y2="115" stroke="#A9663F" stroke-width="1.3" />
+    <text x="604" y="112" text-anchor="end" class="sg-in">Galeries internes</text>
+    <text x="260" y="348" text-anchor="middle">Vermoulure au sol</text>
+  </g>
+</svg>
+
+<style>
+  .illus-signes { width: 100%; height: auto; }
+  .sg-an text { font-family: var(--f-body); font-size: 13px; font-weight: 650; fill: #8F5333; }
+  .sg-in { fill: #F3EFE4; paint-order: stroke; stroke: rgba(62,48,36,.55); stroke-width: 3; }
+  @media (max-width: 640px) { .sg-an text { font-size: 16px; } }
+</style>

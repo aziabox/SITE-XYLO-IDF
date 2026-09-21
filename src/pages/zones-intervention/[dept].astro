@@ -1,0 +1,184 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import CarteIdf from '~/components/CarteIdf.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Faq from '~/components/Faq.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import { DEPARTEMENTS } from '~/data/departements';
+import { VILLES_BY_DEPT } from '~/data/villes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+export const getStaticPaths = (() =>
+  DEPARTEMENTS.map((d) => ({ params: { dept: d.slug }, props: { d } }))) satisfies GetStaticPaths;
+
+const { d } = Astro.props;
+const villes = VILLES_BY_DEPT[d.slug] ?? [];
+const path = `/zones-intervention/${d.slug}`;
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Zones d’intervention', href: '/zones-intervention' },
+  { label: d.name },
+];
+const etapes = [
+  { title: 'Échange préalable', text: `Vous décrivez ce que vous observez et la commune concernée. Nous vous indiquons ce qu’il est utile de vérifier avant même un déplacement ${d.inName}.` },
+  { title: 'Visite sur place', text: 'Examen des ouvrages bois accessibles, sondage des pièces suspectes, mesure d’humidité en plusieurs points, identification de l’espèce lorsque les indices convergent.' },
+  { title: 'Rapport écrit', text: 'Constat, déductions, incertitudes et zones non examinées. Avec, le cas échéant, les préconisations et un devis détaillé.' },
+  { title: 'Intervention', text: 'Mise à nu des bois, bûchage, dépoussiérage, injection et pulvérisation selon la section des pièces.' },
+  { title: 'Suivi lorsqu’il est prévu', text: 'Zones témoins nettoyées et datées, contrôle différé pour vérifier l’arrêt effectif de l’activité.' },
+];
+const jsonLd = [
+  serviceSchema({
+    name: `Traitement des insectes xylophages ${d.inName}`,
+    description: d.intro,
+    path,
+    areaName: d.name,
+  }),
+  faqSchema(d.faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title={`Insectes xylophages ${d.inName} (${d.code}) : diagnostic et traitement`}
+  description={d.intro}
+  path={path}
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow={`Département ${d.code}`}
+    title={`Insectes xylophages ${d.inName} : diagnostic et traitement du bois`}
+    lead={d.intro}
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Le bâti {d.ofName} et ce qu’il implique pour le bois</h2>
+            <p class="lead">{d.contexte.split('. ')[0]}.</p>
+            <p>{d.contexte.split('. ').slice(1).join('. ')}</p>
+          </div>
+
+          <div>
+            <h2>Les types de construction que nous rencontrons</h2>
+            <ul class="list-dot">{d.habitat.map((h) => <li>{h}</li>)}</ul>
+            <p style="margin-top:1rem">
+              <strong>Essences le plus souvent en présence :</strong> {d.boisTypiques}
+            </p>
+          </div>
+
+          <div>
+            <h2>Les ouvrages bois à contrôler en priorité</h2>
+            <p>
+              Ces zones concentrent les facteurs défavorables : humidité, invisibilité, ou
+              concentration des efforts. Ce sont celles par lesquelles nous commençons.
+            </p>
+            <ul class="list-check">{d.batiSensible.map((b) => <li>{b}</li>)}</ul>
+          </div>
+
+          <div class="note note--stone">
+            <span class="note__title">Ce que nous n’écrirons pas sur cette page</span>
+            Aucune statistique d’infestation {d.inName}, aucune affirmation du type « département
+            fortement touché ». Il n’existe pas de donnée publique fiable à l’échelle communale sur
+            la présence des insectes xylophages, et inventer un chiffre pour impressionner un
+            lecteur n’est pas une pratique que nous acceptons. Ce que nous pouvons décrire, en
+            revanche, c’est le bâti réel et les configurations qui rendent une attaque plausible.
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">{d.name} en bref</h3>
+            <dl class="dep__dl">
+              <div><dt>Code</dt><dd>{d.code}</dd></div>
+              <div><dt>Préfecture</dt><dd>{d.prefecture}</dd></div>
+              <div><dt>Région</dt><dd>Île-de-France</dd></div>
+              {villes.length > 0 && (
+                <div><dt>Pages communales</dt><dd>{villes.length}</dd></div>
+              )}
+            </dl>
+          </div>
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.05rem">Nos prestations</h3>
+            <ul class="list-dot small" style="margin-top:.6rem">
+              <li><a href="/diagnostic-insectes-xylophages">Diagnostic d’infestation</a></li>
+              <li><a href="/traitement-charpente">Traitement de charpente</a></li>
+              <li><a href="/traitement-bois">Traitement du bois</a></li>
+              <li><a href="/prevention-insectes-xylophages">Prévention et surveillance</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {villes.length > 0 && (
+    <section class="section section--sage">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Communes</p>
+          <h2>Villes {d.ofName} disposant d’une page dédiée</h2>
+          <p class="lead">
+            Chacune décrit un contexte bâti réellement spécifique. Notre intervention {d.inName}
+            ne se limite pas à ces communes.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          {villes.map((v) => (
+            <a href={`/traitement-xylophages-${v.slug}`} class="card card--link">
+              <p class="sci">{v.cp}</p>
+              <h3>{v.name}</h3>
+              <p>{v.intro}</p>
+              <span class="card__foot link-arrow">Consulter</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="wrap">
+      <Etapes eyebrow="Déroulé" title={`Comment nous intervenons ${d.inName}`} items={etapes} />
+    </div>
+  </section>
+
+  <section class="section section--warm">
+    <div class="wrap-wide">
+      <div class="section-head">
+        <p class="eyebrow">Carte</p>
+        <h2>Situer {d.name} dans la région</h2>
+        <p class="lead">
+          Cette carte représente les zones desservies. Elle ne comporte aucun marqueur
+          d’intervention ni de client.
+        </p>
+      </div>
+      <CarteIdf active={d.slug} id={`carte-${d.slug}`} compact />
+    </div>
+  </section>
+
+  <Faq items={d.faq} title={`Questions fréquentes ${d.inName}`} />
+
+  <Maillage title="Poursuivre" items={[
+    { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Reconnaître l’espèce avant de décider d’un traitement.' },
+    { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Ce que comporte une visite et ce que contient le rapport.' },
+    { label: 'Toutes les zones d’intervention', href: '/zones-intervention', text: 'Les huit départements d’Île-de-France et la carte interactive.' },
+  ]} />
+
+  <CtaBand
+    title={`Une charpente à faire examiner ${d.inName} ?`}
+    text="Décrivez-nous ce que vous observez et la commune concernée. Nous vous dirons franchement si une visite s’impose."
+  />
+</Base>
+
+<style>
+  .dep__dl { margin-top: .9rem; }
+  .dep__dl > div { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+  .dep__dl > div:last-child { border-bottom: 0; }
+  .dep__dl dt { font-size: var(--t-xs); opacity: .65; }
+  .dep__dl dd { margin: 0; font-size: var(--t-sm); font-weight: 600; color: #F3EFE4; }
+</style>

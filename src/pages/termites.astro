@@ -1,0 +1,266 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import FicheIdentite from '~/components/FicheIdentite.astro';
+import Confusions from '~/components/Confusions.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import { INSECTE_BY_SLUG } from '~/data/insectes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const t = INSECTE_BY_SLUG['termites'];
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Insectes xylophages', href: '/insectes-xylophages' },
+  { label: 'Termites' },
+];
+const jsonLd = [
+  serviceSchema({
+    name: 'Diagnostic et traitement des termites',
+    description: "Recherche de termites, identification des cheminements, traitement de sol périmétrique, traitement des bois et suivi, en Île-de-France.",
+    path: '/termites',
+    serviceType: 'Traitement des termites',
+  }),
+  faqSchema(t.faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Termites : reconnaître, diagnostiquer et traiter une infestation"
+  description="Termites souterrains : comment fonctionne une colonie, quels signes les trahissent, pourquoi ils ne laissent ni trou ni sciure, et comment se déroule un traitement en Île-de-France."
+  path="/termites"
+  crumbs={crumbs}
+  jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Fiche espèce"
+    title="Termites : un insecte social qui travaille à l’abri du regard"
+    lead="Les termites ne se comportent comme aucun autre insecte du bois. Ils vivent en colonie, circulent à l’abri de la lumière et consomment le bois de l’intérieur. C’est ce qui les rend à la fois difficiles à repérer et sérieux à traiter."
+    answer="Les termites souterrains vivent en colonie dans le sol et remontent vers le bois par des galeries. Contrairement aux coléoptères xylophages, ils ne laissent <strong>ni trou de sortie, ni vermoulure</strong> : une pièce peut être largement évidée tout en paraissant intacte. L’indice le plus caractéristique est le <strong>cordonnet de terre</strong> construit le long des maçonneries."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Une colonie, pas un insecte isolé</h2>
+            <p class="lead">
+              C’est la différence fondamentale avec le capricorne ou la vrillette. Chez ces
+              derniers, une larve creuse seule sa galerie, se transforme, sort et meurt. Chez les
+              termites, ce qui attaque le bois est une organisation.
+            </p>
+            <p>
+              Une colonie de termites souterrains s’installe dans le sol. Elle est composée
+              d’ouvriers, largement majoritaires, qui récoltent le bois et nourrissent le reste
+              du groupe ; de soldats, reconnaissables à leur tête sombre et à leurs mandibules,
+              chargés de la défense ; et de reproducteurs. Les ouvriers ne supportent ni la
+              lumière ni l’air sec : ils circulent dans des galeries creusées dans le sol ou dans
+              le bois, ou bien dans des tunnels de terre qu’ils construisent eux-mêmes lorsqu’ils
+              doivent traverser une surface qu’ils ne peuvent pas creuser, une maçonnerie par
+              exemple.
+            </p>
+            <p>
+              Cette organisation a deux conséquences pratiques. D’abord, le foyer n’est pas
+              nécessairement là où les dégâts apparaissent : il peut se trouver à plusieurs
+              mètres, sous la dalle, dans le jardin, parfois sur une parcelle voisine. Ensuite,
+              traiter les bois attaqués sans s’occuper de la colonie ne règle rien : les ouvriers
+              reviendront par un autre chemin.
+            </p>
+          </div>
+
+          <div class="note note--copper">
+            <span class="note__title">Pourquoi il n’y a ni trou ni sciure</span>
+            Les termites consomment le bois par l’intérieur en suivant les parties tendres, et
+            ils tapissent leurs galeries de terre et de déjections. Rien n’est rejeté vers
+            l’extérieur, et aucun adulte ne perce la surface pour sortir. Une poutre attaquée
+            conserve donc une peau intacte, parfois épaisse d’un millimètre à peine, jusqu’à ce
+            qu’elle cède sous la pression d’un doigt.
+          </div>
+
+          <div>
+            <h2>Les signes qui doivent alerter</h2>
+            <ul class="list-check">
+              {t.signes.map((s) => <li>{s}</li>)}
+            </ul>
+            <p class="small muted" style="margin-top:1rem">
+              Aucun de ces signes n’est à lui seul une preuve. Un bois qui sonne creux peut avoir
+              été attaqué par un autre insecte, ou simplement présenter une fente interne. C’est
+              la présence conjointe de plusieurs indices, et notamment des cordonnets de terre,
+              qui oriente franchement vers les termites.
+            </p>
+          </div>
+
+          <div>
+            <h2>Où chercher dans le bâtiment</h2>
+            <p>
+              Les termites souterrains remontent du sol. Les zones à examiner en priorité se
+              situent donc au contact de la terre ou de la maçonnerie basse, et non dans le comble
+              comme on l’imagine souvent.
+            </p>
+            <ul class="list-dot">
+              {t.zones.map((z) => <li>{z}</li>)}
+            </ul>
+            <p>
+              L’examen ne s’arrête pas au bâtiment. Une souche non dessouchée, un tas de bois
+              stocké à même le sol, un vieux poteau de clôture ou des cartons entreposés dans une
+              cave constituent des réserves de cellulose qui entretiennent la colonie à proximité
+              immédiate.
+            </p>
+          </div>
+        </div>
+
+        <aside class="split__side">
+          <FicheIdentite insecte={t} />
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Risque pour la structure</h3>
+            <p>{t.risque}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- RÉGLEMENTATION ---------------- */}
+  <section class="section section--sage" id="reglementation">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Cadre réglementaire</p>
+        <h2>Ce que prévoit la réglementation termites</h2>
+        <p class="lead">
+          Les termites sont le seul insecte xylophage à faire l’objet d’un dispositif
+          réglementaire spécifique en France. Voici ce qu’il faut en retenir, et ce que nous ne
+          pouvons pas vérifier à votre place.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>Des zones délimitées par arrêté</h3>
+          <p>
+            Les préfets délimitent, par arrêté, les zones contaminées par les termites ou
+            susceptibles de l’être. Ces arrêtés désignent des communes, parfois des parties de
+            commune, et ils évoluent dans le temps. C’est ce zonage qui déclenche les obligations
+            particulières.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Une information lors de la vente</h3>
+          <p>
+            Lorsqu’un bien se situe dans une zone délimitée, un état relatif à la présence de
+            termites doit être joint au dossier de diagnostic technique remis à l’acquéreur. Sa
+            durée de validité est courte, ce qui suppose de le faire réaliser au bon moment dans
+            le calendrier de la vente.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Une déclaration en mairie</h3>
+          <p>
+            Dans les zones délimitées, la présence de termites constatée dans un immeuble doit
+            être déclarée en mairie. Cette obligation vise à permettre le suivi collectif d’un
+            phénomène qui, par nature, ne s’arrête pas aux limites de propriété.
+          </p>
+        </div>
+      </div>
+
+      <div class="note note--stone" style="margin-top:1.75rem">
+        <span class="note__title">Nous ne nous substituons pas à la vérification officielle</span>
+        Nous ne publions pas de liste de communes classées, et nous n’affirmerons jamais qu’une
+        adresse est, ou n’est pas, en zone délimitée. Ces arrêtés changent, et une information
+        obsolète publiée sur un site commercial peut avoir des conséquences réelles dans une
+        vente. L’information se vérifie auprès de la mairie de la commune concernée ou de la
+        préfecture du département.
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- DIAGNOSTIC ---------------- */}
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Diagnostic</p>
+        <h2>Comment nous recherchons des termites</h2>
+        <p class="lead">
+          La recherche est méthodique et part du bas. Elle vise autant à établir la présence de
+          termites qu’à comprendre par où ils passent, ce qui conditionne entièrement le
+          traitement.
+        </p>
+      </div>
+      <ol class="list-num">
+        {t.diagnostic.map((d) => <li>{d}</li>)}
+      </ol>
+      <div class="btn-row" style="margin-top:2rem">
+        <a href="/traitement-termites" class="btn btn--primary">Traitement des termites</a>
+        <a href="/diagnostic-insectes-xylophages" class="btn btn--ghost">Comment se déroule un diagnostic</a>
+      </div>
+    </div>
+  </section>
+
+  {/* ---------------- GEO ---------------- */}
+  <section class="section section--warm">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Les questions que l’on nous pose sur les termites</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment savoir si des termites sont présents ?">
+          <p>
+            On recherche des cordonnets de terre le long des murs, des soubassements et dans les
+            caves, puis on sonde les bois au contact du sol. Un bois attaqué par des termites
+            paraît sain mais sonne creux et s’enfonce sous la pression ; lorsqu’on l’ouvre, il est
+            feuilleté dans le sens du fil, avec des cloisons de terre entre les couches.
+          </p>
+          <p>
+            L’essaimage de reproducteurs ailés, au printemps ou en été, est parfois le premier
+            signe visible. On les distingue des fourmis ailées par leurs quatre ailes de même
+            longueur, leur taille non étranglée et leurs antennes droites.
+          </p>
+        </Answer>
+        <Answer question="Les termites peuvent-ils fragiliser une charpente ?">
+          <p>
+            Oui, mais ils atteignent rarement la charpente en premier. Les termites souterrains
+            remontent du sol et s’attaquent d’abord aux bois bas : planchers, solives d’about,
+            huisseries, plinthes. Ils peuvent ensuite progresser vers les étages en suivant les
+            cloisons et les gaines, et atteindre une charpente si l’infestation dure.
+          </p>
+          <p>
+            Le risque structurel est réel précisément parce que la progression reste invisible :
+            l’alerte ne vient pas d’un signe extérieur, mais du moment où une pièce cède.
+          </p>
+        </Answer>
+        <Answer question="Un traitement anti-termites est-il définitif ?">
+          <p>
+            Non, et il faut se méfier de toute affirmation contraire. Une colonie est un organisme
+            durable, installé dans le sol, qui peut s’étendre au-delà de la parcelle traitée. Un
+            traitement bien conduit interrompt l’attaque et protège le bâtiment, mais il s’inscrit
+            dans une logique de surveillance, pas d’éradication définitive garantie.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Confusions items={t.confusions} intro="Deux confusions reviennent systématiquement : celle avec les fourmis ailées lors d’un essaimage, et celle avec les coléoptères xylophages lorsqu’on découvre du bois dégradé." />
+
+  <Faq items={t.faq} title="Questions fréquentes sur les termites" />
+
+  <ZonesMini text="Nous intervenons dans les huit départements d’Île-de-France. Pour les termites, la première étape consiste toujours à vérifier le zonage réglementaire applicable à la commune concernée, auprès de la mairie ou de la préfecture." />
+
+  <Maillage
+    title="Poursuivre"
+    items={[
+      { label: 'Traitement des termites', href: '/traitement-termites', text: 'Barrière de sol, traitement des bois, systèmes d’appâts et suivi dans le temps.' },
+      { label: 'Diagnostic d’infestation', href: '/diagnostic-insectes-xylophages', text: 'Comment se déroule une visite, ce qui est observé et ce qui figure dans le rapport.' },
+      { label: 'Les insectes xylophages', href: '/insectes-xylophages', text: 'Vue d’ensemble des espèces qui dégradent le bois du bâtiment.' },
+    ]}
+  />
+
+  <CtaBand
+    title="Vous avez repéré des cordonnets de terre ?"
+    text="Ne les détruisez pas avant notre passage : ils indiquent par où la colonie circule, et c’est une information déterminante pour le traitement."
+  />
+</Base>

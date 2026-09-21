@@ -1,0 +1,77 @@
+---
+import BatimentPage from '~/components/BatimentPage.astro';
+---
+<BatimentPage
+  path="/traitement-bois-batiment"
+  seoTitle="Traitement du bois : bâtiments d’activité et grandes structures"
+  seoDescription="Traitement du bois dans les bâtiments d’activité : anciens ateliers, granges, dépendances, charpentes de grande portée. Inspection des appuis et des abouts, intervention en hauteur, coordination de chantier."
+  eyebrow="Type de bâtiment"
+  h1="Bâtiments d’activité et grandes structures bois"
+  lead="Une charpente de grande portée ne se comporte pas comme une charpente de maison. Les efforts y sont concentrés sur peu de points, et une dégradation localisée au mauvais endroit a des conséquences bien plus rapides."
+  answer="Sur une charpente de <strong>grande portée</strong> — ancien atelier, grange, hangar, bâtiment reconverti — l’inspection porte en priorité sur les <strong>zones d’appui</strong>, les <strong>abouts de poutre</strong> et les <strong>assemblages</strong>, parce que c’est là que les efforts se concentrent. Ces bois sont souvent d’origine et n’ont jamais reçu de traitement."
+  serviceName="Traitement du bois des bâtiments d’activité"
+  sections={[
+    {
+      h2: 'Pourquoi la grande portée change la donne',
+      intro: "Ce n’est pas une question de taille, c’est une question de répartition des efforts.",
+      paragraphs: [
+        "Dans une charpente de maison, les charges se répartissent sur un grand nombre de chevrons et de pannes. La défaillance d’une pièce isolée est rarement immédiate, parce que les pièces voisines reprennent une partie de l’effort.",
+        "Dans une charpente d’atelier ou de grange, les fermes sont espacées, les portées importantes, et chaque assemblage reprend une charge considérable. Une dégradation de quelques centimètres au droit d’un appui ou sur un about de poutre peut compromettre la stabilité d’une travée entière.",
+        "L’inspection y suit donc une logique différente : on ne parcourt pas l’ensemble des bois de la même façon, on hiérarchise en fonction de ce que chaque pièce supporte. Les zones d’appui, les abouts, les assemblages et les points d’infiltration de couverture passent avant tout le reste.",
+      ],
+    },
+    {
+      h2: 'Les bâtiments que nous rencontrons',
+      list: [
+        { t: 'Anciens ateliers et locaux industriels', d: 'Très présents en Seine-Saint-Denis et dans l’est parisien. Charpentes de grande portée, sheds, bois d’origine jamais traités.' },
+        { t: 'Granges et bâtiments agricoles', d: 'Seine-et-Marne, Val-d’Oise, Essonne. Chêne de forte section, volumes non chauffés, attaques anciennes fréquentes.' },
+        { t: 'Dépendances et communs', d: 'Rarement inspectés, souvent point de départ d’une recolonisation du bâtiment principal.' },
+        { t: 'Bâtiments reconvertis en logements ou bureaux', d: 'Le moment de la reconversion est celui où la charpente est accessible : c’est la fenêtre à ne pas manquer.' },
+        { t: 'Structures en lamellé-collé', d: 'Bâtiments récents. Traités à la fabrication, mais les coupes de chantier et les zones exposées demandent une surveillance.' },
+      ],
+    },
+    {
+      h2: 'Le bon moment : avant la reconversion',
+      paragraphs: [
+        "La majorité des anciens bâtiments d’activité que nous voyons sont en cours de transformation en logements, en bureaux ou en espaces de travail. C’est une chance, parce que c’est le seul moment où la charpente est entièrement accessible.",
+        "Une fois les rampants isolés, les plafonds posés et les doublages montés, une partie des bois devient inaccessible pour longtemps, et l’intervention change d’échelle. Un traitement mené sur une charpente nue touche l’intégralité des pièces, sur toutes leurs faces, pour un coût sans rapport avec celui d’une reprise ultérieure.",
+        "Nous intervenons donc volontiers en amont, en coordination avec le maître d’œuvre, dans le planning de chantier plutôt qu’après coup.",
+      ],
+    },
+    {
+      h2: 'Intervenir en hauteur et sur de grands volumes',
+      paragraphs: [
+        "Les moyens d’accès font partie intégrante du devis et ne doivent pas être découverts en cours de chantier : nacelle, échafaudage roulant, plateforme, selon la hauteur et la configuration des lieux.",
+        "Sur un bâtiment en activité, nous organisons l’intervention par zones afin de limiter l’immobilisation, et nous établissons avec l’exploitant un calendrier compatible avec l’usage des locaux. Les consignes de réintégration sont communiquées avant le chantier.",
+      ],
+    },
+  ]}
+  vigilance={{
+    title: 'Priorités d’inspection',
+    items: [
+      'Les <strong>zones d’appui</strong> des fermes sur maçonnerie ou poteau',
+      'Les <strong>abouts de poutre</strong> engagés dans les murs',
+      'Les <strong>assemblages</strong> et les entailles qui réduisent la section',
+      'Les <strong>points d’infiltration</strong> de couverture, noues et sheds',
+      'Les <strong>bois en contact avec le sol</strong>, en particulier en dépendance',
+      'Les <strong>stockages de bois</strong> et de cellulose à même le sol',
+    ],
+  }}
+  aside={{
+    title: 'Attaque ancienne ou active ?',
+    text: "Dans une grange ou un atelier ancien, les bois portent presque toujours des traces d’attaques passées. Le contrôle différé — zones témoins nettoyées, repérées et datées — est ici particulièrement utile : il évite un traitement généralisé coûteux sur des volumes importants.",
+  }}
+  faq={[
+    { q: 'Un ancien atelier présente-t-il des risques particuliers ?', a: "Les charpentes d'atelier sont souvent de grande portée, avec des assemblages et des appuis qui concentrent les efforts. Une dégradation localisée au droit d'un appui y a plus de conséquences que dans une charpente courante. L'inspection porte donc en priorité sur les zones d'appui, les abouts de poutre et les points d'infiltration de couverture." },
+    { q: 'Faut-il traiter une grange avant de la transformer ?', a: "C'est le moment le plus favorable. La charpente est accessible, les bois sont visibles sur toutes leurs faces, et un traitement appliqué avant isolation et doublage touche l'intégralité des pièces. Une fois les rampants isolés, une partie du bois devient inaccessible et le coût comme la complexité augmentent nettement." },
+    { q: 'Comment se passe l’intervention sur un bâtiment en activité ?', a: "Nous organisons le chantier par zones, avec un calendrier établi avec l'exploitant pour limiter l'immobilisation. Les moyens d'accès — nacelle, échafaudage — figurent au devis, et les consignes de réintégration sont communiquées avant le début des travaux." },
+    { q: 'Les charpentes en lamellé-collé sont-elles concernées ?', a: "Elles sont traitées à la fabrication et présentent un risque faible en usage intérieur sec. Les points à surveiller sont les coupes réalisées sur chantier, qui exposent du bois non protégé, et les parties exposées aux intempéries, où l'humidité peut créer des conditions favorables." },
+  ]}
+  liens={[
+    { label: 'Insectes dans les poutres', href: '/insectes-poutres', text: 'Fortes sections et abouts : la méthode d’évaluation.' },
+    { label: 'Charpente ancienne', href: '/traitement-charpente-ancienne', text: 'Distinguer l’ancien de l’actif sur un bois de forte section.' },
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Le cadre technique général.' },
+  ]}
+  ctaTitle="Un bâtiment d’activité ou une grange à contrôler ?"
+  ctaText="Si une reconversion est prévue, c’est le moment d’intervenir : la charpente ne sera plus jamais aussi accessible."
+/>

@@ -1,0 +1,161 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import Charpente from '~/components/illus/Charpente.astro';
+import { INSECTE_BY_SLUG } from '~/data/insectes';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const c = INSECTE_BY_SLUG['capricorne-des-maisons'];
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Traitements', href: '/traitement-insectes-xylophages' },
+  { label: 'Traitement du capricorne' },
+];
+const etapes = c.traitement.map((t, i) => ({
+  title: ['Mise à nu des bois', 'Bûchage', 'Dépoussiérage', 'Injection sous pression', 'Pulvérisation', 'Renfort ou remplacement'][i] ?? `Étape ${i + 1}`,
+  text: t,
+}));
+const faq = [
+  { q: 'Le traitement suffit-il, ou faut-il renforcer la charpente ?', a: "Cela dépend de la section saine restante, pièce par pièce. Le produit arrête l'attaque, il ne restitue pas la résistance du bois déjà consommé. Sur une charpente de pavillon aux sections modestes, il n'est pas rare qu'une partie des chevrons ou des pannes doive être doublée ou remplacée. Nous distinguons toujours, dans le rapport, ce qui relève du traitement et ce qui relève de la reprise structurelle." },
+  { q: 'Pourquoi l’injection est-elle indispensable ?', a: "Parce que les galeries du capricorne peuvent courir à plusieurs centimètres sous la surface. Une pulvérisation, même généreuse, imprègne les premiers millimètres du bois et n'atteint pas une larve installée au cœur d'une panne de 200 mm. L'injection par chevilles, selon un maillage régulier, est la seule méthode qui permette de diffuser le produit en profondeur." },
+  { q: 'Faut-il déposer l’isolation des combles ?', a: "Lorsque l'isolant est posé entre chevrons ou en rampant, oui : il masque précisément les bois à traiter. C'est un poste de coût non négligeable, et c'est aussi la raison pour laquelle il vaut mieux traiter préventivement une charpente avant d'isoler un comble plutôt qu'après. Sur un comble perdu avec isolant en plancher, la dépose est généralement limitée." },
+  { q: 'Combien de temps avant de savoir si c’est efficace ?', a: "Le cycle larvaire du capricorne étant long, il n'y a pas de signe immédiat. L'absence de nouvelle vermoulure sur des zones témoins nettoyées et repérées, constatée sur deux saisons chaudes successives, constitue l'indice le plus fiable. C'est la raison pour laquelle nous proposons un contrôle différé plutôt qu'une déclaration de réussite le jour du chantier." },
+  { q: 'Peut-on traiter en hiver ?', a: "Oui. Les produits s'appliquent toute l'année, et l'hiver présente même un avantage pratique : les combles sont moins chauds à travailler. La seule contrainte est l'humidité du bois, qui doit rester compatible avec la pénétration du produit ; un bois détrempé par une infiltration récente doit d'abord sécher." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Traitement du capricorne des maisons', description: "Bûchage, dépoussiérage, injection sous pression et pulvérisation des charpentes en résineux attaquées par le capricorne des maisons, en Île-de-France.", path: '/traitement-capricorne', serviceType: 'Traitement du capricorne des maisons' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement du capricorne des maisons : protocole complet"
+  description="Traiter une charpente attaquée par le capricorne des maisons : mise à nu des bois, bûchage, dépoussiérage, injection sous pression, pulvérisation et renfort des pièces affaiblies. Île-de-France."
+  path="/traitement-capricorne" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Traitement"
+    title="Traitement du capricorne : arrêter l’attaque, puis vérifier ce qui tient encore"
+    lead="Avec cette espèce, le traitement chimique ne représente que la moitié du travail. L’autre moitié consiste à mesurer ce qu’il reste de bois sain dans chaque pièce, et à en tirer les conséquences."
+    answer="Le traitement curatif du capricorne repose sur trois opérations que rien ne remplace : le <strong>bûchage</strong> des parties dégradées, le <strong>dépoussiérage</strong> complet, et l’<strong>injection sous pression</strong> dans les pièces de forte section — les galeries courant souvent à plusieurs centimètres sous la surface. Les pièces dont la section saine est insuffisante doivent être <strong>renforcées ou remplacées</strong>."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Deux questions, pas une</h2>
+            <p class="lead">
+              Face à une charpente attaquée par le capricorne, il faut répondre à deux questions
+              distinctes, et beaucoup de devis n’en traitent qu’une.
+            </p>
+            <p>
+              <strong>La première est biologique :</strong> comment arrêter l’attaque en cours ?
+              C’est le rôle du traitement proprement dit, et le protocole est bien établi.
+            </p>
+            <p>
+              <strong>La seconde est mécanique :</strong> les pièces attaquées peuvent-elles encore
+              assurer leur fonction ? Cette question n’a rien à voir avec la précédente. Un produit,
+              quel qu’il soit, ne reconstitue pas un aubier consommé. Si un chevron a perdu un tiers
+              de sa section, il l’a perdu définitivement, et il faut décider ce qu’on en fait.
+            </p>
+            <p>
+              Nous traitons systématiquement les deux, et nous les présentons séparément dans le
+              rapport. Vous savez ainsi ce qui relève du traitement et ce qui relève de la
+              charpenterie.
+            </p>
+          </div>
+          <figure class="fig">
+            <Charpente />
+            <figcaption>
+              Les zones d’appui et les assemblages concentrent les efforts : c’est là qu’une perte
+              de section a le plus de conséquences, et c’est donc là que le sondage commence.
+            </figcaption>
+          </figure>
+        </div>
+        <aside class="split__side">
+          <div class="card card--sage">
+            <h3 style="font-size:1.08rem">Rappel : quels bois sont concernés</h3>
+            <p style="margin-top:.5rem">{c.boisCibles}</p>
+            <p style="margin-top:.8rem" class="small">
+              Si la charpente est en chêne, l’hypothèse du capricorne des maisons doit être écartée
+              et une autre espèce recherchée. <a href="/capricorne-des-maisons">Fiche espèce</a>.
+            </p>
+          </div>
+          <div class="card" style="margin-top:1.25rem">
+            <h3 style="font-size:1.08rem">Ce qui reste à votre charge</h3>
+            <ul class="list-check small" style="margin-top:.7rem">
+              <li>Dégagement du comble (cartons, mobilier, stockage)</li>
+              <li>Accès dégagé aux trappes et aux circulations</li>
+              <li>Protection ou retrait des objets fragiles</li>
+              <li>Absence des occupants pendant le délai indiqué</li>
+            </ul>
+            <p class="small muted" style="margin-top:.8rem">
+              Ces points figurent au devis : ils ne sont pas facturés, mais ils conditionnent le
+              délai et la qualité de l’intervention.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <Etapes eyebrow="Protocole" title="Les étapes de l’intervention"
+        lead="Chacune conditionne la suivante. C’est l’escamotage de la deuxième et de la troisième qui explique l’essentiel des traitements inefficaces que nous constatons après coup."
+        items={etapes} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Ce que l’on nous demande le plus souvent</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment savoir si une charpente est encore solide ?">
+          <p>
+            Par le sondage. On frappe la pièce au maillet pour repérer les zones creuses, puis on
+            enfonce un poinçon ou une lame pour évaluer la profondeur de bois dégradé. La section
+            saine restante se compare ensuite à la section d’origine et à l’effort que la pièce
+            doit reprendre.
+          </p>
+          <p>
+            Une inspection sérieuse produit donc une cartographie, pièce par pièce, et non une
+            appréciation globale du type « la charpente est très attaquée ».
+          </p>
+        </Answer>
+        <Answer question="Faut-il traiter toute la charpente ?">
+          <p>
+            Tous les bois résineux du même volume, oui. Le capricorne ne se limite pas aux pièces
+            où des trous sont visibles, et une pièce non traitée à côté d’une pièce traitée
+            constitue un réservoir.
+          </p>
+          <p>
+            En revanche, des bois d’une autre essence, ou situés dans un volume distinct et sans
+            continuité, peuvent légitimement être écartés du périmètre. Nous le justifions dans le
+            devis plutôt que de traiter par principe.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le traitement du capricorne" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Fiche espèce : capricorne', href: '/capricorne-des-maisons', text: 'Biologie, signes, risque structurel et confusions à éviter.' },
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Le cadre général : accessibilité, préparation, méthodes selon les sections.' },
+    { label: 'Trous dans la charpente', href: '/trous-dans-charpente', text: 'Ce que la forme et le diamètre des trous permettent de déduire.' },
+  ]} />
+  <CtaBand title="Une charpente en sapin avec des trous ovales ?" text="Le premier geste utile est le sondage, pas le traitement. Nous mesurons la section saine avant de vous proposer quoi que ce soit." />
+</Base>

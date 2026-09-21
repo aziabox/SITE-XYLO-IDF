@@ -1,0 +1,199 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import Maillage from '~/components/Maillage.astro';
+import Answer from '~/components/Answer.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import SignesBois from '~/components/illus/SignesBois.astro';
+import { faqSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Vous constatez', href: '/bois-attaque-insectes' },
+  { label: 'Trous dans la charpente' },
+];
+const faq = [
+  { q: 'Beaucoup de trous signifie-t-il une attaque grave ?', a: "Pas nécessairement, et c'est contre-intuitif. Chaque trou correspond à la sortie d'un seul adulte, pas à l'étendue des galeries. Le capricorne des maisons, qui est l'espèce la plus destructrice pour une charpente en résineux, laisse souvent très peu de trous alors qu'il a largement évidé la pièce. À l'inverse, une petite vrillette peut cribler une boiserie de dizaines de trous sans compromettre quoi que ce soit de structurel." },
+  { q: 'Faut-il boucher les trous ?', a: "Non, et surtout pas dans l'idée d'enfermer les insectes : cela ne fonctionne pas, les larves étant à l'intérieur et n'ayant pas besoin de l'ouverture. Boucher les trous a par ailleurs un inconvénient réel, celui d'effacer les repères qui permettraient de constater l'apparition de nouvelles sorties. Après traitement, un rebouchage esthétique est envisageable, mais il vient en dernier." },
+  { q: 'Des trous apparaissent chaque année : est-ce normal ?', a: "C'est le signe le plus clair d'une attaque active. Une population installée produit des émergences successives, année après année, à la même saison. Si vous constatez de nouveaux trous dont les bords sont clairs alors que les anciens ont bruni, il n'y a plus de doute à avoir sur l'activité." },
+  { q: 'Les trous sont très anciens : faut-il quand même traiter ?', a: "Pas automatiquement. Un bois ancien porte presque toujours des traces d'attaques passées, et un chêne de deux siècles peut être marqué sans que rien ne s'y passe depuis longtemps. Ce qui justifie un traitement, c'est une activité établie, ou une perte de section qui pose un problème mécanique. Nous préférons mettre en place un contrôle différé plutôt que de traiter par précaution un bois qui n'en a pas besoin." },
+];
+const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Trous dans la charpente : quel insecte et quelle gravité ?"
+  description="Trous dans une charpente : ce que la forme et le diamètre indiquent, pourquoi le nombre de trous ne mesure pas la gravité, et comment savoir si l’attaque est encore active."
+  path="/trous-dans-charpente" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Vous constatez"
+    title="Des trous dans la charpente : comment les lire"
+    lead="Deux informations sont contenues dans un trou de sortie : sa forme et son diamètre. Une troisième ne l’est pas, contrairement à ce qu’on croit : la gravité de l’attaque."
+    answer="La <strong>forme</strong> et le <strong>diamètre</strong> orientent : ovale de 5 à 10 mm dans un résineux pour le <a href='/capricorne-des-maisons'>capricorne</a>, rond de 1 à 3 mm pour la <a href='/vrillette'>petite vrillette</a>, rond de 3 à 4 mm pour la grosse, rond de 1 à 2 mm avec une poudre farineuse pour le <a href='/lyctus'>lyctus</a>. En revanche, le <strong>nombre de trous ne mesure pas la gravité</strong> : seul le sondage du bois le fait."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Pourquoi le nombre de trous induit en erreur</h2>
+            <p class="lead">
+              C’est l’un des malentendus les plus répandus, et il conduit à des décisions inverses
+              de celles qu’il faudrait prendre.
+            </p>
+            <p>
+              Un trou de sortie correspond à un seul événement : l’émergence d’un adulte au terme de
+              son développement. Il ne dit rien du volume de bois consommé par la larve pendant les
+              années précédentes, ni du nombre de larves encore présentes à l’intérieur.
+            </p>
+            <p>
+              Le capricorne des maisons illustre parfaitement ce décalage. Sa larve travaille trois
+              à dix ans dans l’aubier d’une pièce résineuse, en laissant la surface intacte. Une
+              panne peut être largement évidée et ne présenter que deux ou trois trous. Le
+              propriétaire conclut que « ce n’est pas grand-chose », alors que la section portante
+              est déjà compromise.
+            </p>
+            <p>
+              À l’inverse, une boiserie criblée de dizaines de petits trous de vrillette peut ne
+              poser aucun problème structurel : l’ouvrage n’est pas porteur, et les galeries restent
+              superficielles.
+            </p>
+            <p>
+              <strong>Ce qui mesure la gravité, c’est la section saine restante</strong>, et elle
+              s’obtient par le sondage : maillet pour repérer les zones creuses, poinçon pour
+              évaluer la profondeur de bois dégradé.
+            </p>
+          </div>
+
+          <figure class="fig">
+            <SignesBois />
+            <figcaption>
+              Les trous visibles en surface ne représentent qu’une fraction du réseau de galeries.
+              C’est le rapport entre les deux qui explique les erreurs d’appréciation.
+            </figcaption>
+          </figure>
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.08rem">Ce qu’il faut noter</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              <li>La <strong>forme</strong> : ronde ou ovale</li>
+              <li>Le <strong>diamètre</strong>, mesuré ou comparé à un objet</li>
+              <li>La <strong>couleur des bords</strong> : clairs ou brunis</li>
+              <li>La <strong>répartition</strong> : groupés ou dispersés</li>
+              <li>L’<strong>essence</strong> de la pièce : résineux ou feuillu</li>
+              <li>La présence ou non de <strong>vermoulure</strong> à proximité</li>
+            </ul>
+            <p class="small" style="margin-top:1rem;opacity:.75">
+              Ces six éléments, transmis avec deux ou trois photos, permettent presque toujours
+              d’orienter l’échange préalable.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Orientation</p>
+        <h2>Ce que le diamètre suggère</h2>
+        <p class="lead">
+          Les fourchettes se recoupent partiellement : c’est le croisement avec l’essence du bois et
+          la texture de la vermoulure qui permet de conclure.
+        </p>
+      </div>
+      <div class="table-scroll">
+        <table class="data">
+          <caption>Ordres de grandeur indicatifs, à croiser systématiquement avec l’essence du bois.</caption>
+          <thead>
+            <tr>
+              <th scope="col">Diamètre et forme</th><th scope="col">Essence</th>
+              <th scope="col">Oriente vers</th><th scope="col">Enjeu structurel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1 à 2 mm, rond</th><td>Feuillu récent</td>
+              <td><a href="/lyctus">Lyctus</a></td>
+              <td>Faible : limité à l’aubier, dégrade surtout les ouvrages de finition</td>
+            </tr>
+            <tr>
+              <th scope="row">1 à 3 mm, rond, groupés</th><td>Feuillu ou résineux</td>
+              <td><a href="/vrillette">Petite vrillette</a></td>
+              <td>Variable : faible sur mobilier, réel sur lambourdes et solives</td>
+            </tr>
+            <tr>
+              <th scope="row">3 à 4 mm, rond</th><td>Feuillu, bois humide</td>
+              <td><a href="/vrillette">Grosse vrillette</a></td>
+              <td>Élevé, mais l’humidité et la pourriture associées le sont davantage</td>
+            </tr>
+            <tr>
+              <th scope="row">5 à 10 mm, ovale</th><td>Résineux uniquement</td>
+              <td><a href="/capricorne-des-maisons">Capricorne des maisons</a></td>
+              <td>Élevé : c’est l’espèce qui compromet le plus souvent une charpente</td>
+            </tr>
+            <tr>
+              <th scope="row">Jusqu’à 7 mm, rond, très net, isolé</th><td>Résineux, ouvrage neuf</td>
+              <td><a href="/insectes-du-bois">Sirex (bois vert)</a></td>
+              <td>Nul : l’espèce ne se reproduit pas dans un bois sec mis en œuvre</td>
+            </tr>
+            <tr>
+              <th scope="row">12 à 15 mm, rond, galerie lisse</th><td>Bois extérieur non traité</td>
+              <td><a href="/insectes-du-bois">Abeille charpentière</a></td>
+              <td>Limité à l’ouvrage concerné ; l’insecte ne consomme pas le bois</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Quel insecte fait des trous dans le bois ?">
+          <p>
+            Les coléoptères xylophages : capricorne des maisons, vrillettes et lyctus. Chacun laisse
+            un calibre caractéristique, mais aucun ne s’identifie au seul trou : l’essence du bois
+            et la texture de la vermoulure sont indispensables.
+          </p>
+          <p>
+            Si vous trouvez du bois dégradé <em>sans</em> aucun trou, les termites sont une
+            hypothèse sérieuse : ils n’en laissent jamais.
+          </p>
+        </Answer>
+        <Answer question="Les trous sont-ils toujours visibles de l’extérieur ?">
+          <p>
+            Non. Sur une charpente, beaucoup de faces sont plaquées contre une maçonnerie, un
+            doublage ou un autre bois. Les trous peuvent se trouver sur la face que l’on ne voit
+            pas, ce qui explique des situations où une pièce très attaquée paraît vierge depuis le
+            seul angle accessible.
+          </p>
+          <p>
+            C’est une des raisons pour lesquelles une inspection sérieuse ne se limite pas à un
+            examen visuel depuis la trappe du comble.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur les trous dans le bois" />
+  <ZonesMini />
+  <Maillage title="Aller plus loin" items={[
+    { label: 'Sciure sous la charpente', href: '/sciure-charpente', text: 'Les six gestes à faire avant de nettoyer.' },
+    { label: 'Insectes dans la charpente', href: '/insectes-charpente', text: 'Quelles espèces s’y développent et dans quelles conditions.' },
+    { label: 'Traitement de charpente', href: '/traitement-charpente', text: 'Ce que comporte une intervention complète.' },
+  ]} />
+  <CtaBand />
+</Base>

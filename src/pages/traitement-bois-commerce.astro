@@ -1,0 +1,69 @@
+---
+import BatimentPage from '~/components/BatimentPage.astro';
+---
+<BatimentPage
+  path="/traitement-bois-commerce"
+  seoTitle="Traitement du bois en commerce et local professionnel"
+  seoDescription="Traitement du bois dans un commerce ou un local professionnel : agencements, structures apparentes, planchers techniques. Intervention hors horaires d’ouverture, consignes et traçabilité."
+  eyebrow="Type de bâtiment"
+  h1="Commerces et locaux professionnels"
+  lead="Dans un commerce, la contrainte n’est pas seulement technique : c’est la continuité de l’activité. Une intervention se prépare autour des horaires d’ouverture, des denrées éventuelles et des exigences propres au secteur."
+  answer="Dans un local professionnel, l’intervention se planifie <strong>hors horaires d’ouverture</strong> et par zones, afin de limiter l’immobilisation. Les ouvrages concernés sont surtout les <strong>agencements</strong>, les <strong>structures bois apparentes</strong> et les <strong>planchers</strong>. Les consignes de réintégration et la traçabilité des produits sont communiquées avant le chantier."
+  serviceName="Traitement du bois en local professionnel"
+  sections={[
+    {
+      h2: 'Ce qui change par rapport à un logement',
+      paragraphs: [
+        "Trois contraintes structurent l’intervention. D’abord le <strong>temps</strong> : une fermeture prolongée a un coût direct, et le chantier doit s’organiser en conséquence — de nuit, en début de semaine, ou par zones successives.",
+        "Ensuite la <strong>nature des lieux</strong>. Un restaurant, une boulangerie, une pharmacie ou une crèche n’imposent pas les mêmes précautions qu’une boutique de vêtements. Les denrées, les matériels et les publics accueillis déterminent le choix du produit, le périmètre protégé et le délai de réintégration.",
+        "Enfin la <strong>traçabilité</strong>. Un exploitant peut avoir à justifier de la nature des produits employés dans son local. Nous remettons systématiquement les fiches de données de sécurité et un rapport d’intervention détaillant les produits, les zones traitées et les dates.",
+      ],
+    },
+    {
+      h2: 'Les ouvrages concernés',
+      list: [
+        { t: 'Agencements et mobilier de vente', d: 'Comptoirs, rayonnages, boiseries murales. Souvent en feuillu : petite vrillette, ou lyctus sur les aménagements récents.' },
+        { t: 'Structures bois apparentes', d: 'Poutres, colombages décoratifs, charpentes laissées visibles dans les commerces installés dans du bâti ancien.' },
+        { t: 'Planchers et estrades', d: 'Souvent en contact avec un support humide, particulièrement en sous-sol ou en rez-de-chaussée sur terre-plein.' },
+        { t: 'Menuiseries et devantures', d: 'Exposées aux intempéries. Dégradation généralement mixte : humidité, champignon, puis insecte.' },
+        { t: 'Réserves et sous-sols', d: 'Locaux peu ventilés où le bois reste humide, et où les cartons stockés au sol constituent une réserve de cellulose.' },
+      ],
+    },
+    {
+      h2: 'Bâti ancien et commerces de centre-ville',
+      paragraphs: [
+        "Beaucoup de commerces franciliens occupent le rez-de-chaussée d’immeubles anciens. La structure bois y est souvent partagée avec les logements des étages : solives, planchers, parfois charpente.",
+        "Cela a deux conséquences. D’une part, l’ouvrage concerné peut relever des parties communes de la copropriété, ce qui modifie le circuit de décision. D’autre part, un traitement limité au local commercial ne règle pas une attaque qui se poursuit dans les étages.",
+        "Nous qualifions donc les ouvrages dès le rapport, et nous signalons au syndic lorsque la situation dépasse le périmètre du local. <a href='/traitement-charpente-copropriete'>Voir la page copropriété</a>.",
+      ],
+    },
+  ]}
+  vigilance={{
+    title: 'À préparer avec l’exploitant',
+    items: [
+      'Le <strong>créneau d’intervention</strong> compatible avec l’activité',
+      'La <strong>protection ou l’évacuation</strong> des denrées et matériels',
+      'Le <strong>délai de réintégration</strong> avant réouverture',
+      'La <strong>qualification</strong> des ouvrages si le local est en copropriété',
+      'La <strong>ventilation</strong> des réserves et sous-sols',
+      'La <strong>remise des fiches</strong> de données de sécurité pour les archives',
+    ],
+  }}
+  aside={{
+    title: 'Un point souvent négligé',
+    text: "Les réserves en sous-sol cumulent trois facteurs défavorables : humidité, absence de ventilation, et stockage de cartons à même le sol. C’est fréquemment là qu’une attaque commence, et c’est le premier endroit que nous demandons à visiter.",
+  }}
+  faq={[
+    { q: 'Faut-il fermer le commerce pendant l’intervention ?', a: "Généralement le temps du chantier et du délai de réintégration, qui dépend du produit employé, du volume traité et de la ventilation. Nous organisons l'intervention hors horaires d'ouverture ou par zones afin de réduire cette immobilisation au minimum, et le calendrier est établi avec l'exploitant avant le début des travaux." },
+    { q: 'Les denrées alimentaires doivent-elles être retirées ?', a: "Dans un local qui manipule ou stocke des denrées, oui : protection ou évacuation selon la configuration. Le choix du produit et le périmètre traité tiennent compte de cette contrainte, et les consignes vous sont communiquées avec le devis, avant l'intervention." },
+    { q: 'Pouvez-vous fournir un justificatif des produits employés ?', a: "Systématiquement. Nous remettons les fiches de données de sécurité des produits utilisés, ainsi qu'un rapport d'intervention précisant les zones traitées, les méthodes et les dates. Ces documents sont conçus pour être conservés dans les archives de l'établissement." },
+    { q: 'Le local est en copropriété : qui décide ?', a: "Cela dépend de la qualification de l'ouvrage. Un agencement ou un mobilier relève du preneur ou du propriétaire du local. Un plancher, des solives ou une charpente relèvent généralement des parties communes, et la décision passe par l'assemblée générale. Notre rapport le précise." },
+  ]}
+  liens={[
+    { label: 'Charpente en copropriété', href: '/traitement-charpente-copropriete', text: 'Parties communes et privatives : qui décide, qui finance.' },
+    { label: 'Traitement du bois', href: '/traitement-bois', text: 'Les méthodes par famille d’ouvrage.' },
+    { label: 'Lyctus', href: '/lyctus', text: 'L’espèce la plus fréquente dans les agencements récents en feuillu.' },
+  ]}
+  ctaTitle="Un local professionnel à traiter ?"
+  ctaText="Indiquez-nous votre activité et vos horaires : nous construisons le calendrier autour de votre exploitation, pas l’inverse."
+/>

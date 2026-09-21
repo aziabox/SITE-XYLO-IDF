@@ -1,0 +1,152 @@
+---
+import Base from '~/layouts/Base.astro';
+import PageHero from '~/components/PageHero.astro';
+import Faq from '~/components/Faq.astro';
+import CtaBand from '~/components/CtaBand.astro';
+import ZonesMini from '~/components/ZonesMini.astro';
+import Maillage from '~/components/Maillage.astro';
+import Etapes from '~/components/Etapes.astro';
+import Answer from '~/components/Answer.astro';
+import { faqSchema, serviceSchema } from '~/lib/schema';
+
+const crumbs = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Traitements', href: '/traitement-insectes-xylophages' },
+  { label: 'Traitement des vrillettes' },
+];
+const etapes = [
+  { title: 'Identifier la cause de l’humidité', text: 'Infiltration de couverture, remontée capillaire, condensation, vide sanitaire non ventilé, fuite de réseau : tant que l’origine n’est pas établie, aucun traitement ne tiendra dans la durée. C’est la première visite, pas la dernière.' },
+  { title: 'Assécher et ventiler', text: 'Reprise de la cause, puis rétablissement d’une ventilation correcte du volume concerné. Un bois qui redescend durablement sous le seuil d’humidité favorable devient de lui-même inhospitalier pour la grosse vrillette.' },
+  { title: 'Purger le bois altéré', text: 'Élimination des parties pourries et de la vermoulure. Sur une poutre attaquée par la grosse vrillette, la dégradation fongique précède souvent l’insecte : ce qui est purgé n’est pas seulement mangé, il est décomposé.' },
+  { title: 'Traiter selon l’ouvrage', text: 'Injection dans les pièces de forte section, pulvérisation sur les bois minces, application adaptée à la finition sur le mobilier et les boiseries — avec essai préalable sur zone peu visible.' },
+  { title: 'Évaluer la structure', text: 'Sur une solive ou une poutre, mesurer la section saine restante et décider si la pièce se conserve, se renforce ou se remplace. Une pièce dont la sous-face est pourrie sur 30 mm ne se rattrape pas au produit.' },
+  { title: 'Contrôler à distance', text: 'Zones témoins nettoyées et repérées, puis vérification après une saison. C’est le seul moyen honnête de confirmer que l’activité s’est arrêtée.' },
+];
+const faq = [
+  { q: 'Pourquoi insister autant sur l’humidité ?', a: "Parce qu'elle explique la présence de l'insecte. La grosse vrillette ne colonise pratiquement jamais un bois sain et sec : elle s'installe dans un bois déjà altéré par un champignon de pourriture. Traiter l'insecte sans traiter l'eau revient à s'occuper du symptôme le plus visible en laissant la cause intacte, et la dégradation reprend, avec ou sans insecte." },
+  { q: 'Peut-on traiter un meuble ancien sans l’abîmer ?', a: "Dans la plupart des cas, oui, à condition d'adapter le produit à la finition — cire, vernis, peinture, placage — et de procéder par essai préalable sur une zone non visible. L'injection se fait par de petits perçages discrets, refermés ensuite. Sur une pièce de grande valeur, la bonne réponse consiste parfois à faire intervenir un restaurateur en complément." },
+  { q: 'Les vrillettes peuvent-elles revenir ?', a: "Si les conditions qui les ont attirées subsistent, oui. Un local qui reste humide et peu ventilé redevient favorable, quel que soit le produit appliqué. C'est pourquoi les préconisations de ventilation ne sont pas un supplément de confort dans notre rapport : elles font partie du traitement." },
+  { q: 'Faut-il traiter toute la maison ?', a: "Rarement. La petite vrillette se développe dans des ouvrages précis, souvent liés à un local ou à une zone humide. Le périmètre se définit après examen : il peut se limiter à une cave, à un plancher bas, ou à quelques boiseries. Nous préférons un périmètre justifié à un traitement généralisé facturé au mètre carré." },
+];
+const jsonLd = [
+  serviceSchema({ name: 'Traitement des vrillettes', description: "Traitement de la petite et de la grosse vrillette : recherche et reprise de la cause d’humidité, purge des bois altérés, injection et application adaptée aux ouvrages, en Île-de-France.", path: '/traitement-vrillette', serviceType: 'Traitement des vrillettes' }),
+  faqSchema(faq),
+].filter(Boolean) as Record<string, any>[];
+---
+<Base
+  title="Traitement des vrillettes : traiter la cause avant l’insecte"
+  description="Traitement de la petite et de la grosse vrillette : identifier l’origine de l’humidité, assainir et ventiler, purger les bois altérés, puis traiter. Mobilier, boiseries, planchers et charpentes en Île-de-France."
+  path="/traitement-vrillette" crumbs={crumbs} jsonLd={jsonLd}
+>
+  <PageHero
+    eyebrow="Traitement"
+    title="Traitement des vrillettes : l’eau d’abord, l’insecte ensuite"
+    lead="C’est la seule famille d’insectes du bois pour laquelle le traitement commence par une intervention qui n’a rien de chimique : trouver d’où vient l’humidité. Sans cela, le produit ne fait que gagner du temps."
+    answer="Le traitement des vrillettes suit un ordre précis : <strong>identifier et reprendre la cause d’humidité</strong>, <strong>assécher et ventiler</strong>, <strong>purger les bois altérés</strong>, puis seulement <strong>traiter</strong> — par injection dans les fortes sections, par application adaptée à la finition sur le mobilier et les boiseries. Un contrôle différé confirme l’arrêt de l’activité."
+    crumbs={crumbs}
+  />
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="split__main stack-lg">
+          <div>
+            <h2>Deux situations, deux réponses</h2>
+            <p class="lead">
+              Le mot « vrillette » recouvre deux espèces dont les traitements ne se ressemblent que
+              superficiellement.
+            </p>
+            <h3>La petite vrillette dans un ouvrage de menuiserie</h3>
+            <p>
+              Meuble, escalier, lambris, parquet : la question est patrimoniale avant d’être
+              structurelle. On cherche à conserver l’objet, ce qui impose un traitement compatible
+              avec sa finition et des perçages d’injection discrets. L’enjeu est la précision du
+              geste, pas la puissance du produit.
+            </p>
+            <h3>La grosse vrillette dans une poutre de chêne</h3>
+            <p>
+              Ici, la présence de l’insecte signale un bois humide et le plus souvent déjà
+              décomposé par un champignon. La priorité est l’eau : d’où vient-elle, depuis combien
+              de temps, et que reste-t-il de sain dans la pièce ? Le traitement de l’insecte
+              intervient après la reprise de la cause, et il s’accompagne fréquemment d’une
+              décision structurelle.
+            </p>
+            <div class="note note--copper" style="margin-top:1.25rem">
+              <span class="note__title">Un ordre de travaux qui déplaît parfois</span>
+              Il nous arrive de dire à un client que le traitement doit attendre — le temps qu’un
+              couvreur reprenne une noue, qu’une ventilation soit remise en service, ou simplement
+              que le bois sèche. C’est rarement ce qu’on souhaite entendre, mais appliquer un
+              produit sur un bois détrempé revient à le gaspiller.
+            </div>
+          </div>
+        </div>
+        <aside class="split__side">
+          <div class="card card--dark">
+            <h3 style="font-size:1.1rem">Ce que nous mesurons sur place</h3>
+            <ul class="list-check small" style="margin-top:.8rem">
+              <li>L’humidité du bois, en plusieurs points</li>
+              <li>La présence et l’étendue d’une pourriture associée</li>
+              <li>La ventilation réelle du volume concerné</li>
+              <li>La section saine restante des pièces porteuses</li>
+              <li>La granulométrie de la vermoulure, pour trancher entre les deux espèces</li>
+            </ul>
+          </div>
+          <div class="card card--sage" style="margin-top:1.25rem">
+            <h3 style="font-size:1.05rem">Le bon geste avant notre venue</h3>
+            <p style="margin-top:.5rem">
+              Nettoyez une zone de bois attaquée, repérez-la avec un morceau d’adhésif, et notez la
+              date. Si de la vermoulure réapparaît, vous disposerez d’une information que nous ne
+              pourrions pas obtenir en une seule visite.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sage">
+    <div class="wrap">
+      <Etapes eyebrow="Protocole" title="L’ordre des opérations" lead="Les deux premières étapes ne concernent pas l’insecte. C’est ce qui distingue un traitement durable d’une application cosmétique." items={etapes} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap-narrow">
+      <div class="section-head">
+        <p class="eyebrow">Réponses directes</p>
+        <h2>Questions fréquentes avant l’intervention</h2>
+      </div>
+      <div class="stack-lg">
+        <Answer question="Comment éviter une nouvelle infestation ?">
+          <p>
+            En supprimant ce qui a rendu le bois attractif : l’humidité. Ventiler les caves, les
+            vides sanitaires et les combles, traiter les infiltrations sans attendre, éviter les
+            doublages étanches posés directement contre des bois anciens, et ne pas stocker de bois
+            humide à l’intérieur.
+          </p>
+          <p>
+            Ces mesures sont peu coûteuses et bien plus déterminantes que le choix du produit.
+            <a href="/prevention-insectes-xylophages">Prévention et surveillance</a>.
+          </p>
+        </Answer>
+        <Answer question="Un tic-tac entendu au printemps impose-t-il un traitement immédiat ?">
+          <p>
+            Il impose d’abord une visite. Le tic-tac indique la présence d’adultes de grosse
+            vrillette, donc une activité en cours, mais il ne dit rien de l’état de la pièce ni de
+            la cause. Il est fréquent que l’examen révèle une infiltration dont le propriétaire
+            ignorait l’existence.
+          </p>
+        </Answer>
+      </div>
+    </div>
+  </section>
+
+  <Faq items={faq} title="Questions fréquentes sur le traitement des vrillettes" />
+  <ZonesMini />
+  <Maillage title="Poursuivre" items={[
+    { label: 'Fiche espèce : vrillettes', href: '/vrillette', text: 'Petite et grosse vrillette : ce qui les sépare, et pourquoi cela change tout.' },
+    { label: 'Vermoulure dans le bois', href: '/vermoulure-bois', text: 'Lire la texture de la poudre pour identifier l’espèce en cause.' },
+    { label: 'Traitement du bois', href: '/traitement-bois', text: 'Méthodes par ouvrage : mobilier, boiseries, planchers, structures.' },
+  ]} />
+  <CtaBand title="Un bois humide et des trous ronds ?" text="La première mesure utile est celle de l’humidité du bois. Elle départage les espèces et oriente vers la cause réelle du désordre." />
+</Base>

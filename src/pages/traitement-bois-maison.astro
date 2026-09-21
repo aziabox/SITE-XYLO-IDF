@@ -1,0 +1,69 @@
+---
+import BatimentPage from '~/components/BatimentPage.astro';
+---
+<BatimentPage
+  path="/traitement-bois-maison"
+  seoTitle="Traitement du bois en maison et appartement"
+  seoDescription="Traitement du bois dans un logement : parquets et lambourdes, solives, boiseries, escaliers, menuiseries et mobilier. Méthodes adaptées aux ouvrages vus et aux contraintes d’un site occupé."
+  eyebrow="Type de bâtiment"
+  h1="Traitement du bois dans un logement : maison et appartement"
+  lead="En dehors de la charpente, le bois d’un logement se concentre dans des ouvrages que l’on voit tous les jours : un parquet, un escalier, des lambris, des menuiseries. Les traiter suppose de concilier efficacité et respect de la finition."
+  answer="Dans un logement, l’enjeu n’est pas seulement d’arrêter l’attaque mais de <strong>préserver l’aspect</strong> des ouvrages. Sur un bois vu, nous procédons par <strong>essai préalable</strong> sur zone peu visible, employons des produits <strong>incolores</strong> compatibles avec la finition, et réalisons des perçages d’injection discrets, rebouchés. L’ouvrage en cause est souvent la <strong>lambourde</strong>, pas le parquet."
+  serviceName="Traitement du bois en logement"
+  sections={[
+    {
+      h2: 'Le piège du parquet',
+      intro: "C’est la situation que nous rencontrons le plus souvent en appartement, et celle où l’on se trompe de cible.",
+      paragraphs: [
+        "Un propriétaire constate qu’une zone de son parquet s’affaisse légèrement, ou qu’une lame cède sous l’appui. Il cherche des trous à la surface des lames, n’en trouve pas, et conclut à un problème de pose.",
+        "Dans la majorité des cas, ce n’est pas la lame qui est en cause mais la <strong>lambourde</strong> qui la porte. Celle-ci repose sur une forme de sable, un remblai ou une dalle, qui peut conserver de l’humidité pendant des décennies — après une fuite ancienne, dans un rez-de-chaussée sur terre-plein, ou simplement parce que le support n’a jamais séché.",
+        "Le diagnostic passe alors par la dépose d’une lame, choisie à l’endroit le plus significatif et reposée ensuite. C’est une opération limitée, et c’est la seule qui permette d’atteindre le support et de trancher.",
+      ],
+    },
+    {
+      h2: 'Les ouvrages concernés dans un logement',
+      list: [
+        { t: 'Parquets et lambourdes', d: 'Petite vrillette dans les parquets anciens, lyctus dans les parquets récents en feuillu. La lambourde est le point sensible.' },
+        { t: 'Solives et planchers', d: 'Bois porteurs invisibles entre plafond et revêtement. Le signe le plus fréquent est une poussière fine tombant d’un plafond.' },
+        { t: 'Escaliers et boiseries', d: 'Ouvrages vus, souvent anciens. Le traitement doit être compatible avec la finition existante.' },
+        { t: 'Lambris et plinthes', d: 'Faciles à traiter, mais il faut atteindre la face arrière lorsque l’attaque s’y trouve.' },
+        { t: 'Menuiseries et volets', d: 'Exposés aux variations d’humidité. La dégradation y est souvent mixte : eau, champignon, puis insecte.' },
+        { t: 'Mobilier', d: 'Petite vrillette le plus souvent, lyctus sur les pièces récentes ou en bois exotique. Enjeu de conservation.' },
+      ],
+    },
+    {
+      h2: 'Travailler dans un logement occupé',
+      paragraphs: [
+        "Un traitement en logement n’est pas un chantier de comble : il se déroule dans des pièces meublées, souvent habitées, avec des sols finis et des objets fragiles.",
+        "Nous protégeons les surfaces et les meubles, limitons le périmètre à ce qui est réellement concerné, et indiquons à l’avance ce qui doit être déplacé. Le délai de réintégration dépend du produit employé et du volume traité ; il vous est communiqué au moment du devis, pas le jour de l’intervention.",
+        "Sur un appartement en copropriété, il est utile de vérifier d’emblée si l’ouvrage concerné relève du privatif ou du commun : un parquet est privatif, les solives qui le portent ne le sont généralement pas. <a href='/traitement-charpente-copropriete'>Voir la page copropriété</a>.",
+      ],
+    },
+  ]}
+  vigilance={{
+    title: 'Avant l’intervention',
+    items: [
+      'Identifier si l’ouvrage relève du <strong>privatif ou du commun</strong>',
+      'Repérer la <strong>nature de la finition</strong> : cirée, vernie, peinte, plaquée',
+      'Vérifier l’existence d’une <strong>fuite ancienne</strong> à l’aplomb de la zone',
+      'Contrôler la <strong>ventilation</strong> de la cave ou du vide sanitaire situé dessous',
+      'Prévoir le <strong>déplacement du mobilier</strong> concerné',
+      'Conserver un <strong>échantillon de vermoulure</strong> avant nettoyage',
+    ],
+  }}
+  aside={{
+    title: 'Un test que vous pouvez faire',
+    text: "Marchez lentement sur le parquet en cherchant les points de souplesse, puis observez le chant des lames plutôt que leur face : les trous de sortie y sont souvent bien plus visibles, surtout sur un parquet ciré.",
+  }}
+  faq={[
+    { q: 'Un traitement laisse-t-il des traces sur un parquet ciré ?', a: "C'est un risque réel que nous prenons au sérieux. Nous réalisons un essai préalable sur une zone peu visible, choisissons un produit compatible avec la finition existante, et privilégions l'injection par le dessous ou par les joints lorsque la configuration le permet." },
+    { q: 'Peut-on traiter un meuble sans le décaper ?', a: "Oui, dans la plupart des cas. L'injection se fait par de petits perçages réalisés sous le meuble ou dans des zones non visibles, refermés ensuite. Un décapage n'est envisagé que si la finition empêche toute pénétration et que l'ouvrage le justifie." },
+    { q: 'Faut-il traiter tout le logement ?', a: "Rarement. Le périmètre se définit après examen et se limite généralement aux ouvrages concernés et à ceux qui leur sont directement liés. Nous préférons un périmètre justifié à un traitement généralisé facturé au mètre carré." },
+    { q: 'Combien de temps faut-il quitter les lieux ?', a: "Cela dépend du produit employé, du volume traité et de la ventilation. Le délai figure sur la fiche de données de sécurité du produit et vous est communiqué avec le devis. Sur un traitement ponctuel de mobilier ou de boiseries, il est souvent court." },
+  ]}
+  liens={[
+    { label: 'Insectes dans le plancher', href: '/insectes-plancher', text: 'Solives, lambourdes et parquet : trois niveaux, trois situations.' },
+    { label: 'Traitement du bois', href: '/traitement-bois', text: 'Les méthodes par famille d’ouvrage.' },
+    { label: 'Vrillettes', href: '/vrillette', text: 'L’espèce la plus fréquente dans les parquets et le mobilier.' },
+  ]}
+/>
