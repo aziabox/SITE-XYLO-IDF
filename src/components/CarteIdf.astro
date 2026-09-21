@@ -45,6 +45,10 @@ const panelData = DEPT_SHAPES.map((s) => {
         <pattern id={`${id}-grain`} width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
           <line x1="0" y1="0" x2="0" y2="9" stroke="#3A5344" stroke-width="0.7" opacity="0.09" />
         </pattern>
+        {/* Les cours d'eau traversent la région : on les borne à son contour. */}
+        <clipPath id={`${id}-region`}>
+          <path d={REGION_OUTLINE} />
+        </clipPath>
       </defs>
 
       <g class="map__pan">
@@ -65,7 +69,7 @@ const panelData = DEPT_SHAPES.map((s) => {
         ))}
 
         {/* Repères hydrographiques */}
-        <g class="map__rivers" aria-hidden="true">
+        <g class="map__rivers" aria-hidden="true" clip-path={`url(#${id}-region)`}>
           {RIVIERES.map((r) => <path d={r.d} />)}
         </g>
 
@@ -75,12 +79,12 @@ const panelData = DEPT_SHAPES.map((s) => {
             s.chip ? (
               <g class="map__chip" data-slug={s.slug}>
                 <circle cx={s.labelX} cy={s.labelY} r="15" />
-                <text x={s.labelX} y={s.labelY} dy="4.6">{s.code}</text>
+                <text x={s.labelX} y={s.labelY}>{s.code}</text>
               </g>
             ) : (
               <g class="map__name" data-slug={s.slug}>
                 <text x={s.labelX} y={s.labelY}>{s.name}</text>
-                <text x={s.labelX} y={s.labelY} dy="19" class="map__code">{s.code}</text>
+                <text x={s.labelX} y={s.labelY} class="map__code">{s.code}</text>
               </g>
             ),
           )}
@@ -119,6 +123,7 @@ const panelData = DEPT_SHAPES.map((s) => {
     </div>
 
     <p class="map__hint">Touchez un département · pincez pour zoomer</p>
+    <p class="map__credit">Contours : IGN Admin Express — Licence ouverte (Etalab)</p>
   </div>
 
   <aside class="map__panel" aria-live="polite">
@@ -162,13 +167,22 @@ const panelData = DEPT_SHAPES.map((s) => {
     border: 1px solid var(--c-border); border-radius: var(--r-xl);
     overflow: hidden; touch-action: pan-y;
   }
-  .map__svg { width: 100%; height: auto; display: block; aspect-ratio: 1000 / 860; cursor: grab; }
+  .map__svg { width: 100%; height: auto; display: block; aspect-ratio: 1000 / 880; cursor: grab; }
+  /* Sur les pages secondaires la carte reste un repère, pas la pièce maîtresse :
+     on borne sa largeur au lieu de recadrer son format, qui doit rester celui
+     de la boîte englobante réelle de la région (1000 x 880). */
+  .map--compact { max-width: 60rem; margin-inline: auto; }
   .map__svg.is-drag { cursor: grabbing; }
-  .map--compact .map__svg { aspect-ratio: 1000 / 700; }
 
+  /* --z porte le facteur de zoom courant, mis à jour par le script.
+     Diviser par --z conserve aux traits et aux étiquettes une taille
+     constante à l'écran quel que soit le niveau d'agrandissement : c'est
+     ainsi que se comporte une carte, et cela rend le zoom réellement utile. */
+  .map { --z: 1; }
   .map__region { fill: var(--sauge-300); }
   .map__shape {
     fill: var(--sauge-300); stroke: #FBF8F1; stroke-width: 2.4; stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
     transition: fill .2s ease;
   }
   .map__texture { pointer-events: none; }
@@ -179,34 +193,47 @@ const panelData = DEPT_SHAPES.map((s) => {
   .map__dept.is-current .map__shape { fill: var(--sauge-700); }
   .map__dept:focus-visible .map__shape { stroke: var(--cuivre-500); stroke-width: 3.5; }
 
-  .map__rivers path { fill: none; stroke: #8FA8C4; stroke-width: 2.2; stroke-linecap: round; opacity: .5; }
+  .map__rivers path { fill: none; stroke: #8FA8C4; stroke-width: 2.2; stroke-linecap: round; opacity: .5; vector-effect: non-scaling-stroke; }
 
   .map__labels { pointer-events: none; }
   .map__name text {
-    font-family: var(--f-title); font-size: 21px; font-weight: 600; fill: #22301F;
-    text-anchor: middle; paint-order: stroke; stroke: rgba(251,248,241,.8); stroke-width: 3.5;
+    font-family: var(--f-title); font-size: calc(21px / var(--z)); font-weight: 600; fill: #22301F;
+    text-anchor: middle; paint-order: stroke; stroke: rgba(251,248,241,.8);
+    stroke-width: 3.5; vector-effect: non-scaling-stroke;
   }
   .map__name .map__code {
-    font-family: var(--f-body); font-size: 12px; font-weight: 600;
+    font-family: var(--f-body); font-size: calc(12px / var(--z)); font-weight: 600;
     fill: var(--cuivre-600); letter-spacing: .1em;
+    translate: 0 calc(19px / var(--z));
   }
-  .map__chip circle { fill: #FBF8F1; stroke: var(--sauge-600); stroke-width: 2; }
+  .map__chip circle {
+    r: calc(15px / var(--z)); fill: #FBF8F1; stroke: var(--sauge-600);
+    stroke-width: 2; vector-effect: non-scaling-stroke;
+  }
   .map__chip text {
-    font-family: var(--f-body); font-size: 13px; font-weight: 700;
+    font-family: var(--f-body); font-size: calc(13px / var(--z)); font-weight: 700;
     fill: var(--sauge-800); text-anchor: middle;
+    /* Centrage vertical indépendant de la taille de police : un décalage en
+       unités SVG se désaligne dès que la carte est agrandie. */
+    dominant-baseline: central;
   }
 
   .map__city { cursor: pointer; }
-  .map__hit { fill: transparent; }
-  .map__dot { fill: var(--cuivre-500); stroke: #FBF8F1; stroke-width: 2; transition: r .15s ease; }
+  .map__hit { r: calc(11px / var(--z)); fill: transparent; }
+  .map__dot {
+    r: calc(4px / var(--z)); fill: var(--cuivre-500); stroke: #FBF8F1;
+    stroke-width: 2; vector-effect: non-scaling-stroke; transition: r .15s ease;
+  }
   .map__city text {
-    font-family: var(--f-body); font-size: 13px; font-weight: 600; fill: #3D372E;
+    font-family: var(--f-body); font-size: calc(13px / var(--z)); font-weight: 600; fill: #3D372E;
     paint-order: stroke; stroke: rgba(251,248,241,.92); stroke-width: 3.2;
+    vector-effect: non-scaling-stroke;
     opacity: 0; transition: opacity .15s ease; pointer-events: none;
+    translate: calc(var(--dx, 0) * 1px / var(--z)) calc(var(--dy, -9) * 1px / var(--z));
   }
   .map__city.is-always text { opacity: 1; }
   .map__city:hover text, .map__city:focus-visible text { opacity: 1; }
-  .map__city:hover .map__dot, .map__city:focus-visible .map__dot { r: 6; }
+  .map__city:hover .map__dot, .map__city:focus-visible .map__dot { r: calc(6px / var(--z)); }
   .map__cities.is-dimmed .map__city:not(.is-on) { opacity: .28; }
   .map__cities.is-dimmed .map__city.is-on text { opacity: 1; }
 
@@ -226,26 +253,36 @@ const panelData = DEPT_SHAPES.map((s) => {
     padding: .25rem .6rem; border-radius: var(--r-pill);
   }
 
+  /* Attribution des données géographiques : requise par la Licence ouverte. */
+  .map__credit {
+    position: absolute; right: .75rem; bottom: .6rem;
+    margin: 0; font-size: .62rem; line-height: 1.3;
+    color: var(--gris-500); letter-spacing: .01em;
+    background: rgba(246, 243, 235, .82);
+    padding: .2rem .45rem; border-radius: var(--r-sm);
+    pointer-events: none; max-width: 60%; text-align: right;
+  }
+
   .map__panel { grid-area: panel; }
   .map__panel-in {
     background: var(--c-surface); border: 1px solid var(--c-border);
     border-radius: var(--r-lg); padding: 1.5rem 1.4rem; box-shadow: var(--sh-xs);
     position: sticky; top: 100px;
   }
-  .map__eyebrow {
+  :global(.map__eyebrow) {
     font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
     color: var(--cuivre-500); margin-bottom: .5rem;
   }
-  .map__ptitle { font-size: 1.5rem; margin-bottom: .6rem; }
-  .map__ptext { font-size: .85rem; color: var(--c-text-soft); line-height: 1.6; }
-  .map__plinks { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
-  .map__plinks a {
+  :global(.map__ptitle) { font-size: 1.5rem; margin-bottom: .6rem; }
+  :global(.map__ptext) { font-size: .85rem; color: var(--c-text-soft); line-height: 1.6; }
+  :global(.map__plinks) { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+  :global(.map__plinks a) {
     font-size: .74rem; font-weight: 600; text-decoration: none;
     background: var(--sauge-50); color: var(--sauge-800);
     padding: .3rem .65rem; border-radius: var(--r-pill); border: 1px solid var(--sauge-200);
   }
-  .map__plinks a:hover { background: var(--sauge-100); }
-  .map__pcta { margin-top: 1.25rem; }
+  :global(.map__plinks a:hover) { background: var(--sauge-100); }
+  :global(.map__pcta) { margin-top: 1.25rem; }
 
   .map__list {
     grid-area: list; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .5rem;
@@ -267,18 +304,32 @@ const panelData = DEPT_SHAPES.map((s) => {
     .map__panel-in { position: static; }
     /* La carte est réduite d’environ deux tiers : les étiquettes sont agrandies
        en proportion pour rester lisibles. */
-    .map__name text { font-size: 42px; stroke-width: 6; }
-    .map__name .map__code { font-size: 24px; }
-    .map__chip circle { r: 26px; stroke-width: 3.5; }
-    .map__chip text { font-size: 24px; }
-    .map__city .map__dot { r: 7px; stroke-width: 3; }
-    .map__city text { font-size: 28px; stroke-width: 6; }
+    .map__name text { font-size: calc(42px / var(--z)); stroke-width: 6; }
+    .map__name .map__code { font-size: calc(24px / var(--z)); translate: 0 calc(34px / var(--z)); }
+    .map__chip circle { r: calc(26px / var(--z)); stroke-width: 3.5; }
+    .map__chip text { font-size: calc(24px / var(--z)); }
+    .map__city .map__hit { r: calc(18px / var(--z)); }
+    .map__city .map__dot { r: calc(7px / var(--z)); stroke-width: 3; }
+    .map__city text { font-size: calc(28px / var(--z)); stroke-width: 6; }
     .map__city:not(.is-always) text { display: none; }
+    /* Agrandir la carte sert précisément à lire le cœur dense de l'agglomération :
+       une fois zoomé, les étiquettes masquées faute de place réapparaissent. */
+    .map.is-zoomed .map__city text { display: block; opacity: 1; }
     .map__rivers path { stroke-width: 3.5; }
     .map__shape { stroke-width: 4; }
+    .map__hint { left: 50%; transform: translateX(-50%); bottom: 2.6rem; font-size: .68rem; white-space: nowrap; }
+    /* L'indication passe au centre : le crédit descend pour ne pas la recouvrir. */
+    .map__credit { right: auto; left: 50%; transform: translateX(-50%); bottom: .5rem; max-width: 92%; text-align: center; }
   }
-  @media (max-width: 900px) {
-    .map__hint { left: 50%; transform: translateX(-50%); bottom: .6rem; font-size: .68rem; white-space: nowrap; }
+
+  /* Sur un écran de téléphone, les noms de communes agrandis recouvrent les noms
+     de départements. Le nom du département prime : on masque les étiquettes de
+     communes tant que la carte n'est pas agrandie, en conservant leurs points,
+     qui restent activables et annoncés par leur `aria-label`. Les communes sont
+     par ailleurs listées en toutes lettres sous la carte et dans le panneau. */
+  @media (max-width: 620px) {
+    .map__city text { display: none; }
+    .map.is-zoomed .map__city text { display: block; opacity: 1; }
   }
 </style>
 
@@ -293,14 +344,25 @@ const panelData = DEPT_SHAPES.map((s) => {
 
     const depts: PanelDept[] = JSON.parse(dataEl.textContent || '[]');
     const bySlug = new Map(depts.map((d) => [d.slug, d]));
-    const base = (svg.dataset.vb || '0 0 1000 860').split(' ').map(Number) as [number, number, number, number];
+    const base = (svg.dataset.vb || '0 0 1000 880').split(' ').map(Number) as [number, number, number, number];
     const cities = root.querySelector<SVGGElement>('.map__cities');
 
     let [vx, vy, vw, vh] = base;
-    const apply = () => svg.setAttribute('viewBox', `${vx} ${vy} ${vw} ${vh}`);
+    const apply = () => {
+      svg.setAttribute('viewBox', `${vx} ${vy} ${vw} ${vh}`);
+      /* Facteur de zoom : les tailles exprimées en unités SVG sont divisées
+         par cette valeur pour rester constantes à l'écran. */
+      const z = base[2] / vw;
+      root.style.setProperty('--z', String(z));
+      /* Une fois la carte agrandie, la place revient : les étiquettes de communes
+         masquées sur petit écran peuvent réapparaître. */
+      root.classList.toggle('is-zoomed', z > 1.4);
+    };
 
     const clamp = () => {
-      const minW = base[2] * 0.3;
+      /* Jusqu'à huit fois : les étiquettes ne grossissant plus, l'agrandissement
+         sert réellement à lire la petite couronne. */
+      const minW = base[2] * 0.125;
       const maxW = base[2] * 1.25;
       vw = Math.min(maxW, Math.max(minW, vw));
       vh = (vw / base[2]) * base[3];
@@ -387,15 +449,47 @@ const panelData = DEPT_SHAPES.map((s) => {
       cities?.querySelectorAll<SVGAElement>('.map__city').forEach((c) => {
         c.classList.toggle('is-on', c.dataset.dept === slug);
       });
-      const villes = d.villes.length
-        ? `<div class="map__plinks">${d.villes.map((v) => `<a href="${v.href}">${v.name}</a>`).join('')}</div>`
+      /* Le panneau est reconstruit avec les interfaces du DOM plutôt que par
+         concaténation de HTML : pas d'échappement à gérer, et le résultat
+         reste valide quelles que soient les données. */
+      const el = <K extends keyof HTMLElementTagNameMap>(
+        balise: K, classe: string, texte?: string,
+      ): HTMLElementTagNameMap[K] => {
+        const n = document.createElement(balise);
+        n.className = classe;
+        if (texte !== undefined) n.textContent = texte;
+        return n;
+      };
+
+      const origine = d.prefecture
+        ? `, depuis ${d.name === 'Paris' ? 'Paris' : 'la préfecture de ' + d.prefecture} jusqu’aux communes les plus éloignées`
         : '';
-      panel.innerHTML =
-        `<p class="map__eyebrow">Département ${d.code}</p>` +
-        `<h3 class="map__ptitle">${d.name}</h3>` +
-        `<p class="map__ptext">Interventions pour le diagnostic et le traitement des insectes xylophages dans les bâtiments et structures bois${d.prefecture ? `, depuis ${d.name === 'Paris' ? 'Paris' : 'la préfecture de ' + d.prefecture} jusqu’aux communes les plus éloignées` : ''}.</p>` +
-        villes +
-        `<a href="/zones-intervention/${d.slug}" class="btn btn--primary btn--sm map__pcta">Voir les interventions ${prep(d.name)}</a>`;
+
+      const contenu: HTMLElement[] = [
+        el('p', 'map__eyebrow', `Département ${d.code}`),
+        el('h3', 'map__ptitle', d.name),
+        el('p', 'map__ptext',
+          'Interventions pour le diagnostic et le traitement des insectes xylophages ' +
+          `dans les bâtiments et structures bois${origine}.`),
+      ];
+
+      if (d.villes.length) {
+        const liste = el('div', 'map__plinks');
+        for (const v of d.villes) {
+          const a = el('a', '');
+          a.href = v.href;
+          a.textContent = v.name;
+          liste.append(a);
+        }
+        contenu.push(liste);
+      }
+
+      const cta = el('a', 'btn btn--primary btn--sm map__pcta',
+        `Voir les interventions ${prep(d.name)}`);
+      cta.href = `/zones-intervention/${d.slug}`;
+      contenu.push(cta);
+
+      panel.replaceChildren(...contenu);
       panel.dataset.state = 'dept';
     };
 

@@ -211,15 +211,67 @@ qu'un fichier est absent, le schéma reste affiché.
 
 ## Carte interactive
 
-`src/components/CarteIdf.astro` — SVG des huit départements, tessellé sans interstice.
+`src/components/CarteIdf.astro` affiche la géométrie réelle de l'Île-de-France,
+stockée dans `src/data/carte.ts`.
+
+### Données et provenance
+
+| Couche | Source | Licence |
+| --- | --- | --- |
+| Contours départementaux et communaux | IGN, **Admin Express COG**, via [france-geojson](https://github.com/gregoiredavid/france-geojson) | Licence ouverte (Etalab) |
+| Cours d'eau (Seine, Marne, Yonne) | **Natural Earth** 10 m | Domaine public |
+
+La Licence ouverte impose la mention de la source : elle est affichée sur la carte
+elle-même (`.map__credit`, « Contours : IGN Admin Express — Licence ouverte (Etalab) »).
+**Ne pas la retirer.**
+
+### Traitement géométrique
+
+- **Projection Lambert-93 (EPSG:2154)**, la projection légale française — et non une
+  simple mise à l'échelle des degrés, qui étirerait la région d'environ 30 % en largeur.
+- **Simplification topologique** par mapshaper (Visvalingam pondérée, 12 %,
+  `keep-shapes`) : les frontières partagées restent strictement communes, donc
+  **aucun interstice** entre deux départements voisins.
+- Contour de région obtenu par `-dissolve2` des huit départements, posé sous les
+  tracés comme fond continu et servant de `clipPath` aux cours d'eau.
+- Étiquettes placées au **pôle d'inaccessibilité** de chaque polygone (balayage de
+  grille puis raffinement local), et non au centroïde, qui tombe hors du territoire
+  pour les formes concaves.
+- Les quatre départements de petite taille (75, 92, 93, 94) portent une pastille
+  numérotée au lieu d'un nom, faute de place.
+
+### Régénération
+
+`src/data/carte.ts` est **généré** : ne pas le modifier à la main.
+
+```bash
+npm install --no-save mapshaper
+node scripts/generer-carte.mjs
+```
+
+Le script met les téléchargements en cache dans `node_modules/.cache/carte`.
+Pour ajouter une commune sur la carte, l'ajouter au tableau `VILLES` du script
+puis régénérer — le centroïde réel est calculé, jamais saisi à la main.
+
+### Comportement
 
 - **Rendue côté serveur** : indexable, et pleinement utilisable sans JavaScript
   (la liste des départements sous la carte est une alternative réelle, pas un pis-aller).
 - **Script différé**, initialisé par `IntersectionObserver` quand la carte approche
-  du champ de vision : 1,8 ko gzip, aucun impact sur le chargement initial.
-- Zoom molette, déplacement au pointeur, pincement tactile, boutons + / − / réinitialiser.
+  du champ de vision : aucun impact sur le chargement initial.
+- Zoom molette (jusqu'à 8 ×), déplacement au pointeur, pincement tactile,
+  boutons + / − / réinitialiser.
+- Le facteur de zoom courant est publié dans la propriété CSS `--z`. Traits et
+  étiquettes sont dimensionnés en `calc(Npx / var(--z))` et les tracés portent
+  `vector-effect: non-scaling-stroke` : ils gardent donc une taille constante à
+  l'écran quel que soit l'agrandissement, comme sur une vraie carte.
 - Panneau latéral : survol au pointeur fin, première pression sur écran tactile.
 - Sur une page départementale ou communale, le territoire courant est pré-sélectionné.
+
+> Le panneau est reconstruit en JavaScript. Les styles d'Astro étant locaux au
+> composant, ils ne s'appliquent pas aux nœuds créés par script : les règles du
+> panneau sont donc déclarées en `:global()`. Le retirer casserait silencieusement
+> la mise en forme.
 
 **La carte ne comporte aucun marqueur d'intervention ni de client.** Elle représente
 les zones desservies et les communes disposant d'une page dédiée, rien d'autre.
@@ -373,7 +425,9 @@ src/
   lib/                  balisage schema.org, plugin rehype des tableaux
   pages/                routes
   styles/               jetons et feuille globale
-public/                 robots.txt, favicon, image de partage
+public/                 robots.txt, favicon, .htaccess, image de partage
+scripts/
+  generer-carte.mjs     régénère `src/data/carte.ts` depuis les données IGN
 audit.mjs               audit SEO et liens internes (`npm run audit`)
 ```
 
