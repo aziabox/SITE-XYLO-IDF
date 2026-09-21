@@ -1,5 +1,8 @@
 ---
-import { DEPT_SHAPES, RIVIERES, CITY_POINTS, VIEWBOX, REGION_OUTLINE } from '~/data/carte';
+import {
+  DEPT_SHAPES, RIVIERES, CITY_POINTS, VIEWBOX, REGION_OUTLINE, VOISINS, URBAIN, ECHELLE,
+  METRES_PAR_UNITE,
+} from '~/data/carte';
 import { DEPT_BY_SLUG } from '~/data/departements';
 import { VILLES_BY_DEPT } from '~/data/villes';
 
@@ -34,8 +37,10 @@ const panelData = DEPT_SHAPES.map((s) => {
     >
       <title id={`${id}-t`}>Carte des zones d’intervention en Île-de-France</title>
       <desc id={`${id}-d`}>
-        Les huit départements d’Île-de-France sont représentés et cliquables. La liste
-        équivalente est disponible sous la carte pour une consultation sans interaction.
+        Les huit départements d’Île-de-France sont représentés et cliquables, replacés
+        parmi les départements limitrophes, la tache urbaine de l’agglomération et les
+        principaux cours d’eau. La liste équivalente est disponible sous la carte pour
+        une consultation sans interaction.
       </desc>
 
       <defs>
@@ -45,13 +50,15 @@ const panelData = DEPT_SHAPES.map((s) => {
         <pattern id={`${id}-grain`} width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
           <line x1="0" y1="0" x2="0" y2="9" stroke="#3A5344" stroke-width="0.7" opacity="0.09" />
         </pattern>
-        {/* Les cours d'eau traversent la région : on les borne à son contour. */}
-        <clipPath id={`${id}-region`}>
-          <path d={REGION_OUTLINE} />
-        </clipPath>
       </defs>
 
       <g class="map__pan">
+        {/* Départements limitrophes : contexte seul, ni cliquables ni desservis.
+            Sans eux la région serait découpée sur un fond vide. */}
+        <g class="map__around" aria-hidden="true">
+          {VOISINS.map((v) => <path d={v.d} />)}
+        </g>
+
         {/* Fond continu de la région : évite toute discontinuité entre les tracés. */}
         <path d={REGION_OUTLINE} class="map__region" filter={`url(#${id}-sh)`} />
 
@@ -68,9 +75,20 @@ const panelData = DEPT_SHAPES.map((s) => {
           </a>
         ))}
 
+        {/* Tache urbaine. Posée au-dessus des remplissages pour se lire aussi
+            bien sur la région que sur les départements limitrophes. */}
+        <path d={URBAIN} class="map__urban" aria-hidden="true" />
+
         {/* Repères hydrographiques */}
-        <g class="map__rivers" aria-hidden="true" clip-path={`url(#${id}-region)`}>
+        <g class="map__rivers" aria-hidden="true">
           {RIVIERES.map((r) => <path d={r.d} />)}
+        </g>
+
+        {/* Noms des départements limitrophes, en retrait */}
+        <g class="map__aroundnames" aria-hidden="true">
+          {VOISINS.filter((v) => v.labelX !== undefined).map((v) => (
+            <text x={v.labelX} y={v.labelY}>{v.name}</text>
+          ))}
         </g>
 
         {/* Étiquettes de départements */}
@@ -120,6 +138,33 @@ const panelData = DEPT_SHAPES.map((s) => {
       <button type="button" data-z="reset" aria-label="Réinitialiser la vue">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8A5.5 5.5 0 1 1 8 2.5c1.9 0 3.5.9 4.6 2.4M13 2v3h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
+    </div>
+
+    {/* Repères de carte : le nord et l'échelle. La barre est exprimée en
+        pourcentage de la largeur, donc juste quel que soit l'écran ; le script
+        la recalcule à chaque niveau d'agrandissement. */}
+    <div class="map__north" aria-hidden="true">
+      <svg viewBox="0 0 16 22" width="12" height="17">
+        <path d="M8 1.5 L12.4 20 L8 16.4 L3.6 20 Z" fill="currentColor" />
+      </svg>
+      <span>N</span>
+    </div>
+
+    <div class="map__scale" data-mpu={METRES_PAR_UNITE}>
+      <span class="map__scaleval">{ECHELLE.km} km</span>
+      {/* La barre est dessinée dans un SVG large de 100 % de la scène, étiré
+          sans conserver les proportions : une longueur exprimée en unités de
+          la fenêtre y occupe donc exactement la même fraction que sur la
+          carte. L'échelle est ainsi juste sur tout écran, sans style en
+          ligne ni JavaScript. */}
+      <svg
+        class="map__scalebar"
+        viewBox={`0 0 ${VIEWBOX.w} 100`}
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <rect x="0" y="0" width={ECHELLE.unites} height="100" />
+      </svg>
     </div>
 
     <p class="map__hint">Touchez un département · pincez pour zoomer</p>
@@ -180,6 +225,30 @@ const panelData = DEPT_SHAPES.map((s) => {
      ainsi que se comporte une carte, et cela rend le zoom réellement utile. */
   .map { --z: 1; }
   .map__region { fill: var(--sauge-300); }
+
+  /* Contexte territorial : lisible mais nettement en retrait, pour qu'aucun
+     département limitrophe ne puisse passer pour une zone desservie. */
+  .map__around path {
+    fill: #E4DFD2; stroke: #D3CCBB; stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+  }
+  .map__aroundnames text {
+    font-family: var(--f-body); font-size: calc(15px / var(--z));
+    font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    fill: #A79C88; text-anchor: middle; dominant-baseline: central;
+    pointer-events: none;
+  }
+  /* Bâti continu, en transparence : il assombrit la région comme le pourtour
+     sans masquer la couleur du département qu'il recouvre.
+     Sa géométrie est levée au 10 millionième : juste pour situer
+     l'agglomération, beaucoup trop grossière pour une vue à quelques
+     kilomètres, où elle ne serait plus qu'un aplat de polygones anguleux.
+     L'opacité décroît donc avec l'agrandissement, jusqu'à l'effacer. */
+  .map__urban {
+    fill: #8C7F66; opacity: calc(.28 / var(--z)); pointer-events: none;
+    transition: opacity .2s ease;
+  }
+
   .map__shape {
     fill: var(--sauge-300); stroke: #FBF8F1; stroke-width: 2.4; stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
@@ -232,6 +301,7 @@ const panelData = DEPT_SHAPES.map((s) => {
     translate: calc(var(--dx, 0) * 1px / var(--z)) calc(var(--dy, -9) * 1px / var(--z));
   }
   .map__city.is-always text { opacity: 1; }
+  .map.is-zoomed .map__city text { opacity: 1; }
   .map__city:hover text, .map__city:focus-visible text { opacity: 1; }
   .map__city:hover .map__dot, .map__city:focus-visible .map__dot { r: calc(6px / var(--z)); }
   .map__cities.is-dimmed .map__city:not(.is-on) { opacity: .28; }
@@ -254,6 +324,33 @@ const panelData = DEPT_SHAPES.map((s) => {
   }
 
   /* Attribution des données géographiques : requise par la Licence ouverte. */
+  /* Rose des vents et échelle : les deux repères qui font qu'une carte se lit
+     comme une carte et non comme un schéma. */
+  .map__north {
+    position: absolute; left: .9rem; top: .85rem;
+    display: flex; flex-direction: column; align-items: center; gap: .05rem;
+    color: var(--sauge-700); opacity: .65; pointer-events: none;
+  }
+  .map__north span {
+    font-family: var(--f-body); font-size: .58rem; font-weight: 700;
+    letter-spacing: .06em; line-height: 1;
+  }
+
+  .map__scale {
+    position: absolute; left: 0; right: 0; bottom: 2.55rem;
+    pointer-events: none;
+  }
+  .map__scaleval {
+    display: block; margin-left: .9rem; margin-bottom: .16rem;
+    font-family: var(--f-body); font-size: .6rem; font-weight: 600;
+    letter-spacing: .02em; color: var(--gris-600);
+  }
+  .map__scalebar {
+    display: block; width: 100%; height: 5px;
+    margin-left: .9rem; overflow: visible;
+  }
+  .map__scalebar rect { fill: var(--sauge-800); }
+
   .map__credit {
     position: absolute; right: .75rem; bottom: .6rem;
     margin: 0; font-size: .62rem; line-height: 1.3;
@@ -305,6 +402,7 @@ const panelData = DEPT_SHAPES.map((s) => {
     /* La carte est réduite d’environ deux tiers : les étiquettes sont agrandies
        en proportion pour rester lisibles. */
     .map__name text { font-size: calc(42px / var(--z)); stroke-width: 6; }
+    .map__aroundnames text { font-size: calc(26px / var(--z)); }
     .map__name .map__code { font-size: calc(24px / var(--z)); translate: 0 calc(34px / var(--z)); }
     .map__chip circle { r: calc(26px / var(--z)); stroke-width: 3.5; }
     .map__chip text { font-size: calc(24px / var(--z)); }
@@ -320,6 +418,10 @@ const panelData = DEPT_SHAPES.map((s) => {
     .map__hint { left: 50%; transform: translateX(-50%); bottom: 2.6rem; font-size: .68rem; white-space: nowrap; }
     /* L'indication passe au centre : le crédit descend pour ne pas la recouvrir. */
     .map__credit { right: auto; left: 50%; transform: translateX(-50%); bottom: .5rem; max-width: 92%; text-align: center; }
+    /* Le bas de la scène est déjà pris : l'échelle passe en haut, à l'opposé
+       des boutons de zoom, et la rose des vents s'efface. */
+    .map__north { display: none; }
+    .map__scale { top: .75rem; bottom: auto; }
   }
 
   /* Sur un écran de téléphone, les noms de communes agrandis recouvrent les noms
@@ -347,6 +449,23 @@ const panelData = DEPT_SHAPES.map((s) => {
     const base = (svg.dataset.vb || '0 0 1000 880').split(' ').map(Number) as [number, number, number, number];
     const cities = root.querySelector<SVGGElement>('.map__cities');
 
+    /* Barre d'échelle. Son SVG ne suit pas l'agrandissement de la carte :
+       c'est le script qui allonge la barre et choisit une valeur ronde, comme
+       le ferait une carte en ligne. */
+    const echelle = root.querySelector<HTMLElement>('.map__scale');
+    const barre = root.querySelector<SVGRectElement>('.map__scalebar rect');
+    const valeur = root.querySelector<HTMLElement>('.map__scaleval');
+    const metresParUnite = Number(echelle?.dataset.mpu ?? 0);
+    const PALIERS = [1, 2, 5, 10, 20, 25, 50, 100, 200];
+    const majEchelle = (z: number) => {
+      if (!barre || !valeur || !metresParUnite) return;
+      // On vise une barre occupant environ 12 % de la largeur de la scène.
+      const vise = ((120 / z) * metresParUnite) / 1000;
+      const km = PALIERS.reduce((m, v) => (Math.abs(v - vise) < Math.abs(m - vise) ? v : m), PALIERS[0]);
+      barre.setAttribute('width', String((((km * 1000) / metresParUnite) * z).toFixed(1)));
+      valeur.textContent = `${km} km`;
+    };
+
     let [vx, vy, vw, vh] = base;
     const apply = () => {
       svg.setAttribute('viewBox', `${vx} ${vy} ${vw} ${vh}`);
@@ -357,6 +476,7 @@ const panelData = DEPT_SHAPES.map((s) => {
       /* Une fois la carte agrandie, la place revient : les étiquettes de communes
          masquées sur petit écran peuvent réapparaître. */
       root.classList.toggle('is-zoomed', z > 1.4);
+      majEchelle(z);
     };
 
     const clamp = () => {

@@ -219,11 +219,36 @@ stockée dans `src/data/carte.ts`.
 | Couche | Source | Licence |
 | --- | --- | --- |
 | Contours départementaux et communaux | IGN, **Admin Express COG**, via [france-geojson](https://github.com/gregoiredavid/france-geojson) | Licence ouverte (Etalab) |
-| Cours d'eau (Seine, Marne, Yonne) | **Natural Earth** 10 m | Domaine public |
+| Départements limitrophes | idem, jeu France entière | Licence ouverte (Etalab) |
+| Cours d'eau | **Natural Earth** 10 m, jeux mondial et Europe | Domaine public |
+| Tache urbaine | **Natural Earth** 10 m *urban areas* | Domaine public |
+
+À l'échelle du 10 millionième, Natural Earth ne retient que les cours
+principaux : la Seine, la Marne, l'Yonne, la Loire, l'Eure et l'Aube. **L'Oise
+n'y figure pas** et n'a pas été ajoutée : un tracé approximatif dessiné à la
+main serait une donnée inventée.
 
 La Licence ouverte impose la mention de la source : elle est affichée sur la carte
 elle-même (`.map__credit`, « Contours : IGN Admin Express — Licence ouverte (Etalab) »).
 **Ne pas la retirer.**
+
+### Cadre
+
+La fenêtre ne s'arrête pas aux limites de la région : elle déborde de **22 km**
+au-delà, puis s'étire pour épouser exactement le format 1000 × 880. Le cadre est
+donc rempli de territoire d'un bord à l'autre. Les départements limitrophes, leurs
+villes et les cours d'eau y sont conservés — **en retrait, ni cliquables ni
+desservis** — parce qu'une carte situe : découpée sur un fond vide, l'Île-de-France
+ne se rattache à rien.
+
+La carte porte les deux repères qui la distinguent d'un schéma :
+
+- une **rose des vents** ;
+- une **barre d'échelle** exacte. Elle est dessinée dans un SVG large de 100 %
+  de la scène et étiré sans conserver les proportions : une longueur exprimée
+  en unités de la fenêtre y occupe la même fraction que sur la carte, quel que
+  soit l'écran et sans style en ligne. Le script la rallonge et choisit une
+  nouvelle valeur ronde à chaque niveau d'agrandissement.
 
 ### Traitement géométrique
 
@@ -239,6 +264,13 @@ elle-même (`.map__credit`, « Contours : IGN Admin Express — Licence ouverte 
   pour les formes concaves.
 - Les quatre départements de petite taille (75, 92, 93, 94) portent une pastille
   numérotée au lieu d'un nom, faute de place.
+- Les couches de décor (limitrophes, tache urbaine) sont découpées au cadre et
+  allégées par Douglas–Peucker après projection, la tolérance étant alors
+  exprimée en pixels. Sans cette découpe le fichier pèserait plusieurs fois
+  plus lourd pour un rendu identique, la fenêtre rognant de toute façon.
+
+La tache urbaine sert à lire la densité de l'agglomération. **Elle ne représente
+ni chantier, ni client, ni zone d'activité** — c'est du bâti.
 
 ### Régénération
 
@@ -249,7 +281,13 @@ npm install --no-save mapshaper
 node scripts/generer-carte.mjs
 ```
 
-Le script met les téléchargements en cache dans `node_modules/.cache/carte`.
+Le script met les téléchargements en cache dans `node_modules/.cache/carte`
+(environ 30 Mo, dont 27 Mo pour la tache urbaine mondiale : le premier passage
+est long, les suivants immédiats).
+
+`npm install --no-save mapshaper` reconstruit l'arbre des dépendances et retire
+au passage les paquets installés hors `package.json` — Playwright notamment, si
+vous l'aviez ajouté pour les vérifications au navigateur.
 Pour ajouter une commune sur la carte, l'ajouter au tableau `VILLES` du script
 puis régénérer — le centroïde réel est calculé, jamais saisi à la main.
 
@@ -260,7 +298,9 @@ puis régénérer — le centroïde réel est calculé, jamais saisi à la main.
 - **Script différé**, initialisé par `IntersectionObserver` quand la carte approche
   du champ de vision : aucun impact sur le chargement initial.
 - Zoom molette (jusqu'à 8 ×), déplacement au pointeur, pincement tactile,
-  boutons + / − / réinitialiser.
+  boutons + / − / réinitialiser. La barre d'échelle suit l'agrandissement.
+- Sur téléphone la rose des vents s'efface et l'échelle passe en haut à gauche :
+  le bas de la scène porte déjà l'indication tactile et l'attribution.
 - Le facteur de zoom courant est publié dans la propriété CSS `--z`. Traits et
   étiquettes sont dimensionnés en `calc(Npx / var(--z))` et les tracés portent
   `vector-effect: non-scaling-stroke` : ils gardent donc une taille constante à
