@@ -153,5 +153,5 @@ const toc = headings.filter((h) => h.depth === 2);
   .toc li::before { content: counter(t) '. '; color: var(--cuivre-300); font-size: .78rem; }
   .toc a { font-size: .82rem; color: var(--gris-700); text-decoration: none; line-height: 1.4; display: block; }
   .toc a:hover { color: var(--sauge-700); }
-  @media (max-width: 960px) { .abody { grid-template-columns: 1fr; } .aside { position: static; } }
+  @media (max-width: 960px) { .abody { grid-template-columns: minmax(0, 1fr); } .aside { position: static; } }
 </style>

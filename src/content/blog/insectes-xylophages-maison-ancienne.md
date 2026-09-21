@@ -11,9 +11,9 @@ links:
   - { label: "Bois attaqué : que faire ?", href: "/bois-attaque-insectes" }
 faq:
   - q: "Faut-il faire examiner une maison ancienne avant de l’acheter ?"
-    a: "C'est une précaution qui coûte infiniment moins cher qu'une charpente à reprendre après. Demandez à voir les combles, et pas seulement depuis la trappe. Emportez une lampe et un tournevis. Regardez les abouts de poutre au contact des murs, les pieds de chevron, et le sol du comble où la sciure s'accumule. Un examen professionnel avant signature reste le moyen le plus sûr."
+    a: "C’est une précaution qui coûte infiniment moins cher qu’une charpente à reprendre après. Demandez à voir les combles, et pas seulement depuis la trappe. Emportez une lampe et un tournevis. Regardez les abouts de poutre au contact des murs, les pieds de chevron, et le sol du comble où la sciure s’accumule. Un examen professionnel avant signature reste le moyen le plus sûr."
   - q: "Les maisons anciennes sont-elles plus exposées ?"
-    a: "Elles comportent davantage de bois, et une partie de ce bois est en contact avec des maçonneries qui peuvent retenir l'humidité. Cela crée des points sensibles. Mais l'essence employée — souvent du chêne purgé de son aubier — et la qualité de mise en œuvre jouent en sens inverse. Une maison ancienne sèche et ventilée n'est pas plus exposée qu'une construction récente."
+    a: "Elles comportent davantage de bois, et une partie de ce bois est en contact avec des maçonneries qui peuvent retenir l’humidité. Cela crée des points sensibles. Mais l’essence employée — souvent du chêne purgé de son aubier — et la qualité de mise en œuvre jouent en sens inverse. Une maison ancienne sèche et ventilée n’est pas plus exposée qu’une construction récente."
 ---
 
 Acheter ou habiter une maison ancienne, c’est vivre avec un bâtiment qui a une histoire. Cette histoire est inscrite dans le bois, et elle comprend presque toujours des épisodes d’attaque par des insectes.

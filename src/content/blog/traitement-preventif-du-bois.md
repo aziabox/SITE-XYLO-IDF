@@ -11,9 +11,9 @@ links:
   - { label: "Traitement de charpente", href: "/traitement-charpente" }
 faq:
   - q: "Quelle différence de prix entre préventif et curatif ?"
-    a: "L'écart est important, parce que les prestations n'ont rien à voir. Un traitement préventif se limite à une application de surface soignée sur un bois sain. Un traitement curatif comprend en plus le bûchage des parties dégradées, un dépoussiérage complet et une injection sous pression dans les pièces de forte section — sans compter l'éventuelle reprise structurelle. C'est aussi pourquoi un devis curatif nettement moins cher que les autres décrit souvent, en réalité, une prestation préventive."
+    a: "L’écart est important, parce que les prestations n’ont rien à voir. Un traitement préventif se limite à une application de surface soignée sur un bois sain. Un traitement curatif comprend en plus le bûchage des parties dégradées, un dépoussiérage complet et une injection sous pression dans les pièces de forte section — sans compter l’éventuelle reprise structurelle. C’est aussi pourquoi un devis curatif nettement moins cher que les autres décrit souvent, en réalité, une prestation préventive."
   - q: "Un traitement préventif dispense-t-il de surveiller ?"
-    a: "Non. Il réduit le risque, il ne le supprime pas, et sa durée d'efficacité dépend des conditions du bâtiment. Quelques minutes de contrôle visuel chaque printemps, et un examen complet tous les deux à trois ans, restent la meilleure assurance."
+    a: "Non. Il réduit le risque, il ne le supprime pas, et sa durée d’efficacité dépend des conditions du bâtiment. Quelques minutes de contrôle visuel chaque printemps, et un examen complet tous les deux à trois ans, restent la meilleure assurance."
 ---
 
 Il existe une manière simple de vendre beaucoup de traitements préventifs : expliquer qu’ils sont toujours utiles. Ce n’est pas exact, et le dire honnêtement fait partie du travail.

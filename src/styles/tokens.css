@@ -36,7 +36,7 @@
   --gris-100: #EDEBE6;
   --gris-200: #DCD8D0;
   --gris-300: #BFB9AD;
-  --gris-500: #837C70;
+  --gris-500: #716A5E;
   --gris-600: #635D53;
   --gris-700: #4A453D;
   --gris-900: #262320;
@@ -44,8 +44,8 @@
   /* --- Accent cuivre / terre cuite (usage tres parcimonieux) --- */
   --cuivre-100: #F4E6DC;
   --cuivre-300: #DBA684;
-  --cuivre-500: #A9663F;
-  --cuivre-600: #8F5333;
+  --cuivre-500: #9D5A33;
+  --cuivre-600: #874A28;
 
   /* --- Roles semantiques --- */
   --c-bg:            var(--ivoire);

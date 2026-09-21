@@ -2,9 +2,9 @@
  * Source de verite unique du site.
  *
  * REGLE ABSOLUE : aucune donnee de ce fichier ne doit etre inventee.
- * Tout ce qui n'est pas encore fourni par l'entreprise reste a `null`
+ * Tout ce qui n’est pas encore fourni par l’entreprise reste a `null`
  * ou `verified: false`. Les composants sont ecrits pour masquer
- * proprement les blocs non renseignes plutot que d'afficher une
+ * proprement les blocs non renseignes plutot que d’afficher une
  * information fausse (garantie, certification, avis, statistique).
  */
 
@@ -14,13 +14,13 @@ export const SITE = {
   region: 'Ile-de-France',
   url: 'https://www.xylo-patrimoine.fr',
   locale: 'fr-FR',
-  /** Numero officiel fourni par l'entreprise. */
+  /** Numero officiel fourni par l’entreprise. */
   phoneDisplay: '07 56 82 27 85',
   phoneHref: 'tel:+33756822785',
   phoneE164: '+33756822785',
-  /** A completer par l'entreprise : email de contact reel. */
+  /** A completer par l’entreprise : email de contact reel. */
   email: null as string | null,
-  /** A completer : adresse postale reelle de l'etablissement. */
+  /** A completer : adresse postale reelle de l’etablissement. */
   address: null as null | {
     street: string;
     postalCode: string;
@@ -40,8 +40,8 @@ export const SITE = {
   },
   /**
    * Assurance decennale.
-   * `verified` reste a false tant que l'attestation n'a pas ete fournie.
-   * Aucune mention de garantie decennale n'est affichee tant que
+   * `verified` reste a false tant que l’attestation n’a pas ete fournie.
+   * Aucune mention de garantie decennale n’est affichee tant que
    * `verified !== true` (voir src/components/GarantieSection.astro).
    */
   decennale: {
@@ -61,14 +61,14 @@ export const SITE = {
   },
   /** Certifications reellement detenues (Certibiome, CTB-A+, Qualibat...). Vide tant que non justifie. */
   certifications: [] as { name: string; issuer: string; number?: string; validUntil?: string }[],
-  /** Avis clients reels uniquement. Tant que le tableau est vide, aucun avis n'est affiche. */
+  /** Avis clients reels uniquement. Tant que le tableau est vide, aucun avis n’est affiche. */
   reviews: [] as { author: string; rating: number; date: string; body: string; source: string }[],
   /** Horaires reellement pratiques. */
   openingHours: [
     { days: 'Lundi au vendredi', hours: '8h00 - 19h00' },
     { days: 'Samedi', hours: '9h00 - 17h00' },
   ],
-  /** Endpoint du formulaire. A brancher sur le back-office de l'entreprise. */
+  /** Endpoint du formulaire. A brancher sur le back-office de l’entreprise. */
   formEndpoint: null as string | null,
 } as const;
 

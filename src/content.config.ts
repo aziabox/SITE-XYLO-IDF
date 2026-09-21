@@ -15,7 +15,7 @@ export const CATEGORIES = {
   vrillettes: {
     name: 'Vrillettes',
     slug: 'vrillettes',
-    desc: "Petite et grosse vrillette : signes, rôle de l'humidité, mobilier et charpentes.",
+    desc: "Petite et grosse vrillette : signes, rôle de l’humidité, mobilier et charpentes.",
   },
   lyctus: {
     name: 'Lyctus',
@@ -40,7 +40,7 @@ export const CATEGORIES = {
   diagnostic: {
     name: 'Diagnostic',
     slug: 'diagnostic',
-    desc: "Méthode d'observation, distinction entre attaque ancienne et active, erreurs fréquentes.",
+    desc: "Méthode d’observation, distinction entre attaque ancienne et active, erreurs fréquentes.",
   },
 } as const;
 
@@ -60,7 +60,7 @@ const blog = defineCollection({
     answer: z.string(),
     readingTime: z.number().optional(),
     related: z.array(z.string()).default([]),
-    /** Pages du site à mettre en avant depuis l'article. */
+    /** Pages du site à mettre en avant depuis l’article. */
     links: z.array(z.object({ label: z.string(), href: z.string() })).default([]),
     faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
   }),

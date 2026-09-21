@@ -14,16 +14,16 @@ const crumbs = [
   { label: 'Insectes dans les poutres' },
 ];
 const faq = [
-  { q: 'Quels insectes attaquent les poutres ?', a: "Cela dépend de l'essence. Dans une poutre résineuse, le capricorne des maisons. Dans une poutre de chêne, la grosse vrillette si le bois a été humidifié, et la petite vrillette dans les zones d'aubier. Le lyctus ne concerne que les poutres en feuillu récentes, ce qui est rare. Les termites peuvent atteindre une poutre de plancher bas par le sol, sans laisser de trou." },
-  { q: 'Une poutre attaquée doit-elle être remplacée ?', a: "Rarement, en réalité. Une poutre de forte section dont seule la périphérie est touchée conserve souvent une capacité portante suffisante : elle se bûche, se traite et se conserve. Le remplacement ou le renfort s'impose lorsque la dégradation traverse la section, ou lorsqu'elle se situe au droit d'un appui. C'est le sondage qui tranche, pas l'aspect général de la pièce." },
-  { q: 'Pourquoi les abouts de poutre sont-ils critiques ?', a: "Parce qu'ils cumulent trois facteurs défavorables. Ils sont engagés dans une maçonnerie qui peut conserver de l'humidité. Ils sont invisibles, donc jamais contrôlés. Et c'est précisément là que la poutre transmet sa charge au mur. Une dégradation de vingt centimètres à l'about a plus de conséquences qu'une dégradation d'un mètre en travée." },
-  { q: 'Peut-on renforcer une poutre plutôt que la remplacer ?', a: "Oui, et c'est souvent préférable sur un bâtiment ancien, où le remplacement à l'identique est coûteux et où la dépose peut déstabiliser l'ouvrage. Les techniques existent : moisage par flasques latérales, prothèse d'about, renfort métallique. Elles relèvent d'un charpentier, et nous travaillons en coordination avec lui." },
+  { q: 'Quels insectes attaquent les poutres ?', a: "Cela dépend de l’essence. Dans une poutre résineuse, le capricorne des maisons. Dans une poutre de chêne, la grosse vrillette si le bois a été humidifié, et la petite vrillette dans les zones d’aubier. Le lyctus ne concerne que les poutres en feuillu récentes, ce qui est rare. Les termites peuvent atteindre une poutre de plancher bas par le sol, sans laisser de trou." },
+  { q: 'Une poutre attaquée doit-elle être remplacée ?', a: "Rarement, en réalité. Une poutre de forte section dont seule la périphérie est touchée conserve souvent une capacité portante suffisante : elle se bûche, se traite et se conserve. Le remplacement ou le renfort s’impose lorsque la dégradation traverse la section, ou lorsqu’elle se situe au droit d’un appui. C’est le sondage qui tranche, pas l’aspect général de la pièce." },
+  { q: 'Pourquoi les abouts de poutre sont-ils critiques ?', a: "Parce qu’ils cumulent trois facteurs défavorables. Ils sont engagés dans une maçonnerie qui peut conserver de l’humidité. Ils sont invisibles, donc jamais contrôlés. Et c’est précisément là que la poutre transmet sa charge au mur. Une dégradation de vingt centimètres à l’about a plus de conséquences qu’une dégradation d’un mètre en travée." },
+  { q: 'Peut-on renforcer une poutre plutôt que la remplacer ?', a: "Oui, et c’est souvent préférable sur un bâtiment ancien, où le remplacement à l’identique est coûteux et où la dépose peut déstabiliser l’ouvrage. Les techniques existent : moisage par flasques latérales, prothèse d’about, renfort métallique. Elles relèvent d’un charpentier, et nous travaillons en coordination avec lui." },
 ];
 const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 ---
 <Base
   title="Insectes dans les poutres : évaluer avant de conclure"
-  description="Insectes dans les poutres apparentes ou de plancher : quelles espèces selon l’essence, pourquoi les abouts engagés dans les murs sont critiques, et comment évaluer la section saine restante."
+  description="Insectes dans les poutres : quelles espèces selon l’essence, pourquoi les abouts engagés dans les murs sont critiques, comment évaluer la section saine."
   path="/insectes-poutres" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero

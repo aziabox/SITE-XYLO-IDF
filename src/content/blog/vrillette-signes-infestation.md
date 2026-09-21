@@ -11,9 +11,9 @@ links:
   - { label: "Vermoulure dans le bois", href: "/vermoulure-bois" }
 faq:
   - q: "Les vrillettes attaquent-elles les meubles ?"
-    a: "La petite vrillette, oui, et c'est même sa manifestation la plus courante. Meubles, cadres, escaliers, lambris, parquets : tout ouvrage en bois comportant de l'aubier peut être concerné, surtout dans un local peu chauffé ou mal ventilé. La grosse vrillette, en revanche, ne s'intéresse qu'aux feuillus de forte section déjà humidifiés."
+    a: "La petite vrillette, oui, et c’est même sa manifestation la plus courante. Meubles, cadres, escaliers, lambris, parquets : tout ouvrage en bois comportant de l’aubier peut être concerné, surtout dans un local peu chauffé ou mal ventilé. La grosse vrillette, en revanche, ne s’intéresse qu’aux feuillus de forte section déjà humidifiés."
   - q: "Une vrillette dans un meuble peut-elle gagner la charpente ?"
-    a: "C'est possible mais peu fréquent. Les adultes volent et peuvent pondre ailleurs, mais ils recherchent un bois dont les caractéristiques leur conviennent : essence, humidité, état de surface. Un meuble attaqué placé dans un logement chauffé et sec a peu de chances de déclencher une infestation de charpente. Cela dit, le meuble lui-même mérite d'être traité."
+    a: "C’est possible mais peu fréquent. Les adultes volent et peuvent pondre ailleurs, mais ils recherchent un bois dont les caractéristiques leur conviennent : essence, humidité, état de surface. Un meuble attaqué placé dans un logement chauffé et sec a peu de chances de déclencher une infestation de charpente. Cela dit, le meuble lui-même mérite d’être traité."
 ---
 
 Les vrillettes sont les insectes du bois que l’on rencontre le plus souvent dans un logement, et ceux dont les signes sont les plus visibles. Contrairement au capricorne, elles ne dissimulent pas leur activité.

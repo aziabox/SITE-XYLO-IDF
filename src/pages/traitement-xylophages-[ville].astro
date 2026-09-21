@@ -43,6 +43,7 @@ const jsonLd = [
     eyebrow={`${v.name} · ${v.cp}`}
     title={`Insectes xylophages à ${v.name} : diagnostic et traitement du bois`}
     lead={v.intro}
+    answer={v.answer}
     crumbs={crumbs}
   />
 
@@ -69,30 +70,11 @@ const jsonLd = [
             <ul class="list-check">{v.zones.map((z) => <li>{z}</li>)}</ul>
           </div>
 
-          <div>
-            <h2>Comment se déroule une intervention</h2>
-            <p>
-              La démarche est la même que partout ailleurs, et c’est volontaire : elle ne doit pas
-              dépendre de la commune. Un échange préalable pour comprendre ce que vous observez.
-              Une visite avec examen des ouvrages accessibles, sondage des pièces suspectes et
-              mesure d’humidité. Un rapport écrit qui distingue ce qui est constaté de ce qui est
-              déduit, et qui indique ce qui n’a pas pu être examiné.
-            </p>
-            <p>
-              Si un traitement se justifie, le devis détaille les ouvrages concernés, la méthode
-              et les produits. Si aucun traitement ne s’impose, nous vous le disons — et c’est un
-              cas plus fréquent qu’on ne l’imagine, notamment lorsque les traces observées
-              correspondent à une attaque terminée depuis longtemps.
-              <a href="/diagnostic-insectes-xylophages">Le diagnostic en détail</a>.
-            </p>
-          </div>
-
           <div class="note note--stone">
             <span class="note__title">Pas de chiffres inventés</span>
-            Vous ne trouverez sur cette page ni statistique d’infestation à {v.name}, ni nombre
-            d’interventions réalisées, ni témoignage. Ces données n’existent pas sous une forme
-            vérifiable à l’échelle communale, et nous ne les fabriquons pas. Ce que nous pouvons
-            décrire honnêtement, c’est le bâti local et ce qu’il implique pour le bois.
+            Ni statistique d’infestation à {v.name}, ni nombre d’interventions, ni témoignage :
+            ces données n’existent pas sous une forme vérifiable à l’échelle communale.
+            Ce que nous décrivons ici, c’est le bâti local et ce qu’il implique pour le bois.
           </div>
         </div>
 
@@ -127,10 +109,6 @@ const jsonLd = [
       <div class="section-head">
         <p class="eyebrow">Carte</p>
         <h2>{v.name} dans {dept.name}</h2>
-        <p class="lead">
-          Les zones desservies en Île-de-France. Aucun marqueur ne représente une intervention ou
-          un client.
-        </p>
       </div>
       <CarteIdf active={dept.slug} id={`carte-${v.slug}`} compact />
     </div>

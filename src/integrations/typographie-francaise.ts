@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const NNBSP = ' '; // espace fine insécable
 const NBSP = ' ';  // espace insécable
 
-/** Segmente le HTML : on ne transforme jamais l'intérieur d'une balise, d'un script ou d'un style. */
+/** Segmente le HTML : on ne transforme jamais l’intérieur d’une balise, d’un script ou d’un style. */
 const SPLIT = /(<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>|<!--[\s\S]*?-->|<[^>]*>)/gi;
 
 const applique = (texte: string) =>
@@ -36,7 +36,7 @@ const walk = async (dir: string): Promise<string[]> => {
 
 /**
  * Applique les règles typographiques françaises au HTML généré.
- * Évite qu'un deux-points ou un point d'interrogation se retrouve seul
+ * Évite qu’un deux-points ou un point d’interrogation se retrouve seul
  * en début de ligne, ce qui arrive souvent sur les titres responsives.
  */
 export default function typographieFrancaise(): AstroIntegration {

@@ -11,9 +11,9 @@ links:
   - { label: "Insectes dans la charpente", href: "/insectes-charpente" }
 faq:
   - q: "Un contrôle est-il utile sur une maison récente ?"
-    a: "Au-delà de quinze ans, oui, et cela surprend souvent. Les fermettes sont traitées en usine, mais les coupes réalisées sur chantier exposent du bois non protégé, et la faible épaisseur des membres fait qu'une dégradation devient vite critique. Nous intervenons régulièrement sur des charpentes de vingt à quarante ans."
+    a: "Au-delà de quinze ans, oui, et cela surprend souvent. Les fermettes sont traitées en usine, mais les coupes réalisées sur chantier exposent du bois non protégé, et la faible épaisseur des membres fait qu’une dégradation devient vite critique. Nous intervenons régulièrement sur des charpentes de vingt à quarante ans."
   - q: "Faut-il un diagnostic avant de vendre ?"
-    a: "Il n'y a d'obligation réglementaire que pour l'état relatif à la présence de termites, et uniquement pour les biens situés en zone délimitée par arrêté préfectoral. En dehors de ce cas, aucun diagnostic xylophage n'est imposé. Beaucoup de vendeurs en font néanmoins réaliser un : un rapport clair rassure l'acquéreur et évite des négociations fondées sur une inquiétude vague."
+    a: "Il n’y a d’obligation réglementaire que pour l’état relatif à la présence de termites, et uniquement pour les biens situés en zone délimitée par arrêté préfectoral. En dehors de ce cas, aucun diagnostic xylophage n’est imposé. Beaucoup de vendeurs en font néanmoins réaliser un : un rapport clair rassure l’acquéreur et évite des négociations fondées sur une inquiétude vague."
 ---
 
 La plupart des gens font inspecter leur charpente quand ils ont trouvé quelque chose. C’est légitime, mais c’est aussi le moment le moins favorable : à ce stade, l’attaque a généralement plusieurs années d’avance.

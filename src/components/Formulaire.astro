@@ -43,8 +43,10 @@ const zones = [
   method="post"
   action={SITE.formEndpoint ?? '/merci'}
   enctype="multipart/form-data"
-  novalidate
+  data-endpoint={SITE.formEndpoint ? 'oui' : 'non'}
 >
+  {/* Zone de message, renseignée par le script en cas d'envoi impossible. */}
+  <p class="form__alert" role="alert" hidden></p>
   <div class="field-row">
     <label class="field">
       <span>Nom et prénom <span class="req" aria-hidden="true">*</span></span>
@@ -148,12 +150,29 @@ const zones = [
 
   {!SITE.formEndpoint && (
     <p class="form__todo">
-      <strong>À configurer.</strong> Renseignez <code>formEndpoint</code> dans
-      <code>src/data/site.ts</code> pour brancher ce formulaire sur la boîte de réception
-      ou le back-office de l’entreprise.
+      <strong>À configurer avant mise en ligne.</strong> Renseignez <code>formEndpoint</code>
+      dans <code>src/data/site.ts</code> pour brancher ce formulaire sur la boîte de réception
+      ou le back-office de l’entreprise. Tant que ce champ est vide, l’envoi est bloqué et
+      l’internaute est invité à appeler : le formulaire n’échoue jamais silencieusement.
     </p>
   )}
 </form>
+
+<script is:inline define:vars={{ tel: SITE.phoneDisplay, href: SITE.phoneHref }}>
+  document.querySelectorAll('form[data-endpoint="non"]').forEach((form) => {
+    const alerte = form.querySelector('.form__alert');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!alerte) return;
+      alerte.innerHTML =
+        'L’envoi en ligne n’est pas encore actif sur ce site. ' +
+        'Appelez-nous au <a href="' + href + '">' + tel + '</a> : ' +
+        'nous prenons votre demande directement.';
+      alerte.hidden = false;
+      alerte.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+</script>
 
 <style>
   .form { max-width: 720px; }
@@ -167,5 +186,12 @@ const zones = [
     background: var(--cuivre-100); color: var(--cuivre-600); font-size: var(--t-xs);
   }
   .form__todo code { background: rgba(255,255,255,.6); }
+  .form__alert {
+    margin-bottom: 1.25rem; padding: .9rem 1.1rem; border-radius: var(--r-md);
+    background: var(--sauge-100); border-left: 3px solid var(--sauge-600);
+    font-size: var(--t-sm); color: var(--sauge-900);
+  }
+  .form__alert[hidden] { display: none; }
+  .form__alert a { font-weight: 650; }
   .form--compact .field-row { grid-template-columns: 1fr; }
 </style>

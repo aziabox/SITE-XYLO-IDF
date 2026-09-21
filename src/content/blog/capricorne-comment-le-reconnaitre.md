@@ -11,9 +11,9 @@ links:
   - { label: "Trous dans la charpente", href: "/trous-dans-charpente" }
 faq:
   - q: "Le capricorne peut-il attaquer du chêne ?"
-    a: "Le capricorne des maisons, non : il se développe exclusivement dans l'aubier des résineux. Si des trous ovales apparaissent dans du chêne, il faut chercher une autre explication — une autre espèce de longicorne, une pièce résineuse rapportée, ou une attaque très ancienne remontant à un bois d'origine différent."
+    a: "Le capricorne des maisons, non : il se développe exclusivement dans l’aubier des résineux. Si des trous ovales apparaissent dans du chêne, il faut chercher une autre explication — une autre espèce de longicorne, une pièce résineuse rapportée, ou une attaque très ancienne remontant à un bois d’origine différent."
   - q: "À quoi ressemble la larve ?"
-    a: "Blanc crème, charnue, arquée, elle peut atteindre 25 à 30 mm en fin de développement. On ne la voit qu'en ouvrant le bois, puisqu'elle ne remonte jamais à la surface. Sa tête porte des mandibules sombres et puissantes, et son corps présente des segments bien marqués."
+    a: "Blanc crème, charnue, arquée, elle peut atteindre 25 à 30 mm en fin de développement. On ne la voit qu’en ouvrant le bois, puisqu’elle ne remonte jamais à la surface. Sa tête porte des mandibules sombres et puissantes, et son corps présente des segments bien marqués."
 ---
 
 Le capricorne des maisons est l’insecte qui provoque le plus fréquemment des désordres structurels dans les charpentes franciliennes en résineux. Savoir l’identifier est donc utile — d’autant que ses signes sont trompeurs.

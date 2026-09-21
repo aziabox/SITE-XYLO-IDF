@@ -11,9 +11,9 @@ links:
   - { label: "Prévention et surveillance", href: "/prevention-insectes-xylophages" }
 faq:
   - q: "Faut-il traiter préventivement une charpente ancienne saine ?"
-    a: "Rarement. Un chêne ancien, sec, purgé de son aubier et dans un volume ventilé tire un bénéfice limité d'un traitement préventif. L'investissement le plus rentable est ailleurs : dans l'étanchéité de la couverture et dans la ventilation du comble. Nous le disons même quand cela ne nous donne pas de travaux."
+    a: "Rarement. Un chêne ancien, sec, purgé de son aubier et dans un volume ventilé tire un bénéfice limité d’un traitement préventif. L’investissement le plus rentable est ailleurs : dans l’étanchéité de la couverture et dans la ventilation du comble. Nous le disons même quand cela ne nous donne pas de travaux."
   - q: "Un traitement peut-il abîmer une charpente apparente ?"
-    a: "Le risque existe sur des bois vus, cirés, peints ou plaqués. C'est ce qui conditionne le choix de la méthode : produits incolores compatibles avec la finition, essai préalable sur une zone peu visible, injection discrète plutôt qu'application généralisée. Sur un élément de grande valeur, il est parfois préférable de faire intervenir un restaurateur en complément."
+    a: "Le risque existe sur des bois vus, cirés, peints ou plaqués. C’est ce qui conditionne le choix de la méthode : produits incolores compatibles avec la finition, essai préalable sur une zone peu visible, injection discrète plutôt qu’application généralisée. Sur un élément de grande valeur, il est parfois préférable de faire intervenir un restaurateur en complément."
 ---
 
 Il existe une croyance tenace selon laquelle une vieille charpente serait fragile parce qu’elle est vieille. C’est presque l’inverse : si elle a traversé deux siècles, c’est qu’elle a été bien conçue et bien entretenue. Le danger vient rarement de l’âge.

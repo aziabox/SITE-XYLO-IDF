@@ -12,9 +12,9 @@ links:
   - { label: "Diagnostic d’infestation", href: "/diagnostic-insectes-xylophages" }
 faq:
   - q: "Y a-t-il des termites en Île-de-France ?"
-    a: "La présence de termites fait l'objet d'arrêtés préfectoraux qui délimitent les zones concernées, commune par commune, et ces arrêtés évoluent dans le temps. L'information se vérifie auprès de la mairie ou de la préfecture du département concerné. Nous ne publions pas de liste de communes classées : une information obsolète sur un site commercial peut avoir des conséquences réelles dans une vente."
+    a: "La présence de termites fait l’objet d’arrêtés préfectoraux qui délimitent les zones concernées, commune par commune, et ces arrêtés évoluent dans le temps. L’information se vérifie auprès de la mairie ou de la préfecture du département concerné. Nous ne publions pas de liste de communes classées : une information obsolète sur un site commercial peut avoir des conséquences réelles dans une vente."
   - q: "Certains départements sont-ils plus touchés que d’autres ?"
-    a: "Il n'existe pas de donnée publique fiable permettant de l'affirmer, et nous ne fabriquerons pas de statistique pour le suggérer. Ce que l'on peut dire honnêtement, c'est que certaines configurations bâties sont plus favorables que d'autres : un pavillonnaire ancien à charpente en sapin, un fond de vallée humide, un bâti rural peu chauffé. Ces configurations se répartissent sur toute la région."
+    a: "Il n’existe pas de donnée publique fiable permettant de l’affirmer, et nous ne fabriquerons pas de statistique pour le suggérer. Ce que l’on peut dire honnêtement, c’est que certaines configurations bâties sont plus favorables que d’autres : un pavillonnaire ancien à charpente en sapin, un fond de vallée humide, un bâti rural peu chauffé. Ces configurations se répartissent sur toute la région."
 ---
 
 L’Île-de-France est une région dont le bâti a la particularité d’être à la fois très dense et très hétérogène. On y trouve, à quelques kilomètres d’écart, des charpentes de chêne de plusieurs siècles et des fermettes industrialisées de trente ans. Ces deux mondes ne posent pas les mêmes questions au bois.

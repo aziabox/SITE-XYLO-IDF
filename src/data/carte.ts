@@ -1,5 +1,5 @@
 /**
- * Géométrie schématique de l'Île-de-France utilisée par la carte interactive.
+ * Géométrie schématique de l’Île-de-France utilisée par la carte interactive.
  *
  * Les tracés sont volontairement simplifiés : la carte est un outil de
  * navigation vers les pages départementales et communales, pas un document
@@ -7,7 +7,7 @@
  * projetées linéairement sur la fenêtre SVG.
  *
  * Aucun marqueur ne représente une intervention, un chantier ou un client :
- * la carte n'affiche que des zones desservies et des communes disposant d'une
+ * la carte n’affiche que des zones desservies et des communes disposant d’une
  * page dédiée.
  */
 
@@ -23,7 +23,7 @@ export const DEPT_SHAPES: DeptShape[] = [
   {
     slug: 'val-doise',
     code: '95',
-    name: "Val-d'Oise",
+    name: "Val-d’Oise",
     d: 'M95 168 L130 62 L288 32 L420 70 L530 116 L606 186 L537 222 L470 244 L400 256 L330 240 L250 222 L168 198 Z',
     labelX: 330, labelY: 146,
   },
@@ -78,7 +78,7 @@ export const DEPT_SHAPES: DeptShape[] = [
   },
 ];
 
-/** Cours d'eau principaux, uniquement pour aider à se repérer. */
+/** Cours d’eau principaux, uniquement pour aider à se repérer. */
 export const RIVIERES = [
   {
     name: 'Seine',
@@ -88,7 +88,7 @@ export const RIVIERES = [
   { name: 'Oise', d: 'M472 66 C452 110 420 150 386 178 C356 202 330 214 308 218' },
 ];
 
-/** Villes disposant d'une page dédiée, positionnées d'après leurs coordonnées. */
+/** Villes disposant d’une page dédiée, positionnées d’après leurs coordonnées. */
 export type CityPoint = { slug: string; name: string; dept: string; x: number; y: number; anchor?: 'start' | 'end' | 'middle'; dy?: number; always?: boolean };
 
 export const CITY_POINTS: CityPoint[] = [

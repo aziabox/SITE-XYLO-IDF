@@ -86,7 +86,7 @@ const panelData = DEPT_SHAPES.map((s) => {
           )}
         </g>
 
-        {/* Communes disposant d'une page dédiée */}
+        {/* Communes disposant d’une page dédiée */}
         <g class="map__cities">
           {CITY_POINTS.map((c) => (
             <a
@@ -118,7 +118,7 @@ const panelData = DEPT_SHAPES.map((s) => {
       </button>
     </div>
 
-    <p class="map__hint">Cliquez sur un département · molette ou pincement pour zoomer</p>
+    <p class="map__hint">Touchez un département · pincez pour zoomer</p>
   </div>
 
   <aside class="map__panel" aria-live="polite">
@@ -265,9 +265,20 @@ const panelData = DEPT_SHAPES.map((s) => {
   @media (max-width: 900px) {
     .map { grid-template-columns: 1fr; grid-template-areas: 'stage' 'panel' 'list'; }
     .map__panel-in { position: static; }
-    .map__hint { display: none; }
-    .map__name text { font-size: 24px; }
-    .map__city text { font-size: 15px; }
+    /* La carte est réduite d’environ deux tiers : les étiquettes sont agrandies
+       en proportion pour rester lisibles. */
+    .map__name text { font-size: 42px; stroke-width: 6; }
+    .map__name .map__code { font-size: 24px; }
+    .map__chip circle { r: 26px; stroke-width: 3.5; }
+    .map__chip text { font-size: 24px; }
+    .map__city .map__dot { r: 7px; stroke-width: 3; }
+    .map__city text { font-size: 28px; stroke-width: 6; }
+    .map__city:not(.is-always) text { display: none; }
+    .map__rivers path { stroke-width: 3.5; }
+    .map__shape { stroke-width: 4; }
+  }
+  @media (max-width: 900px) {
+    .map__hint { left: 50%; transform: translateX(-50%); bottom: .6rem; font-size: .68rem; white-space: nowrap; }
   }
 </style>
 
@@ -363,7 +374,7 @@ const panelData = DEPT_SHAPES.map((s) => {
     }, { passive: false });
     svg.addEventListener('touchend', () => { pinch = 0; }, { passive: true });
 
-    /* --- Panneau d'information --- */
+    /* --- Panneau d’information --- */
     const listItems = root.querySelectorAll<HTMLElement>('.map__listitem');
     const deptNodes = root.querySelectorAll<SVGAElement>('.map__dept');
 
@@ -397,18 +408,29 @@ const panelData = DEPT_SHAPES.map((s) => {
         'Hauts-de-Seine': 'dans les Hauts-de-Seine',
         'Seine-Saint-Denis': 'en Seine-Saint-Denis',
         'Val-de-Marne': 'dans le Val-de-Marne',
-        "Val-d'Oise": "dans le Val-d'Oise",
+        "Val-d’Oise": "dans le Val-d’Oise",
       };
       return map[name] ?? `dans le ${name}`;
     };
 
+    /* Sur un écran tactile, il n’y a pas de survol : une première pression
+       sélectionne le département et affiche le panneau, la seconde navigue. */
+    const tactile = matchMedia('(hover: none)').matches;
+    let selectionne: string | null = null;
+
     deptNodes.forEach((node) => {
       const slug = node.dataset.slug!;
-      node.addEventListener('pointerenter', () => select(slug));
+      node.addEventListener('pointerenter', () => { if (!tactile) select(slug); });
       node.addEventListener('focus', () => select(slug));
       node.addEventListener('click', (e) => {
         /* Un glissement de carte ne doit pas déclencher la navigation. */
         if (moved > 6) { e.preventDefault(); return; }
+        if (tactile && selectionne !== slug) {
+          e.preventDefault();
+          selectionne = slug;
+          select(slug);
+          panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
       });
     });
     listItems.forEach((node) => {
@@ -418,6 +440,7 @@ const panelData = DEPT_SHAPES.map((s) => {
     /* Département courant mis en évidence sur les pages locales. */
     const current = root.dataset.active;
     if (current) {
+      selectionne = current;
       deptNodes.forEach((n) => n.classList.toggle('is-current', n.dataset.slug === current));
       select(current);
     }

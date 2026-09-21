@@ -12,11 +12,11 @@ import { faqSchema, serviceSchema } from '~/lib/schema';
 
 const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Zones d’intervention' }];
 const faq = [
-  { q: 'Dans quels départements intervenez-vous ?', a: "Dans les huit départements d'Île-de-France : Paris (75), la Seine-et-Marne (77), les Yvelines (78), l'Essonne (91), les Hauts-de-Seine (92), la Seine-Saint-Denis (93), le Val-de-Marne (94) et le Val-d'Oise (95). Les délais de déplacement varient selon l'éloignement et vous sont annoncés à la prise de rendez-vous." },
-  { q: 'Intervenez-vous dans les communes rurales ?', a: "Oui. La Seine-et-Marne, le Vexin français dans le Val-d'Oise, le Hurepoix en Essonne et le sud des Yvelines comportent de nombreuses communes rurales, et le bâti qu'on y trouve — fermes, longères, granges, maisons de village — est précisément celui qui demande le plus d'attention sur le plan du bois." },
-  { q: 'Pourquoi certaines villes ont-elles une page dédiée et d’autres non ?', a: "Nous ne créons une page communale que lorsqu'il existe un contexte bâti réellement spécifique à décrire : un tissu architectural particulier, une configuration d'habitat qui change la façon d'aborder le bois. Générer une page par commune francilienne produirait des centaines de textes interchangeables sans aucune valeur pour le lecteur. Notre intervention, elle, ne se limite pas aux communes listées." },
-  { q: 'La carte indique-t-elle vos interventions passées ?', a: "Non, et c'est volontaire. La carte représente les zones desservies et les communes disposant d'une page dédiée. Elle ne comporte aucun marqueur d'intervention, de chantier ou de client : ces données n'ont pas à figurer sur un site public, et leur mise en scène n'apporterait rien d'honnête au visiteur." },
-  { q: 'Le déplacement est-il facturé ?', a: "Les modalités vous sont indiquées lors de l'échange préalable, avant tout déplacement. Nous préférons annoncer clairement ce qui est dû plutôt que de pratiquer une visite dite gratuite dont le coût se retrouve ailleurs." },
+  { q: 'Dans quels départements intervenez-vous ?', a: "Dans les huit départements d’Île-de-France : Paris (75), la Seine-et-Marne (77), les Yvelines (78), l’Essonne (91), les Hauts-de-Seine (92), la Seine-Saint-Denis (93), le Val-de-Marne (94) et le Val-d’Oise (95). Les délais de déplacement varient selon l’éloignement et vous sont annoncés à la prise de rendez-vous." },
+  { q: 'Intervenez-vous dans les communes rurales ?', a: "Oui. La Seine-et-Marne, le Vexin français dans le Val-d’Oise, le Hurepoix en Essonne et le sud des Yvelines comportent de nombreuses communes rurales, et le bâti qu’on y trouve — fermes, longères, granges, maisons de village — est précisément celui qui demande le plus d’attention sur le plan du bois." },
+  { q: 'Pourquoi certaines villes ont-elles une page dédiée et d’autres non ?', a: "Nous ne créons une page communale que lorsqu’il existe un contexte bâti réellement spécifique à décrire : un tissu architectural particulier, une configuration d’habitat qui change la façon d’aborder le bois. Générer une page par commune francilienne produirait des centaines de textes interchangeables sans aucune valeur pour le lecteur. Notre intervention, elle, ne se limite pas aux communes listées." },
+  { q: 'La carte indique-t-elle vos interventions passées ?', a: "Non, et c’est volontaire. La carte représente les zones desservies et les communes disposant d’une page dédiée. Elle ne comporte aucun marqueur d’intervention, de chantier ou de client : ces données n’ont pas à figurer sur un site public, et leur mise en scène n’apporterait rien d’honnête au visiteur." },
+  { q: 'Le déplacement est-il facturé ?', a: "Les modalités vous sont indiquées lors de l’échange préalable, avant tout déplacement. Nous préférons annoncer clairement ce qui est dû plutôt que de pratiquer une visite dite gratuite dont le coût se retrouve ailleurs." },
 ];
 const jsonLd = [
   serviceSchema({ name: 'Traitement des insectes xylophages en Île-de-France', description: "Diagnostic et traitement des insectes xylophages dans les huit départements d’Île-de-France.", path: '/zones-intervention' }),
@@ -24,8 +24,8 @@ const jsonLd = [
 ].filter(Boolean) as Record<string, any>[];
 ---
 <Base
-  title="Traitement des insectes xylophages en Île-de-France : zones d’intervention"
-  description="Nos zones d’intervention en Île-de-France : Paris, Seine-et-Marne, Yvelines, Essonne, Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne et Val-d’Oise. Carte interactive et pages départementales."
+  title="Traitement des insectes xylophages en Île-de-France"
+  description="Zones d’intervention en Île-de-France : Paris, Seine-et-Marne, Yvelines, Essonne, Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne et Val-d’Oise."
   path="/zones-intervention" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero
@@ -38,6 +38,14 @@ const jsonLd = [
 
   <section class="section">
     <div class="wrap-wide">
+      <div class="section-head">
+        <p class="eyebrow">Carte interactive</p>
+        <h2>Les zones desservies en Île-de-France</h2>
+        <p class="lead">
+          Sélectionnez un département pour afficher son contexte bâti et les communes
+          disposant d’une page dédiée.
+        </p>
+      </div>
       <CarteIdf id="carte-zones" />
     </div>
   </section>

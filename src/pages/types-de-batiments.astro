@@ -16,15 +16,15 @@ const types = [
   { t: 'Bâtiment d’activité et grange', href: '/traitement-bois-batiment', d: 'Charpentes de grande portée, anciens ateliers, dépendances. Les appuis avant tout le reste.', k: 'Portée et appuis' },
 ];
 const faq = [
-  { q: 'Pourquoi le type de bâtiment change-t-il le diagnostic ?', a: "Parce qu'il détermine trois choses : les essences de bois employées, et donc les espèces plausibles ; la configuration des ouvrages, et donc ce qu'il est possible d'observer ; et le circuit de décision, qui conditionne le délai réel d'une intervention. Une même attaque de capricorne ne s'aborde pas de la même façon dans un pavillon, dans un immeuble en copropriété et dans une grange en cours de reconversion." },
-  { q: 'Intervenez-vous sur tous les types de bâtiments ?', a: "Oui, dès lors qu'il s'agit d'ouvrages bois : maisons, appartements, immeubles, copropriétés, bâtiments anciens, commerces, locaux professionnels, dépendances et bâtiments d'activité. Sur les bâtiments protégés ou situés aux abords d'un monument historique, nous réalisons le diagnostic et les préconisations en coordination avec le maître d'œuvre chargé du dossier." },
-  { q: 'Un même bâtiment peut-il relever de plusieurs situations ?', a: "C'est fréquent. Un commerce installé au rez-de-chaussée d'un immeuble ancien en copropriété cumule trois logiques : celle du local professionnel, celle du bâti ancien, et celle des parties communes. Notre rapport qualifie alors chaque ouvrage séparément, afin que chaque décideur sache ce qui le concerne." },
+  { q: 'Pourquoi le type de bâtiment change-t-il le diagnostic ?', a: "Parce qu’il détermine trois choses : les essences de bois employées, et donc les espèces plausibles ; la configuration des ouvrages, et donc ce qu’il est possible d’observer ; et le circuit de décision, qui conditionne le délai réel d’une intervention. Une même attaque de capricorne ne s’aborde pas de la même façon dans un pavillon, dans un immeuble en copropriété et dans une grange en cours de reconversion." },
+  { q: 'Intervenez-vous sur tous les types de bâtiments ?', a: "Oui, dès lors qu’il s’agit d’ouvrages bois : maisons, appartements, immeubles, copropriétés, bâtiments anciens, commerces, locaux professionnels, dépendances et bâtiments d’activité. Sur les bâtiments protégés ou situés aux abords d’un monument historique, nous réalisons le diagnostic et les préconisations en coordination avec le maître d’œuvre chargé du dossier." },
+  { q: 'Un même bâtiment peut-il relever de plusieurs situations ?', a: "C’est fréquent. Un commerce installé au rez-de-chaussée d’un immeuble ancien en copropriété cumule trois logiques : celle du local professionnel, celle du bâti ancien, et celle des parties communes. Notre rapport qualifie alors chaque ouvrage séparément, afin que chaque décideur sache ce qui le concerne." },
 ];
 const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 ---
 <Base
   title="Types de bâtiments : maisons, immeubles, bâti ancien, commerces"
-  description="Le type de bâtiment détermine les essences de bois, les espèces plausibles et le circuit de décision. Maisons, appartements, copropriétés, bâti ancien, commerces et bâtiments d’activité."
+  description="Le bâtiment détermine les essences, les espèces plausibles et le circuit de décision : maisons, copropriétés, bâti ancien, commerces, bâtiments d’activité."
   path="/types-de-batiments" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero
@@ -37,6 +37,10 @@ const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 
   <section class="section">
     <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Six familles</p>
+        <h2>Choisissez le bâtiment qui correspond au vôtre</h2>
+      </div>
       <div class="grid grid-3">
         {types.map((t) => (
           <a href={t.href} class="card card--link">

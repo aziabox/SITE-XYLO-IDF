@@ -13,7 +13,7 @@ faq:
   - q: "Les deux espèces peuvent-elles cohabiter ?"
     a: "Oui, dans un bâtiment qui comporte à la fois des bois résineux et des bois feuillus, ce qui est fréquent : une charpente en sapin et un plancher en chêne, par exemple. En revanche, sur une même pièce de bois, la cohabitation est rare, puisque les exigences des deux espèces ne se recoupent pas."
   - q: "Laquelle est la plus grave ?"
-    a: "Le capricorne des maisons, sans hésitation, sur le plan structurel. Sa larve consomme l'aubier des résineux en laissant la surface intacte, et elle travaille plusieurs années : une pièce peut être largement évidée avant le premier trou visible. La petite vrillette dégrade plus lentement et se limite souvent à des ouvrages non porteurs. La grosse vrillette, elle, est surtout le signal d'un problème d'humidité."
+    a: "Le capricorne des maisons, sans hésitation, sur le plan structurel. Sa larve consomme l’aubier des résineux en laissant la surface intacte, et elle travaille plusieurs années : une pièce peut être largement évidée avant le premier trou visible. La petite vrillette dégrade plus lentement et se limite souvent à des ouvrages non porteurs. La grosse vrillette, elle, est surtout le signal d’un problème d’humidité."
 ---
 
 Ce sont les deux noms qui reviennent le plus souvent, et ils sont employés à peu près indifféremment par la plupart des gens. Ce n’est pas une question de vocabulaire : les deux insectes n’attaquent pas les mêmes bois, ne progressent pas à la même vitesse et ne posent pas le même problème.

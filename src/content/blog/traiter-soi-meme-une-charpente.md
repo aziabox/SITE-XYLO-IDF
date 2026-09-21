@@ -11,9 +11,9 @@ links:
   - { label: "Prévention et surveillance", href: "/prevention-insectes-xylophages" }
 faq:
   - q: "Les produits vendus en grande surface sont-ils efficaces ?"
-    a: "Beaucoup contiennent des matières actives comparables à celles des produits professionnels, à des concentrations parfois différentes. Le problème n'est généralement pas le produit lui-même mais les conditions d'application : sur un bois poussiéreux, il ne pénètre pas ; sur une pièce de forte section, une application de surface n'atteint pas les galeries profondes. Lisez l'étiquette, respectez les consignes, et surtout préparez le support."
+    a: "Beaucoup contiennent des matières actives comparables à celles des produits professionnels, à des concentrations parfois différentes. Le problème n’est généralement pas le produit lui-même mais les conditions d’application : sur un bois poussiéreux, il ne pénètre pas ; sur une pièce de forte section, une application de surface n’atteint pas les galeries profondes. Lisez l’étiquette, respectez les consignes, et surtout préparez le support."
   - q: "Que puis-je faire moi-même sans risque ?"
-    a: "Beaucoup de choses utiles : inspecter et documenter, prélever un échantillon de vermoulure, sonder au maillet et au tournevis, mettre en place des zones témoins nettoyées et datées, retraiter les coupes d'une charpente neuve, améliorer la ventilation d'un comble ou d'un vide sanitaire, et traiter un meuble ou une boiserie non porteuse. Ce sont des interventions sans conséquence structurelle."
+    a: "Beaucoup de choses utiles : inspecter et documenter, prélever un échantillon de vermoulure, sonder au maillet et au tournevis, mettre en place des zones témoins nettoyées et datées, retraiter les coupes d’une charpente neuve, améliorer la ventilation d’un comble ou d’un vide sanitaire, et traiter un meuble ou une boiserie non porteuse. Ce sont des interventions sans conséquence structurelle."
 ---
 
 C’est une question légitime, et la réponse honnête est nuancée : cela dépend entièrement de ce qu’on traite.

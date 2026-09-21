@@ -36,7 +36,10 @@ const {
 const clean = path === '/' ? '/' : '/' + path.replace(/^\/|\/$/g, '');
 const canonical = new URL(clean, SITE.url).href;
 const ogImage = new URL(image, SITE.url).href;
-const fullTitle = title.includes(SITE.name) ? title : `${title} | ${SITE.name}`;
+/* Le nom de marque n’est ajouté que si le titre reste sous ~65 caractères,
+   longueur au-delà de laquelle les moteurs tronquent l’affichage. */
+const fullTitle =
+  title.includes(SITE.name) || title.length > 46 ? title : `${title} | ${SITE.name}`;
 
 /* --- Organisation : uniquement des informations réellement disponibles. --- */
 const org: Record<string, any> = {
@@ -49,7 +52,7 @@ const org: Record<string, any> = {
   areaServed: {
     '@type': 'AdministrativeArea',
     name: 'Île-de-France',
-    containsPlace: ['Paris', 'Seine-et-Marne', 'Yvelines', 'Essonne', 'Hauts-de-Seine', 'Seine-Saint-Denis', 'Val-de-Marne', "Val-d'Oise"],
+    containsPlace: ['Paris', 'Seine-et-Marne', 'Yvelines', 'Essonne', 'Hauts-de-Seine', 'Seine-Saint-Denis', 'Val-de-Marne', "Val-d’Oise"],
   },
   knowsAbout: [
     'Insectes xylophages',
@@ -73,7 +76,7 @@ if (SITE.address) {
 }
 if (SITE.legal.companyName) org.legalName = SITE.legal.companyName;
 /* Aucun aggregateRating, aucun award, aucune certification ne sont émis tant
-   qu'ils ne sont pas réellement justifiés par l'entreprise. */
+   qu’ils ne sont pas réellement justifiés par l’entreprise. */
 
 const website = {
   '@type': 'WebSite',

@@ -7,6 +7,7 @@ import ZonesMini from '~/components/ZonesMini.astro';
 import Maillage from '~/components/Maillage.astro';
 import Answer from '~/components/Answer.astro';
 import Charpente from '~/components/illus/Charpente.astro';
+import Photo from '~/components/Photo.astro';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 
 const crumbs = [
@@ -15,11 +16,11 @@ const crumbs = [
   { label: 'Traitement de charpente' },
 ];
 const faq = [
-  { q: 'Traitement de charpente : à quel moment le faire ?', a: "Le meilleur moment est celui où la charpente est accessible. Avant d'isoler ou d'aménager un comble, les bois sont visibles sur toutes leurs faces et le traitement les atteint intégralement, pour un coût sans commune mesure avec celui d'une intervention après doublage. Après des travaux de couverture ou une infiltration, un contrôle s'impose également, car l'humidité a pu créer des conditions nouvelles." },
-  { q: 'Faut-il déposer la couverture ?', a: "Non, dans la quasi-totalité des cas. Le traitement s'effectue par l'intérieur, depuis le comble. Une dépose de couverture ne se justifie que si la charpente est inaccessible par le dessous, ce qui reste exceptionnel, ou si des travaux de couverture sont de toute façon programmés — auquel cas il est judicieux de coordonner les deux." },
-  { q: 'Que faire des combles aménagés ?', a: "Un comble aménagé masque les pièces les plus exposées : pieds de chevron, bois de rive, sablières. Nous inspectons ce qui est accessible, réalisons si nécessaire des ouvertures ponctuelles aux endroits les plus significatifs, et indiquons explicitement dans le rapport ce qui n'a pas pu être examiné. Selon l'ampleur de l'attaque, la dépose partielle d'un doublage peut devenir nécessaire." },
-  { q: 'Une charpente industrialisée se traite-t-elle différemment ?', a: "Les principes sont les mêmes, mais les sections changent tout. Les fermettes sont constituées de bois minces assemblés par connecteurs métalliques : l'injection y est rarement nécessaire, une application de surface soignée suffit généralement. En revanche, la perte de section y est plus vite critique qu'avec des pièces massives, et les connecteurs demandent une attention particulière." },
-  { q: 'Le traitement protège-t-il aussi contre les champignons ?', a: "Cela dépend du produit. Certains produits de protection du bois ont une action fongicide en plus de leur action insecticide. Mais aucun produit ne règle un problème d'eau : si une infiltration persiste, la dégradation fongique reprendra. La reprise de la cause reste prioritaire, et nous l'indiquons systématiquement lorsqu'elle est en jeu." },
+  { q: 'Traitement de charpente : à quel moment le faire ?', a: "Le meilleur moment est celui où la charpente est accessible. Avant d’isoler ou d’aménager un comble, les bois sont visibles sur toutes leurs faces et le traitement les atteint intégralement, pour un coût sans commune mesure avec celui d’une intervention après doublage. Après des travaux de couverture ou une infiltration, un contrôle s’impose également, car l’humidité a pu créer des conditions nouvelles." },
+  { q: 'Faut-il déposer la couverture ?', a: "Non, dans la quasi-totalité des cas. Le traitement s’effectue par l’intérieur, depuis le comble. Une dépose de couverture ne se justifie que si la charpente est inaccessible par le dessous, ce qui reste exceptionnel, ou si des travaux de couverture sont de toute façon programmés — auquel cas il est judicieux de coordonner les deux." },
+  { q: 'Que faire des combles aménagés ?', a: "Un comble aménagé masque les pièces les plus exposées : pieds de chevron, bois de rive, sablières. Nous inspectons ce qui est accessible, réalisons si nécessaire des ouvertures ponctuelles aux endroits les plus significatifs, et indiquons explicitement dans le rapport ce qui n’a pas pu être examiné. Selon l’ampleur de l’attaque, la dépose partielle d’un doublage peut devenir nécessaire." },
+  { q: 'Une charpente industrialisée se traite-t-elle différemment ?', a: "Les principes sont les mêmes, mais les sections changent tout. Les fermettes sont constituées de bois minces assemblés par connecteurs métalliques : l’injection y est rarement nécessaire, une application de surface soignée suffit généralement. En revanche, la perte de section y est plus vite critique qu’avec des pièces massives, et les connecteurs demandent une attention particulière." },
+  { q: 'Le traitement protège-t-il aussi contre les champignons ?', a: "Cela dépend du produit. Certains produits de protection du bois ont une action fongicide en plus de leur action insecticide. Mais aucun produit ne règle un problème d’eau : si une infiltration persiste, la dégradation fongique reprendra. La reprise de la cause reste prioritaire, et nous l’indiquons systématiquement lorsqu’elle est en jeu." },
 ];
 const jsonLd = [
   serviceSchema({ name: 'Traitement de charpente', description: "Traitement curatif et préventif des charpentes traditionnelles et industrialisées : inspection, bûchage, injection, pulvérisation et renfort des pièces affaiblies, en Île-de-France.", path: '/traitement-charpente', serviceType: 'Traitement de charpente' }),
@@ -28,7 +29,7 @@ const jsonLd = [
 ---
 <Base
   title="Traitement de charpente : inspection, curatif et préventif"
-  description="Traitement de charpente contre les insectes xylophages : inspection des pièces, bûchage, injection sous pression, pulvérisation, renfort. Charpentes traditionnelles, anciennes et fermettes. Île-de-France."
+  description="Traitement de charpente contre les insectes xylophages : inspection, bûchage, injection sous pression, pulvérisation, renfort. Traditionnelles et fermettes."
   path="/traitement-charpente" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero
@@ -74,13 +75,13 @@ const jsonLd = [
               sur une pièce résineuse.
             </p>
           </div>
-          <figure class="fig">
+          <Photo
+            nom="ferme-charpente-zones-sensibles.jpg"
+            alt="Ferme de charpente traditionnelle avec repérage des zones d’appui et des assemblages à sonder en priorité"
+            legende="Repérage des zones sensibles d’une ferme traditionnelle. Le sondage commence toujours par les points où les efforts se concentrent."
+          >
             <Charpente />
-            <figcaption>
-              Repérage des zones sensibles d’une ferme traditionnelle. Le sondage commence toujours
-              par les points où les efforts se concentrent.
-            </figcaption>
-          </figure>
+          </Photo>
         </div>
         <aside class="split__side">
           <div class="card card--sage">

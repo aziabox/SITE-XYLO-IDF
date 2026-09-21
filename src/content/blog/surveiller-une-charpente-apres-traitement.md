@@ -11,9 +11,9 @@ links:
   - { label: "Diagnostic d’infestation", href: "/diagnostic-insectes-xylophages" }
 faq:
   - q: "Faut-il souscrire un contrat de surveillance ?"
-    a: "Pour une charpente traitée dans un logement, ce n'est généralement pas nécessaire : la méthode des zones témoins est simple et vous pouvez la mettre en œuvre vous-même. Un suivi contractualisé se justifie davantage sur un traitement anti-termites, où la surveillance fait partie intégrante du dispositif, ou sur un patrimoine important où l'accès est difficile."
+    a: "Pour une charpente traitée dans un logement, ce n’est généralement pas nécessaire : la méthode des zones témoins est simple et vous pouvez la mettre en œuvre vous-même. Un suivi contractualisé se justifie davantage sur un traitement anti-termites, où la surveillance fait partie intégrante du dispositif, ou sur un patrimoine important où l’accès est difficile."
   - q: "Combien de temps un traitement reste-t-il efficace ?"
-    a: "La durée dépend du produit, du support et surtout des conditions du bâtiment. Un traitement appliqué dans un comble ventilé et sec conserve son effet bien plus longtemps que le même produit appliqué sur un bois qui reste humide. C'est pourquoi la reprise des causes d'humidité conditionne la durabilité du résultat autant que le traitement lui-même."
+    a: "La durée dépend du produit, du support et surtout des conditions du bâtiment. Un traitement appliqué dans un comble ventilé et sec conserve son effet bien plus longtemps que le même produit appliqué sur un bois qui reste humide. C’est pourquoi la reprise des causes d’humidité conditionne la durabilité du résultat autant que le traitement lui-même."
 ---
 
 Le jour où le chantier se termine, la charpente a exactement la même apparence que la veille, à la teinte du bois près. Aucun signe ne permet d’affirmer que le traitement a fonctionné.

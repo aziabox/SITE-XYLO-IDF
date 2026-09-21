@@ -218,7 +218,8 @@ const isActive = (href: string) => here === href || (href !== '/' && here.starts
     background: var(--c-bg); padding-top: 112px; display: flex; flex-direction: column;
   }
   .mnav[hidden] { display: none; }
-  .mnav__scroll { overflow-y: auto; flex: 1; padding: 1rem 0 6rem; }
+  .mnav__scroll { overflow-y: auto; flex: 1; padding: 1rem 0 0; display: flex; flex-direction: column; }
+  .mnav__scroll > nav { flex: 0 0 auto; }
   .mnav__grp { border-bottom: 1px solid var(--c-border); }
   .mnav__grp summary {
     list-style: none; cursor: pointer; padding: 1rem 1.25rem;
@@ -243,12 +244,13 @@ const isActive = (href: string) => here === href || (href !== '/' && here.starts
   .mnav__all { font-weight: 650; color: var(--sauge-700); }
   .mnav__simple { padding: 1rem 1.25rem; }
   .mnav__foot {
-    padding: 1rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+    margin-top: auto;
+    padding: 1.25rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
     border-top: 1px solid var(--c-border); background: var(--c-bg-alt);
   }
   body.nav-open { overflow: hidden; }
 
-  /* ---------- Barre d'action mobile ---------- */
+  /* ---------- Barre d’action mobile ---------- */
   .dock {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 88;
     display: none; gap: .55rem; padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom));

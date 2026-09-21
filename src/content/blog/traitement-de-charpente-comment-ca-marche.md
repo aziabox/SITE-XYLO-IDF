@@ -11,9 +11,9 @@ links:
   - { label: "Diagnostic d’infestation", href: "/diagnostic-insectes-xylophages" }
 faq:
   - q: "Pourquoi deux devis peuvent-ils être si différents ?"
-    a: "Parce qu'ils ne décrivent pas la même prestation. Un devis de traitement curatif qui ne mentionne ni bûchage, ni dépoussiérage, ni injection décrit en réalité une prestation préventive appliquée sur un bois attaqué. Le prix est logiquement plus bas ; l'efficacité sur une infestation en cours l'est aussi. Vérifiez la présence explicite de ces trois postes."
+    a: "Parce qu’ils ne décrivent pas la même prestation. Un devis de traitement curatif qui ne mentionne ni bûchage, ni dépoussiérage, ni injection décrit en réalité une prestation préventive appliquée sur un bois attaqué. Le prix est logiquement plus bas ; l’efficacité sur une infestation en cours l’est aussi. Vérifiez la présence explicite de ces trois postes."
   - q: "Le produit est-il dangereux ?"
-    a: "Les produits de protection du bois relèvent de la réglementation européenne sur les produits biocides, et leur application professionnelle suppose la détention des certificats requis. Les consignes d'usage et le délai de réintégration figurent sur la fiche de données de sécurité, qui doit vous être communiquée avant l'intervention. Pendant le chantier, la poussière de bois dégagée par le bûchage justifie une protection respiratoire."
+    a: "Les produits de protection du bois relèvent de la réglementation européenne sur les produits biocides, et leur application professionnelle suppose la détention des certificats requis. Les consignes d’usage et le délai de réintégration figurent sur la fiche de données de sécurité, qui doit vous être communiquée avant l’intervention. Pendant le chantier, la poussière de bois dégagée par le bûchage justifie une protection respiratoire."
 ---
 
 « Traiter une charpente », dans l’esprit de la plupart des gens, c’est pulvériser un produit sur du bois. C’est la dernière étape, et de loin la moins déterminante.

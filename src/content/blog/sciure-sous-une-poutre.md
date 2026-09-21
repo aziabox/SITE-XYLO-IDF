@@ -11,9 +11,9 @@ links:
   - { label: "Diagnostic d’infestation", href: "/diagnostic-insectes-xylophages" }
 faq:
   - q: "Quelle quantité de sciure doit inquiéter ?"
-    a: "La quantité n'est pas un bon indicateur. Une petite quantité peut correspondre à une attaque active récente, une grande quantité à un dépôt ancien libéré d'un coup par une vibration. Ce qui compte, c'est la récurrence : de la sciure qui réapparaît après un nettoyage complet est un signe, un tas ponctuel ne l'est pas."
+    a: "La quantité n’est pas un bon indicateur. Une petite quantité peut correspondre à une attaque active récente, une grande quantité à un dépôt ancien libéré d’un coup par une vibration. Ce qui compte, c’est la récurrence : de la sciure qui réapparaît après un nettoyage complet est un signe, un tas ponctuel ne l’est pas."
   - q: "La sciure peut-elle venir d’ailleurs ?"
-    a: "Oui, et c'est une cause fréquente de fausse alerte. Un plâtre qui se désagrège produit une poudre très claire et irrégulière. Un bois pourri sec se réduit en poudre brunâtre, mais le bois autour est alors fissuré en cubes ou en lamelles. Des fourmis charpentières rejettent des fragments grossiers, presque des copeaux. La vermoulure d'insecte, elle, est homogène et de granulométrie régulière."
+    a: "Oui, et c’est une cause fréquente de fausse alerte. Un plâtre qui se désagrège produit une poudre très claire et irrégulière. Un bois pourri sec se réduit en poudre brunâtre, mais le bois autour est alors fissuré en cubes ou en lamelles. Des fourmis charpentières rejettent des fragments grossiers, presque des copeaux. La vermoulure d’insecte, elle, est homogène et de granulométrie régulière."
 ---
 
 Une petite quantité de sciure sous une poutre ne permet pas, à elle seule, d’identifier l’insecte responsable. Elle peut correspondre à une attaque ancienne comme à une attaque active. L’observation des trous, leur diamètre, leur répartition et l’état du bois permettent d’orienter le diagnostic.

@@ -7,7 +7,7 @@ export const MAIN_NAV: NavGroup[] = [
   {
     label: 'Les insectes',
     href: '/insectes-xylophages',
-    intro: "Reconnaître l'insecte responsable avant de décider d'un traitement.",
+    intro: "Reconnaître l’insecte responsable avant de décider d’un traitement.",
     columns: [
       {
         title: 'Fiches espèces',

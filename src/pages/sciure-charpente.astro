@@ -23,16 +23,16 @@ const gestes = [
   { title: 'Nettoyez, repérez, datez', text: 'Une fois l’observation faite, nettoyez complètement la zone, marquez-la avec un morceau d’adhésif et notez la date. Si de la sciure réapparaît au même endroit dans les semaines qui suivent, l’attaque est active. C’est le test le plus fiable, et il ne coûte rien.' },
 ];
 const faq = [
-  { q: 'De la sciure signifie-t-elle forcément une attaque en cours ?', a: "Non. Une vibration, un courant d'air, un passage dans le comble ou même une variation d'hygrométrie peuvent faire tomber de la vermoulure accumulée depuis des années dans des galeries anciennes. C'est une cause fréquente de fausse alerte. Le seul moyen de trancher est le contrôle différé : nettoyer, repérer, et vérifier si la sciure réapparaît." },
-  { q: 'Quelle quantité de sciure doit inquiéter ?', a: "La quantité n'est pas un bon indicateur. Une petite quantité peut correspondre à une attaque active récente, une grande quantité à un dépôt ancien libéré d'un coup. Ce qui compte, c'est la récurrence : de la sciure qui réapparaît après un nettoyage complet est un signe, un tas ponctuel ne l'est pas." },
-  { q: 'Et si la sciure vient d’un plafond ?', a: "Dans un immeuble ancien, une poussière fine qui tombe d'un plafond peut provenir des solives situées au-dessus, ou simplement d'un plâtre qui se désagrège. Recueillez-en : la vermoulure d'insecte a une granulométrie régulière et souvent une forme caractéristique, alors qu'un plâtre dégradé produit une poudre irrégulière, plus claire et plus légère." },
-  { q: 'La couleur de la sciure est-elle informative ?', a: "Oui, en relatif. Une vermoulure fraîche est généralement plus claire que le bois qui l'entoure, parce qu'elle n'a pas été exposée à la lumière ni à la poussière. Une vermoulure ancienne prend la teinte grisâtre de l'empoussièrement ambiant. C'est un indice parmi d'autres, à croiser avec l'aspect des bords des trous." },
+  { q: 'De la sciure signifie-t-elle forcément une attaque en cours ?', a: "Non. Une vibration, un courant d’air, un passage dans le comble ou même une variation d’hygrométrie peuvent faire tomber de la vermoulure accumulée depuis des années dans des galeries anciennes. C’est une cause fréquente de fausse alerte. Le seul moyen de trancher est le contrôle différé : nettoyer, repérer, et vérifier si la sciure réapparaît." },
+  { q: 'Quelle quantité de sciure doit inquiéter ?', a: "La quantité n’est pas un bon indicateur. Une petite quantité peut correspondre à une attaque active récente, une grande quantité à un dépôt ancien libéré d’un coup. Ce qui compte, c’est la récurrence : de la sciure qui réapparaît après un nettoyage complet est un signe, un tas ponctuel ne l’est pas." },
+  { q: 'Et si la sciure vient d’un plafond ?', a: "Dans un immeuble ancien, une poussière fine qui tombe d’un plafond peut provenir des solives situées au-dessus, ou simplement d’un plâtre qui se désagrège. Recueillez-en : la vermoulure d’insecte a une granulométrie régulière et souvent une forme caractéristique, alors qu’un plâtre dégradé produit une poudre irrégulière, plus claire et plus légère." },
+  { q: 'La couleur de la sciure est-elle informative ?', a: "Oui, en relatif. Une vermoulure fraîche est généralement plus claire que le bois qui l’entoure, parce qu’elle n’a pas été exposée à la lumière ni à la poussière. Une vermoulure ancienne prend la teinte grisâtre de l’empoussièrement ambiant. C’est un indice parmi d’autres, à croiser avec l’aspect des bords des trous." },
 ];
 const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 ---
 <Base
   title="Sciure sous une charpente : que faire et comment l’interpréter"
-  description="J’ai trouvé de la sciure sous ma charpente : les six gestes à faire avant de nettoyer, comment lire la texture de la vermoulure et comment savoir si l’attaque est encore active."
+  description="De la sciure sous votre charpente : les six gestes à faire avant de nettoyer, lire la texture de la vermoulure, savoir si l’attaque est encore active."
   path="/sciure-charpente" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero

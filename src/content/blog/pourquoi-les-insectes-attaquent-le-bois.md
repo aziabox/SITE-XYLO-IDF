@@ -11,9 +11,9 @@ links:
   - { label: "Prévention et surveillance", href: "/prevention-insectes-xylophages" }
 faq:
   - q: "Pourquoi le chêne est-il réputé résistant ?"
-    a: "Parce que son duramen est dense et imprégné de tanins et d'autres composés qui le rendent peu nutritif et peu assimilable. Mais cette réputation vaut pour le duramen seulement : l'aubier du chêne, lui, est tendre et attaquable. Une pièce bien purgée est très durable ; une pièce comportant beaucoup d'aubier ne l'est pas, malgré l'essence."
+    a: "Parce que son duramen est dense et imprégné de tanins et d’autres composés qui le rendent peu nutritif et peu assimilable. Mais cette réputation vaut pour le duramen seulement : l’aubier du chêne, lui, est tendre et attaquable. Une pièce bien purgée est très durable ; une pièce comportant beaucoup d’aubier ne l’est pas, malgré l’essence."
   - q: "Un bois traité est-il définitivement protégé ?"
-    a: "Non. Un traitement de préservation est calibré pour une durée et une exposition données, et il se concentre en périphérie de la pièce. Le point le plus souvent négligé est le retraitement des coupes faites sur chantier, qui exposent du bois vierge au cœur de la pièce — et c'est fréquemment par là qu'une attaque commence des années plus tard."
+    a: "Non. Un traitement de préservation est calibré pour une durée et une exposition données, et il se concentre en périphérie de la pièce. Le point le plus souvent négligé est le retraitement des coupes faites sur chantier, qui exposent du bois vierge au cœur de la pièce — et c’est fréquemment par là qu’une attaque commence des années plus tard."
 ---
 
 La question paraît naïve. Elle ne l’est pas : y répondre explique pourquoi certaines pièces de bois sont attaquées et d’autres non, dans le même bâtiment, parfois à quelques centimètres d’écart.

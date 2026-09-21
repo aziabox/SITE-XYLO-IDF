@@ -11,9 +11,9 @@ links:
   - { label: "Traitement de charpente", href: "/traitement-charpente" }
 faq:
   - q: "Une charpente peut-elle s’effondrer ?"
-    a: "Une défaillance brutale et complète est rare. Ce que nous constatons plus souvent, ce sont des défaillances localisées : un chevron qui cède sous l'appui, une panne qui flèche visiblement, un about d'entrait qui se dérobe. Les conséquences sont réelles — déformation de toiture, infiltrations, désordres en cascade — mais elles s'installent progressivement, ce qui laisse le temps d'intervenir si l'on regarde."
+    a: "Une défaillance brutale et complète est rare. Ce que nous constatons plus souvent, ce sont des défaillances localisées : un chevron qui cède sous l’appui, une panne qui flèche visiblement, un about d’entrait qui se dérobe. Les conséquences sont réelles — déformation de toiture, infiltrations, désordres en cascade — mais elles s’installent progressivement, ce qui laisse le temps d’intervenir si l’on regarde."
   - q: "Mon assurance couvre-t-elle les dégâts ?"
-    a: "Les dégâts d'insectes xylophages sont généralement exclus des garanties multirisques habitation, car ils relèvent d'un phénomène progressif plutôt que d'un sinistre soudain. Certaines situations font exception, notamment lorsque l'attaque est la conséquence directe d'un dégât des eaux couvert. Vérifiez vos conditions particulières, et conservez le rapport de diagnostic : il constitue une pièce utile dans tous les cas."
+    a: "Les dégâts d’insectes xylophages sont généralement exclus des garanties multirisques habitation, car ils relèvent d’un phénomène progressif plutôt que d’un sinistre soudain. Certaines situations font exception, notamment lorsque l’attaque est la conséquence directe d’un dégât des eaux couvert. Vérifiez vos conditions particulières, et conservez le rapport de diagnostic : il constitue une pièce utile dans tous les cas."
 ---
 
 « J’ai des insectes dans ma charpente » ne décrit pas une situation. Selon l’espèce, l’ouvrage et l’ancienneté, cela peut signifier un désagrément esthétique sur une boiserie, ou une pièce porteuse qu’il faut reprendre.

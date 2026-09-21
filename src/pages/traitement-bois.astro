@@ -22,10 +22,10 @@ const ouvrages = [
   { t: 'Ossatures et bardages', d: 'Constructions récentes, généralement traitées d’origine. Les points sensibles sont les coupes de chantier et les zones exposées aux intempéries.', m: 'Traitement ciblé des zones atteintes, retraitement des coupes, contrôle de la protection d’ensemble.' },
 ];
 const faq = [
-  { q: 'Quelle différence entre traiter une poutre et traiter un meuble ?', a: "Tout, sauf le principe. Sur une poutre, l'enjeu est mécanique : on mesure la section saine, on bûche, on injecte en profondeur, et l'aspect final importe peu. Sur un meuble, l'enjeu est la conservation de l'objet : on adapte le produit à la finition, on fait un essai préalable, et les perçages doivent rester invisibles. Ce sont deux métiers dans un même geste." },
-  { q: 'Peut-on traiter un bois peint ou verni ?', a: "Oui, mais la finition constitue une barrière. Un produit appliqué sur une peinture ne pénètre pas : il faut soit atteindre le bois par des perçages, soit décaper localement. C'est une des raisons pour lesquelles un traitement sur boiserie ancienne demande plus de temps qu'une pulvérisation sur charpente brute." },
-  { q: 'Le bois traité change-t-il d’aspect ?', a: "Sur un bois brut de charpente, l'application laisse un aspect légèrement plus foncé qui s'atténue avec le temps. Sur un bois vu, ciré ou plaqué, le risque de marque est réel et doit être anticipé : essai préalable sur une zone peu visible, choix d'un produit incolore, et parfois reprise de la finition après traitement." },
-  { q: 'Un bois neuf doit-il être traité ?', a: "Cela dépend de sa classe d'emploi et de sa mise en œuvre. Les bois de construction sont normalement traités pour la classe correspondant à leur exposition. Le point souvent négligé est le retraitement des coupes et usinages réalisés sur chantier : une entaille ou une coupe de longueur met à nu du bois non protégé, et c'est précisément là que les problèmes commencent quelques années plus tard." },
+  { q: 'Quelle différence entre traiter une poutre et traiter un meuble ?', a: "Tout, sauf le principe. Sur une poutre, l’enjeu est mécanique : on mesure la section saine, on bûche, on injecte en profondeur, et l’aspect final importe peu. Sur un meuble, l’enjeu est la conservation de l’objet : on adapte le produit à la finition, on fait un essai préalable, et les perçages doivent rester invisibles. Ce sont deux métiers dans un même geste." },
+  { q: 'Peut-on traiter un bois peint ou verni ?', a: "Oui, mais la finition constitue une barrière. Un produit appliqué sur une peinture ne pénètre pas : il faut soit atteindre le bois par des perçages, soit décaper localement. C’est une des raisons pour lesquelles un traitement sur boiserie ancienne demande plus de temps qu’une pulvérisation sur charpente brute." },
+  { q: 'Le bois traité change-t-il d’aspect ?', a: "Sur un bois brut de charpente, l’application laisse un aspect légèrement plus foncé qui s’atténue avec le temps. Sur un bois vu, ciré ou plaqué, le risque de marque est réel et doit être anticipé : essai préalable sur une zone peu visible, choix d’un produit incolore, et parfois reprise de la finition après traitement." },
+  { q: 'Un bois neuf doit-il être traité ?', a: "Cela dépend de sa classe d’emploi et de sa mise en œuvre. Les bois de construction sont normalement traités pour la classe correspondant à leur exposition. Le point souvent négligé est le retraitement des coupes et usinages réalisés sur chantier : une entaille ou une coupe de longueur met à nu du bois non protégé, et c’est précisément là que les problèmes commencent quelques années plus tard." },
 ];
 const jsonLd = [
   serviceSchema({ name: 'Traitement du bois', description: "Traitement des ouvrages bois contre les insectes xylophages : planchers, parquets, boiseries, menuiseries, mobilier, ossatures. Île-de-France.", path: '/traitement-bois', serviceType: 'Traitement du bois' }),
@@ -34,7 +34,7 @@ const jsonLd = [
 ---
 <Base
   title="Traitement du bois : méthodes selon l’ouvrage concerné"
-  description="Traitement du bois contre les insectes xylophages : planchers, parquets et lambourdes, boiseries, menuiseries, mobilier, ossatures. Une méthode par ouvrage, en Île-de-France."
+  description="Traitement du bois contre les insectes xylophages : planchers, parquets, boiseries, menuiseries, mobilier, ossatures. Une méthode par ouvrage."
   path="/traitement-bois" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero

@@ -14,16 +14,16 @@ const crumbs = [
   { label: 'Insectes dans le plancher' },
 ];
 const faq = [
-  { q: 'Un parquet qui grince est-il attaqué ?', a: "Le plus souvent non. Un grincement traduit un jeu mécanique entre lames, ou un léger dévers des lambourdes. Un parquet réellement attaqué présente plutôt un fléchissement localisé, des trous de sortie sur le chant des lames, ou une lame qui cède sous l'appui. Le grincement seul n'est pas un signe d'infestation." },
-  { q: 'Peut-on diagnostiquer sans démonter ?', a: "Dans une large mesure, oui. L'observation depuis le vide sanitaire ou la cave, l'examen des chants de lames, le sondage au poinçon et quelques points de contrôle bien choisis donnent déjà une image fiable. La dépose d'une lame n'est envisagée que si ces éléments laissent un doute sérieux, et elle se limite alors à une ou deux lames, reposées ensuite." },
-  { q: 'Qui prend en charge un plancher en copropriété ?', a: "Un plancher séparant deux lots relève généralement des parties communes, sous réserve de ce que prévoit le règlement de copropriété. La décision et le financement passent alors par l'assemblée générale. Un parquet posé au-dessus, purement privatif, relève du propriétaire. C'est l'une des raisons pour lesquelles notre rapport qualifie précisément chaque ouvrage concerné." },
-  { q: 'Des trous dans un parquet neuf, est-ce possible ?', a: "Oui, et c'est le cas typique du lyctus. L'attaque était déjà présente dans le bois à la livraison, sous forme d'œufs ou de jeunes larves, et le développement s'est poursuivi après la pose. La vermoulure est alors d'une finesse de farine. Il faut examiner l'ensemble du lot, pas seulement les lames où des trous apparaissent." },
+  { q: 'Un parquet qui grince est-il attaqué ?', a: "Le plus souvent non. Un grincement traduit un jeu mécanique entre lames, ou un léger dévers des lambourdes. Un parquet réellement attaqué présente plutôt un fléchissement localisé, des trous de sortie sur le chant des lames, ou une lame qui cède sous l’appui. Le grincement seul n’est pas un signe d’infestation." },
+  { q: 'Peut-on diagnostiquer sans démonter ?', a: "Dans une large mesure, oui. L’observation depuis le vide sanitaire ou la cave, l’examen des chants de lames, le sondage au poinçon et quelques points de contrôle bien choisis donnent déjà une image fiable. La dépose d’une lame n’est envisagée que si ces éléments laissent un doute sérieux, et elle se limite alors à une ou deux lames, reposées ensuite." },
+  { q: 'Qui prend en charge un plancher en copropriété ?', a: "Un plancher séparant deux lots relève généralement des parties communes, sous réserve de ce que prévoit le règlement de copropriété. La décision et le financement passent alors par l’assemblée générale. Un parquet posé au-dessus, purement privatif, relève du propriétaire. C’est l’une des raisons pour lesquelles notre rapport qualifie précisément chaque ouvrage concerné." },
+  { q: 'Des trous dans un parquet neuf, est-ce possible ?', a: "Oui, et c’est le cas typique du lyctus. L’attaque était déjà présente dans le bois à la livraison, sous forme d’œufs ou de jeunes larves, et le développement s’est poursuivi après la pose. La vermoulure est alors d’une finesse de farine. Il faut examiner l’ensemble du lot, pas seulement les lames où des trous apparaissent." },
 ];
 const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 ---
 <Base
   title="Insectes dans le plancher : solives, lambourdes et parquet"
-  description="Insectes dans un plancher : pourquoi le désordre se manifeste souvent par un affaissement sans trou visible, comment distinguer parquet et lambourde, et quelles espèces selon la configuration."
+  description="Insectes dans un plancher : pourquoi le désordre se manifeste par un affaissement sans trou visible, et pourquoi la lambourde est souvent en cause."
   path="/insectes-plancher" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero

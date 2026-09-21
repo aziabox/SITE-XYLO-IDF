@@ -11,9 +11,9 @@ links:
   - { label: "Diagnostic d’infestation", href: "/diagnostic-insectes-xylophages" }
 faq:
   - q: "Que faire si je découvre des termites ?"
-    a: "Ne détruisez pas les cordonnets de terre : ils indiquent par où la colonie circule, et c'est une information déterminante pour le traitement. Ne déplacez pas non plus les bois stockés au sol avant qu'ils aient été examinés. Dans les zones délimitées par arrêté préfectoral, l'occupant ou le propriétaire est tenu de déclarer la présence de termites en mairie."
+    a: "Ne détruisez pas les cordonnets de terre : ils indiquent par où la colonie circule, et c’est une information déterminante pour le traitement. Ne déplacez pas non plus les bois stockés au sol avant qu’ils aient été examinés. Dans les zones délimitées par arrêté préfectoral, l’occupant ou le propriétaire est tenu de déclarer la présence de termites en mairie."
   - q: "Comment savoir si ma commune est en zone délimitée ?"
-    a: "La délimitation relève d'arrêtés préfectoraux qui évoluent dans le temps. L'information se vérifie auprès de la mairie de la commune concernée ou de la préfecture du département. Nous ne publions pas de liste et ne nous substituons pas à cette vérification : un renseignement obsolète peut avoir des conséquences réelles dans une vente."
+    a: "La délimitation relève d’arrêtés préfectoraux qui évoluent dans le temps. L’information se vérifie auprès de la mairie de la commune concernée ou de la préfecture du département. Nous ne publions pas de liste et ne nous substituons pas à cette vérification : un renseignement obsolète peut avoir des conséquences réelles dans une vente."
 ---
 
 Repérer des termites demande de chercher exactement l’inverse de ce que l’on cherche pour les autres insectes du bois. Pas de trous, pas de sciure, pas de galeries visibles en surface. C’est cette absence même qui doit mettre en alerte.

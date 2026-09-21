@@ -7,6 +7,7 @@ import Maillage from '~/components/Maillage.astro';
 import Answer from '~/components/Answer.astro';
 import ZonesMini from '~/components/ZonesMini.astro';
 import SignesBois from '~/components/illus/SignesBois.astro';
+import Photo from '~/components/Photo.astro';
 import { faqSchema } from '~/lib/schema';
 
 const crumbs = [
@@ -15,16 +16,16 @@ const crumbs = [
   { label: 'Trous dans la charpente' },
 ];
 const faq = [
-  { q: 'Beaucoup de trous signifie-t-il une attaque grave ?', a: "Pas nécessairement, et c'est contre-intuitif. Chaque trou correspond à la sortie d'un seul adulte, pas à l'étendue des galeries. Le capricorne des maisons, qui est l'espèce la plus destructrice pour une charpente en résineux, laisse souvent très peu de trous alors qu'il a largement évidé la pièce. À l'inverse, une petite vrillette peut cribler une boiserie de dizaines de trous sans compromettre quoi que ce soit de structurel." },
-  { q: 'Faut-il boucher les trous ?', a: "Non, et surtout pas dans l'idée d'enfermer les insectes : cela ne fonctionne pas, les larves étant à l'intérieur et n'ayant pas besoin de l'ouverture. Boucher les trous a par ailleurs un inconvénient réel, celui d'effacer les repères qui permettraient de constater l'apparition de nouvelles sorties. Après traitement, un rebouchage esthétique est envisageable, mais il vient en dernier." },
-  { q: 'Des trous apparaissent chaque année : est-ce normal ?', a: "C'est le signe le plus clair d'une attaque active. Une population installée produit des émergences successives, année après année, à la même saison. Si vous constatez de nouveaux trous dont les bords sont clairs alors que les anciens ont bruni, il n'y a plus de doute à avoir sur l'activité." },
-  { q: 'Les trous sont très anciens : faut-il quand même traiter ?', a: "Pas automatiquement. Un bois ancien porte presque toujours des traces d'attaques passées, et un chêne de deux siècles peut être marqué sans que rien ne s'y passe depuis longtemps. Ce qui justifie un traitement, c'est une activité établie, ou une perte de section qui pose un problème mécanique. Nous préférons mettre en place un contrôle différé plutôt que de traiter par précaution un bois qui n'en a pas besoin." },
+  { q: 'Beaucoup de trous signifie-t-il une attaque grave ?', a: "Pas nécessairement, et c’est contre-intuitif. Chaque trou correspond à la sortie d’un seul adulte, pas à l’étendue des galeries. Le capricorne des maisons, qui est l’espèce la plus destructrice pour une charpente en résineux, laisse souvent très peu de trous alors qu’il a largement évidé la pièce. À l’inverse, une petite vrillette peut cribler une boiserie de dizaines de trous sans compromettre quoi que ce soit de structurel." },
+  { q: 'Faut-il boucher les trous ?', a: "Non, et surtout pas dans l’idée d’enfermer les insectes : cela ne fonctionne pas, les larves étant à l’intérieur et n’ayant pas besoin de l’ouverture. Boucher les trous a par ailleurs un inconvénient réel, celui d’effacer les repères qui permettraient de constater l’apparition de nouvelles sorties. Après traitement, un rebouchage esthétique est envisageable, mais il vient en dernier." },
+  { q: 'Des trous apparaissent chaque année : est-ce normal ?', a: "C’est le signe le plus clair d’une attaque active. Une population installée produit des émergences successives, année après année, à la même saison. Si vous constatez de nouveaux trous dont les bords sont clairs alors que les anciens ont bruni, il n’y a plus de doute à avoir sur l’activité." },
+  { q: 'Les trous sont très anciens : faut-il quand même traiter ?', a: "Pas automatiquement. Un bois ancien porte presque toujours des traces d’attaques passées, et un chêne de deux siècles peut être marqué sans que rien ne s’y passe depuis longtemps. Ce qui justifie un traitement, c’est une activité établie, ou une perte de section qui pose un problème mécanique. Nous préférons mettre en place un contrôle différé plutôt que de traiter par précaution un bois qui n’en a pas besoin." },
 ];
 const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 ---
 <Base
   title="Trous dans la charpente : quel insecte et quelle gravité ?"
-  description="Trous dans une charpente : ce que la forme et le diamètre indiquent, pourquoi le nombre de trous ne mesure pas la gravité, et comment savoir si l’attaque est encore active."
+  description="Trous dans une charpente : ce que la forme et le diamètre indiquent, pourquoi leur nombre ne mesure pas la gravité, et comment évaluer l’état du bois."
   path="/trous-dans-charpente" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero
@@ -69,13 +70,13 @@ const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
             </p>
           </div>
 
-          <figure class="fig">
+          <Photo
+            nom="trous-sortie-charpente-galeries.jpg"
+            alt="Trous de sortie en surface d’une pièce de charpente, et réseau de galeries internes révélé par une coupe"
+            legende="Les trous visibles en surface ne représentent qu’une fraction du réseau de galeries. C’est le rapport entre les deux qui explique les erreurs d’appréciation."
+          >
             <SignesBois />
-            <figcaption>
-              Les trous visibles en surface ne représentent qu’une fraction du réseau de galeries.
-              C’est le rapport entre les deux qui explique les erreurs d’appréciation.
-            </figcaption>
-          </figure>
+          </Photo>
         </div>
         <aside class="split__side">
           <div class="card card--dark">

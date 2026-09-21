@@ -11,9 +11,9 @@ links:
   - { label: "Bois attaqué : que faire ?", href: "/bois-attaque-insectes" }
 faq:
   - q: "Peut-on avoir les deux en même temps ?"
-    a: "Oui, rien ne l'empêche, et cela arrive dans des bâtiments anciens présentant à la fois des bois de comble en résineux et des bois bas en contact avec le sol. Les deux problèmes se traitent alors séparément, selon des logiques complètement différentes : traitement des bois pour les coléoptères, action sur la colonie pour les termites."
+    a: "Oui, rien ne l’empêche, et cela arrive dans des bâtiments anciens présentant à la fois des bois de comble en résineux et des bois bas en contact avec le sol. Les deux problèmes se traitent alors séparément, selon des logiques complètement différentes : traitement des bois pour les coléoptères, action sur la colonie pour les termites."
   - q: "Pourquoi les termites sont-ils considérés comme plus graves ?"
-    a: "Pour trois raisons. Leur progression reste invisible beaucoup plus longtemps, faute de trous et de sciure. La colonie est un organisme durable qui ne s'éteint pas spontanément. Et elle ne s'arrête pas aux limites de propriété : traiter un bâtiment sans traiter le sol, ou sans coordination avec le voisinage, peut ne régler le problème que temporairement."
+    a: "Pour trois raisons. Leur progression reste invisible beaucoup plus longtemps, faute de trous et de sciure. La colonie est un organisme durable qui ne s’éteint pas spontanément. Et elle ne s’arrête pas aux limites de propriété : traiter un bâtiment sans traiter le sol, ou sans coordination avec le voisinage, peut ne régler le problème que temporairement."
 ---
 
 Un propriétaire découvre du bois dégradé. Avant toute chose, il faut déterminer à quelle famille on a affaire, parce que les deux appellent des réponses qui n’ont rien de commun.

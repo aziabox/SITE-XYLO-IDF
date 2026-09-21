@@ -1,6 +1,7 @@
 ---
 import Base from '~/layouts/Base.astro';
 import Charpente from '~/components/illus/Charpente.astro';
+import Photo from '~/components/Photo.astro';
 import SignesBois from '~/components/illus/SignesBois.astro';
 import CarteIdf from '~/components/CarteIdf.astro';
 import Garanties from '~/components/Garanties.astro';
@@ -59,43 +60,43 @@ const batiments = [
 const faq = [
   {
     q: 'Quels sont les principaux insectes xylophages en Île-de-France ?',
-    a: "Dans le bâti francilien, on rencontre principalement le capricorne des maisons dans les charpentes en résineux, la petite vrillette dans les parquets, boiseries et mobilier, la grosse vrillette dans les bois de feuillus humidifiés, et le lyctus dans les ouvrages récents en feuillus. Les termites relèvent d'une logique différente : ce sont des insectes sociaux, dont la présence est encadrée par des arrêtés préfectoraux qu'il faut consulter commune par commune.",
+    a: "Dans le bâti francilien, on rencontre principalement le capricorne des maisons dans les charpentes en résineux, la petite vrillette dans les parquets, boiseries et mobilier, la grosse vrillette dans les bois de feuillus humidifiés, et le lyctus dans les ouvrages récents en feuillus. Les termites relèvent d’une logique différente : ce sont des insectes sociaux, dont la présence est encadrée par des arrêtés préfectoraux qu’il faut consulter commune par commune.",
   },
   {
     q: 'Comment savoir si une attaque est encore active ?',
-    a: "Aucun signe ne suffit à lui seul. On recoupe plusieurs indices : la couleur des trous de sortie, l'aspect et la fraîcheur de la vermoulure, la réaction du bois au sondage, la présence d'adultes en saison. Le moyen le plus fiable reste le contrôle différé : on nettoie une zone témoin, on la repère, et l'on vérifie quelques semaines ou quelques mois plus tard si de la sciure fraîche est réapparue.",
+    a: "Aucun signe ne suffit à lui seul. On recoupe plusieurs indices : la couleur des trous de sortie, l’aspect et la fraîcheur de la vermoulure, la réaction du bois au sondage, la présence d’adultes en saison. Le moyen le plus fiable reste le contrôle différé : on nettoie une zone témoin, on la repère, et l’on vérifie quelques semaines ou quelques mois plus tard si de la sciure fraîche est réapparue.",
   },
   {
     q: 'Les insectes xylophages peuvent-ils fragiliser une charpente ?',
-    a: "Oui, mais pas tous ni dans les mêmes proportions. Le capricorne des maisons et les termites peuvent compromettre la résistance d'une pièce porteuse. Le lyctus, qui se limite à l'aubier, dégrade surtout les ouvrages de finition. La vraie question n'est donc pas la présence d'un insecte, mais la section de bois sain qui subsiste dans les pièces concernées.",
+    a: "Oui, mais pas tous ni dans les mêmes proportions. Le capricorne des maisons et les termites peuvent compromettre la résistance d’une pièce porteuse. Le lyctus, qui se limite à l’aubier, dégrade surtout les ouvrages de finition. La vraie question n’est donc pas la présence d’un insecte, mais la section de bois sain qui subsiste dans les pièces concernées.",
   },
   {
     q: 'Que faire en présence de sciure sous une poutre ?',
-    a: "Ne nettoyez pas tout de suite. Recueillez un échantillon sur une feuille blanche, photographiez-le à côté d'un objet servant d'échelle, puis nettoyez soigneusement la zone et repérez-la. Si de la sciure réapparaît au même endroit dans les semaines qui suivent, l'attaque est active. Cette observation simple vaut mieux qu'une identification hasardeuse à partir d'une seule photo.",
+    a: "Ne nettoyez pas tout de suite. Recueillez un échantillon sur une feuille blanche, photographiez-le à côté d’un objet servant d’échelle, puis nettoyez soigneusement la zone et repérez-la. Si de la sciure réapparaît au même endroit dans les semaines qui suivent, l’attaque est active. Cette observation simple vaut mieux qu’une identification hasardeuse à partir d’une seule photo.",
   },
   {
     q: 'Faut-il traiter toute une charpente ?',
-    a: "Souvent oui, pour une raison pratique : les insectes ne s'arrêtent pas aux pièces où les trous sont visibles, et traiter partiellement laisse des zones non protégées à proximité immédiate. Mais cela ne signifie pas traiter de la même manière partout. Les pièces de forte section demandent une injection, les bois minces une simple application, et certaines zones peuvent être écartées après examen.",
+    a: "Souvent oui, pour une raison pratique : les insectes ne s’arrêtent pas aux pièces où les trous sont visibles, et traiter partiellement laisse des zones non protégées à proximité immédiate. Mais cela ne signifie pas traiter de la même manière partout. Les pièces de forte section demandent une injection, les bois minces une simple application, et certaines zones peuvent être écartées après examen.",
   },
   {
     q: 'Combien de temps dure un traitement ?',
-    a: "L'intervention elle-même s'étale généralement sur un à trois jours pour une charpente de maison individuelle, selon la surface, l'accessibilité et l'ampleur du bûchage. La préparation, c'est-à-dire le dégagement des combles et la dépose des éléments qui masquent le bois, prend souvent autant de temps que l'application. Le délai de réintégration dépend du produit employé et vous est indiqué avant l'intervention.",
+    a: "L’intervention elle-même s’étale généralement sur un à trois jours pour une charpente de maison individuelle, selon la surface, l’accessibilité et l’ampleur du bûchage. La préparation, c’est-à-dire le dégagement des combles et la dépose des éléments qui masquent le bois, prend souvent autant de temps que l’application. Le délai de réintégration dépend du produit employé et vous est indiqué avant l’intervention.",
   },
   {
     q: 'Peut-on prévenir les insectes xylophages ?',
-    a: "On peut réduire nettement le risque. Employer des bois traités pour leur classe d'emploi et retraiter les coupes faites sur chantier, ventiler les combles et les vides sanitaires, traiter les infiltrations sans attendre, éviter de stocker du bois non traité dans les dépendances, et contrôler visuellement la charpente tous les deux à trois ans : ce sont des mesures simples, et ce sont les plus efficaces.",
+    a: "On peut réduire nettement le risque. Employer des bois traités pour leur classe d’emploi et retraiter les coupes faites sur chantier, ventiler les combles et les vides sanitaires, traiter les infiltrations sans attendre, éviter de stocker du bois non traité dans les dépendances, et contrôler visuellement la charpente tous les deux à trois ans : ce sont des mesures simples, et ce sont les plus efficaces.",
   },
   {
     q: 'Quelle est la différence entre termites et capricornes ?',
-    a: "Elle est nette. Le capricorne est un coléoptère dont la larve creuse seule sa galerie, laisse des trous de sortie ovales et de la vermoulure, et n'attaque que les résineux. Les termites sont des insectes sociaux vivant en colonie dans le sol, qui consomment le bois de l'intérieur sans laisser ni trou ni sciure, mais construisent des cordonnets de terre le long des maçonneries.",
+    a: "Elle est nette. Le capricorne est un coléoptère dont la larve creuse seule sa galerie, laisse des trous de sortie ovales et de la vermoulure, et n’attaque que les résineux. Les termites sont des insectes sociaux vivant en colonie dans le sol, qui consomment le bois de l’intérieur sans laisser ni trou ni sciure, mais construisent des cordonnets de terre le long des maçonneries.",
   },
   {
     q: 'Une garantie décennale est-elle proposée ?',
-    a: "Tous les travaux de traitement du bois ne relèvent pas de la garantie décennale : celle-ci concerne les ouvrages dont un désordre compromettrait la solidité du bâtiment ou le rendrait impropre à sa destination. Lorsque l'intervention entre dans ce champ, l'attestation d'assurance correspondante est remise avec le devis et sa validité peut être vérifiée auprès de l'assureur. Nous n'affichons pas cette mention comme un argument général.",
+    a: "Tous les travaux de traitement du bois ne relèvent pas de la garantie décennale : celle-ci concerne les ouvrages dont un désordre compromettrait la solidité du bâtiment ou le rendrait impropre à sa destination. Lorsque l’intervention entre dans ce champ, l’attestation d’assurance correspondante est remise avec le devis et sa validité peut être vérifiée auprès de l’assureur. Nous n’affichons pas cette mention comme un argument général.",
   },
   {
     q: 'Dans quels départements intervenez-vous ?',
-    a: "Dans les huit départements d'Île-de-France : Paris, la Seine-et-Marne, les Yvelines, l'Essonne, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne et le Val-d'Oise. Les délais de déplacement varient selon l'éloignement et vous sont annoncés à la prise de rendez-vous.",
+    a: "Dans les huit départements d’Île-de-France : Paris, la Seine-et-Marne, les Yvelines, l’Essonne, les Hauts-de-Seine, la Seine-Saint-Denis, le Val-de-Marne et le Val-d’Oise. Les délais de déplacement varient selon l’éloignement et vous sont annoncés à la prise de rendez-vous.",
   },
 ];
 
@@ -111,7 +112,7 @@ const jsonLd = [
 ---
 <Base
   title="Insectes xylophages en Île-de-France : diagnostic et traitement du bois"
-  description="Diagnostic et traitement des insectes xylophages en Île-de-France : termites, capricornes, vrillettes, lyctus. Identification de l’insecte, évaluation des dégâts et traitement adapté des charpentes, poutres et planchers."
+  description="Diagnostic et traitement des insectes xylophages en Île-de-France : termites, capricornes, vrillettes, lyctus. Charpentes, poutres, planchers et boiseries."
   path="/"
   jsonLd={jsonLd}
   crumbs={[{ label: 'Accueil' }]}
@@ -141,15 +142,19 @@ const jsonLd = [
         </p>
       </div>
 
-      <figure class="hero__fig">
+      <div class="hero__fig">
         <div class="hero__frame">
-          <Charpente />
+          <Photo
+            nom="inspection-charpente-insectes-xylophages.jpg"
+            alt="Inspection d’une charpente traditionnelle présentant des signes possibles d’attaque d’insectes xylophages"
+            legende="Les points qu’une inspection de charpente examine en priorité : abouts d’entrait au contact de la maçonnerie, pieds de chevron en rive, assemblages en tête."
+            prioritaire
+            sizes="(max-width: 980px) 100vw, 560px"
+          >
+            <Charpente />
+          </Photo>
         </div>
-        <figcaption>
-          Les points qu’une inspection de charpente examine en priorité : abouts d’entrait
-          au contact de la maçonnerie, pieds de chevron en rive, assemblages en tête.
-        </figcaption>
-      </figure>
+      </div>
     </div>
   </section>
 
@@ -211,13 +216,15 @@ const jsonLd = [
           </div>
         </div>
 
-        <figure class="doute__fig">
-          <SignesBois />
-          <figcaption>
-            Ce qui se voit en surface ne représente qu’une part de ce qui se passe à l’intérieur
-            de la pièce : les galeries sont creusées sous une pellicule de bois restée intacte.
-          </figcaption>
-        </figure>
+        <div class="doute__fig">
+          <Photo
+            nom="bois-attaque-galeries-vermoulure.jpg"
+            alt="Pièce de bois ouverte laissant voir les galeries internes et la vermoulure qu’elles contiennent"
+            legende="Ce qui se voit en surface ne représente qu’une part de ce qui se passe à l’intérieur de la pièce : les galeries sont creusées sous une pellicule de bois restée intacte."
+          >
+            <SignesBois />
+          </Photo>
+        </div>
       </div>
 
       <ul class="signes">
@@ -463,14 +470,12 @@ const jsonLd = [
     border-radius: var(--r-xl); padding: clamp(1rem, .5rem + 2vw, 1.85rem);
     box-shadow: var(--sh-lg);
   }
-  .hero__fig figcaption {
-    margin-top: .9rem; font-size: var(--t-xs); color: var(--c-text-muted);
-    line-height: 1.55; max-width: 48ch;
-  }
+  .hero__frame :global(.photo figcaption) { max-width: 48ch; }
   @media (max-width: 980px) {
     .hero__in { grid-template-columns: 1fr; }
     .hero h1 { max-width: 20ch; }
-    .hero__fig { order: -1; }
+    /* Le titre et les appels à l’action restent au-dessus de la ligne de flottaison. */
+    .hero__fig { margin-top: 1rem; }
   }
 
   /* ---------------- CONFIANCE ---------------- */
@@ -488,7 +493,7 @@ const jsonLd = [
   /* ---------------- DOUTE / SIGNES ---------------- */
   .doute { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 1rem + 4vw, 4rem); align-items: center; }
   .doute__head > * + * { margin-top: 1rem; }
-  .doute__fig figcaption { margin-top: .9rem; font-size: var(--t-xs); color: var(--c-text-muted); line-height: 1.55; }
+
   @media (max-width: 900px) { .doute { grid-template-columns: 1fr; } }
 
   .signes {

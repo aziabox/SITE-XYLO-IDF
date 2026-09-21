@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import typographieFrancaise from './src/integrations/typographie-francaise.ts';
+import prechargePolices from './src/integrations/precharge-polices.ts';
+import rehypeTableaux from './src/lib/rehype-tableaux.ts';
 
 export default defineConfig({
   site: 'https://www.xylo-patrimoine.fr',
@@ -10,6 +12,7 @@ export default defineConfig({
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   integrations: [
     typographieFrancaise(),
+    prechargePolices(),
     sitemap({
       changefreq: 'weekly',
       lastmod: new Date(),
@@ -25,6 +28,9 @@ export default defineConfig({
       },
     }),
   ],
+  markdown: {
+    rehypePlugins: [rehypeTableaux],
+  },
   vite: {
     build: { cssCodeSplit: false },
   },

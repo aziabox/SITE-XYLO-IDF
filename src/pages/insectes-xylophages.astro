@@ -7,6 +7,7 @@ import ZonesMini from '~/components/ZonesMini.astro';
 import Maillage from '~/components/Maillage.astro';
 import Answer from '~/components/Answer.astro';
 import SignesBois from '~/components/illus/SignesBois.astro';
+import Photo from '~/components/Photo.astro';
 import { INSECTES, COMPARATIF } from '~/data/insectes';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 
@@ -15,27 +16,27 @@ const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Insectes xylophages' 
 const faq = [
   {
     q: 'Qu’est-ce qu’un insecte xylophage ?',
-    a: "C'est un insecte dont le développement dépend du bois, qu'il consomme directement ou dont il exploite les composants. Dans le bâtiment, quatre groupes concentrent l'essentiel des situations : les coléoptères à larve xylophage (capricorne, vrillettes, lyctus), dont c'est la larve qui creuse ; et les termites, insectes sociaux dont la colonie entière exploite le bois. Les autres espèces rencontrées sont soit des insectes de bois vert, qui ne poursuivent pas leur développement dans un bois mis en œuvre, soit des insectes qui creusent le bois sans le consommer, comme les fourmis charpentières.",
+    a: "C’est un insecte dont le développement dépend du bois, qu’il consomme directement ou dont il exploite les composants. Dans le bâtiment, quatre groupes concentrent l’essentiel des situations : les coléoptères à larve xylophage (capricorne, vrillettes, lyctus), dont c’est la larve qui creuse ; et les termites, insectes sociaux dont la colonie entière exploite le bois. Les autres espèces rencontrées sont soit des insectes de bois vert, qui ne poursuivent pas leur développement dans un bois mis en œuvre, soit des insectes qui creusent le bois sans le consommer, comme les fourmis charpentières.",
   },
   {
     q: 'Tous les bois sont-ils concernés de la même façon ?',
-    a: "Non, et c'est le premier tri que fait un diagnostic. Le capricorne des maisons n'attaque que l'aubier des résineux. Le lyctus ne s'intéresse qu'à l'aubier de certains feuillus riches en amidon, et seulement tant qu'ils sont récents. La grosse vrillette exige un feuillu déjà humidifié et altéré. La petite vrillette est la plus généraliste. Les termites, eux, consomment toutes les essences ainsi que d'autres matériaux cellulosiques.",
+    a: "Non, et c’est le premier tri que fait un diagnostic. Le capricorne des maisons n’attaque que l’aubier des résineux. Le lyctus ne s’intéresse qu’à l’aubier de certains feuillus riches en amidon, et seulement tant qu’ils sont récents. La grosse vrillette exige un feuillu déjà humidifié et altéré. La petite vrillette est la plus généraliste. Les termites, eux, consomment toutes les essences ainsi que d’autres matériaux cellulosiques.",
   },
   {
     q: 'Le duramen et l’aubier, quelle différence ?',
-    a: "L'aubier est la partie périphérique et jeune du bois, encore riche en réserves nutritives au moment de l'abattage : c'est la zone que recherchent la plupart des insectes xylophages. Le duramen, ou bois de cœur, est plus dense, imprégné de substances qui le rendent moins attractif et plus durable. Un chêne bien purgé de son aubier est donc naturellement peu sensible, alors qu'une pièce comportant beaucoup d'aubier reste vulnérable quelle que soit l'essence.",
+    a: "L’aubier est la partie périphérique et jeune du bois, encore riche en réserves nutritives au moment de l’abattage : c’est la zone que recherchent la plupart des insectes xylophages. Le duramen, ou bois de cœur, est plus dense, imprégné de substances qui le rendent moins attractif et plus durable. Un chêne bien purgé de son aubier est donc naturellement peu sensible, alors qu’une pièce comportant beaucoup d’aubier reste vulnérable quelle que soit l’essence.",
   },
   {
     q: 'Une attaque s’arrête-t-elle toute seule ?',
-    a: "Parfois, oui, et c'est une réalité que trop peu de professionnels mentionnent. Une attaque de lyctus s'éteint quand l'amidon est épuisé. Une attaque de grosse vrillette régresse si le bois s'assèche durablement. En revanche, une attaque de capricorne dans un comble sec ne s'arrête pas spontanément, et une colonie de termites encore moins. C'est précisément pour cela que l'identification de l'espèce détermine la conduite à tenir.",
+    a: "Parfois, oui, et c’est une réalité que trop peu de professionnels mentionnent. Une attaque de lyctus s’éteint quand l’amidon est épuisé. Une attaque de grosse vrillette régresse si le bois s’assèche durablement. En revanche, une attaque de capricorne dans un comble sec ne s’arrête pas spontanément, et une colonie de termites encore moins. C’est précisément pour cela que l’identification de l’espèce détermine la conduite à tenir.",
   },
   {
     q: 'À quelle saison observe-t-on les insectes adultes ?',
-    a: "Principalement du printemps au début de l'été. Les vrillettes émergent surtout en mai et juin, le capricorne des maisons de juin à août, et les essaimages de termites ailés se produisent au printemps ou en été par temps chaud. Le lyctus fait exception : dans un local chauffé, il peut émerger une grande partie de l'année. Une observation d'adulte est une information précieuse — conservez-le si vous le pouvez, même mort.",
+    a: "Principalement du printemps au début de l’été. Les vrillettes émergent surtout en mai et juin, le capricorne des maisons de juin à août, et les essaimages de termites ailés se produisent au printemps ou en été par temps chaud. Le lyctus fait exception : dans un local chauffé, il peut émerger une grande partie de l’année. Une observation d’adulte est une information précieuse — conservez-le si vous le pouvez, même mort.",
   },
   {
     q: 'Les insectes xylophages sont-ils dangereux pour la santé ?',
-    a: "Ils ne piquent pas, ne mordent pas et ne transmettent pas de maladie. Le risque qu'ils créent est matériel : il porte sur la solidité des ouvrages bois. Les précautions sanitaires concernent plutôt les produits de traitement, dont les consignes d'usage et de réintégration doivent être respectées, et la poussière de bois dégagée lors du bûchage, qui justifie une protection respiratoire pendant le chantier.",
+    a: "Ils ne piquent pas, ne mordent pas et ne transmettent pas de maladie. Le risque qu’ils créent est matériel : il porte sur la solidité des ouvrages bois. Les précautions sanitaires concernent plutôt les produits de traitement, dont les consignes d’usage et de réintégration doivent être respectées, et la poussière de bois dégagée lors du bûchage, qui justifie une protection respiratoire pendant le chantier.",
   },
 ];
 
@@ -50,7 +51,7 @@ const jsonLd = [
 ---
 <Base
   title="Insectes xylophages : reconnaître les insectes qui attaquent le bois"
-  description="Termites, capricorne des maisons, vrillettes, lyctus : quels insectes attaquent le bois du bâtiment, à quels signes les reconnaître et ce qu’ils impliquent pour une charpente. Guide complet, Île-de-France."
+  description="Termites, capricorne, vrillettes, lyctus : quels insectes attaquent le bois du bâtiment, à quels signes les reconnaître, et ce qu’ils impliquent pour une charpente."
   path="/insectes-xylophages"
   crumbs={crumbs}
   jsonLd={jsonLd}
@@ -92,14 +93,13 @@ const jsonLd = [
             </p>
           </div>
 
-          <figure class="fig">
+          <Photo
+            nom="bois-attaque-galeries-vermoulure.jpg"
+            alt="Pièce de bois ouverte laissant voir des galeries internes remplies de vermoulure et des trous de sortie en surface"
+            legende="La larve creuse à l’intérieur et tasse la sciure derrière elle. La surface reste intacte jusqu’à l’émergence de l’adulte, ce qui donne à une pièce déjà affaiblie l’apparence d’un bois sain."
+          >
             <SignesBois />
-            <figcaption>
-              La larve creuse à l’intérieur et tasse la sciure derrière elle. La surface reste
-              intacte jusqu’à l’émergence de l’adulte, ce qui donne à une pièce déjà affaiblie
-              l’apparence d’un bois sain.
-            </figcaption>
-          </figure>
+          </Photo>
 
           <div>
             <h2>Quatre critères permettent de trancher</h2>
@@ -130,9 +130,10 @@ const jsonLd = [
             </p>
             <h3>4. L’humidité du bois</h3>
             <p>
-              Elle départage les espèces autant qu’elle explique la situation. Un bois à 12 % ne
-              peut pas héberger une grosse vrillette. Un bois à 25 % pose d’abord un problème
-              d’eau, et l’insecte n’en est que la conséquence visible.
+              Elle départage les espèces autant qu’elle explique la situation. Un bois sec,
+              maintenu dans un local chauffé et ventilé, n’offre pas les conditions dont la grosse
+              vrillette a besoin. Un bois nettement humide pose, lui, d’abord un problème d’eau :
+              l’insecte n’en est que la conséquence visible.
             </p>
           </div>
         </div>

@@ -44,7 +44,7 @@ const autres = Object.values(CATEGORIES).filter((c) => c.slug !== cat.slug);
         {posts.map((p) => (
           <a href={`/blog/${cat.slug}/${p.id}`} class="card card--link">
             <p class="sci">{frDate(p.data.published)}</p>
-            <h3>{p.data.title}</h3>
+            <h2 class="cardtitle">{p.data.title}</h2>
             <p>{p.data.description}</p>
             <span class="card__foot link-arrow">Lire</span>
           </a>

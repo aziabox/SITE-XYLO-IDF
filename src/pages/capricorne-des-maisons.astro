@@ -9,6 +9,7 @@ import CtaBand from '~/components/CtaBand.astro';
 import Maillage from '~/components/Maillage.astro';
 import Answer from '~/components/Answer.astro';
 import SignesBois from '~/components/illus/SignesBois.astro';
+import Photo from '~/components/Photo.astro';
 import { INSECTE_BY_SLUG } from '~/data/insectes';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 
@@ -30,7 +31,7 @@ const jsonLd = [
 ---
 <Base
   title="Capricorne des maisons : reconnaître l’insecte et mesurer les dégâts"
-  description="Le capricorne des maisons attaque l’aubier des bois résineux et peut évider une charpente sans signe visible. Identification, trous ovales, vermoulure, risque structurel et traitement en Île-de-France."
+  description="Le capricorne des maisons attaque l’aubier des résineux et peut évider une charpente sans signe visible. Identification, trous ovales, vermoulure, risque réel."
   path="/capricorne-des-maisons"
   crumbs={crumbs}
   jsonLd={jsonLd}
@@ -75,13 +76,13 @@ const jsonLd = [
             </p>
           </div>
 
-          <figure class="fig">
+          <Photo
+            nom="capricorne-galeries-aubier-resineux.jpg"
+            alt="Coupe d’une pièce de bois résineux montrant les galeries creusées dans l’aubier par une larve de capricorne"
+            legende="Les galeries occupent l’aubier et restent invisibles tant que la peau du bois n’est pas percée. Les trous de sortie ne représentent qu’une fraction de l’activité réelle."
+          >
             <SignesBois />
-            <figcaption>
-              Les galeries occupent l’aubier et restent invisibles tant que la peau du bois n’est
-              pas percée. Les trous de sortie ne représentent qu’une fraction de l’activité réelle.
-            </figcaption>
-          </figure>
+          </Photo>
 
           <div>
             <h2>Les signes d’une attaque de capricorne</h2>

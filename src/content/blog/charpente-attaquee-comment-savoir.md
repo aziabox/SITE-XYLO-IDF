@@ -12,9 +12,9 @@ links:
   - { label: "Traitement de charpente", href: "/traitement-charpente" }
 faq:
   - q: "Faut-il monter dans les combles soi-même ?"
-    a: "Si l'accès est sûr et que vous vous sentez à l'aise, oui : un examen sommaire vous donnera déjà beaucoup d'informations. Les précautions habituelles s'imposent — ne marchez que sur les solives ou sur un platelage, prévoyez un éclairage correct, et ne vous aventurez pas seul dans un comble encombré. Si l'accès est difficile, mieux vaut attendre une visite professionnelle."
+    a: "Si l’accès est sûr et que vous vous sentez à l’aise, oui : un examen sommaire vous donnera déjà beaucoup d’informations. Les précautions habituelles s’imposent — ne marchez que sur les solives ou sur un platelage, prévoyez un éclairage correct, et ne vous aventurez pas seul dans un comble encombré. Si l’accès est difficile, mieux vaut attendre une visite professionnelle."
   - q: "Une charpente neuve peut-elle déjà être attaquée ?"
-    a: "C'est rare mais possible, principalement dans deux cas : un insecte de bois vert, comme le sirex, qui termine son cycle dans un bois déjà mis en œuvre sans pouvoir s'y reproduire ; ou du lyctus si des pièces en feuillu ont été employées. Une attaque de capricorne sur une charpente de moins de quinze ans reste exceptionnelle, le cycle larvaire étant long."
+    a: "C’est rare mais possible, principalement dans deux cas : un insecte de bois vert, comme le sirex, qui termine son cycle dans un bois déjà mis en œuvre sans pouvoir s’y reproduire ; ou du lyctus si des pièces en feuillu ont été employées. Une attaque de capricorne sur une charpente de moins de quinze ans reste exceptionnelle, le cycle larvaire étant long."
 ---
 
 Presque tous les appels commencent de la même façon : quelqu’un est monté dans son comble pour y chercher un carton, et il a remarqué quelque chose. Un petit tas de poussière claire, un trou qu’il n’avait jamais vu, une pièce de bois dont la surface ondule légèrement.

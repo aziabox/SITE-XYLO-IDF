@@ -6,7 +6,6 @@ import CarteIdf from '~/components/CarteIdf.astro';
 import CtaBand from '~/components/CtaBand.astro';
 import Faq from '~/components/Faq.astro';
 import Maillage from '~/components/Maillage.astro';
-import Etapes from '~/components/Etapes.astro';
 import { DEPARTEMENTS } from '~/data/departements';
 import { VILLES_BY_DEPT } from '~/data/villes';
 import { faqSchema, serviceSchema } from '~/lib/schema';
@@ -16,18 +15,20 @@ export const getStaticPaths = (() =>
 
 const { d } = Astro.props;
 const villes = VILLES_BY_DEPT[d.slug] ?? [];
+
+/* Le contexte départemental est stocké en un bloc : on l'aère en un chapô
+   suivi de paragraphes de trois phrases, pour éviter un pavé illisible. */
+const phrases = d.contexte.match(/[^.!?]+[.!?]+(?:\s|$)/g)?.map((p) => p.trim()) ?? [d.contexte];
+const chapo = phrases[0];
+const corps: string[] = [];
+for (let i = 1; i < phrases.length; i += 3) {
+  corps.push(phrases.slice(i, i + 3).join(' '));
+}
 const path = `/zones-intervention/${d.slug}`;
 const crumbs = [
   { label: 'Accueil', href: '/' },
   { label: 'Zones d’intervention', href: '/zones-intervention' },
   { label: d.name },
-];
-const etapes = [
-  { title: 'Échange préalable', text: `Vous décrivez ce que vous observez et la commune concernée. Nous vous indiquons ce qu’il est utile de vérifier avant même un déplacement ${d.inName}.` },
-  { title: 'Visite sur place', text: 'Examen des ouvrages bois accessibles, sondage des pièces suspectes, mesure d’humidité en plusieurs points, identification de l’espèce lorsque les indices convergent.' },
-  { title: 'Rapport écrit', text: 'Constat, déductions, incertitudes et zones non examinées. Avec, le cas échéant, les préconisations et un devis détaillé.' },
-  { title: 'Intervention', text: 'Mise à nu des bois, bûchage, dépoussiérage, injection et pulvérisation selon la section des pièces.' },
-  { title: 'Suivi lorsqu’il est prévu', text: 'Zones témoins nettoyées et datées, contrôle différé pour vérifier l’arrêt effectif de l’activité.' },
 ];
 const jsonLd = [
   serviceSchema({
@@ -40,7 +41,7 @@ const jsonLd = [
 ].filter(Boolean) as Record<string, any>[];
 ---
 <Base
-  title={`Insectes xylophages ${d.inName} (${d.code}) : diagnostic et traitement`}
+  title={`Traitement des insectes xylophages ${d.inName} (${d.code})`}
   description={d.intro}
   path={path}
   crumbs={crumbs}
@@ -50,6 +51,7 @@ const jsonLd = [
     eyebrow={`Département ${d.code}`}
     title={`Insectes xylophages ${d.inName} : diagnostic et traitement du bois`}
     lead={d.intro}
+    answer={`Le bâti ${d.ofName} présente une dominante claire : ${d.habitat[0].charAt(0).toLowerCase() + d.habitat[0].slice(1)}. Les ouvrages à contrôler en priorité y sont donc <strong>${d.batiSensible[0].charAt(0).toLowerCase() + d.batiSensible[0].slice(1)}</strong> et <strong>${d.batiSensible[1].charAt(0).toLowerCase() + d.batiSensible[1].slice(1)}</strong>. Essences le plus souvent en présence : ${d.boisTypiques.charAt(0).toLowerCase() + d.boisTypiques.slice(1)}`}
     crumbs={crumbs}
   />
 
@@ -59,8 +61,8 @@ const jsonLd = [
         <div class="split__main stack-lg">
           <div>
             <h2>Le bâti {d.ofName} et ce qu’il implique pour le bois</h2>
-            <p class="lead">{d.contexte.split('. ')[0]}.</p>
-            <p>{d.contexte.split('. ').slice(1).join('. ')}</p>
+            <p class="lead">{chapo}</p>
+            {corps.map((par) => <p>{par}</p>)}
           </div>
 
           <div>
@@ -73,20 +75,20 @@ const jsonLd = [
 
           <div>
             <h2>Les ouvrages bois à contrôler en priorité</h2>
-            <p>
-              Ces zones concentrent les facteurs défavorables : humidité, invisibilité, ou
-              concentration des efforts. Ce sont celles par lesquelles nous commençons.
-            </p>
             <ul class="list-check">{d.batiSensible.map((b) => <li>{b}</li>)}</ul>
+            <p style="margin-top:1rem">
+              Le déroulé de notre intervention ne dépend pas de la commune :
+              <a href="/diagnostic-insectes-xylophages">échange préalable, visite, sondage,
+              mesure d’humidité puis rapport écrit</a>. Ce qui change {d.inName}, c’est
+              l’ordre dans lequel nous examinons les ouvrages.
+            </p>
           </div>
 
           <div class="note note--stone">
-            <span class="note__title">Ce que nous n’écrirons pas sur cette page</span>
+            <span class="note__title">Ce que nous n’écrirons pas ici</span>
             Aucune statistique d’infestation {d.inName}, aucune affirmation du type « département
-            fortement touché ». Il n’existe pas de donnée publique fiable à l’échelle communale sur
-            la présence des insectes xylophages, et inventer un chiffre pour impressionner un
-            lecteur n’est pas une pratique que nous acceptons. Ce que nous pouvons décrire, en
-            revanche, c’est le bâti réel et les configurations qui rendent une attaque plausible.
+            fortement touché » : il n’existe pas de donnée publique fiable à cette échelle. Ce que
+            nous décrivons, c’est le bâti réel et les configurations qui rendent une attaque plausible.
           </div>
         </div>
 
@@ -141,21 +143,11 @@ const jsonLd = [
     </section>
   )}
 
-  <section class="section">
-    <div class="wrap">
-      <Etapes eyebrow="Déroulé" title={`Comment nous intervenons ${d.inName}`} items={etapes} />
-    </div>
-  </section>
-
   <section class="section section--warm">
     <div class="wrap-wide">
       <div class="section-head">
         <p class="eyebrow">Carte</p>
         <h2>Situer {d.name} dans la région</h2>
-        <p class="lead">
-          Cette carte représente les zones desservies. Elle ne comporte aucun marqueur
-          d’intervention ni de client.
-        </p>
       </div>
       <CarteIdf active={d.slug} id={`carte-${d.slug}`} compact />
     </div>

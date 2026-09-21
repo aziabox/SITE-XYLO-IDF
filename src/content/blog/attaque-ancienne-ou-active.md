@@ -11,9 +11,9 @@ links:
   - { label: "Charpente ancienne", href: "/traitement-charpente-ancienne" }
 faq:
   - q: "Combien de temps faut-il attendre pour un contrôle différé ?"
-    a: "Cela dépend de la saison. Au printemps et au début de l'été, période d'émergence pour la plupart des espèces, quelques semaines suffisent souvent. En automne et en hiver, l'activité ralentit et une absence de sciure ne prouve rien : il faut alors attendre la saison chaude suivante. En pratique, nous conseillons de couvrir au moins une période d'émergence complète."
+    a: "Cela dépend de la saison. Au printemps et au début de l’été, période d’émergence pour la plupart des espèces, quelques semaines suffisent souvent. En automne et en hiver, l’activité ralentit et une absence de sciure ne prouve rien : il faut alors attendre la saison chaude suivante. En pratique, nous conseillons de couvrir au moins une période d’émergence complète."
   - q: "Un traitement préventif peut-il régler la question du doute ?"
-    a: "Il la contourne plutôt qu'il ne la règle. Traiter par précaution coûte le prix d'un traitement complet et engage une intervention chimique dans un bâtiment, parfois pour rien. Le contrôle différé coûte une fraction de ce prix et donne une vraie réponse. Nous le proposons systématiquement quand l'ancienneté d'une attaque est incertaine."
+    a: "Il la contourne plutôt qu’il ne la règle. Traiter par précaution coûte le prix d’un traitement complet et engage une intervention chimique dans un bâtiment, parfois pour rien. Le contrôle différé coûte une fraction de ce prix et donne une vraie réponse. Nous le proposons systématiquement quand l’ancienneté d’une attaque est incertaine."
 ---
 
 C’est la question qui détermine s’il faut traiter, et c’est aussi celle sur laquelle beaucoup de devis font l’impasse. Un bois marqué n’est pas nécessairement un bois attaqué **aujourd’hui**.

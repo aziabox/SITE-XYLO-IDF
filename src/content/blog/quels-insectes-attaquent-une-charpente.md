@@ -13,7 +13,7 @@ faq:
   - q: "Plusieurs espèces peuvent-elles cohabiter dans une charpente ?"
     a: "Oui, dans un bâtiment mixte comportant des bois résineux et des bois feuillus, ou dans une charpente remaniée où des pièces de nature différente ont été rapportées. Sur une même pièce en revanche, la cohabitation est rare : les exigences des espèces ne se recoupent pas."
   - q: "Une charpente peut-elle s’effondrer à cause des insectes ?"
-    a: "Une défaillance brutale et complète est rare, mais une perte de capacité localisée est fréquente et peut avoir des conséquences réelles : un chevron qui cède sous l'appui, une panne qui flèche, un about d'entrait qui se dérobe. C'est pourquoi l'évaluation porte sur la section saine restante de chaque pièce, et non sur l'apparence générale de la charpente."
+    a: "Une défaillance brutale et complète est rare, mais une perte de capacité localisée est fréquente et peut avoir des conséquences réelles : un chevron qui cède sous l’appui, une panne qui flèche, un about d’entrait qui se dérobe. C’est pourquoi l’évaluation porte sur la section saine restante de chaque pièce, et non sur l’apparence générale de la charpente."
 ---
 
 Avant de chercher quel insecte attaque une charpente, il faut répondre à une question plus simple, et qui écarte la moitié des hypothèses : **de quel bois est-elle faite ?**

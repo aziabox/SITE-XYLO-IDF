@@ -11,9 +11,9 @@ links:
   - { label: "Vermoulure dans le bois", href: "/vermoulure-bois" }
 faq:
   - q: "Le lyctus peut-il passer du parquet à la charpente ?"
-    a: "Pratiquement pas. Il lui faut de l'aubier de feuillu riche en amidon : une charpente en sapin ne l'intéresse pas du tout, et une charpente ancienne en chêne a perdu son amidon depuis longtemps. Le périmètre d'une attaque de lyctus se limite donc généralement à l'ouvrage concerné et aux bois de même provenance."
+    a: "Pratiquement pas. Il lui faut de l’aubier de feuillu riche en amidon : une charpente en sapin ne l’intéresse pas du tout, et une charpente ancienne en chêne a perdu son amidon depuis longtemps. Le périmètre d’une attaque de lyctus se limite donc généralement à l’ouvrage concerné et aux bois de même provenance."
   - q: "Le vendeur du parquet est-il responsable ?"
-    a: "C'est une question contractuelle qui dépend des conditions de vente et du délai écoulé. Ce que nous pouvons apporter, c'est un constat technique : identification de l'espèce, description de l'attaque, et le fait qu'un cycle de lyctus commencé après la pose suppose une ponte antérieure à celle-ci. Ce constat a sa place dans une discussion avec le fournisseur ou le poseur."
+    a: "C’est une question contractuelle qui dépend des conditions de vente et du délai écoulé. Ce que nous pouvons apporter, c’est un constat technique : identification de l’espèce, description de l’attaque, et le fait qu’un cycle de lyctus commencé après la pose suppose une ponte antérieure à celle-ci. Ce constat a sa place dans une discussion avec le fournisseur ou le poseur."
 ---
 
 Un parquet posé l’an dernier, et voilà que de petits trous apparaissent, avec une poudre très fine au sol. La réaction est presque toujours la même : d’où viennent ces insectes, et comment sont-ils entrés ?

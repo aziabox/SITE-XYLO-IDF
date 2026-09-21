@@ -11,9 +11,9 @@ links:
   - { label: "Prévention et surveillance", href: "/prevention-insectes-xylophages" }
 faq:
   - q: "Combien de temps dure la protection d’un bois traité en usine ?"
-    a: "Cela dépend du produit, du procédé et de la classe d'emploi visée. Un traitement de préservation correctement appliqué offre une protection de plusieurs décennies dans des conditions d'usage conformes. Le problème n'est généralement pas la durée en soi, mais les zones qui n'ont jamais été protégées : les coupes de chantier, et le cœur des pièces de forte section que le produit n'a pas pénétré."
+    a: "Cela dépend du produit, du procédé et de la classe d’emploi visée. Un traitement de préservation correctement appliqué offre une protection de plusieurs décennies dans des conditions d’usage conformes. Le problème n’est généralement pas la durée en soi, mais les zones qui n’ont jamais été protégées : les coupes de chantier, et le cœur des pièces de forte section que le produit n’a pas pénétré."
   - q: "Faut-il traiter préventivement une charpente neuve ?"
-    a: "Pas nécessairement l'ensemble, mais systématiquement les coupes et usinages réalisés sur le chantier. C'est une opération de quelques minutes, au pinceau, avec un produit adapté. Elle est omise dans une grande partie des chantiers, et c'est souvent par là que commence une attaque quinze ou vingt ans plus tard."
+    a: "Pas nécessairement l’ensemble, mais systématiquement les coupes et usinages réalisés sur le chantier. C’est une opération de quelques minutes, au pinceau, avec un produit adapté. Elle est omise dans une grande partie des chantiers, et c’est souvent par là que commence une attaque quinze ou vingt ans plus tard."
 ---
 
 « Ma charpente a trente ans, elle a été traitée en usine, elle ne risque rien. » C’est une phrase que nous entendons souvent, et elle est fausse plus souvent qu’on ne le croit.

@@ -11,9 +11,9 @@ links:
   - { label: "Insectes dans les poutres", href: "/insectes-poutres" }
 faq:
   - q: "Le bois peut-il redevenir sain une fois asséché ?"
-    a: "Le bois déjà consommé ne se reconstitue pas : la matière perdue l'est définitivement. En revanche, l'assèchement arrête la progression du champignon et supprime les conditions favorables à l'insecte. Une pièce dont la section saine reste suffisante peut alors être bûchée, traitée et conservée sans autre intervention."
+    a: "Le bois déjà consommé ne se reconstitue pas : la matière perdue l’est définitivement. En revanche, l’assèchement arrête la progression du champignon et supprime les conditions favorables à l’insecte. Une pièce dont la section saine reste suffisante peut alors être bûchée, traitée et conservée sans autre intervention."
   - q: "Combien de temps faut-il pour qu’une poutre sèche ?"
-    a: "Cela dépend de la section, de l'essence, de la ventilation et de l'origine de l'humidité. Une poutre de forte section humidifiée en profondeur met des mois à redescendre à un taux acceptable, et elle n'y parviendra jamais si la source n'a pas été supprimée. C'est la raison pour laquelle la reprise de la cause précède toujours le reste."
+    a: "Cela dépend de la section, de l’essence, de la ventilation et de l’origine de l’humidité. Une poutre de forte section humidifiée en profondeur met des mois à redescendre à un taux acceptable, et elle n’y parviendra jamais si la source n’a pas été supprimée. C’est la raison pour laquelle la reprise de la cause précède toujours le reste."
 ---
 
 Parmi les insectes du bois, la grosse vrillette occupe une place à part : elle est moins un problème en elle-même qu’un révélateur. Quand on la trouve, l’essentiel du travail consiste à comprendre ce qui a rendu le bois hospitalier.

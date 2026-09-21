@@ -11,9 +11,9 @@ links:
   - { label: "Traitement du bois", href: "/traitement-bois" }
 faq:
   - q: "Faut-il huiler ou cirer une poutre apparente ?"
-    a: "Une finition n'a pas d'effet protecteur contre les insectes : ils pondent dans les fentes, et une couche de surface ne les arrête pas. Elle peut en revanche ralentir les échanges d'humidité, ce qui est plutôt favorable en intérieur. Attention toutefois : une finition épaisse rend un traitement ultérieur beaucoup plus difficile, puisque le produit ne pénètre plus."
+    a: "Une finition n’a pas d’effet protecteur contre les insectes : ils pondent dans les fentes, et une couche de surface ne les arrête pas. Elle peut en revanche ralentir les échanges d’humidité, ce qui est plutôt favorable en intérieur. Attention toutefois : une finition épaisse rend un traitement ultérieur beaucoup plus difficile, puisque le produit ne pénètre plus."
   - q: "Peut-on traiter une poutre apparente sans que cela se voie ?"
-    a: "Dans la plupart des cas, oui. Nous utilisons des produits incolores compatibles avec la finition existante, après essai préalable sur une zone peu visible. Les perçages d'injection sont réalisés en partie haute ou sur une face peu exposée au regard, puis rebouchés. Sur une pièce de grande valeur, il est parfois préférable de faire intervenir un restaurateur en complément."
+    a: "Dans la plupart des cas, oui. Nous utilisons des produits incolores compatibles avec la finition existante, après essai préalable sur une zone peu visible. Les perçages d’injection sont réalisés en partie haute ou sur une face peu exposée au regard, puis rebouchés. Sur une pièce de grande valeur, il est parfois préférable de faire intervenir un restaurateur en complément."
 ---
 
 Les poutres apparentes font la valeur d’une maison ancienne. Elles sont aussi, par leur configuration, exposées à un risque particulier — non pas sur toute leur longueur, mais à un endroit précis que personne ne voit jamais.

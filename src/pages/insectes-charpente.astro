@@ -7,6 +7,7 @@ import Maillage from '~/components/Maillage.astro';
 import Answer from '~/components/Answer.astro';
 import ZonesMini from '~/components/ZonesMini.astro';
 import Charpente from '~/components/illus/Charpente.astro';
+import Photo from '~/components/Photo.astro';
 import { faqSchema } from '~/lib/schema';
 
 const crumbs = [
@@ -15,16 +16,16 @@ const crumbs = [
   { label: 'Insectes dans la charpente' },
 ];
 const faq = [
-  { q: 'Quels insectes attaquent une charpente ?', a: "Dans une charpente en résineux — le cas le plus fréquent en pavillonnaire — le capricorne des maisons domine largement. Dans une charpente en chêne, on rencontre plutôt la grosse vrillette lorsque le bois a été humidifié, et la petite vrillette dans les zones d'aubier. Les termites atteignent rarement une charpente en premier, puisqu'ils remontent du sol, mais ils peuvent y parvenir si l'infestation dure." },
+  { q: 'Quels insectes attaquent une charpente ?', a: "Dans une charpente en résineux — le cas le plus fréquent en pavillonnaire — le capricorne des maisons domine largement. Dans une charpente en chêne, on rencontre plutôt la grosse vrillette lorsque le bois a été humidifié, et la petite vrillette dans les zones d’aubier. Les termites atteignent rarement une charpente en premier, puisqu’ils remontent du sol, mais ils peuvent y parvenir si l’infestation dure." },
   { q: 'Une charpente récente peut-elle être attaquée ?', a: "Oui. Les fermettes industrialisées sont traitées en usine, mais cette protection est calibrée pour une durée limitée et se concentre en périphérie de la pièce. Les coupes de longueur et les entailles réalisées sur chantier mettent à nu du bois non traité. Nous intervenons régulièrement sur des charpentes de vingt à quarante ans présentant des sorties de capricorne." },
-  { q: 'Peut-on inspecter une charpente sous isolation ?', a: "Partiellement seulement, et c'est une vraie limite. Un isolant posé en rampant masque les chevrons sur une grande partie de leur longueur, ainsi que les pieds et les bois de rive — précisément les pièces les plus exposées. Nous inspectons ce qui est accessible, pratiquons si besoin des ouvertures ponctuelles, et indiquons explicitement dans le rapport ce qui n'a pas pu être vu." },
-  { q: 'Faut-il s’inquiéter d’un bruit dans la charpente ?', a: "Un grignotement irrégulier entendu par temps chaud, dans le silence, évoque une larve de capricorne en activité. Un tic-tac régulier au printemps évoque plutôt la grosse vrillette. Dans les deux cas, cela indique une activité en cours et justifie un examen. Beaucoup d'attaques actives sont toutefois totalement silencieuses : l'absence de bruit ne prouve rien." },
+  { q: 'Peut-on inspecter une charpente sous isolation ?', a: "Partiellement seulement, et c’est une vraie limite. Un isolant posé en rampant masque les chevrons sur une grande partie de leur longueur, ainsi que les pieds et les bois de rive — précisément les pièces les plus exposées. Nous inspectons ce qui est accessible, pratiquons si besoin des ouvertures ponctuelles, et indiquons explicitement dans le rapport ce qui n’a pas pu être vu." },
+  { q: 'Faut-il s’inquiéter d’un bruit dans la charpente ?', a: "Un grignotement irrégulier entendu par temps chaud, dans le silence, évoque une larve de capricorne en activité. Un tic-tac régulier au printemps évoque plutôt la grosse vrillette. Dans les deux cas, cela indique une activité en cours et justifie un examen. Beaucoup d’attaques actives sont toutefois totalement silencieuses : l’absence de bruit ne prouve rien." },
 ];
 const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
 ---
 <Base
   title="Insectes dans la charpente : espèces, zones et conduite à tenir"
-  description="Quels insectes attaquent une charpente, où ils se développent en priorité, comment évaluer le risque structurel et à quel moment une inspection s’impose. Île-de-France."
+  description="Quels insectes attaquent une charpente, où ils se développent en priorité, comment évaluer le risque structurel et quand une inspection s’impose."
   path="/insectes-charpente" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero
@@ -67,13 +68,13 @@ const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
             </p>
           </div>
 
-          <figure class="fig">
+          <Photo
+            nom="ferme-charpente-zones-sensibles.jpg"
+            alt="Schéma d’une ferme de charpente indiquant les pièces les plus exposées à l’humidité et aux efforts"
+            legende="Les zones que l’inspection examine en priorité, parce qu’elles cumulent concentration des efforts et exposition à l’humidité."
+          >
             <Charpente />
-            <figcaption>
-              Les zones que l’inspection examine en priorité, parce qu’elles cumulent concentration
-              des efforts et exposition à l’humidité.
-            </figcaption>
-          </figure>
+          </Photo>
 
           <div>
             <h2>Ce que nous regardons, et dans quel ordre</h2>

@@ -8,6 +8,7 @@ import Maillage from '~/components/Maillage.astro';
 import Etapes from '~/components/Etapes.astro';
 import Answer from '~/components/Answer.astro';
 import Charpente from '~/components/illus/Charpente.astro';
+import Photo from '~/components/Photo.astro';
 import { INSECTE_BY_SLUG } from '~/data/insectes';
 import { faqSchema, serviceSchema } from '~/lib/schema';
 
@@ -22,11 +23,11 @@ const etapes = c.traitement.map((t, i) => ({
   text: t,
 }));
 const faq = [
-  { q: 'Le traitement suffit-il, ou faut-il renforcer la charpente ?', a: "Cela dépend de la section saine restante, pièce par pièce. Le produit arrête l'attaque, il ne restitue pas la résistance du bois déjà consommé. Sur une charpente de pavillon aux sections modestes, il n'est pas rare qu'une partie des chevrons ou des pannes doive être doublée ou remplacée. Nous distinguons toujours, dans le rapport, ce qui relève du traitement et ce qui relève de la reprise structurelle." },
-  { q: 'Pourquoi l’injection est-elle indispensable ?', a: "Parce que les galeries du capricorne peuvent courir à plusieurs centimètres sous la surface. Une pulvérisation, même généreuse, imprègne les premiers millimètres du bois et n'atteint pas une larve installée au cœur d'une panne de 200 mm. L'injection par chevilles, selon un maillage régulier, est la seule méthode qui permette de diffuser le produit en profondeur." },
-  { q: 'Faut-il déposer l’isolation des combles ?', a: "Lorsque l'isolant est posé entre chevrons ou en rampant, oui : il masque précisément les bois à traiter. C'est un poste de coût non négligeable, et c'est aussi la raison pour laquelle il vaut mieux traiter préventivement une charpente avant d'isoler un comble plutôt qu'après. Sur un comble perdu avec isolant en plancher, la dépose est généralement limitée." },
-  { q: 'Combien de temps avant de savoir si c’est efficace ?', a: "Le cycle larvaire du capricorne étant long, il n'y a pas de signe immédiat. L'absence de nouvelle vermoulure sur des zones témoins nettoyées et repérées, constatée sur deux saisons chaudes successives, constitue l'indice le plus fiable. C'est la raison pour laquelle nous proposons un contrôle différé plutôt qu'une déclaration de réussite le jour du chantier." },
-  { q: 'Peut-on traiter en hiver ?', a: "Oui. Les produits s'appliquent toute l'année, et l'hiver présente même un avantage pratique : les combles sont moins chauds à travailler. La seule contrainte est l'humidité du bois, qui doit rester compatible avec la pénétration du produit ; un bois détrempé par une infiltration récente doit d'abord sécher." },
+  { q: 'Le traitement suffit-il, ou faut-il renforcer la charpente ?', a: "Cela dépend de la section saine restante, pièce par pièce. Le produit arrête l’attaque, il ne restitue pas la résistance du bois déjà consommé. Sur une charpente de pavillon aux sections modestes, il n’est pas rare qu’une partie des chevrons ou des pannes doive être doublée ou remplacée. Nous distinguons toujours, dans le rapport, ce qui relève du traitement et ce qui relève de la reprise structurelle." },
+  { q: 'Pourquoi l’injection est-elle indispensable ?', a: "Parce que les galeries du capricorne peuvent courir à plusieurs centimètres sous la surface. Une pulvérisation, même généreuse, imprègne les premiers millimètres du bois et n’atteint pas une larve installée au cœur d’une panne de 200 mm. L’injection par chevilles, selon un maillage régulier, est la seule méthode qui permette de diffuser le produit en profondeur." },
+  { q: 'Faut-il déposer l’isolation des combles ?', a: "Lorsque l’isolant est posé entre chevrons ou en rampant, oui : il masque précisément les bois à traiter. C’est un poste de coût non négligeable, et c’est aussi la raison pour laquelle il vaut mieux traiter préventivement une charpente avant d’isoler un comble plutôt qu’après. Sur un comble perdu avec isolant en plancher, la dépose est généralement limitée." },
+  { q: 'Combien de temps avant de savoir si c’est efficace ?', a: "Le cycle larvaire du capricorne étant long, il n’y a pas de signe immédiat. L’absence de nouvelle vermoulure sur des zones témoins nettoyées et repérées, constatée sur deux saisons chaudes successives, constitue l’indice le plus fiable. C’est la raison pour laquelle nous proposons un contrôle différé plutôt qu’une déclaration de réussite le jour du chantier." },
+  { q: 'Peut-on traiter en hiver ?', a: "Oui. Les produits s’appliquent toute l’année, et l’hiver présente même un avantage pratique : les combles sont moins chauds à travailler. La seule contrainte est l’humidité du bois, qui doit rester compatible avec la pénétration du produit ; un bois détrempé par une infiltration récente doit d’abord sécher." },
 ];
 const jsonLd = [
   serviceSchema({ name: 'Traitement du capricorne des maisons', description: "Bûchage, dépoussiérage, injection sous pression et pulvérisation des charpentes en résineux attaquées par le capricorne des maisons, en Île-de-France.", path: '/traitement-capricorne', serviceType: 'Traitement du capricorne des maisons' }),
@@ -35,7 +36,7 @@ const jsonLd = [
 ---
 <Base
   title="Traitement du capricorne des maisons : protocole complet"
-  description="Traiter une charpente attaquée par le capricorne des maisons : mise à nu des bois, bûchage, dépoussiérage, injection sous pression, pulvérisation et renfort des pièces affaiblies. Île-de-France."
+  description="Traiter une charpente attaquée par le capricorne : mise à nu des bois, bûchage, dépoussiérage, injection sous pression et renfort des pièces affaiblies."
   path="/traitement-capricorne" crumbs={crumbs} jsonLd={jsonLd}
 >
   <PageHero
@@ -72,13 +73,13 @@ const jsonLd = [
               charpenterie.
             </p>
           </div>
-          <figure class="fig">
+          <Photo
+            nom="sondage-appuis-charpente-capricorne.jpg"
+            alt="Zones d’appui et assemblages d’une ferme de charpente, points de sondage prioritaires"
+            legende="Les zones d’appui et les assemblages concentrent les efforts : c’est là qu’une perte de section a le plus de conséquences, et c’est donc là que le sondage commence."
+          >
             <Charpente />
-            <figcaption>
-              Les zones d’appui et les assemblages concentrent les efforts : c’est là qu’une perte
-              de section a le plus de conséquences, et c’est donc là que le sondage commence.
-            </figcaption>
-          </figure>
+          </Photo>
         </div>
         <aside class="split__side">
           <div class="card card--sage">
