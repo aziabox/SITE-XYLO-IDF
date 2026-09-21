@@ -4,6 +4,11 @@ import PageHero from '~/components/PageHero.astro';
 import { SITE } from '~/data/site';
 
 const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Politique de confidentialité' }];
+const L = SITE.legal;
+const H = L.host;
+const adresse = SITE.address
+  ? `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}, ${SITE.address.country}`
+  : null;
 ---
 <Base
   title="Politique de confidentialité"
@@ -20,6 +25,22 @@ const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Politique de confiden
 
   <section class="section">
     <div class="wrap-narrow prose">
+      <h2>Responsable du traitement</h2>
+      <p>
+        Le responsable du traitement des données collectées via ce site est&nbsp;:
+      </p>
+      <ul>
+        <li><strong>{L.companyName ?? 'À compléter'}</strong>{L.legalForm && <>, {L.legalForm.toLowerCase()}</>}</li>
+        {adresse && <li>{adresse}</li>}
+        {L.siret && <li>SIRET {L.siret}</li>}
+        <li>Téléphone&nbsp;: <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a></li>
+        {SITE.email && <li>Adresse électronique&nbsp;: {SITE.email}</li>}
+      </ul>
+      <p>
+        L’identification complète de l’éditeur figure dans les
+        <a href="/mentions-legales"> mentions légales</a>.
+      </p>
+
       <h2>Ce que nous collectons</h2>
       <p>
         Les seules données personnelles collectées par ce site sont celles que vous nous
@@ -56,7 +77,7 @@ const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Politique de confiden
         <li>Nous ne les vendons pas.</li>
         <li>Nous ne les cédons ni ne les louons à des tiers.</li>
         <li>Nous ne les utilisons pas à des fins de prospection pour des services sans rapport.</li>
-        <li>Nous ne les transférons pas hors de l’Union européenne.</li>
+        <li>Nous ne les transférons pas nous-mêmes hors de l’Union européenne.</li>
       </ul>
 
       <h2>Combien de temps nous les conservons</h2>
@@ -68,9 +89,19 @@ const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Politique de confiden
 
       <h2>Qui y a accès</h2>
       <p>
-        Seules les personnes de l’entreprise chargées de traiter votre demande. Les éventuels
-        prestataires techniques intervenant sur l’hébergement ou la messagerie agissent en
-        qualité de sous-traitants, dans le cadre d’engagements de confidentialité.
+        Seules les personnes de l’entreprise chargées de traiter votre demande.
+      </p>
+      {H && (
+        <p>
+          L’hébergement du site est assuré par <strong>{H.name}</strong> ({H.street},
+          {' '}{H.postalCode} {H.city}, {H.country}), qui agit en qualité de sous-traitant au
+          sens du règlement général sur la protection des données. Cette société est établie
+          dans l’Union européenne.
+        </p>
+      )}
+      <p>
+        Les autres prestataires techniques éventuels, notamment pour la messagerie, agissent
+        également en qualité de sous-traitants, dans le cadre d’engagements de confidentialité.
       </p>
 
       <h2>Vos droits</h2>
@@ -85,8 +116,14 @@ const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Politique de confiden
         Nous répondons dans un délai d’un mois.
       </p>
       <p>
-        Vous disposez également du droit d’introduire une réclamation auprès de l’autorité de
-        contrôle compétente en matière de protection des données personnelles.
+        Lorsque le traitement repose sur votre consentement, vous pouvez le retirer à tout
+        moment. Ce retrait ne remet pas en cause la licéité du traitement effectué avant.
+      </p>
+      <p>
+        Vous disposez également du droit d’introduire une réclamation auprès de la
+        <strong>Commission nationale de l’informatique et des libertés</strong> (CNIL),
+        3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 —
+        <a href="https://www.cnil.fr" rel="noopener nofollow" target="_blank">www.cnil.fr</a>.
       </p>
 
       <h2>Cookies</h2>

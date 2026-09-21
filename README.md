@@ -43,15 +43,63 @@ Ces éléments se renseignent dans un seul fichier, `src/data/site.ts`.
 
 | Champ | Fichier | Conséquence tant qu'il est vide |
 |---|---|---|
-| `legal.companyName`, `legalForm`, `siret`, `rcs`, `vat`, `capital`, `publicationDirector`, `host` | `src/data/site.ts` | La page *Mentions légales* affiche « À compléter » et un bandeau d'avertissement |
-| `address` | `src/data/site.ts` | L'adresse postale est omise des mentions légales et du balisage `Organization` |
-| `email` | `src/data/site.ts` | L'adresse électronique est omise des mentions légales et de la politique de confidentialité |
+| `email` | `src/data/site.ts` | L'adresse électronique est omise des mentions légales et de la politique de confidentialité. **Le RGPD attend un moyen de contact pour exercer ses droits** : le téléphone en tient lieu, une adresse serait préférable |
+| `legal.vat` | `src/data/site.ts` | Aucun numéro de TVA n'est affiché, et une phrase explique pourquoi (voir plus bas) |
+| `legal.host.phone` | `src/data/site.ts` | Le téléphone de l'hébergeur est omis (voir plus bas) |
 | `formEndpoint` | `src/data/site.ts` | L'envoi du formulaire est **bloqué** et l'internaute est invité à appeler — jamais d'échec silencieux |
 | `decennale` | `src/data/site.ts` | Aucune mention de garantie décennale n'est affichée nulle part sur le site |
 | `rcPro` | `src/data/site.ts` | L'assurance professionnelle n'est pas mentionnée dans les mentions légales |
 | `certifications` | `src/data/site.ts` | La page *Garanties* explique qu'aucune certification n'est affichée, et pourquoi |
 | `reviews` | `src/data/site.ts` | Aucun avis n'est affiché ; l'emplacement est prévu |
 | `site` (domaine) | `astro.config.mjs` et `public/robots.txt` | Les URL canoniques et le sitemap pointent vers `xylo-patrimoine.fr` |
+
+### Identification de l'éditeur
+
+Renseignée dans `src/data/site.ts` à partir du registre national des entreprises
+et du RCS de Nanterre. Vérifiable sur l'avis de situation SIRENE et l'extrait INPI.
+
+| | |
+|---|---|
+| Éditeur | ASSOUL Bilal — entrepreneur individuel |
+| Siège social | 1 rue Albert Simonin, 92400 Courbevoie |
+| SIREN / SIRET | 901 133 041 / 901 133 041 00011 |
+| RCS | 901 133 041 R.C.S. Nanterre (07/07/2021) |
+| Code APE | 81.29A |
+| Directeur de la publication | Bilal ASSOUL |
+
+Le SIRET est aussi émis dans le balisage `Organization` (`identifier`), ce qui
+rattache le site à une entité du registre plutôt qu'à un simple nom de marque.
+
+**Trois points restent à trancher :**
+
+1. **TVA.** Le numéro théorique `FR17901133041` est signalé **non valide** dans
+   VIES — situation habituelle d'une entreprise en franchise en base. Il n'est
+   donc **pas publié** : afficher un numéro inactif serait une mention fausse.
+   Si l'entreprise est assujettie, renseigner `legal.vat` ; la ligne apparaît
+   alors et la phrase d'explication disparaît.
+2. **Nom commercial.** Le site est publié sous le nom **Xylo Patrimoine**, qui
+   n'est pas la dénomination de l'entreprise. S'il doit être opposable, le
+   déclarer comme nom commercial ou enseigne au guichet unique (INPI). Sinon,
+   remplacer `SITE.name`.
+3. **Adresse électronique.** Absente. Le RGPD attend un canal pour exercer ses
+   droits ; le téléphone y supplée, une adresse dédiée serait plus solide.
+
+### Hébergeur
+
+`legal.host` dans `src/data/site.ts`. Dénomination, code entreprise et adresse
+légale tels que publiés par Hostinger :
+
+```
+HOSTINGER, UAB — code entreprise 302710386
+Švitrigailos g. 34, LT-03230 Vilnius, Lituanie
+```
+
+> **À confirmer sur le contrat d'hébergement.** Hostinger exploite plusieurs
+> entités (`HOSTINGER, UAB` et `HOSTINGER operations, UAB`) et une adresse plus
+> ancienne circule encore largement (Jonavos g. 60C, Kaunas). Le **téléphone**,
+> que la LCEN attend pour l'hébergeur, n'a pas pu être vérifié à la source et
+> n'est donc pas publié : le renseigner dans `legal.host.phone` une fois relevé
+> sur la facture.
 
 ### Garantie décennale
 

@@ -20,23 +20,66 @@ export const SITE = {
   phoneE164: '+33756822785',
   /** A completer par l’entreprise : email de contact reel. */
   email: null as string | null,
-  /** A completer : adresse postale reelle de l’etablissement. */
-  address: null as null | {
+  /** Siege social declare au RCS (source : registre, via Pappers). */
+  address: {
+    street: '1 rue Albert Simonin',
+    postalCode: '92400',
+    city: 'Courbevoie',
+    country: 'France',
+    /** Code ISO 3166-1, attendu par schema.org. */
+    countryCode: 'FR',
+  } as null | {
     street: string;
     postalCode: string;
     city: string;
     country: string;
+    countryCode: string;
   },
-  /** A completer : SIRET, forme juridique, capital, RCS, TVA, directeur de publication. */
+  /**
+   * Identification de l’editeur. Donnees issues du registre national des
+   * entreprises et du RCS de Nanterre, verifiables sur l’extrait Pappers /
+   * l’avis de situation SIRENE.
+   */
   legal: {
-    companyName: null as string | null,
-    legalForm: null as string | null,
-    siret: null as string | null,
-    rcs: null as string | null,
+    companyName: 'ASSOUL Bilal' as string | null,
+    /** Entreprise individuelle : pas de capital social, la ligne est masquee. */
+    legalForm: 'Entrepreneur individuel' as string | null,
+    siren: '901 133 041' as string | null,
+    siret: '901 133 041 00011' as string | null,
+    rcs: '901 133 041 R.C.S. Nanterre' as string | null,
+    rcsDate: '07/07/2021' as string | null,
+    rneDate: '06/07/2021' as string | null,
+    /** Code APE declare (INSEE). */
+    ape: '81.29A' as string | null,
+    apeLabel: 'Désinfection, désinsectisation, dératisation' as string | null,
+    /**
+     * TVA intracommunautaire : NON renseignee volontairement.
+     * Le numero theorique FR17901133041 est signale comme non valide dans
+     * VIES, ce qui est le cas courant d’une entreprise en franchise en base.
+     * Publier un numero invalide serait une mention fausse : tant que le
+     * regime n’est pas confirme, la ligne n’est pas affichee.
+     */
     vat: null as string | null,
     capital: null as string | null,
-    publicationDirector: null as string | null,
-    host: null as string | null,
+    publicationDirector: 'Bilal ASSOUL' as string | null,
+    /**
+     * Hebergeur. Denomination, code entreprise et adresse legale tels que
+     * publies par Hostinger. Le telephone reste a confirmer sur le contrat
+     * d’hebergement : aucun numero non verifie n’est publie ici.
+     */
+    host: {
+      name: 'HOSTINGER, UAB',
+      companyCode: '302710386',
+      street: 'Švitrigailos g. 34',
+      postalCode: 'LT-03230',
+      city: 'Vilnius',
+      country: 'Lituanie',
+      url: 'https://www.hostinger.fr',
+      phone: null as string | null,
+    } as null | {
+      name: string; companyCode: string; street: string; postalCode: string;
+      city: string; country: string; url: string; phone: string | null;
+    },
   },
   /**
    * Assurance decennale.

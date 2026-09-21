@@ -71,10 +71,19 @@ if (SITE.address) {
     streetAddress: SITE.address.street,
     postalCode: SITE.address.postalCode,
     addressLocality: SITE.address.city,
-    addressCountry: SITE.address.country,
+    addressCountry: SITE.address.countryCode,
   };
 }
 if (SITE.legal.companyName) org.legalName = SITE.legal.companyName;
+/* Le SIRET identifie l’entreprise sans ambiguïté : il rattache l’entité à un
+   registre public plutôt qu’à un simple nom de marque. */
+if (SITE.legal.siret) {
+  org.identifier = {
+    '@type': 'PropertyValue',
+    propertyID: 'SIRET',
+    value: SITE.legal.siret.replace(/\s/g, ''),
+  };
+}
 /* Aucun aggregateRating, aucun award, aucune certification ne sont émis tant
    qu’ils ne sont pas réellement justifiés par l’entreprise. */
 

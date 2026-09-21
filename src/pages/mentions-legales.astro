@@ -5,8 +5,14 @@ import { SITE } from '~/data/site';
 
 const crumbs = [{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }];
 const L = SITE.legal;
+const H = L.host;
 const manquant = (v: string | null) => v ?? 'À compléter';
-const incomplet = !L.companyName || !L.siret || !SITE.address;
+/* L’avertissement ne s’affiche que s’il manque une mention obligatoire :
+   identification de l’éditeur, siège social ou hébergeur. */
+const incomplet = !L.companyName || !L.siret || !SITE.address || !H;
+const adresse = SITE.address
+  ? `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}, ${SITE.address.country}`
+  : null;
 ---
 <Base
   title="Mentions légales"
@@ -27,28 +33,58 @@ const incomplet = !L.companyName || !L.siret || !SITE.address;
       )}
 
       <h2>Éditeur du site</h2>
+      <p>
+        Le site <strong>{SITE.name}</strong> est édité par&nbsp;:
+      </p>
       <ul>
-        <li><strong>Dénomination sociale :</strong> {manquant(L.companyName)}</li>
+        <li><strong>Éditeur :</strong> {manquant(L.companyName)}</li>
         <li><strong>Forme juridique :</strong> {manquant(L.legalForm)}</li>
-        <li><strong>Capital social :</strong> {manquant(L.capital)}</li>
-        <li><strong>Siège social :</strong> {SITE.address ? `${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}, ${SITE.address.country}` : 'À compléter'}</li>
-        <li><strong>SIRET :</strong> {manquant(L.siret)}</li>
-        <li><strong>RCS :</strong> {manquant(L.rcs)}</li>
-        <li><strong>Numéro de TVA intracommunautaire :</strong> {manquant(L.vat)}</li>
+        {L.capital && <li><strong>Capital social :</strong> {L.capital}</li>}
+        <li><strong>Siège social :</strong> {adresse ?? 'À compléter'}</li>
+        <li><strong>SIREN :</strong> {manquant(L.siren)}</li>
+        <li><strong>SIRET (siège) :</strong> {manquant(L.siret)}</li>
+        <li>
+          <strong>RCS :</strong> {manquant(L.rcs)}
+          {L.rcsDate && <> (immatriculation le {L.rcsDate})</>}
+        </li>
+        {L.ape && (
+          <li><strong>Code APE :</strong> {L.ape}{L.apeLabel && <> — {L.apeLabel}</>}</li>
+        )}
+        {L.vat && <li><strong>Numéro de TVA intracommunautaire :</strong> {L.vat}</li>}
         <li><strong>Téléphone :</strong> <a href={SITE.phoneHref}>{SITE.phoneDisplay}</a></li>
-        <li><strong>Adresse électronique :</strong> {SITE.email ?? 'À compléter'}</li>
+        {SITE.email && <li><strong>Adresse électronique :</strong> {SITE.email}</li>}
         <li><strong>Directeur de la publication :</strong> {manquant(L.publicationDirector)}</li>
       </ul>
+      {!L.vat && (
+        <p>
+          L’éditeur ne fait pas figurer de numéro de TVA intracommunautaire sur ce site&nbsp;:
+          celui-ci n’est mentionné que s’il est effectivement actif. Le régime de TVA applicable
+          est indiqué sur les devis et les factures.
+        </p>
+      )}
 
       <h2>Hébergeur</h2>
-      <ul>
-        <li><strong>Hébergeur :</strong> {manquant(L.host)}</li>
-      </ul>
-      <p>
-        Les coordonnées complètes de l’hébergeur, incluant sa dénomination, son adresse et son
-        numéro de téléphone, doivent figurer ici conformément aux obligations applicables aux
-        éditeurs de services de communication au public en ligne.
-      </p>
+      {H ? (
+        <>
+          <ul>
+            <li><strong>Hébergeur :</strong> {H.name}</li>
+            <li><strong>Code entreprise :</strong> {H.companyCode}</li>
+            <li><strong>Adresse :</strong> {H.street}, {H.postalCode} {H.city}, {H.country}</li>
+            {H.phone && <li><strong>Téléphone :</strong> {H.phone}</li>}
+            <li><strong>Site :</strong> <a href={H.url} rel="noopener nofollow" target="_blank">{H.url.replace(/^https?:\/\//, '')}</a></li>
+          </ul>
+          <p>
+            Le site est hébergé sur l’infrastructure de cet hébergeur, établi dans l’Union
+            européenne.
+          </p>
+        </>
+      ) : (
+        <p>
+          Les coordonnées complètes de l’hébergeur, incluant sa dénomination, son adresse et son
+          numéro de téléphone, doivent figurer ici conformément aux obligations applicables aux
+          éditeurs de services de communication au public en ligne.
+        </p>
+      )}
 
       <h2>Assurance professionnelle</h2>
       {SITE.rcPro.verified || SITE.decennale.verified ? (
