@@ -58,7 +58,7 @@ const toc = headings.filter((h) => h.depth === 2);
     <header class="ahead grain">
       <Breadcrumb items={crumbs} />
       <div class="wrap ahead__in">
-        <p class="eyebrow"><a href={`/blog/${cat.slug}`} style="color:inherit;text-decoration:none">{cat.name}</a></p>
+        <p class="eyebrow"><a href={`/blog/${cat.slug}`} class="link-plain">{cat.name}</a></p>
         <h1>{p.data.title}</h1>
         <p class="lead">{p.data.description}</p>
         <p class="ahead__meta">
@@ -89,20 +89,20 @@ const toc = headings.filter((h) => h.depth === 2);
             </nav>
           )}
           {p.data.links.length > 0 && (
-            <div class="card card--sage" style="margin-top:1.25rem">
-              <h2 style="font-size:1.05rem">Sur le site</h2>
-              <ul class="list-dot small" style="margin-top:.6rem">
+            <div class="card card--sage mt-10">
+              <h2 class="fs-card">Sur le site</h2>
+              <ul class="list-dot small mt-3">
                 {p.data.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
               </ul>
             </div>
           )}
-          <div class="card card--dark" style="margin-top:1.25rem">
-            <h2 style="font-size:1.05rem">Un doute sur votre charpente ?</h2>
-            <p style="margin-top:.5rem;font-size:var(--t-sm)">
+          <div class="card card--dark mt-10">
+            <h2 class="fs-card">Un doute sur votre charpente ?</h2>
+            <p class="mt-2 fs-sm">
               Décrivez ce que vous observez. Nous vous dirons franchement si une visite s’impose.
             </p>
-            <a href="/demander-un-diagnostic" class="btn btn--light btn--sm btn--block" style="margin-top:1rem">Demander un diagnostic</a>
-            <a href={SITE.phoneHref} class="btn btn--outline-light btn--sm btn--block" style="margin-top:.5rem">{SITE.phoneDisplay}</a>
+            <a href="/demander-un-diagnostic" class="btn btn--light btn--sm btn--block mt-8">Demander un diagnostic</a>
+            <a href={SITE.phoneHref} class="btn btn--outline-light btn--sm btn--block mt-2">{SITE.phoneDisplay}</a>
           </div>
         </aside>
       </div>
@@ -114,7 +114,7 @@ const toc = headings.filter((h) => h.depth === 2);
   {suite.length > 0 && (
     <section class="section section--warm">
       <div class="wrap">
-        <h2 style="font-size:var(--t-h3);margin-bottom:1.6rem">À lire ensuite</h2>
+        <h2 class="title-sub">À lire ensuite</h2>
         <div class="grid grid-3">
           {suite.map((o) => (
             <a href={`/blog/${o.data.category}/${o.id}`} class="card card--link">

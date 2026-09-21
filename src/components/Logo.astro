@@ -1,10 +1,8 @@
 ---
 interface Props { variant?: 'dark' | 'light'; compact?: boolean; class?: string }
 const { variant = 'dark', compact = false, class: cls = '' } = Astro.props;
-const ink = variant === 'light' ? '#F4F0E5' : '#2C3E33';
-const sub = variant === 'light' ? 'rgba(244,240,229,.62)' : '#837C70';
 ---
-<span class={`logo ${cls}`} aria-hidden="false">
+<span class={`logo logo--${variant} ${cls}`} aria-hidden="false">
   <svg class="logo__mark" viewBox="0 0 40 40" width="38" height="38" role="img" aria-label="">
     <rect x="0.5" y="0.5" width="39" height="39" rx="11" fill="#3A5344" />
     {/* Cernes de croissance : section transversale d’une pièce de bois */}
@@ -18,8 +16,8 @@ const sub = variant === 'light' ? 'rgba(244,240,229,.62)' : '#837C70';
   </svg>
   {!compact && (
     <span class="logo__text">
-      <span class="logo__name" style={`color:${ink}`}>Xylo<span class="logo__name--light">Patrimoine</span></span>
-      <span class="logo__base" style={`color:${sub}`}>Traitement du bois · Île-de-France</span>
+      <span class="logo__name">Xylo<span class="logo__name--light">Patrimoine</span></span>
+      <span class="logo__base">Traitement du bois · Île-de-France</span>
     </span>
   )}
 </span>
@@ -32,6 +30,12 @@ const sub = variant === 'light' ? 'rgba(244,240,229,.62)' : '#837C70';
     font-family: var(--f-title); font-size: 1.22rem; font-weight: 640;
     letter-spacing: -0.02em; font-variation-settings: 'SOFT' 20, 'opsz' 24;
   }
+  /* Les deux déclinaisons évitent un attribut style en ligne, incompatible
+     avec une politique de sécurité de contenu stricte. */
+  .logo--dark .logo__name  { color: #2C3E33; }
+  .logo--dark .logo__base  { color: #716A5E; }
+  .logo--light .logo__name { color: #F4F0E5; }
+  .logo--light .logo__base { color: rgba(244, 240, 229, .62); }
   .logo__name--light { font-weight: 420; font-style: italic; }
   .logo__base {
     font-size: .625rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;

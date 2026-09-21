@@ -62,7 +62,7 @@ const jsonLd = [faqSchema(faq)].filter(Boolean) as Record<string, any>[];
       <div class="grid grid-4">
         {signes.map((s) => (
           <a href={s.href} class="card card--link">
-            <h3 style="font-size:1.05rem">{s.t}</h3>
+            <h3 class="fs-card">{s.t}</h3>
             <p>{s.d}</p>
             <span class="card__foot link-arrow">Voir</span>
           </a>

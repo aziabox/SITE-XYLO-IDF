@@ -15,6 +15,31 @@ export default defineConfig({
     port: Number(process.env.PORT) || 4321,
   },
   trailingSlash: 'ignore',
+  /* Politique de sécurité de contenu.
+     Astro calcule l'empreinte SHA-256 de chaque script et de chaque style qu'il
+     génère, et les inscrit dans une balise meta. Le site n'appelle aucune
+     ressource externe — polices, styles et scripts sont tous auto-hébergés —
+     et ne contient plus aucun attribut `style` en ligne, ce qui permet de se
+     passer de 'unsafe-inline'.
+     `frame-ancestors` n'a d'effet qu'en en-tête HTTP : il est défini dans
+     public/.htaccess, avec les autres en-têtes de sécurité. */
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "object-src 'none'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "manifest-src 'self'",
+        "frame-src 'none'",
+        "worker-src 'self'",
+        'upgrade-insecure-requests',
+      ],
+    },
+  },
   build: { format: 'directory', inlineStylesheets: 'auto' },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   integrations: [

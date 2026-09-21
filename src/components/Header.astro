@@ -101,7 +101,7 @@ const isActive = (href: string) => here === href || (href !== '/' && here.starts
     </nav>
     <div class="mnav__foot">
       <a href={SITE.phoneHref} class="btn btn--primary btn--block">Appeler le {SITE.phoneDisplay}</a>
-      <p class="small muted" style="margin-top:.7rem;text-align:center">Du lundi au samedi</p>
+      <p class="small muted mt-4 tac">Du lundi au samedi</p>
     </div>
   </div>
 </div>
@@ -271,7 +271,7 @@ const isActive = (href: string) => here === href || (href !== '/' && here.starts
   body.nav-open .dock { display: none; }
 </style>
 
-<script is:inline>
+<script>
   (() => {
     const hdr = document.getElementById('hdr');
     const burger = document.getElementById('burger');

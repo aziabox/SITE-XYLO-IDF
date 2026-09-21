@@ -68,7 +68,7 @@ const jsonLd = [
           <div>
             <h2>Les types de construction que nous rencontrons</h2>
             <ul class="list-dot">{d.habitat.map((h) => <li>{h}</li>)}</ul>
-            <p style="margin-top:1rem">
+            <p class="mt-8">
               <strong>Essences le plus souvent en présence :</strong> {d.boisTypiques}
             </p>
           </div>
@@ -76,7 +76,7 @@ const jsonLd = [
           <div>
             <h2>Les ouvrages bois à contrôler en priorité</h2>
             <ul class="list-check">{d.batiSensible.map((b) => <li>{b}</li>)}</ul>
-            <p style="margin-top:1rem">
+            <p class="mt-8">
               Le déroulé de notre intervention ne dépend pas de la commune :
               <a href="/diagnostic-insectes-xylophages">échange préalable, visite, sondage,
               mesure d’humidité puis rapport écrit</a>. Ce qui change {d.inName}, c’est
@@ -94,7 +94,7 @@ const jsonLd = [
 
         <aside class="split__side">
           <div class="card card--dark">
-            <h3 style="font-size:1.08rem">{d.name} en bref</h3>
+            <h3 class="fs-card-lg">{d.name} en bref</h3>
             <dl class="dep__dl">
               <div><dt>Code</dt><dd>{d.code}</dd></div>
               <div><dt>Préfecture</dt><dd>{d.prefecture}</dd></div>
@@ -104,9 +104,9 @@ const jsonLd = [
               )}
             </dl>
           </div>
-          <div class="card card--sage" style="margin-top:1.25rem">
-            <h3 style="font-size:1.05rem">Nos prestations</h3>
-            <ul class="list-dot small" style="margin-top:.6rem">
+          <div class="card card--sage mt-10">
+            <h3 class="fs-card">Nos prestations</h3>
+            <ul class="list-dot small mt-3">
               <li><a href="/diagnostic-insectes-xylophages">Diagnostic d’infestation</a></li>
               <li><a href="/traitement-charpente">Traitement de charpente</a></li>
               <li><a href="/traitement-bois">Traitement du bois</a></li>

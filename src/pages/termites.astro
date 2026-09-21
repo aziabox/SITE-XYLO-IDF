@@ -86,7 +86,7 @@ const jsonLd = [
             <ul class="list-check">
               {t.signes.map((s) => <li>{s}</li>)}
             </ul>
-            <p class="small muted" style="margin-top:1rem">
+            <p class="small muted mt-8">
               Aucun de ces signes n’est à lui seul une preuve. Un bois qui sonne creux peut avoir
               été attaqué par un autre insecte, ou simplement présenter une fente interne. C’est
               la présence conjointe de plusieurs indices, et notamment des cordonnets de terre,
@@ -115,8 +115,8 @@ const jsonLd = [
 
         <aside class="split__side">
           <FicheIdentite insecte={t} />
-          <div class="card card--sage" style="margin-top:1.25rem">
-            <h3 style="font-size:1.08rem">Risque pour la structure</h3>
+          <div class="card card--sage mt-10">
+            <h3 class="fs-card-lg">Risque pour la structure</h3>
             <p>{t.risque}</p>
           </div>
         </aside>
@@ -166,7 +166,7 @@ const jsonLd = [
         </div>
       </div>
 
-      <div class="note note--stone" style="margin-top:1.75rem">
+      <div class="note note--stone mt-12">
         <span class="note__title">Nous ne nous substituons pas à la vérification officielle</span>
         Nous ne publions pas de liste de communes classées, et nous n’affirmerons jamais qu’une
         adresse est, ou n’est pas, en zone délimitée. Ces arrêtés changent, et une information
@@ -192,7 +192,7 @@ const jsonLd = [
       <ol class="list-num">
         {t.diagnostic.map((d) => <li>{d}</li>)}
       </ol>
-      <div class="btn-row" style="margin-top:2rem">
+      <div class="btn-row mt-13">
         <a href="/traitement-termites" class="btn btn--primary">Traitement des termites</a>
         <a href="/diagnostic-insectes-xylophages" class="btn btn--ghost">Comment se déroule un diagnostic</a>
       </div>

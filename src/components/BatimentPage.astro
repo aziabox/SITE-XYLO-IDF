@@ -56,7 +56,7 @@ const jsonLd = [
               {s.intro && <p class="lead">{s.intro}</p>}
               {s.paragraphs?.map((t) => <p set:html={t} />)}
               {s.list && (
-                <ul class="list-dot" style="margin-top:1rem">
+                <ul class="list-dot mt-8">
                   {s.list.map((i) => <li><strong>{i.t}</strong> — <span set:html={i.d} /></li>)}
                 </ul>
               )}
@@ -65,15 +65,15 @@ const jsonLd = [
         </div>
         <aside class="split__side">
           <div class="card card--dark">
-            <h3 style="font-size:1.08rem">{p.vigilance.title}</h3>
-            <ul class="list-check small" style="margin-top:.8rem">
+            <h3 class="fs-card-lg">{p.vigilance.title}</h3>
+            <ul class="list-check small mt-6">
               {p.vigilance.items.map((i) => <li set:html={i} />)}
             </ul>
           </div>
           {p.aside && (
-            <div class="card card--sage" style="margin-top:1.25rem">
-              <h3 style="font-size:1.05rem">{p.aside.title}</h3>
-              <p style="margin-top:.5rem" set:html={p.aside.text} />
+            <div class="card card--sage mt-10">
+              <h3 class="fs-card">{p.aside.title}</h3>
+              <p set:html={p.aside.text} class="mt-2" />
             </div>
           )}
         </aside>

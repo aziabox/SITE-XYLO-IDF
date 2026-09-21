@@ -374,3 +374,34 @@ legend { font-size: var(--t-sm); font-weight: 600; color: var(--sauge-800); marg
 .sci { font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--cuivre-500); margin-bottom: .5rem; }
 /* Titre de carte servant de titre de section sur les pages de liste */
 .card .cardtitle { font-size: var(--t-h4); font-weight: 600; margin-bottom: .55rem; }
+
+/* ===================== UTILITAIRES ===================== */
+/* Ces classes remplacent les attributs `style` en ligne. Sans elles, une
+   politique de sécurité de contenu stricte bloquerait les styles inline et
+   dégraderait la mise en page. */
+.mt-2  { margin-top: .5rem; }
+.mt-3  { margin-top: .6rem; }
+.mt-4  { margin-top: .7rem; }
+.mt-5  { margin-top: .75rem; }
+.mt-6  { margin-top: .8rem; }
+.mt-7  { margin-top: .9rem; }
+.mt-8  { margin-top: 1rem; }
+.mt-9  { margin-top: 1.1rem; }
+.mt-10 { margin-top: 1.25rem; }
+.mt-11 { margin-top: 1.5rem; }
+.mt-12 { margin-top: 1.75rem; }
+.mt-13 { margin-top: 2rem; }
+.mt-14 { margin-top: 2.5rem; }
+.mb-13 { margin-bottom: 2rem; }
+.mbl   { margin: .7rem 0 2rem; }
+.fs-card    { font-size: 1.05rem; }
+.fs-card-lg { font-size: 1.08rem; }
+.fs-card-xl { font-size: 1.1rem; }
+.fs-sm      { font-size: var(--t-sm); }
+.title-sub  { font-size: var(--t-h3); margin-bottom: 1.6rem; }
+.title-sub--tight { font-size: var(--t-h3); margin-bottom: 1.1rem; }
+.tac     { text-align: center; }
+.op-75   { opacity: .75; }
+.jc-c    { justify-content: center; }
+.link-plain { color: inherit; text-decoration: none; }
+.screen-center { min-height: 52vh; display: grid; place-items: center; }

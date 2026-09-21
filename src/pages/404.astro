@@ -19,14 +19,14 @@ const pistes = [
   crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Page introuvable' }]}
 >
   <section class="section">
-    <div class="wrap-narrow" style="text-align:center">
-      <p class="eyebrow eyebrow--plain" style="justify-content:center">Erreur 404</p>
-      <h1 style="margin-top:.8rem">Cette page n’existe pas</h1>
-      <p class="lead" style="margin-top:1rem">
+    <div class="wrap-narrow tac">
+      <p class="eyebrow eyebrow--plain jc-c">Erreur 404</p>
+      <h1 class="mt-6">Cette page n’existe pas</h1>
+      <p class="lead mt-8">
         Le lien est peut-être ancien, ou l’adresse comporte une erreur. Voici les pages
         les plus consultées du site.
       </p>
-      <div class="btn-row" style="justify-content:center;margin-top:1.75rem">
+      <div class="btn-row jc-c mt-12">
         <a href="/" class="btn btn--primary">Retour à l’accueil</a>
         <a href={SITE.phoneHref} class="btn btn--ghost">Appeler le {SITE.phoneDisplay}</a>
       </div>
@@ -37,7 +37,7 @@ const pistes = [
       <div class="grid grid-3">
         {pistes.map((p) => (
           <a href={p.h} class="card card--link">
-            <h2 style="font-size:1.08rem">{p.t}</h2>
+            <h2 class="fs-card-lg">{p.t}</h2>
             <p>{p.d}</p>
             <span class="card__foot link-arrow">Consulter</span>
           </a>

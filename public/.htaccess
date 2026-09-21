@@ -1,0 +1,138 @@
+# ============================================================================
+#  Xylo Patrimoine — configuration Apache / LiteSpeed (Hostinger)
+#  Site statique : aucun code exécuté côté serveur.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+#  En-têtes de sécurité
+#  La politique de sécurité de contenu est émise par Astro dans une balise
+#  meta, avec l'empreinte SHA-256 de chaque script. Les directives ci-dessous
+#  sont celles qui n'ont d'effet qu'en en-tête HTTP.
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Interdit l'inclusion du site dans une iframe tierce (détournement de clic).
+  Header always set X-Frame-Options "DENY"
+  Header always set Content-Security-Policy "frame-ancestors 'none'"
+
+  # Empêche le navigateur de deviner un type MIME différent de celui annoncé.
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Ne transmet l'URL complète qu'aux pages du même site.
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Le site n'a besoin d'aucune de ces interfaces : on les refuse explicitement.
+  Header always set Permissions-Policy "accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), publickey-credentials-get=(), screen-wake-lock=(), usb=(), xr-spatial-tracking=()"
+
+  # Isolation de la fenêtre et des ressources.
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+
+  # HTTPS obligatoire pendant deux ans, sous-domaines compris.
+  # À n'activer qu'une fois le certificat en place et le site joignable en
+  # HTTPS : un navigateur ayant reçu cet en-tête refusera le HTTP pendant
+  # toute la durée indiquée.
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" env=HTTPS
+
+  # Ne divulgue pas la pile technique.
+  Header always unset X-Powered-By
+  Header always unset Server
+</IfModule>
+
+# ---------------------------------------------------------------------------
+#  Redirection vers HTTPS et vers le domaine canonique (avec www)
+#  Décommentez après avoir vérifié que le certificat couvre bien les deux noms.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # RewriteCond %{HTTPS} !=on
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+  # RewriteCond %{HTTP_HOST} !^www\. [NC]
+  # RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+
+  # Sert /page quand /page/index.html existe, sans redirection visible.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+?)/?$ /$1/index.html [L]
+</IfModule>
+
+# ---------------------------------------------------------------------------
+#  Page d'erreur
+# ---------------------------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# ---------------------------------------------------------------------------
+#  Compression
+# ---------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json
+  AddOutputFilterByType BROTLI_COMPRESS application/xml image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------------------
+#  Cache
+#  Les fichiers de /_astro/ portent une empreinte dans leur nom : leur contenu
+#  ne change jamais sans que le nom change, ils sont donc immuables. Le HTML,
+#  lui, doit être revalidé à chaque visite.
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 month"
+  ExpiresByType image/avif                "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 month"
+  ExpiresByType application/xml           "access plus 1 hour"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|woff2|avif|webp)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# ---------------------------------------------------------------------------
+#  Types MIME et encodage
+# ---------------------------------------------------------------------------
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/avif .avif
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ---------------------------------------------------------------------------
+#  Accès
+#  Le site généré ne contient aucun de ces fichiers ; la règle protège d'un
+#  dépôt accidentel de fichiers de configuration ou de sauvegarde.
+# ---------------------------------------------------------------------------
+<FilesMatch "(^\.|\.(env|ini|log|sh|sql|bak|old|orig|swp|json|lock|md|ts|mjs)$)">
+  Require all denied
+</FilesMatch>
+<Files "robots.txt">
+  Require all granted
+</Files>
+<Files ".htaccess">
+  Require all denied
+</Files>
+
+# Pas d'index automatique des dossiers.
+Options -Indexes

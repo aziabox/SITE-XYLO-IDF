@@ -2,7 +2,7 @@
 
 Site statique entièrement consacré au **diagnostic et au traitement des insectes
 xylophages** en Île-de-France : termites, capricorne des maisons, vrillettes, lyctus.
-94 pages, construites avec [Astro](https://astro.build).
+94 pages, construites avec [Astro 7](https://astro.build).
 
 Le positionnement n'est pas celui d'une entreprise de désinsectisation, mais celui
 d'un spécialiste du bois et de la structure : **expertise du bois, diagnostic,
@@ -20,7 +20,7 @@ npm start        # sert dist/ — c'est la commande utilisée en hébergement
 npm run audit    # audit SEO et liens internes de la version générée
 ```
 
-Node 20.3 ou supérieur (`engines` dans `package.json`).
+Node 22.12 ou supérieur (`engines` dans `package.json`) — exigé par Astro 7.
 
 Le port et l'hôte suivent la variable d'environnement `PORT` ; l'URL canonique
 suit `SITE_URL` si elle est définie, sinon la valeur inscrite dans
@@ -251,6 +251,77 @@ sans `alt` ; pages trop courtes.
 
 ---
 
+## Sécurité
+
+`npm audit` remonte **0 vulnérabilité**. Le site ne charge aucune ressource
+externe : polices, styles et scripts sont tous auto-hébergés. Aucun script
+tiers, aucun traceur, aucun cookie.
+
+### Politique de sécurité de contenu
+
+Activée dans `astro.config.mjs` (`security.csp`). Astro calcule l'empreinte
+SHA-256 de chaque script et de chaque style qu'il produit, et les inscrit dans
+une balise `meta` propre à chaque page. La politique ne contient **ni
+`unsafe-inline` ni `unsafe-eval`** :
+
+```
+default-src 'self' ; base-uri 'self' ; form-action 'self' ;
+object-src 'none' ; frame-src 'none' ; img-src 'self' data: ;
+font-src 'self' ; connect-src 'self' ; upgrade-insecure-requests ;
+script-src 'self' <empreintes> ; style-src 'self' <empreintes>
+```
+
+Deux conséquences sur la façon d'écrire le code, à respecter pour toute
+évolution :
+
+- **Aucun attribut `style=` en ligne.** Ils seraient bloqués. Utilisez les
+  classes utilitaires de `src/styles/global.css` (`.mt-*`, `.fs-*`, `.tac`…).
+- **Aucun `is:inline` ni `define:vars` sur un script.** Un script marqué
+  `is:inline` échappe au traitement d'Astro, donc à l'empreinte, et se retrouve
+  bloqué. Pour transmettre une valeur du serveur au navigateur, passez par un
+  attribut `data-*` lu ensuite via `dataset` — c'est ce que fait
+  `src/components/Formulaire.astro`.
+
+Les deux seuls `is:inline` restants sont des blocs de données
+(`application/ld+json` et `application/json`), que les navigateurs
+n'exécutent pas.
+
+### En-têtes HTTP
+
+`public/.htaccess` est copié tel quel dans `dist/` et lu par Apache comme par
+LiteSpeed, le serveur utilisé chez Hostinger. Il fournit les en-têtes qu'une
+balise `meta` ne peut pas porter :
+
+| En-tête | Valeur |
+|---|---|
+| `X-Frame-Options` / `frame-ancestors` | `DENY` / `'none'` |
+| `X-Content-Type-Options` | `nosniff` |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` |
+| `Permissions-Policy` | toutes les interfaces refusées, sauf `fullscreen=(self)` |
+| `Cross-Origin-Opener-Policy` | `same-origin` |
+| `Cross-Origin-Resource-Policy` | `same-origin` |
+| `X-Permitted-Cross-Domain-Policies` | `none` |
+| `Strict-Transport-Security` | `max-age=63072000; includeSubDomains; preload` |
+
+Le fichier gère aussi la compression, le cache (immuable pour `/_astro/`,
+revalidation pour le HTML), la page 404 et le refus d'accès aux fichiers de
+configuration.
+
+> **`Strict-Transport-Security` n'est envoyé qu'en HTTPS** (`env=HTTPS`).
+> Vérifiez que le certificat est en place avant la mise en ligne : un
+> navigateur ayant reçu cet en-tête refusera le HTTP pendant deux ans.
+>
+> Les redirections vers HTTPS et vers le domaine canonique sont **commentées**
+> dans le fichier. Décommentez-les une fois le domaine définitif connu.
+
+### Vérifier après déploiement
+
+```bash
+curl -sI https://votre-domaine.fr | grep -iE 'content-security|x-frame|x-content|referrer|permissions|strict-transport'
+```
+
+---
+
 ## Intégrité des informations
 
 C'est une contrainte structurante du projet, pas une clause de style.
@@ -316,7 +387,7 @@ Le site est **statique** : un hébergeur de fichiers suffit.
 | Commande de build | `npm run build` |
 | Dossier publié | `dist` |
 | Commande de démarrage | `npm start` (pour les plateformes qui lancent un serveur Node) |
-| Version de Node | 20.3 ou supérieure |
+| Version de Node | 22.12 ou supérieure |
 
 ### Deux intégrations maison
 

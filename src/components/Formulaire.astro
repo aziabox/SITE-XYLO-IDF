@@ -44,6 +44,8 @@ const zones = [
   action={SITE.formEndpoint ?? '/merci'}
   enctype="multipart/form-data"
   data-endpoint={SITE.formEndpoint ? 'oui' : 'non'}
+  data-tel={SITE.phoneDisplay}
+  data-tel-href={SITE.phoneHref}
 >
   {/* Zone de message, renseignée par le script en cas d'envoi impossible. */}
   <p class="form__alert" role="alert" hidden></p>
@@ -158,16 +160,24 @@ const zones = [
   )}
 </form>
 
-<script is:inline define:vars={{ tel: SITE.phoneDisplay, href: SITE.phoneHref }}>
+<script>
+  /* Les coordonnées transitent par des attributs data-* plutôt que par
+     `define:vars`, qui impose un script non traité par Astro — donc non
+     empreinté par la politique de sécurité de contenu. Le lien est construit
+     par le DOM, sans concaténation de HTML. */
   document.querySelectorAll('form[data-endpoint="non"]').forEach((form) => {
     const alerte = form.querySelector('.form__alert');
+    if (!alerte) return;
+    const tel = form.dataset.tel ?? '';
+    const href = form.dataset.telHref ?? '';
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (!alerte) return;
-      alerte.innerHTML =
-        'L’envoi en ligne n’est pas encore actif sur ce site. ' +
-        'Appelez-nous au <a href="' + href + '">' + tel + '</a> : ' +
-        'nous prenons votre demande directement.';
+      alerte.replaceChildren();
+      alerte.append('L’envoi en ligne n’est pas encore actif sur ce site. Appelez-nous au ');
+      const lien = document.createElement('a');
+      lien.href = href;
+      lien.textContent = tel;
+      alerte.append(lien, ' : nous prenons votre demande directement.');
       alerte.hidden = false;
       alerte.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });

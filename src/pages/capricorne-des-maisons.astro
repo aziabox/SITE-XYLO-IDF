@@ -89,7 +89,7 @@ const jsonLd = [
             <ul class="list-check">
               {c.signes.map((s) => <li>{s}</li>)}
             </ul>
-            <div class="note" style="margin-top:1.25rem">
+            <div class="note mt-10">
               <span class="note__title">Le test du tournevis</span>
               Sur une pièce suspecte, appuyez la lame d’un tournevis plat perpendiculairement au
               fil du bois, sans forcer exagérément. Un résineux sain résiste nettement. Un bois
@@ -139,12 +139,12 @@ const jsonLd = [
 
         <aside class="split__side">
           <FicheIdentite insecte={c} />
-          <div class="card card--sage" style="margin-top:1.25rem">
-            <h3 style="font-size:1.08rem">Reconnaître l’adulte</h3>
+          <div class="card card--sage mt-10">
+            <h3 class="fs-card-lg">Reconnaître l’adulte</h3>
             <p>{c.adulte}</p>
           </div>
-          <div class="card" style="margin-top:1rem">
-            <h3 style="font-size:1.08rem">Et la larve ?</h3>
+          <div class="card mt-8">
+            <h3 class="fs-card-lg">Et la larve ?</h3>
             <p>{c.larve}</p>
           </div>
         </aside>
@@ -163,7 +163,7 @@ const jsonLd = [
         </p>
       </div>
       <ol class="list-num">{c.diagnostic.map((d) => <li>{d}</li>)}</ol>
-      <div class="btn-row" style="margin-top:2rem">
+      <div class="btn-row mt-13">
         <a href="/traitement-capricorne" class="btn btn--primary">Traitement du capricorne</a>
         <a href="/traitement-charpente" class="btn btn--ghost">Traitement de charpente</a>
       </div>

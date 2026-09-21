@@ -9,22 +9,22 @@ import { SITE } from '~/data/site';
   noindex
   crumbs={[{ label: 'Accueil', href: '/' }, { label: 'Demande envoyée' }]}
 >
-  <section class="section" style="min-height:52vh;display:grid;place-items:center">
-    <div class="wrap-narrow" style="text-align:center">
+  <section class="section screen-center">
+    <div class="wrap-narrow tac">
       <span class="ok" aria-hidden="true">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </span>
-      <h1 style="margin-top:1.5rem">Votre demande est partie</h1>
-      <p class="lead" style="margin-top:1rem">
+      <h1 class="mt-11">Votre demande est partie</h1>
+      <p class="lead mt-8">
         Nous revenons vers vous pour préciser ce que vous avez observé et vous indiquer
         si une visite s’impose. Si votre situation est urgente — un bois qui s’enfonce,
         un affaissement —, appelez-nous directement.
       </p>
-      <div class="btn-row" style="justify-content:center;margin-top:2rem">
+      <div class="btn-row jc-c mt-13">
         <a href={SITE.phoneHref} class="btn btn--primary">Appeler le {SITE.phoneDisplay}</a>
         <a href="/" class="btn btn--ghost">Retour à l’accueil</a>
       </div>
-      <p class="small muted" style="margin-top:2.5rem">
+      <p class="small muted mt-14">
         En attendant, ces pages répondent aux questions les plus fréquentes :
         <a href="/bois-attaque-insectes">bois attaqué</a>,
         <a href="/sciure-charpente">sciure sous une charpente</a>,

@@ -87,7 +87,7 @@ const comparaison = [
           <div>
             <h2>Les signes à observer</h2>
             <ul class="list-check">{v.signes.map((s) => <li>{s}</li>)}</ul>
-            <div class="note note--copper" style="margin-top:1.25rem">
+            <div class="note note--copper mt-10">
               <span class="note__title">Regardez la vermoulure de près</span>
               C’est le critère le plus utile et le plus accessible. Recueillez un peu de poudre sur
               une feuille blanche et frottez-la entre le pouce et l’index. Celle de la petite
@@ -134,8 +134,8 @@ const comparaison = [
 
         <aside class="split__side">
           <FicheIdentite insecte={v} />
-          <div class="card card--sage" style="margin-top:1.25rem">
-            <h3 style="font-size:1.08rem">Risque pour la structure</h3>
+          <div class="card card--sage mt-10">
+            <h3 class="fs-card-lg">Risque pour la structure</h3>
             <p>{v.risque}</p>
           </div>
         </aside>
@@ -189,7 +189,7 @@ const comparaison = [
         </p>
       </div>
       <ol class="list-num">{v.diagnostic.map((d) => <li>{d}</li>)}</ol>
-      <div class="btn-row" style="margin-top:2rem">
+      <div class="btn-row mt-13">
         <a href="/traitement-vrillette" class="btn btn--primary">Traitement des vrillettes</a>
         <a href="/vermoulure-bois" class="btn btn--ghost">Comprendre la vermoulure</a>
       </div>

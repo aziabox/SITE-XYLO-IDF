@@ -129,13 +129,13 @@ const jsonLd = [
 
         <aside class="split__side">
           <FicheIdentite insecte={l} />
-          <div class="card card--sage" style="margin-top:1.25rem">
-            <h3 style="font-size:1.08rem">Reconnaître l’adulte</h3>
+          <div class="card card--sage mt-10">
+            <h3 class="fs-card-lg">Reconnaître l’adulte</h3>
             <p>{l.adulte}</p>
           </div>
-          <div class="card" style="margin-top:1rem">
-            <h3 style="font-size:1.08rem">Signes d’une attaque</h3>
-            <ul class="list-check small" style="margin-top:.6rem">{l.signes.map((s) => <li>{s}</li>)}</ul>
+          <div class="card mt-8">
+            <h3 class="fs-card-lg">Signes d’une attaque</h3>
+            <ul class="list-check small mt-3">{l.signes.map((s) => <li>{s}</li>)}</ul>
           </div>
         </aside>
       </div>
@@ -153,10 +153,10 @@ const jsonLd = [
         </p>
       </div>
       <ol class="list-num">{l.diagnostic.map((d) => <li>{d}</li>)}</ol>
-      <h3 style="margin-top:2.5rem">Le traitement</h3>
-      <ol class="list-num" style="margin-top:.75rem">{l.traitement.map((d) => <li>{d}</li>)}</ol>
-      <h3 style="margin-top:2.5rem">La prévention</h3>
-      <ul class="list-check" style="margin-top:.75rem">{l.prevention.map((d) => <li>{d}</li>)}</ul>
+      <h3 class="mt-14">Le traitement</h3>
+      <ol class="list-num mt-5">{l.traitement.map((d) => <li>{d}</li>)}</ol>
+      <h3 class="mt-14">La prévention</h3>
+      <ul class="list-check mt-5">{l.prevention.map((d) => <li>{d}</li>)}</ul>
     </div>
   </section>
 
