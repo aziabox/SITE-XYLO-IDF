@@ -3,12 +3,14 @@
   "type": "module",
   "version": "1.0.0",
   "private": true,
-  "description": "Site specialise dans le diagnostic et le traitement des insectes xylophages en Ile-de-France",
+  "description": "Site spécialisé dans le diagnostic et le traitement des insectes xylophages en Île-de-France",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "start": "astro preview",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "audit": "node audit.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
@@ -19,7 +21,7 @@
     "sharp": "^0.34.4",
     "unist-util-visit": "^5.1.0"
   },
-  "devDependencies": {
-    "playwright": "^1.63.0"
+  "engines": {
+    "node": ">=20.3.0"
   }
 }

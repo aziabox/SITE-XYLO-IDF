@@ -14,12 +14,24 @@ patrimoine immobilier, protection durable**.
 
 ```bash
 npm install
-npm run dev      # serveur de développement sur http://localhost:4321
+npm run dev      # serveur de développement
 npm run build    # génère dist/
-npm run preview  # prévisualise la version générée
+npm start        # sert dist/ — c'est la commande utilisée en hébergement
+npm run audit    # audit SEO et liens internes de la version générée
 ```
 
-Node 20 ou supérieur.
+Node 20.3 ou supérieur (`engines` dans `package.json`).
+
+Le port et l'hôte suivent la variable d'environnement `PORT` ; l'URL canonique
+suit `SITE_URL` si elle est définie, sinon la valeur inscrite dans
+`astro.config.mjs`.
+
+Les vérifications visuelles et de responsive utilisent Playwright, installé à la
+demande pour ne pas alourdir l'installation en production :
+
+```bash
+npm install --no-save playwright
+```
 
 ---
 
@@ -291,8 +303,20 @@ src/
   pages/                routes
   styles/               jetons et feuille globale
 public/                 robots.txt, favicon, image de partage
-audit.mjs               audit SEO et liens internes
+audit.mjs               audit SEO et liens internes (`npm run audit`)
 ```
+
+### Hébergement
+
+Le site est **statique** : un hébergeur de fichiers suffit.
+
+| | |
+|---|---|
+| Commande d'installation | `npm ci` |
+| Commande de build | `npm run build` |
+| Dossier publié | `dist` |
+| Commande de démarrage | `npm start` (pour les plateformes qui lancent un serveur Node) |
+| Version de Node | 20.3 ou supérieure |
 
 ### Deux intégrations maison
 
@@ -311,7 +335,8 @@ Sortie statique dans `dist/`, déployable tel quel sur n'importe quel hébergeur
 Avant la première mise en ligne :
 
 1. Renseigner `src/data/site.ts` (voir le tableau plus haut).
-2. Remplacer le domaine dans `astro.config.mjs` et `public/robots.txt`.
+2. Remplacer le domaine dans `astro.config.mjs` et `public/robots.txt`,
+   ou définir la variable d'environnement `SITE_URL`.
 3. Brancher `formEndpoint` sur le traitement réel des demandes.
 4. Servir en HTTPS et configurer une page d'erreur 404 pointant sur `/404.html`.
 5. Relire les mentions légales avec l'entreprise.
