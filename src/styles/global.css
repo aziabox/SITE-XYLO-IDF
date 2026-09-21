@@ -78,9 +78,9 @@ a:hover { color: var(--cuivre-600); text-decoration-color: var(--cuivre-300); }
 .stack > * + * { margin-top: var(--sp-4); }
 .stack-lg > * + * { margin-top: var(--sp-6); }
 .grid { display: grid; gap: var(--sp-5); }
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); }
-.grid-4 { grid-template-columns: repeat(auto-fit, minmax(212px, 1fr)); }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 46%, 400px), 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(clamp(258px, 30%, 360px), 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(clamp(212px, 22%, 280px), 1fr)); }
 .section-head { max-width: 62ch; margin-bottom: clamp(2rem, 1.2rem + 2.5vw, 3.25rem); }
 .section-head > * + * { margin-top: var(--sp-3); }
 .section-head--center { margin-inline: auto; text-align: center; }
